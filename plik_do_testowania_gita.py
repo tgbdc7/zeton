@@ -1,4 +1,5 @@
-# plik gdzie testuje wysyłąnie zmian na Githuba
+# plik gdzie testuje wysyłanie zmian na Githuba
 # można modyfikowac :) LM
+
 
 print(" Nasz projekt !")
