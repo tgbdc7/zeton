@@ -12,6 +12,7 @@ punkty = None
 
 app = Flask(__name__)
 
+print("xxxx")
 
 @app.route('/')
 def hello():
@@ -38,7 +39,7 @@ def dodaj_punkt():
             pass
         finally:
             return redirect(url_for('hello'))
-    
+
 
 if __name__ == '__main__':
     app.run()
