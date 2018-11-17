@@ -1,0 +1,12 @@
+Linux:
+export FLASK_APP = zeton_glowny.py
+python -m flask run
+lub
+app.run()
+
+Windows:
+set FLASK_APP = zeton_glowny.py
+python -m flask run
+lub
+app.run()
+
