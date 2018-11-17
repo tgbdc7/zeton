@@ -1,0 +1,5 @@
+"""
+Aplikacja: system żetonowy
+
+"""
+
