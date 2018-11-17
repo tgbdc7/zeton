@@ -4,10 +4,10 @@ Aplikacja: system żetonowy
 """
 
 from flask import Flask, redirect, render_template
-#import request
+from flask import request, url_for
 import json
 
-# punkty = 19
+punkty = None
 
 app = Flask(__name__)
 
@@ -28,10 +28,16 @@ def hello():
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
 def dodaj_punkt():
     if request.method == 'POST':
-        nowe_punkty = request.form['liczba_punktow']
-        punkty+=nowe_punkty
-    return redirect()
-
+        try:
+            nowe_punkty = int(request.form['liczba_punktow'])
+            punkty += nowe_punkty
+            with open('dane.json', 'w') as plik:
+                json.dump(punkty, plik)
+        except:
+            pass
+        finally:
+            return redirect(url_for('hello'))
+    
 
 if __name__ == '__main__':
     app.run()
