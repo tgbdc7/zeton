@@ -19,13 +19,13 @@ def hello():
     with open('dane.json', 'r') as plik:
         punkty = json.load(plik)
 
+    return f'Aktualnie masz {punkty} punktów!'
+
 
 def dodaj_punkt(nowe_punkty):
     return nowe_punkty
 
 
-app.run()
-    return f'Aktualnie masz {punkty} punktów!'
 
 
 if __name__ == '__main__':
