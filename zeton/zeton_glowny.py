@@ -4,6 +4,7 @@ Aplikacja: system żetonowy
 """
 
 from flask import Flask, redirect, render_template
+#import request
 import json
 
 # punkty = 19
@@ -28,6 +29,7 @@ def hello():
 def dodaj_punkt():
     if request.method == 'POST':
         nowe_punkty = request.form['liczba_punktow']
+        punkty+=nowe_punkty
     return redirect()
 
 
