@@ -26,9 +26,11 @@ def dodaj_punkt():
     if request.method == 'POST':
         try:
             nowe_punkty = int(request.form['liczba_punktow'])
-            punkty = wczytaj_dane()
-            punkty += nowe_punkty
-            zapisz_dane(punkty)
+            if nowe_punkty > 0 :
+                punkty = wczytaj_dane()
+                punkty += nowe_punkty
+                zapisz_dane(punkty)
+
         except:
             pass
         finally:
