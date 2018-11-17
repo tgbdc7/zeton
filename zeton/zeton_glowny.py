@@ -1,3 +1,4 @@
+
 """
 Aplikacja: system żetonowy
 
