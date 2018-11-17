@@ -3,29 +3,32 @@ Aplikacja: system żetonowy
 
 """
 
-from flask import Flask
+from flask import Flask, redirect, render_template
 import json
 
-punkty = 16
-with open('dane.json', 'w') as plik:
-    json.dump(punkty,plik)
+# punkty = 19
 
-import json
 app = Flask(__name__)
+
 
 @app.route('/')
 def hello():
     global punkty
-    with open('dane.json', 'r') as plik:
-        punkty = json.load(plik)
+    try:
+        with open('dane.json', 'r') as plik:
+            punkty = json.load(plik)
+    except FileNotFoundError:
+        with open('dane.json', 'w') as plik:
+            punkty = 0
+            json.dump(punkty, plik)
+    return render_template('dodaj_punkty.html', punkty=punkty)
 
-    return f'Aktualnie masz {punkty} punktów!'
 
-
-def dodaj_punkt(nowe_punkty):
-    return nowe_punkty
-
-
+@app.route("/wszystkie-posty", methods=['POST', 'GET'])
+def dodaj_punkt():
+    if request.method == 'POST':
+        nowe_punkty = request.form['liczba_punktow']
+    return redirect()
 
 
 if __name__ == '__main__':
