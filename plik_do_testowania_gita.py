@@ -3,3 +3,4 @@
 
 
 print(" Nasz projekt !")
+print('hello Leszek')
