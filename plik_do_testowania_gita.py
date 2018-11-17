@@ -2,4 +2,4 @@
 # można modyfikowac :) LM
 
 
-print(" Nasz projekt Zeton !")
+print(" Nasz projekt !")
