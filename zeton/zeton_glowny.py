@@ -10,6 +10,7 @@ punkty = 16
 with open('dane.json', 'w') as plik:
     json.dump(punkty,plik)
 
+import json
 app = Flask(__name__)
 
 @app.route('/')
@@ -19,6 +20,11 @@ def hello():
         punkty = json.load(plik)
 
 
+def dodaj_punkt(nowe_punkty):
+    return nowe_punkty
+
+
+app.run()
     return f'Aktualnie masz {punkty} punktów!'
 
 
