@@ -1,4 +1,3 @@
-
 """
 Aplikacja: system żetonowy
 
@@ -8,25 +7,24 @@ from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json
 
-
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello():
-
     punkty = wczytaj_dane()
 
     return render_template('dodaj_punkty.html', punkty=punkty)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
-
 def dodaj_punkt():
+    #if request.method == 'GET':
+    #    mozliwe_punkty = [0, 1, 3]
     if request.method == 'POST':
         try:
             nowe_punkty = int(request.form['liczba_punktow'])
-            if nowe_punkty > 0 :
+            if nowe_punkty > 0:
                 punkty = wczytaj_dane()
                 punkty += nowe_punkty
                 zapisz_dane(punkty)
@@ -38,7 +36,6 @@ def dodaj_punkt():
 
 
 def wczytaj_dane():
-
     try:
         with open('dane.json', 'r') as plik:
             punkty = json.load(plik)
@@ -48,11 +45,11 @@ def wczytaj_dane():
             json.dump(punkty, plik)
     return punkty
 
-def zapisz_dane (punkty):
 
+def zapisz_dane(punkty):
     try:
-        with open('dane.json','w') as plik:
-            json.dump(punkty,plik)
+        with open('dane.json', 'w') as plik:
+            json.dump(punkty, plik)
     except:
         return f'Nie można zapisać dancyh do pliku'
 
@@ -63,8 +60,11 @@ def wykorzystaj_punkty():
         try:
             punkty_do_wykorzystania = int(request.form['liczba_punktow'])
             punkty = wczytaj_dane()
-            punkty -= punkty_do_wykorzystania
-            zapisz_dane(punkty)
+            if punkty >= punkty_do_wykorzystania:
+                punkty -= punkty_do_wykorzystania
+                zapisz_dane(punkty)
+            else:
+                print("Niestety nie masz wystarczajaco duzo punktow na ta nagrode")
         except:
             pass
         finally:
