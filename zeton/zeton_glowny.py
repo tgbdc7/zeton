@@ -6,6 +6,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json
+import time
 
 app = Flask(__name__)
 
@@ -80,6 +81,20 @@ def wykorzystaj_punkty():
             pass
         finally:
             return redirect(url_for('hello'))
+
+def odliczaj_czas_warna(t):
+    """
+    Funkcja odliczajaca czas warna (minuty:sekundy)
+    Dziala, ale nie dodalam jeszcze przekazania liczby sekund do funkcji
+    """
+    while t:
+        minuty, sekundy = divmod(t, 60)
+        timeformat = '{:02d}:{:02d}'.format(minuty, sekundy)
+        print(timeformat, end="\r")
+        time.sleep(1)
+        t -= 1
+    print("Koniec warna")
+#odliczaj_czas_warna(100)
 
 
 if __name__ == '__main__':
