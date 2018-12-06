@@ -16,7 +16,7 @@ def hello():
     uczen = wczytaj_dane()
     punkty = uczen["punkty"]
 
-    return render_template('dodaj_punkty.html', punkty=punkty)
+    return render_template('index.html', punkty=punkty)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
