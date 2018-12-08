@@ -15,8 +15,9 @@ app = Flask(__name__)
 def hello():
     uczen = wczytaj_dane()
     punkty = uczen["punkty"]
+    ban = uczen['ban']
 
-    return render_template('dodaj_punkty.html', punkty=punkty)
+    return render_template('index.html', punkty=punkty, ban=ban)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
@@ -48,7 +49,7 @@ def wczytaj_dane():
             dane = json.load(plik)
     except FileNotFoundError:
         with open('dane.json', 'w') as plik:
-            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0}
+            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False, }
             json.dump(dane, plik)
     return dane
 
@@ -82,6 +83,7 @@ def wykorzystaj_punkty():
         finally:
             return redirect(url_for('hello'))
 
+
 def odliczaj_czas_warna(t):
     """
     Funkcja odliczajaca czas warna (minuty:sekundy)
@@ -94,7 +96,9 @@ def odliczaj_czas_warna(t):
         time.sleep(1)
         t -= 1
     print("Koniec warna")
-#odliczaj_czas_warna(100)
+
+
+# odliczaj_czas_warna(100)
 
 
 if __name__ == '__main__':
