@@ -7,6 +7,7 @@ from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json
 import time
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -49,7 +50,7 @@ def wczytaj_dane():
             dane = json.load(plik)
     except FileNotFoundError:
         with open('dane.json', 'w') as plik:
-            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False, }
+            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False }
             json.dump(dane, plik)
     return dane
 
@@ -82,6 +83,27 @@ def wykorzystaj_punkty():
             pass
         finally:
             return redirect(url_for('hello'))
+
+
+@app.route("/ban")
+def daj_bana(time_ban_start=None):
+    """
+    Zmienia
+    :param  time_ban_start: czas dania bana, jeśli nie podany to pobiera aktualny czas
+    :return: None,  zapisuje dane ucznia do pliku/ bazy
+    """
+    uczen = wczytaj_dane()
+    if uczen["ban"] is True:
+        # co się stanie jak już jest dany ban, przedłuża się ? jaka funkcjonalność ma być ? zwrócić wyjatek ?
+        pass
+    if time_ban_start is None:
+        time_ban_start = datetime.now()
+
+    uczen['ban'] = True
+    uczen['time_ban_start'] = time_ban_start
+    #uczen['time_ban_stop'] = time_ban_start.day +1
+    zapisz_dane(uczen)
+    return 'ban' #redirect(url_for('hello'))
 
 
 def odliczaj_czas_warna(t):
