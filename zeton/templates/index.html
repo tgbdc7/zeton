@@ -15,20 +15,29 @@
             <h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
         </div>
 
-        <div class="square">
-            <h1>Dodawanie punktów dla Stasia</h1>
+        <div id="dodawanie">
+            <h2>Dodawanie punktów dla Stasia</h2>
             <form action="/wszystkie-posty" method="post">
                 Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
                 <br><input type="submit" name="dodaj punkty" value="Dodaj punkty"/>
             </form>
         </div>
 
-        <div class="square">
-            <h1>Wykorzystaj punkty</h1>
+        <div id="odejmowanie">
+               <h2>Wykorzystaj punkty</h2>
             <form action="/wykorzystanie_punktow" method="post">
                 Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
                 <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
             </form>
+        </div>
+        <div style="clear:both"></div>
+        <div id="bany_warny">
+            <h2> *****Warny i bany****** </h2>
+            {% if ban %}
+            <h1> Masz BANA !</h1>
+            {% else %}
+            <h1>Możesz korzystać z komputera</h1>
+            {% endif %}
         </div>
 
         <div style="clear:both"></div>
@@ -40,14 +49,6 @@
 
 
 
-<h2> *****Warny i bany****** </h2>
-<div>
-    {% if ban %}
-    <h1> Masz BANA !</h1>
-    {% else %}
-    <h1>Możesz korzystać z komputera</h1>
-    {% endif %}
-</div>
 
 
 </body>

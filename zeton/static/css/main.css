@@ -17,16 +17,36 @@ body
 
 .rectangle
 {
-    width:960px;
+    margin: 10px;
+    width:500px;
     margin:20px;
+    border-style: solid;
+    border-width: medium;
 
 }
 
-.square
+
+
+#dodawanie
 {
-    width:50%;
-    float:left;
-
-
+    border-style: solid;
+    border-width: medium;
+    float: left;
+    margin: 10px;
 }
 
+#odejmowanie
+{
+    float: left;
+    border-style: solid;
+    border-width: medium;
+    margin: 10px;
+}
+
+#bany_warny
+{
+    float: left;
+    border-style: solid;
+    border-width: medium;
+    margin: 10px;
+}
