@@ -10,45 +10,95 @@
 
 <html>
 <body>
-    <div id="container">
-        <div class="rectangle">
-            <h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
-        </div>
+<div id="container">
+    <div class="rectangle">
+        <h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
+    </div>
 
-        <div id="dodawanie">
-            <h2>Dodawanie punktów dla Stasia</h2>
-            <form action="/wszystkie-posty" method="post">
-                Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
-                <br><input type="submit" name="dodaj punkty" value="Dodaj punkty"/>
-            </form>
-        </div>
+    <div id="dodawanie">
+        <h2>Dodawanie punktów dla Stasia</h2>
+        <form action="/wszystkie-posty" method="post">
+            Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
+            <br><input type="submit" name="dodaj punkty" value="Dodaj punkty"/>
+            <h4>SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
 
-        <div id="odejmowanie">
-               <h2>Wykorzystaj punkty</h2>
-            <form action="/wykorzystanie_punktow" method="post">
-                Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
-                <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-            </form>
-        </div>
-        <div style="clear:both"></div>
-        <div id="bany_warny">
-            <h2> *****Warny i bany****** </h2>
-            {% if ban %}
-            <h1> Masz BANA !</h1>
-            {% else %}
-            <h1>Możesz korzystać z komputera</h1>
-            {% endif %}
-        </div>
+            <ul>
 
-        <div style="clear:both"></div>
+                <li>sprzątanie pokoju--> 20pkt</li>
+                <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
+                <li>odrobionie lekcji--> 20pkt</li>
+                <li>spakowanie plecaka--> 20pkt</li>
+                <li>spakowanie plecaka (z mamą)--> 5pkt</li>
+                <li>pomoc rodzicom--> 10-60pkt</li>
+                <li>zenek--> 20pkt</li>
+                <li><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></li> <br>
+
+            </ul>
+
+        </form>
+    </div>
+
+    <div id="odejmowanie">
+        <h2>Wykorzystaj punkty</h2>
+        <form action="/wykorzystanie_punktow" method="post">
+            Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
+            <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+            <h4>NAGRODY</h4>
+
+            <ul>
+
+                <li>1 pkt--> 1 min komputer</li>
+                <li>40 pkt--> cola (200ml) (raz na 7 dni )</li>
+                <li>50 pkt--> cola (330ml) (raz na 7 dni)</li>
+                <li>60 pkt--> zakupy w żabce (bez chipsów i Coca Coli)</li>
+                <li>100 pkt--> kino domowe</li>
+                <Li>200 pkt--> 6zł do wydania na mc.skyblock.pl</Li>
+                <li>250 pkt--> jump city</li>
+                <li>250 pkt--> kino</li>
+                <li>250 pkt--> Aquapark reda</li>
+                <li>250 pkt--> piżama party</li>
+
+            </ul>
+
+        </form>
+    </div>
+    <div style="clear:both"></div>
+    <div id="bany_warny">
+        <h2> *****Warny i bany****** </h2>
+        {% if ban %}
+        <h2 style="color: red;"> Masz BANA !</h2>
+        {% else %}
+        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        {% endif %}
+        <H4>WARNY</H4>
+        <ol>
+
+            <li>warn--> ostrżezenie ustne</li>
+            <li>warn--> ostrżezenie ustne</li>
+            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu  zresetowanie routera</li>
+            <li>warn--> ban 2 stopnia na 30min (brak komputera i telefonu)</li>
+            <li>warn--> ban 1 stopnia na 24h (brak telefonu)</li>
+            <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
+
+        </ol>
+    </div>
+
+    <div id="punkty_szkola">
+
+        <h2> *** Punkty ze Szkoły *** </h2>
+        <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
+        <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
+        <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
+        <div><label> <input type="checkbox"> przyklad 4 </label></div>
+        <div><label> <input type="checkbox"> przyklad 5 </label></div>
 
 
     </div>
 
+    <div style="clear:both"></div>
 
 
-
-
+</div>
 
 
 </body>

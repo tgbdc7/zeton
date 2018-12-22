@@ -18,8 +18,7 @@ body
 .rectangle
 {
     margin: 10px;
-    width:500px;
-    margin:20px;
+    width: 980px;
     border-style: solid;
     border-width: medium;
 
@@ -49,4 +48,11 @@ body
     border-style: solid;
     border-width: medium;
     margin: 10px;
+}
+
+#punkty_szkola
+{
+float: left;
+border-style: solid;
+    border-width: medium;
 }
