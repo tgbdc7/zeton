@@ -10,25 +10,35 @@
 
 <html>
 <body>
+    <div id="container">
+        <div class="rectangle">
+            <h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
+        </div>
 
-<title>Dodawanie punktow</title>
-<h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
-<header><h1>Dodawanie punktów dla Stasia</h1></header>
-<form action="/wszystkie-posty" method="post">
-    <div>
-        Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
-        <br><input type="submit" name="dodaj punkty" value="Dodaj punkty"/>
-    </div>
-</form>
+        <div class="square">
+            <h1>Dodawanie punktów dla Stasia</h1>
+            <form action="/wszystkie-posty" method="post">
+                Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
+                <br><input type="submit" name="dodaj punkty" value="Dodaj punkty"/>
+            </form>
+        </div>
 
-<title>Wykorzystanie punktów</title>
-<header><h1>Wykorzystaj punkty</h1></header>
-<form action="/wykorzystanie_punktow" method="post">
-    <div>
-        Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
-        <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+        <div class="square">
+            <h1>Wykorzystaj punkty</h1>
+            <form action="/wykorzystanie_punktow" method="post">
+                Liczba punktów <br> <input type="number_format" name="liczba_punktow" required><br/>
+                <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+            </form>
+        </div>
+
+        <div style="clear:both"></div>
+
+
     </div>
-</form>
+
+
+
+
 
 <h2> *****Warny i bany****** </h2>
 <div>

@@ -3,5 +3,30 @@ body
     background-color: gray;
     font-family: Verdana;
     color: white;
+}
+
+#container
+{
+    width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+    border-style: solid;
+    border-width: medium;
 
 }
+
+.rectangle
+{
+    width:960px;
+    margin:20px;
+
+}
+
+.square
+{
+    width:50%;
+    float:left;
+
+
+}
+
