@@ -7,7 +7,7 @@ body
 
 #container
 {
-    width:1000px;
+    width:1010px;
     margin-left:auto;
     margin-right:auto;
     border-style: solid;
@@ -24,35 +24,37 @@ body
 
 }
 
+.square
+{
 
+    border-style: solid;
+    border-width: medium;
+    margin: 10px;
+    width: 480px;
+    height: 480px;
+
+}
 
 #dodawanie
 {
-    border-style: solid;
-    border-width: medium;
+
     float: left;
-    margin: 10px;
+
 }
 
 #odejmowanie
 {
     float: left;
-    border-style: solid;
-    border-width: medium;
-    margin: 10px;
+
 }
 
 #bany_warny
 {
     float: left;
-    border-style: solid;
-    border-width: medium;
-    margin: 10px;
+
 }
 
 #punkty_szkola
 {
-float: left;
-border-style: solid;
-    border-width: medium;
+    float: left;
 }
