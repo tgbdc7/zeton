@@ -1,6 +1,6 @@
 body
 {
-    background-color: gray;
+    background-color: #3f3f3f;
     font-family: Verdana;
     color: white;
 }
@@ -52,12 +52,12 @@ body
 #bany_warny
 {
     float: left;
-    background-color: Aqua;
+    background-color: #00cccc;
 
 }
 
 #punkty_szkola
 {
     float: left;
-    background-color: lime;
+    background-color: #99ff99;
 }
