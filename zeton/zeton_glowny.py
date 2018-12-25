@@ -5,8 +5,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 
 from flask import Flask, redirect, render_template
 from flask import request, url_for
-import json
-import time
+import json, time
 from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
@@ -26,8 +25,10 @@ def hello():
     punkty = uczen["punkty"]
     ban = uczen['ban']
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
+    time_ban_stop = datetime.fromisoformat(uczen['time_ban_stop'])
 
-    return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia)
+    return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
+                           time_ban_stop=time_ban_stop)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
@@ -87,7 +88,7 @@ def wykorzystaj_punkty():
                 uczen["punkty"] -= punkty_do_wykorzystania
                 zapisz_dane(uczen)
             else:
-                print("Niestety nie masz wystarczajaco duzo punktow na ta nagrode")
+                print("Niestety nie masz wystarczająco duzo punktów na ta nagrodę")
         except:
             pass
         finally:
@@ -103,8 +104,12 @@ def daj_bana(time_ban_start=None):
     """
     uczen = wczytaj_dane()
     if uczen["ban"] is True:
-        # co się stanie jak już jest damy ban, przedłuża się ? jaka funkcjonalność ma być ? zwrócić wyjatek ?
-        pass
+        # # Jeśi jest już dany ban to przedłuża go o 24h
+        uczen['time_ban_stop'] = datetime.fromisoformat(uczen['time_ban_stop'])
+        uczen['time_ban_stop'] += timedelta(days=1)
+        zapisz_dane(uczen)
+        return redirect(url_for('hello'))
+
     if time_ban_start is None:
         time_ban_start = datetime.now()
 
@@ -112,7 +117,7 @@ def daj_bana(time_ban_start=None):
     uczen['time_ban_start'] = time_ban_start
     uczen['time_ban_stop'] = time_ban_start + timedelta(days=1)
     zapisz_dane(uczen)
-    return 'ban'  # redirect(url_for('hello'))
+    return redirect(url_for('hello'))
 
 
 def odliczaj_czas_warna(t):

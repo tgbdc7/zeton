@@ -19,7 +19,8 @@
     <div id="dodawanie" class="square">
         <h2 style="text-align: center;">Dodawanie punktów dla Stasia</h2>
         <form style="text-align: center;" action="/wszystkie-posty" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow" required><br/>
+            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
+                                       required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
             <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
 
@@ -32,7 +33,8 @@
                 <li>spakowanie plecaka (z mamą)--> 5pkt</li>
                 <li>pomoc rodzicom--> 10-60pkt</li>
                 <li>zenek--> 20pkt</li>
-                <li><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></li> <br>
+                <li><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></li>
+                <br>
 
             </ul>
 
@@ -42,8 +44,9 @@
     <div id="odejmowanie" class="square">
         <h2 style="text-align: center">Wykorzystaj punkty</h2>
         <form style="text-align: center;" action="/wykorzystanie_punktow" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow" required><br/>
-            <br><input  type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
+                                       required><br/>
+            <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
             <h4>NAGRODY</h4>
 
             <ul style="text-align:left;">
@@ -65,9 +68,10 @@
     </div>
     <div style="clear:both"></div>
     <div id="bany_warny" class="square">
-        <h2> *****Warny i bany****** </h2>
+        <h2 style="text-align: center;"> *****Warny i bany****** </h2>
         {% if ban %}
-        <h2 style="color: red;"> Masz BANA !</h2>
+        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+        <h4> koniec bana: {{time_ban_stop}}</h4>
         {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
@@ -76,7 +80,8 @@
 
             <li>warn--> ostrżezenie ustne</li>
             <li>warn--> ostrżezenie ustne</li>
-            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu  zresetowanie "routera"</li>
+            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu zresetowanie "routera"
+            </li>
             <li>warn--> ban 2 stopnia na 30min (brak komputera i telefonu)</li>
             <li>warn--> ban 1 stopnia na 24h (brak telefonu)</li>
             <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
