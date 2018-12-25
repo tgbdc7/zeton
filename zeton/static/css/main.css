@@ -46,16 +46,18 @@ body
 #odejmowanie
 {
     float: left;
-
+    background-color: #FF1CAE;
 }
 
 #bany_warny
 {
     float: left;
+    background-color: Aqua;
 
 }
 
 #punkty_szkola
 {
     float: left;
+    background-color: lime;
 }
