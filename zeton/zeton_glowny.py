@@ -7,7 +7,7 @@ from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json
 import time
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 app = Flask(__name__)
 
@@ -25,8 +25,9 @@ def hello():
     uczen = wczytaj_dane()
     punkty = uczen["punkty"]
     ban = uczen['ban']
+    szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
 
-    return render_template('index.html', punkty=punkty, ban=ban)
+    return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
@@ -59,7 +60,7 @@ def wczytaj_dane():
     except FileNotFoundError:
         with open('dane.json', 'w') as plik:
             dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False}
-            json.dump(dane, plik,  default=json_serial)
+            json.dump(dane, plik, default=json_serial)
     return dane
 
 
@@ -71,7 +72,7 @@ def zapisz_dane(dane):
     """
     try:
         with open('dane.json', 'w') as plik:
-            json.dump(dane, plik,  default=json_serial)
+            json.dump(dane, plik, default=json_serial)
     except:
         return f'Nie można zapisać dancyh do pliku'
 
@@ -96,7 +97,7 @@ def wykorzystaj_punkty():
 @app.route("/ban")
 def daj_bana(time_ban_start=None):
     """
-    Zmienia
+    Dajemy bana
     :param  time_ban_start: czas dania bana, jeśli nie podany to pobiera aktualny czas
     :return: None,  zapisuje dane ucznia do pliku/ bazy
     """
@@ -109,7 +110,7 @@ def daj_bana(time_ban_start=None):
 
     uczen['ban'] = True
     uczen['time_ban_start'] = time_ban_start
-    # uczen['time_ban_stop'] = time_ban_start.day +1
+    uczen['time_ban_stop'] = time_ban_start + timedelta(days=1)
     zapisz_dane(uczen)
     return 'ban'  # redirect(url_for('hello'))
 
