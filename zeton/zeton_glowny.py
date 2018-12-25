@@ -7,9 +7,17 @@ from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json
 import time
-from datetime import datetime
+from datetime import datetime, date
 
 app = Flask(__name__)
+
+
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    raise TypeError("Type %s not serializable" % type(obj))
 
 
 @app.route('/')
@@ -50,8 +58,8 @@ def wczytaj_dane():
             dane = json.load(plik)
     except FileNotFoundError:
         with open('dane.json', 'w') as plik:
-            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False }
-            json.dump(dane, plik)
+            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False}
+            json.dump(dane, plik,  default=json_serial)
     return dane
 
 
@@ -63,7 +71,7 @@ def zapisz_dane(dane):
     """
     try:
         with open('dane.json', 'w') as plik:
-            json.dump(dane, plik)
+            json.dump(dane, plik,  default=json_serial)
     except:
         return f'Nie można zapisać dancyh do pliku'
 
@@ -94,16 +102,16 @@ def daj_bana(time_ban_start=None):
     """
     uczen = wczytaj_dane()
     if uczen["ban"] is True:
-        # co się stanie jak już jest dany ban, przedłuża się ? jaka funkcjonalność ma być ? zwrócić wyjatek ?
+        # co się stanie jak już jest damy ban, przedłuża się ? jaka funkcjonalność ma być ? zwrócić wyjatek ?
         pass
     if time_ban_start is None:
         time_ban_start = datetime.now()
 
     uczen['ban'] = True
     uczen['time_ban_start'] = time_ban_start
-    #uczen['time_ban_stop'] = time_ban_start.day +1
+    # uczen['time_ban_stop'] = time_ban_start.day +1
     zapisz_dane(uczen)
-    return 'ban' #redirect(url_for('hello'))
+    return 'ban'  # redirect(url_for('hello'))
 
 
 def odliczaj_czas_warna(t):
@@ -118,9 +126,6 @@ def odliczaj_czas_warna(t):
         time.sleep(1)
         t -= 1
     print("Koniec warna")
-
-
-# odliczaj_czas_warna(100)
 
 
 if __name__ == '__main__':
