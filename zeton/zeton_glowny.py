@@ -25,7 +25,10 @@ def hello():
     punkty = uczen["punkty"]
     ban = uczen['ban']
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
-    time_ban_stop = datetime.fromisoformat(uczen['time_ban_stop'])
+    try:
+        time_ban_stop = datetime.fromisoformat(uczen['time_ban_stop'])
+    except (TypeError, KeyError):
+        time_ban_stop = None
 
     return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
                            time_ban_stop=time_ban_stop)
