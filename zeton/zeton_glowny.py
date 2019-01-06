@@ -7,6 +7,7 @@ from flask import Flask, redirect, render_template
 from flask import request, url_for
 import json, time
 from datetime import datetime, date, timedelta
+import sys
 
 app = Flask(__name__)
 
@@ -25,18 +26,24 @@ def hello():
     punkty = uczen["punkty"]
     ban = uczen['ban']
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
+    python_version = sys.version
 
     try:
-        time_ban_stop = datetime.fromisoformat(uczen['time_ban_stop'])
+        # datetime.fromisoformat is on > python3.7
+        # nasz serwer działa na python 3.6
+        time_ban_stop = datetime.strptime(uczen['time_ban_stop'], "%Y-%m-%dT%H:%M:%S.%f")
+
     except (TypeError, KeyError):
-        time_ban_stop = None
+        # Gdy nie ma takiej pozycji w pliku
+        time_ban_stop = datetime(1969, 10, 29, 22, 30)
     if ban and time_ban_stop < datetime.now():
         ban = False
         uczen['ban'] = ban
         zapisz_dane(uczen)
 
     return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
-                           time_ban_stop=time_ban_stop)
+                           time_ban_stop=time_ban_stop.strftime("%Y-%m-%d o godzinie: %H:%M:%S"),
+                           python_version=python_version)
 
 
 @app.route("/wszystkie-posty", methods=['POST', 'GET'])
