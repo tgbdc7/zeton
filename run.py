@@ -1,4 +1,7 @@
+import sys, os
 
-from zeton import app
+sys.path.append(os.getcwd())
+
+from zeton.zeton_glowny import app
 
 app.run()
