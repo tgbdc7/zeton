@@ -31,6 +31,7 @@ def hello():
     try:
         # datetime.fromisoformat is on > python3.7
         # nasz serwer działa na python 3.6
+        # dlatego skorzystamy z datetime.strip
         time_ban_stop = datetime.strptime(uczen['time_ban_stop'], "%Y-%m-%dT%H:%M:%S.%f")
 
     except (TypeError, KeyError):
@@ -120,7 +121,7 @@ def daj_bana(time_ban_start=None):
     uczen = wczytaj_dane()
     if uczen["ban"] is True:
         # # Jeśi jest już dany ban to przedłuża go o 24h
-        uczen['time_ban_stop'] = datetime.fromisoformat(uczen['time_ban_stop'])
+        uczen['time_ban_stop'] = datetime.strptime(uczen['time_ban_stop'], "%Y-%m-%dT%H:%M:%S.%f")
         uczen['time_ban_stop'] += timedelta(days=1)
         zapisz_dane(uczen)
         return redirect(url_for('hello'))
