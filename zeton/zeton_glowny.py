@@ -8,8 +8,33 @@ from flask import request, url_for
 import json, time
 from datetime import datetime, date, timedelta
 import sys
+import os
+import sqlite3
+from flask import g
 
 app = Flask(__name__)
+
+"""stworzenie objektu config"""
+app.config.update(dict(
+    SECRET_KEY='AplikacjaDlaStasia',
+    DATABASE=os.path.join(app.root_path, 'db.sqlite'),
+    SITE_NAME='Zeton'
+))
+
+def get_db():
+    """Funkcja tworząca połączenie z bazą danych"""
+    if not g.get('db'):
+        con = sqlite3.connect(app.config['DATABASE'])
+        con.row_factory = sqlite3.Row
+        g.db = con
+    return g.db
+
+
+@app.teardown_appcontext
+def close_db(error):
+    """Zamykanie połączenia z bazą"""
+    if g.get('db'):
+        g.db.close()
 
 
 def json_serial(obj):
