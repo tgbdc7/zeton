@@ -9,13 +9,14 @@ QUERY_PUNKTY_UCZNIOW = """create table punkty_uczniow (
     );"""
 
 QUERY_UZYTKOWNICY = """create table uzytkownicy (
-  id_uzytkownika integer primary key autoincrement,
+  id integer primary key autoincrement,
   login text not null,
-  haslo text not null
+  pass text not null
   );"""
 
 # populowanie bazy testowymi danymi
 QUERY_INSERT_POINTS = """insert into punkty_uczniow VALUES  (1, 17, 29)"""
+QUERY_INSERT_USER = "insert into uzytkownicy VALUES  (NULL, 'test', 'testpass')"
 
 
 def recreate_tables(db):
@@ -28,6 +29,7 @@ def recreate_tables(db):
     cur.execute(QUERY_PUNKTY_UCZNIOW)
 
     cur.execute(QUERY_INSERT_POINTS)
+    cur.execute(QUERY_INSERT_USER)
 
     db.commit()
 

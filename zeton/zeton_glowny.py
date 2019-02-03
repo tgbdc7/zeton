@@ -50,6 +50,20 @@ def get_weekly_highscore(user_id):
     pass
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        login = request.form['login']
+        password = request.form['password']
+
+        if login == 'qqq' and password == 'www':
+            return redirect(url_for('hello'))
+        else:
+            error = 'Invalid login or username'
+    return render_template('login.html', error=error)
+
+
 @app.route('/')
 def hello():
     uczen = wczytaj_dane()
