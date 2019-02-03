@@ -2,6 +2,7 @@
 __pycache__/
 venv
 .idea/
+_config.yml
 
 # database should not be stored in the repo
 db.sqlite

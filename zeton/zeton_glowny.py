@@ -5,12 +5,13 @@ Aplikacja: system żetonowy ucznia/dziecka
 
 from flask import Flask, redirect, render_template
 from flask import request, url_for
-import json, time
-from datetime import datetime, date, timedelta
+from datetime import datetime, timedelta
 import sys
 import os
 import sqlite3
 from flask import g
+
+from data_access import wczytaj_dane, zapisz_dane
 
 app = Flask(__name__)
 
@@ -23,35 +24,44 @@ app.config.update(dict(
 
 
 def get_db():
-    """Funkcja tworząca połączenie z bazą danych"""
-    if not g.get('db'):
-        con = sqlite3.connect(app.config['DATABASE'])
-        con.row_factory = sqlite3.Row
-        g.db = con
-    return g.db
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(app.config['DATABASE'])
+    return db
 
 
 @app.teardown_appcontext
-def close_db(error):
+def close_connection(exception):
     """Zamykanie połączenia z bazą"""
-    if g.get('db'):
-        g.db.close()
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
 
 
-def json_serial(obj):
-    """JSON serializer for objects not serializable by default json code"""
+def get_points(user_id):
+    query = 'select suma_punktow from punkty_uczniow where id_ucznia = ?'
+    result = get_db().cursor().execute(query, (user_id,))
+    points = result.fetchone()[0]
+    return points
 
-    if isinstance(obj, (datetime, date)):
-        return obj.isoformat()
-    raise TypeError("Type %s not serializable" % type(obj))
+
+def get_weekly_highscore(user_id):
+    # TODO: do dopisania na podstawie funkcji 'get_points()'
+    pass
 
 
 @app.route('/')
 def hello():
     uczen = wczytaj_dane()
-    punkty = uczen["punkty"]
     ban = uczen['ban']
+
+    punkty = uczen["punkty"]
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
+
+    # Nadpisuję punkty i ban, danymi z bazy:
+    punkty = get_points(user_id=1)
+    # szkolny_rekord_tygodnia = get_weekly_highscore(user_id=1)
+
     python_version = sys.version
 
     try:
@@ -84,40 +94,10 @@ def dodaj_punkt():
                 uczen = wczytaj_dane()
                 uczen["punkty"] += nowe_punkty
                 zapisz_dane(uczen)
-
         except:
             pass
         finally:
             return redirect(url_for('hello'))
-
-
-def wczytaj_dane():
-    """
-    Wczytuje dane z pliku dane.json
-    Jeśli nie ma tego pliku to go tworzy z ustawionymi wartościmai na "0"
-    :return: dane ucznia
-    """
-    try:
-        with open('dane.json', 'r') as plik:
-            dane = json.load(plik)
-    except FileNotFoundError:
-        with open('dane.json', 'w') as plik:
-            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False}
-            json.dump(dane, plik, default=json_serial)
-    return dane
-
-
-def zapisz_dane(dane):
-    """
-    zapisuje dane do pliku "dane.json"
-    :param dane: dane ucznia - słownik (dictionary)
-    :return: None
-    """
-    try:
-        with open('dane.json', 'w') as plik:
-            json.dump(dane, plik, default=json_serial)
-    except:
-        return f'Nie można zapisać dancyh do pliku'
 
 
 @app.route("/wykorzystanie_punktow", methods=['POST', 'GET'])
@@ -160,20 +140,6 @@ def daj_bana(time_ban_start=None):
     uczen['time_ban_stop'] = time_ban_start + timedelta(days=1)
     zapisz_dane(uczen)
     return redirect(url_for('hello'))
-
-
-def odliczaj_czas_warna(t):
-    """
-    Funkcja odliczajaca czas warna (minuty:sekundy)
-    Dziala, ale nie dodalam jeszcze przekazania liczby sekund do funkcji
-    """
-    while t:
-        minuty, sekundy = divmod(t, 60)
-        timeformat = '{:02d}:{:02d}'.format(minuty, sekundy)
-        print(timeformat, end="\r")
-        time.sleep(1)
-        t -= 1
-    print("Koniec warna")
 
 
 if __name__ == '__main__':
