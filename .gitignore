@@ -2,3 +2,6 @@
 __pycache__/
 venv
 .idea/
+
+# database should not be stored in the repo
+db.sqlite
