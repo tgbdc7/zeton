@@ -21,6 +21,7 @@ app.config.update(dict(
     SITE_NAME='Zeton'
 ))
 
+
 def get_db():
     """Funkcja tworząca połączenie z bazą danych"""
     if not g.get('db'):
