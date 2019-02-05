@@ -1,6 +1,8 @@
 import json
 from datetime import datetime, date
 
+from flask import g
+
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
@@ -37,3 +39,21 @@ def zapisz_dane(dane):
             json.dump(dane, plik, default=json_serial)
     except:
         return f'Nie można zapisać dancyh do pliku'
+
+
+def get_points(user_id):
+    query = 'select points from points_ where id = ?'
+    result = g.db.cursor().execute(query, (user_id,))
+    points = result.fetchone()[0]
+    return points
+
+
+def get_weekly_highscore(user_id):
+    # TODO: do dopisania na podstawie funkcji 'get_points()'
+    pass
+
+def add_points(user_id, points):
+    query = 'UPDATE points_ SET points = points + ? WHERE id = ?;'
+    g.db.cursor().execute(query, [points, user_id])
+    g.db.commit()
+

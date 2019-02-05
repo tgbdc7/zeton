@@ -4,7 +4,7 @@
 - `pip install -r requirements.txt` - instalacja zależności
 - `cd zeton`
 - `python recreate_db.py` - stworzenie tabeli w bazie
-- `python zeton_glowny.py` - uruchomienie serwera
+- `python main.py` - uruchomienie serwera
 
 
 
