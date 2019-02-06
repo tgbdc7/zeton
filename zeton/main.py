@@ -44,11 +44,10 @@ def hello():
     uczen = data_access.wczytaj_dane()
     ban = uczen['ban']
 
-    punkty = uczen["punkty"]
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
 
     # Nadpisuję punkty i ban, danymi z bazy:
-    punkty = data_access.get_points(USER_ID)
+    points = data_access.get_points(USER_ID)
     # szkolny_rekord_tygodnia = get_weekly_highscore(user_id=1)
 
     python_version = sys.version
@@ -67,7 +66,7 @@ def hello():
         uczen['ban'] = ban
         data_access.zapisz_dane(uczen)
 
-    return render_template('index.html', firstname=firstname, punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
+    return render_template('index.html', firstname=firstname, points=points, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
                            time_ban_stop=time_ban_stop.strftime("%Y-%m-%d o godzinie: %H:%M:%S"),
                            python_version=python_version)
 
