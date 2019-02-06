@@ -1,23 +1,27 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS users;
 
 
 create table users
 (
-  id       integer primary key autoincrement,
-  username text not null,
-  password text not null
+  id                      integer primary key autoincrement,
+  username                text not null,
+  password                text not null,
+  firstname               text,
+  lastname                text,
+  points                  integer default 0,
+  school_weekly_highscore integer default 0
 );
 
-DROP TABLE IF EXISTS points_;
-
-create table points_
+create table bans
 (
-  id                   INTEGER primary key,
-  points               INTEGER NOT NULL,
-  school_weekly_record integer not null,
-  FOREIGN KEY (id) REFERENCES users (id)
+  id              INTEGER primary key,
+  user_id         INTEGER,
+  start_timestamp text,
+  end_timestamp   text,
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 -- TODO: punkty powinny być przechowywane w tabeli "users", natomiast bany powinny mieć oddzielną tabelę

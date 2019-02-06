@@ -1,22 +1,19 @@
-body
-{
+body {
     background-color: #3f3f3f;
     font-family: Verdana;
     color: white;
 }
 
-#container
-{
-    width:1010px;
-    margin-left:auto;
-    margin-right:auto;
+#container {
+    width: 1010px;
+    margin-left: auto;
+    margin-right: auto;
     border-style: solid;
     border-width: medium;
 
 }
 
-.rectangle
-{
+.rectangle {
     margin: 10px;
     width: 980px;
     border-style: solid;
@@ -24,8 +21,7 @@ body
 
 }
 
-.square
-{
+.square {
 
     border-style: solid;
     border-width: medium;
@@ -35,29 +31,35 @@ body
 
 }
 
-#dodawanie
-{
+.logout-button {
+    padding: 10px;
+    margin: 10px;
+}
+
+.logout-button a {
+    text-decoration: none;
+    font-size: large;
+}
+
+#dodawanie {
 
     float: left;
     background-color: blue;
 
 }
 
-#odejmowanie
-{
+#odejmowanie {
     float: left;
     background-color: #FF1CAE;
 }
 
-#bany_warny
-{
+#bany_warny {
     float: left;
     background-color: #00cccc;
 
 }
 
-#punkty_szkola
-{
+#punkty_szkola {
     float: left;
     background-color: #66ff99;
 }

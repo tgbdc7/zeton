@@ -42,18 +42,29 @@ def zapisz_dane(dane):
 
 
 def get_points(user_id):
-    query = 'select points from points_ where id = ?'
+    query = 'select points from users where id = ?'
     result = g.db.cursor().execute(query, (user_id,))
-    points = result.fetchone()[0]
-    return points
+    row = result.fetchone()
+    if row:
+        return row['points']
+    return None
 
 
 def get_weekly_highscore(user_id):
     # TODO: do dopisania na podstawie funkcji 'get_points()'
     pass
 
+
 def add_points(user_id, points):
-    query = 'UPDATE points_ SET points = points + ? WHERE id = ?;'
+    query = 'UPDATE users SET points = points + ? WHERE id = ?;'
     g.db.cursor().execute(query, [points, user_id])
     g.db.commit()
 
+
+def get_firstname(user_id):
+    query = 'select firstname from users where id = ?'
+    result = g.db.cursor().execute(query, (user_id,))
+    row = result.fetchone()
+    if row:
+        return row['firstname']
+    return None

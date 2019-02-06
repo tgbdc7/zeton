@@ -11,8 +11,13 @@
 <html>
 <body>
 <div id="container">
+    <div>
+        <button class="logout-button">
+            <a href="logout">LOGOUT</a>
+        </button>
+    </div>
     <div class="rectangle">
-        <h2>Stasiu, obecnie masz {{ punkty }} punktów</h2>
+        <h2>Witaj {{ firstname }}, obecnie masz {{ punkty }} punktów</h2>
         <h3>Szkolny rekord tygodnia : {{ szkolny_rekord_tygodnia }}</h3>
         <h6>Wersja Python: {{ python_version }}</h6>
     </div>

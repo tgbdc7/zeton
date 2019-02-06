@@ -1,23 +1,15 @@
 import os
 import sqlite3 as sql
 import sys
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 
 
-def create_points():
-    query = "insert into points_ VALUES (1, 0, 0)"
-
-    cur = db.cursor()
-    cur.execute(query)
-    db.commit()
-
-
-def create_user(username, password):
-    query = "insert into users VALUES (NULL, ?, ?)"
+def create_user(username, password, firstname):
+    query = "insert into users (username, password, firstname) VALUES (?, ?, ?)"
 
     cur = db.cursor()
     hashed_password = generate_password_hash(password)
-    cur.execute(query, [username, hashed_password])
+    cur.execute(query, [username, hashed_password, firstname])
     db.commit()
 
 
@@ -29,7 +21,7 @@ if __name__ == '__main__':
     with open('01_db_init.sql') as f:
         db.executescript(f.read())
 
-    create_user('admin', 'admin')
-    create_points()
+    create_user('admin', 'admin', 'Admin')
+    create_user('testowy', 'testowy', 'Testowy')
 
     db.close()

@@ -3,7 +3,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 
 """
 
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, redirect, render_template, request, url_for, session
 from datetime import datetime, timedelta
 import sys
 import os
@@ -11,8 +11,6 @@ import os
 import data_access
 import auth
 import db
-from data_access import get_points
-
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -37,8 +35,11 @@ app = create_app()
 
 
 @app.route('/')
+@auth.login_required
 def hello():
     db.get_db()
+    USER_ID = session.get('user_id', None)
+    firstname = data_access.get_firstname(USER_ID)
 
     uczen = data_access.wczytaj_dane()
     ban = uczen['ban']
@@ -47,8 +48,7 @@ def hello():
     szkolny_rekord_tygodnia = uczen['szkolny_rekord_tygodnia']
 
     # Nadpisuję punkty i ban, danymi z bazy:
-    punkty = get_points(user_id=1)
-    punkty = get_points(user_id=1)
+    punkty = data_access.get_points(USER_ID)
     # szkolny_rekord_tygodnia = get_weekly_highscore(user_id=1)
 
     python_version = sys.version
@@ -67,22 +67,23 @@ def hello():
         uczen['ban'] = ban
         data_access.zapisz_dane(uczen)
 
-    return render_template('index.html', punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
+    return render_template('index.html', firstname=firstname, punkty=punkty, ban=ban, szkolny_rekord_tygodnia=szkolny_rekord_tygodnia,
                            time_ban_stop=time_ban_stop.strftime("%Y-%m-%d o godzinie: %H:%M:%S"),
                            python_version=python_version)
 
 
 @app.route("/dodaj_punkt", methods=['POST', 'GET'])
+@auth.login_required
 def dodaj_punkt():
     db.get_db()
-    user_id = 1  # TODO: to musi być dynamicznie ustawiane!
+    USER_ID = session.get('user_id', None)
 
     #    mozliwe_punkty = [0, 1, 3]
     if request.method == 'POST':
         try:
             nowe_punkty = int(request.form['liczba_punktow'])
             if nowe_punkty > 0:
-                data_access.add_points(user_id, nowe_punkty)
+                data_access.add_points(USER_ID, nowe_punkty)
                 # uczen = data_access.wczytaj_dane()
                 # uczen["punkty"] += nowe_punkty
                 # data_access.zapisz_dane(uczen)
@@ -92,8 +93,8 @@ def dodaj_punkt():
     return redirect(url_for('hello'))
 
 
-
 @app.route("/wykorzystanie_punktow", methods=['POST', 'GET'])
+@auth.login_required
 def wykorzystaj_punkty():
     if request.method == 'POST':
         try:
@@ -111,6 +112,7 @@ def wykorzystaj_punkty():
 
 
 @app.route("/ban")
+@auth.login_required
 def daj_bana(time_ban_start=None):
     """
     Dajemy bana
