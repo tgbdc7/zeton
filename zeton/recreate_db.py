@@ -21,7 +21,7 @@ if __name__ == '__main__':
     with open('01_db_init.sql') as f:
         db.executescript(f.read())
 
-    create_user('admin', 'admin', 'Admin')
-    create_user('testowy', 'testowy', 'Testowy')
+    with open('02_insert_test_data.sql') as f:
+        db.executescript(f.read())
 
     db.close()

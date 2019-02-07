@@ -23,5 +23,3 @@ create table bans
   end_timestamp   text,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
-
--- TODO: punkty powinny być przechowywane w tabeli "users", natomiast bany powinny mieć oddzielną tabelę

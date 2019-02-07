@@ -17,9 +17,8 @@
         </button>
     </div>
     <div class="rectangle">
-        <h2>Witaj {{ firstname }}, obecnie masz {{ punkty }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ szkolny_rekord_tygodnia }}</h3>
-        <h6>Wersja Python: {{ python_version }}</h6>
+        <h2>Witaj {{ firstname }}, obecnie masz {{ points }} punktów</h2>
+        <h3>Szkolny rekord tygodnia : {{ weekly_highscore }}</h3>
     </div>
 
     <div id="dodawanie" class="square">
@@ -77,7 +76,7 @@
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
         {% if ban %}
             <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-            <h4> koniec bana: {{ time_ban_stop }}</h4>
+            <h4> koniec bana za {{ time_ban_stop }} minuty</h4>
         {% else %}
             <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}

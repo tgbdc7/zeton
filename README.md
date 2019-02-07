@@ -7,6 +7,11 @@
 - `python main.py` - uruchomienie serwera
 
 
+### Testowi użytkownicy:
+- login: admin, password: admin
+- login: testowy, password: testowy
+
+
 
 ### Triki (Linux)
 - W przypadku serwera Flaskowego, który odłączył się od PyCharma i nie da się go wyłączyć:
