@@ -1,5 +1,7 @@
 # ZETON
 
+Python 3.6
+
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
 - `cd zeton`
