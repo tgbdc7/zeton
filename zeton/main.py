@@ -80,18 +80,8 @@ def dodaj_punkt():
 @auth.login_required
 def wykorzystaj_punkty():
     if request.method == 'POST':
-        try:
-            punkty_do_wykorzystania = int(request.form['liczba_punktow'])
-            uczen = data_access.wczytaj_dane()
-            if uczen["punkty"] >= punkty_do_wykorzystania:
-                uczen["punkty"] -= punkty_do_wykorzystania
-                data_access.zapisz_dane(uczen)
-            else:
-                print("Niestety nie masz wystarczająco duzo punktów na ta nagrodę")
-        except:
-            pass
-        finally:
-            return redirect(url_for('hello'))
+        # TODO: zaimplementować wykorzystywanie punktów
+        return redirect(url_for('hello'))
 
 
 @app.route("/ban")
