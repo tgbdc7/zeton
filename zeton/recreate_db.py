@@ -18,10 +18,10 @@ if __name__ == '__main__':
     dir_path = os.path.dirname(script_path)
     db = sql.connect(dir_path + "/db.sqlite")
 
-    with open('01_db_init.sql') as f:
+    with open('sql/01_db_init.sql') as f:
         db.executescript(f.read())
 
-    with open('02_insert_test_data.sql') as f:
+    with open('sql/02_insert_test_data.sql') as f:
         db.executescript(f.read())
 
     db.close()

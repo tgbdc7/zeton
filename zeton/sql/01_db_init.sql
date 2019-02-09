@@ -17,7 +17,7 @@ create table users
 
 create table bans
 (
-  id              INTEGER primary key,
+  id              INTEGER primary key autoincrement,
   user_id         INTEGER,
   start_timestamp text,
   end_timestamp   text,
