@@ -1,39 +1,68 @@
-import json
-from datetime import datetime, date
+from datetime import datetime, timedelta
+
+from flask import g
+
+def parse_iso_timestamp(timestamp):
+    return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
 
 
-def json_serial(obj):
-    """JSON serializer for objects not serializable by default json code"""
-
-    if isinstance(obj, (datetime, date)):
-        return obj.isoformat()
-    raise TypeError("Type %s not serializable" % type(obj))
-
-
-def wczytaj_dane():
-    """
-    Wczytuje dane z pliku dane.json
-    Jeśli nie ma tego pliku to go tworzy z ustawionymi wartościmai na "0"
-    :return: dane ucznia
-    """
-    try:
-        with open('dane.json', 'r') as plik:
-            dane = json.load(plik)
-    except FileNotFoundError:
-        with open('dane.json', 'w') as plik:
-            dane = {"punkty": 0, "szkolny_rekord_tygodnia": 0, "ban": False}
-            json.dump(dane, plik, default=json_serial)
-    return dane
+def get_points(user_id):
+    query = 'select points from users where id = ?'
+    result = g.db.cursor().execute(query, [user_id])
+    row = result.fetchone()
+    if row:
+        return row['points']
+    return None
 
 
-def zapisz_dane(dane):
-    """
-    zapisuje dane do pliku "dane.json"
-    :param dane: dane ucznia - słownik (dictionary)
-    :return: None
-    """
-    try:
-        with open('dane.json', 'w') as plik:
-            json.dump(dane, plik, default=json_serial)
-    except:
-        return f'Nie można zapisać dancyh do pliku'
+def get_weekly_highscore(user_id):
+    query = 'select school_weekly_highscore from users where id = ?'
+    result = g.db.cursor().execute(query, [user_id])
+    row = result.fetchone()
+    if row:
+        return row['school_weekly_highscore']
+    return None
+
+
+def add_points(user_id, points):
+    query = 'UPDATE users SET points = points + ? WHERE id = ?;'
+    g.db.cursor().execute(query, [points, user_id])
+    g.db.commit()
+
+
+def get_firstname(user_id):
+    query = 'select firstname from users where id = ?'
+    result = g.db.cursor().execute(query, (user_id,))
+    row = result.fetchone()
+    if row:
+        return row['firstname']
+    return None
+
+
+def get_last_active_ban(user_id):
+    all_bans = get_all_bans(user_id)
+    # sqlite3 nie wspiera typu datetime, więc obliczenia trzeba zrobić samemu
+    for ban_id, _, start, end in reversed(all_bans):
+        start = parse_iso_timestamp(start)
+        end = parse_iso_timestamp(end)
+
+        if start < datetime.now() < end:
+            return {'ban_id': ban_id, 'start': start, 'end': end}
+
+
+def get_all_bans(user_id):
+    query = 'select * from bans where user_id = ?'
+    result = g.db.cursor().execute(query, [user_id])
+    return result.fetchall()
+
+
+def give_ban(user_id, duration_minutes):
+    start = datetime.now()
+    end = start + timedelta(minutes=duration_minutes)
+    start_timestamp = start.isoformat()
+    end_timestamp = end.isoformat()
+
+    query = 'insert into bans values (NULL, ?, ?, ?)'
+    params = (user_id, start_timestamp, end_timestamp)
+    result = g.db.cursor().execute(query, params)
+    g.db.commit()

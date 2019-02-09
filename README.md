@@ -1,11 +1,17 @@
 # ZETON
 
+Python 3.6
+
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
 - `cd zeton`
 - `python recreate_db.py` - stworzenie tabeli w bazie
-- `python zeton_glowny.py` - uruchomienie serwera
+- `python main.py` - uruchomienie serwera
 
+
+### Testowi użytkownicy:
+- login: admin, password: admin
+- login: testowy, password: testowy
 
 
 ### Triki (Linux)
