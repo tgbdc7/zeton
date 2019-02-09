@@ -1,8 +1,9 @@
-import json
-from datetime import datetime, date, timedelta
-import ciso8601
+from datetime import datetime, timedelta
 
 from flask import g
+
+def parse_iso_timestamp(timestamp):
+    return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
 
 
 def get_points(user_id):
@@ -42,8 +43,8 @@ def get_last_active_ban(user_id):
     all_bans = get_all_bans(user_id)
     # sqlite3 nie wspiera typu datetime, więc obliczenia trzeba zrobić samemu
     for ban_id, _, start, end in reversed(all_bans):
-        start = ciso8601.parse_datetime(start)
-        end = ciso8601.parse_datetime(end)
+        start = parse_iso_timestamp(start)
+        end = parse_iso_timestamp(end)
 
         if start < datetime.now() < end:
             return {'ban_id': ban_id, 'start': start, 'end': end}

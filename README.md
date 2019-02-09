@@ -14,7 +14,6 @@ Python 3.6
 - login: testowy, password: testowy
 
 
-
 ### Triki (Linux)
 - W przypadku serwera Flaskowego, który odłączył się od PyCharma i nie da się go wyłączyć:
     1. `netstat -tnlp` wypisuje wszystkie używane porty
