@@ -31,14 +31,10 @@ body {
 
 }
 
-.logout-button {
-    padding: 10px;
-    margin: 10px;
-}
-
-.logout-button a {
+.logout-link a {
     text-decoration: none;
     font-size: large;
+    background: red;
 }
 
 #dodawanie {

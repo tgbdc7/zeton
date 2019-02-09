@@ -4,7 +4,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 """
 
 from flask import Flask, redirect, render_template, request, url_for, session
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 
 import data_access
