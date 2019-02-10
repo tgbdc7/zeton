@@ -5,7 +5,6 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from zeton.db import get_db
 
-# bp = Blueprint('auth', __name__, url_prefix='/auth')
 bp = Blueprint('auth', __name__)
 
 
@@ -31,7 +30,7 @@ def login():
 
         if hashed_password and check_password_hash(hashed_password, password):
             session['user_id'] = user_id
-            return redirect(url_for('hello'))
+            return redirect(url_for('main.index'))
         else:
             error = 'Invalid login or username'
     return render_template('login.html', error=error)
@@ -44,12 +43,12 @@ def logout():
 
 
 # login required decorator
-def login_required(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(*args, **kwargs):
         if 'user_id' in session:
-            return f(*args, **kwargs)
+            return view(*args, **kwargs)
         else:
             return redirect(url_for('auth.login'))
 
-    return wrap
+    return wrapped_view

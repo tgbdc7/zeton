@@ -21,8 +21,8 @@
     </div>
 
     <div id="dodawanie" class="square">
-        <h2 style="text-align: center;">Dodawanie punktów dla Stasia</h2>
-        <form style="text-align: center;" action="/dodaj_punkt" method="post">
+        <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ firstname }}</h2>
+        <form style="text-align: center;" action="/api/dodaj_punkt" method="post">
             Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
                                        required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
@@ -47,7 +47,7 @@
 
     <div id="odejmowanie" class="square">
         <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/wykorzystanie_punktow" method="post">
+        <form style="text-align: center;" action="/api/wykorzystanie_punktow" method="post">
             Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
                                        required><br/>
             <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
@@ -91,7 +91,7 @@
             <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
 
         </ol>
-        <div style="text-align: center;"><a href="/ban">
+        <div style="text-align: center;"><a href="/api/ban">
             <button>DAJ BANA</button>
         </a></div>
 
