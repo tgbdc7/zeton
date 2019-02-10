@@ -14,8 +14,7 @@ def create_user(username, password, firstname):
 
 
 if __name__ == '__main__':
-    PATH_TO_APP = "zeton"
-    db = sql.connect(PATH_TO_APP + "/db.sqlite")
+    db = sql.connect("zeton/db.sqlite")
 
     with open('sql/01_db_init.sql') as f:
         db.executescript(f.read())
