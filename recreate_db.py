@@ -17,10 +17,10 @@ if __name__ == '__main__':
     PATH_TO_APP = "zeton"
     db = sql.connect(PATH_TO_APP + "/db.sqlite")
 
-    with open(PATH_TO_APP + '/sql/01_db_init.sql') as f:
+    with open('sql/01_db_init.sql') as f:
         db.executescript(f.read())
 
-    with open(PATH_TO_APP + '/sql/02_insert_test_data.sql') as f:
+    with open('sql/02_insert_test_data.sql') as f:
         db.executescript(f.read())
 
     db.close()
