@@ -11,15 +11,18 @@
 <html>
 <body>
 <div id="container">
+    <div class="logout-link">
+        <a href="/logout">
+            <button>LOGOUT</button>
+        </a></div>
     <div class="rectangle">
-        <h2>Stasiu, obecnie masz {{punkty}} punktów</h2>
-        <h3> Szkolny rekord tygodnia : {{szkolny_rekord_tygodnia}}</h3>
-        <h6> Wersja Python: {{python_version}}</h6>
+        <h2>Witaj {{ firstname }}, obecnie masz {{ points }} punktów</h2>
+        <h3>Szkolny rekord tygodnia : {{ weekly_highscore }}</h3>
     </div>
 
     <div id="dodawanie" class="square">
         <h2 style="text-align: center;">Dodawanie punktów dla Stasia</h2>
-        <form style="text-align: center;" action="/wszystkie-posty" method="post">
+        <form style="text-align: center;" action="/dodaj_punkt" method="post">
             Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
                                        required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
@@ -71,10 +74,10 @@
     <div id="bany_warny" class="square">
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
         {% if ban %}
-        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-        <h4> koniec bana: {{time_ban_stop}}</h4>
+            <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+            <h4> koniec bana za {{ time_ban_stop }} minuty</h4>
         {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+            <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
         <H4>WARNY</H4>
         <ol>
@@ -88,7 +91,9 @@
             <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
 
         </ol>
-        <div style="text-align: center;"><a  href="/ban"><button>DAJ BANA</button></a></div>
+        <div style="text-align: center;"><a href="/ban">
+            <button>DAJ BANA</button>
+        </a></div>
 
     </div>
 

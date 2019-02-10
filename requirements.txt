@@ -1,0 +1,8 @@
+Click
+Flask
+future
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+pytest
