@@ -1,6 +1,4 @@
-import os
 import sqlite3 as sql
-import sys
 from werkzeug.security import generate_password_hash
 
 

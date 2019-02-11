@@ -1,8 +1,6 @@
 from flask import Blueprint, session, request, redirect, url_for
 
-import auth
-import data_access
-import db
+from . import auth, db, data_access
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 

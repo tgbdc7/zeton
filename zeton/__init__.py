@@ -6,10 +6,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 from flask import Flask
 import os
 
-import api
-import auth
-import views
-import db
+from . import api, auth, views, db
 
 
 def create_app(test_config=None):

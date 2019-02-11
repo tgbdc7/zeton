@@ -1,7 +1,7 @@
 import functools
 
 from flask import Blueprint, redirect, render_template, request, url_for, session
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 from zeton.db import get_db
 
@@ -30,7 +30,7 @@ def login():
 
         if hashed_password and check_password_hash(hashed_password, password):
             session['user_id'] = user_id
-            return redirect(url_for('main.index'))
+            return redirect(url_for('views.index'))
         else:
             error = 'Invalid login or username'
     return render_template('login.html', error=error)

@@ -2,9 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, session, render_template
 
-import auth
-import data_access
-import db
+from . import auth, data_access, db
 
 bp = Blueprint('views', __name__)
 
