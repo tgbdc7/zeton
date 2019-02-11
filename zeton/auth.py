@@ -3,7 +3,7 @@ import functools
 from flask import Blueprint, redirect, render_template, request, url_for, session
 from werkzeug.security import check_password_hash
 
-from zeton.db import get_db
+from db import get_db
 
 bp = Blueprint('auth', __name__)
 
