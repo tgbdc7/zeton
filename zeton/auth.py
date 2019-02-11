@@ -3,13 +3,13 @@ import functools
 from flask import Blueprint, redirect, render_template, request, url_for, session
 from werkzeug.security import check_password_hash
 
-from db import get_db
+from . import db
 
 bp = Blueprint('auth', __name__)
 
 
 def get_user_data(login):
-    result = get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
+    result = db.get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
     user_data = result.fetchone()
 
     if user_data:
