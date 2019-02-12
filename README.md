@@ -4,9 +4,8 @@ Python 3.6
 
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
-- `cd zeton`
 - `python recreate_db.py` - stworzenie tabeli w bazie
-- `python main.py` - uruchomienie serwera
+- `python run.py` - uruchomienie serwera
 
 
 ### Testowi użytkownicy:

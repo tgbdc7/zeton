@@ -30,12 +30,12 @@ def add_points(user_id, points):
     g.db.commit()
 
 
-def get_firstname(user_id):
-    query = 'select firstname from users where id = ?'
+def get_user_data(user_id):
+    query = 'select * from users where id = ?'
     result = g.db.cursor().execute(query, (user_id,))
     row = result.fetchone()
     if row:
-        return row['firstname']
+        return dict(row)
     return None
 
 
