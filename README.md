@@ -1,6 +1,17 @@
 # ZETON
+Aplikacja wspomagająca terapię behawioralną. System żetonowy przeznaczony dla 
+dziecka/ucznia. Pozwala na zdobywanie punktów za wykonywane czynności 
+oraz wymienianie ich na nagrody.
 
-Python 3.6
+## Cele aplikacji
+- Rozwijanie zachowań deficytowych (pożądanych)
+- Redukowanie zachowań niepożądanych
+- Generalizowanie i utrzymywanie efektów terapii w czasie 
+
+
+
+## Wymagania
+- Python 3.6
 
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
