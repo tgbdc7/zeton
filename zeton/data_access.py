@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from flask import g
 
+
 def parse_iso_timestamp(timestamp):
     return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
 
@@ -37,6 +38,18 @@ def get_user_data(user_id):
     if row:
         return dict(row)
     return None
+
+
+def get_caregivers_children(user_id):
+    query = """
+    SELECT u.* 
+    FROM caregiver_to_child AS ctc 
+    JOIN users AS u on ctc.child_id = u.id
+    WHERE ctc.caregiver_id = ?
+    AND u.role = 'child'
+    """
+    result = g.db.cursor().execute(query, (user_id,))
+    return result.fetchall()
 
 
 def get_last_active_ban(user_id):

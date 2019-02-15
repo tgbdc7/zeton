@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Żeton</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
 </head>
 
 
@@ -15,10 +14,22 @@
         <a href="/logout">
             <button>LOGOUT</button>
         </a></div>
-    <div class="rectangle">
+    {% if role == 'child' %}
+    <div class="rectangle child">
         <h2>Witaj {{ firstname }}, obecnie masz {{ points }} punktów</h2>
         <h3>Szkolny rekord tygodnia : {{ weekly_highscore }}</h3>
     </div>
+    {%  elif role == 'caregiver' %}
+    <div class="rectangle ">
+        <h2>Witaj {{ firstname }}</h2>
+        <h3>Twoi podopieczni to: </h3>
+        <ul>
+            {% for child in children %}
+            <li>{{ child.firstname }}: ma {{ child.points }} punktów.</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
 
     <div id="dodawanie" class="square">
         <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ firstname }}</h2>

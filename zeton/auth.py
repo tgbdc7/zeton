@@ -9,14 +9,8 @@ bp = Blueprint('auth', __name__)
 
 
 def get_user_data(login):
-    result = db.get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
-    user_data = result.fetchone()
-
-    if user_data:
-        user_id = user_data['id']
-        hashed_password = user_data['password']
-        return (user_id, hashed_password)
-    return None, None
+    result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
+    return result.fetchone()
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -26,10 +20,13 @@ def login():
         login = request.form['login']
         password = request.form['password']
 
-        user_id, hashed_password = get_user_data(login)
+        user_data = get_user_data(login)
+
+        hashed_password = user_data['password']
 
         if hashed_password and check_password_hash(hashed_password, password):
-            session['user_id'] = user_id
+            session['user_id'] = user_data['id']
+            session['role'] = user_data['role']
             return redirect(url_for('views.index'))
         else:
             error = 'Invalid login or username'
