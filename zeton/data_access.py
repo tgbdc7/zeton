@@ -40,6 +40,17 @@ def get_user_data(user_id):
     return None
 
 
+def _add_ban_data(children):
+    new_children = []
+    for child in children:
+        child = dict(child)
+        ban_data = get_last_active_ban(child['id'])
+        if ban_data:
+            child['ban'] = ban_data
+        new_children.append(child)
+    return new_children
+
+
 def get_caregivers_children(user_id):
     query = """
     SELECT u.* 
@@ -49,7 +60,24 @@ def get_caregivers_children(user_id):
     AND u.role = 'child'
     """
     result = g.db.cursor().execute(query, (user_id,))
-    return result.fetchall()
+    children = result.fetchall()
+    # to powinno być też rozwiązane po stronie bazy danych
+    children = _add_ban_data(children)
+    return children
+
+
+def get_child_data(child_id):
+    query = """
+    SELECT u.* 
+    FROM caregiver_to_child AS ctc 
+    JOIN users AS u on ctc.child_id = u.id
+    WHERE ctc.child_id = ?
+    AND u.role = 'child'
+    """
+    result = g.db.cursor().execute(query, (child_id,))
+    child = dict(result.fetchone())
+    child['ban'] = get_last_active_ban(child_id)
+    return child
 
 
 def get_last_active_ban(user_id):
@@ -79,3 +107,9 @@ def give_ban(user_id, duration_minutes):
     params = (user_id, start_timestamp, end_timestamp)
     result = g.db.cursor().execute(query, params)
     g.db.commit()
+
+
+def is_child_under_caregiver(child_id, caregiver_id):
+    query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
+    result = g.db.cursor().execute(query, (child_id, caregiver_id))
+    return result.fetchone()

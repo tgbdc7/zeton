@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Żeton</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+
+<html>
+<body>
+<div id="container">
+    <div class="logout-link">
+        <a href="/logout">
+            <button>LOGOUT</button>
+        </a></div>
+    <div class="rectangle ">
+        <h2>Witaj {{ firstname }}</h2>
+        <h3>Twoi podopieczni to: </h3>
+        <ul>
+            {% for child in children %}
+                <li>
+                    <a href="/child/{{ child.id }}">
+                        {{ child.firstname }}
+                    </a>
+                    : ma {{ child.points }} punktów.
+                    {% if child.ban %}
+                        <b>MA BANA!</b> od {{ child.ban.start }} do {{ child.ban.end }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>
+
