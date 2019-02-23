@@ -27,7 +27,7 @@ def run_scripts(scripts_list):
 
 
 if __name__ == '__main__':
-    DATABASE = 'zeton/db.sqlite'
+    DATABASE = 'db.sqlite'
     SQL_SCRIPTS_DIR = './sql'
 
     db = sql.connect(DATABASE)

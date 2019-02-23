@@ -14,7 +14,7 @@ def create_app(test_config=None):
 
     app.config.from_mapping(
         SECRET_KEY='AplikacjaDlaStasia',
-        DATABASE=os.path.join(app.root_path, 'db.sqlite'),
+        DATABASE=os.path.join(app.root_path, '..', 'db.sqlite'),
         SITE_NAME='Zeton'
     )
 
