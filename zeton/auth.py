@@ -22,14 +22,16 @@ def login():
 
         user_data = get_user_data(login)
 
-        hashed_password = user_data['password']
+        if user_data:
 
-        if hashed_password and check_password_hash(hashed_password, password):
-            session['user_id'] = user_data['id']
-            session['role'] = user_data['role']
-            return redirect(url_for('views.index'))
-        else:
-            error = 'Invalid login or username'
+            hashed_password = user_data['password']
+
+            if check_password_hash(hashed_password, password):
+                session['user_id'] = user_data['id']
+                session['role'] = user_data['role']
+                return redirect(url_for('views.index'))
+
+        error = 'Invalid login or username'
     return render_template('login.html', error=error)
 
 
