@@ -20,8 +20,7 @@ oraz wymienianie ich na nagrody.
 
 
 ### Testowi użytkownicy:
-- login: admin, password: admin
-- login: testowy, password: testowy
+- na ten moment użytkownicy i ich hasła zapisane są w wykomentowanym kodzie w `recreate_db.py`
 
 
 ### Triki (Linux)
