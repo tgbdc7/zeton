@@ -1,23 +1,16 @@
 import functools
 
 from flask import Blueprint, redirect, render_template, request, url_for, session
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
-from db import get_db
+from . import db
 
-# bp = Blueprint('auth', __name__, url_prefix='/auth')
 bp = Blueprint('auth', __name__)
 
 
 def get_user_data(login):
-    result = get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
-    user_data = result.fetchone()
-
-    if user_data:
-        user_id = user_data['id']
-        hashed_password = user_data['password']
-        return (user_id, hashed_password)
-    return None, None
+    result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
+    return result.fetchone()
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -27,13 +20,18 @@ def login():
         login = request.form['login']
         password = request.form['password']
 
-        user_id, hashed_password = get_user_data(login)
+        user_data = get_user_data(login)
 
-        if hashed_password and check_password_hash(hashed_password, password):
-            session['user_id'] = user_id
-            return redirect(url_for('hello'))
-        else:
-            error = 'Invalid login or username'
+        if user_data:
+
+            hashed_password = user_data['password']
+
+            if check_password_hash(hashed_password, password):
+                session['user_id'] = user_data['id']
+                session['role'] = user_data['role']
+                return redirect(url_for('views.index'))
+
+        error = 'Invalid login or username'
     return render_template('login.html', error=error)
 
 
@@ -44,12 +42,12 @@ def logout():
 
 
 # login required decorator
-def login_required(f):
-    @functools.wraps(f)
-    def wrap(*args, **kwargs):
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(*args, **kwargs):
         if 'user_id' in session:
-            return f(*args, **kwargs)
+            return view(*args, **kwargs)
         else:
             return redirect(url_for('auth.login'))
 
-    return wrap
+    return wrapped_view

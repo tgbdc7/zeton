@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Żeton</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-
 </head>
 
 
@@ -14,35 +13,43 @@
     <div class="logout-link">
         <a href="/logout">
             <button>LOGOUT</button>
-        </a></div>
+        </a>
+        <a href="/">Wróć do strony głównej</a>
+    </div>
+
     <div class="rectangle">
-        <h2>Witaj {{ firstname }}, obecnie masz {{ points }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ weekly_highscore }}</h3>
+        <h2>Informacje na temat {{ child.firstname }}</h2>
+        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+        <h3>Punkty: {{ child.points }} punkty.</h3>
+
+        {% if child.ban %}
+            <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+            <h4> Ban kończy się: {{ child.ban.end }}</h4>
+        {% else %}
+            <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        {% endif %}
     </div>
 
     <div id="dodawanie" class="square">
-        <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ firstname }}</h2>
-        <form style="text-align: center;" action="/api/dodaj_punkt" method="post">
+        <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
+        <form style="text-align: center;" action="/api/dodaj_punkt/{{ child.id }}" method="post">
             Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
                                        required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
-            <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
-
-            <ul style="text-align:left;">
-
-                <li>sprzątanie pokoju--> 20pkt</li>
-                <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
-                <li>odrobionie lekcji--> 20pkt</li>
-                <li>spakowanie plecaka--> 20pkt</li>
-                <li>spakowanie plecaka (z mamą)--> 5pkt</li>
-                <li>pomoc rodzicom--> 10-60pkt</li>
-                <li>zenek--> 20pkt</li>
-                <li><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></li>
-                <br>
-
-            </ul>
-
         </form>
+
+        <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
+
+        <ul style="text-align:left;">
+            <li>sprzątanie pokoju--> 20pkt</li>
+            <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
+            <li>odrobionie lekcji--> 20pkt</li>
+            <li>spakowanie plecaka--> 20pkt</li>
+            <li>spakowanie plecaka (z mamą)--> 5pkt</li>
+            <li>pomoc rodzicom--> 10-60pkt</li>
+            <li>zenek--> 20pkt</li>
+        </ul>
+        <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
     </div>
 
     <div id="odejmowanie" class="square">
@@ -70,28 +77,21 @@
 
         </form>
     </div>
-    <div style="clear:both"></div>
     <div id="bany_warny" class="square">
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
-        {% if ban %}
-            <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-            <h4> koniec bana za {{ time_ban_stop }} minuty</h4>
-        {% else %}
-            <h2 style="color: green;">Możesz korzystać z komputera</h2>
-        {% endif %}
         <H4>WARNY</H4>
         <ol>
-
             <li>warn--> ostrżezenie ustne</li>
             <li>warn--> ostrżezenie ustne</li>
-            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu zresetowanie "routera"
+            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu zresetowanie
+                "routera"
             </li>
             <li>warn--> ban 2 stopnia na 30min (brak komputera i telefonu)</li>
             <li>warn--> ban 1 stopnia na 24h (brak telefonu)</li>
             <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
 
         </ol>
-        <div style="text-align: center;"><a href="/api/ban">
+        <div style="text-align: center;"><a href="/api/ban/{{ child.id }}">
             <button>DAJ BANA</button>
         </a></div>
 
@@ -106,14 +106,9 @@
         <div><label> <input type="checkbox"> przyklad 4 </label></div>
         <div><label> <input type="checkbox"> przyklad 5 </label></div>
 
-
     </div>
 
-    <div style="clear:both"></div>
-
-
 </div>
-
 
 </body>
 </html>

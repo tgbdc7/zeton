@@ -6,6 +6,7 @@ body {
 
 #container {
     width: 1010px;
+    background: gray;
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
@@ -15,9 +16,10 @@ body {
 
 .rectangle {
     margin: 10px;
-    width: 980px;
     border-style: solid;
     border-width: medium;
+    padding: 10px;
+    background: darkgray;
 
 }
 
@@ -27,31 +29,24 @@ body {
     border-width: medium;
     margin: 10px;
     width: 480px;
-    height: 480px;
-
+    padding: 10px;
 }
 
 
 #dodawanie {
-
-    float: left;
     background-color: blue;
-
 }
 
 #odejmowanie {
-    float: left;
     background-color: #FF1CAE;
 }
 
 #bany_warny {
-    float: left;
     background-color: #00cccc;
 
 }
 
 #punkty_szkola {
-    float: left;
     background-color: #66ff99;
 }
 
