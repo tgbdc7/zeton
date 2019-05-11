@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <style>
-        .error {
-            color: red;
-        }
+
     </style>
 </head>
 <body>
+<div id="top">
+    <h2 style="text-align:center;">PROJEKT ŻETON</h2>
+</div>
+<div id="logowanie">
+    <form method="post">
+        <h2>ZALOGUJ SIE</h2>
+        <p>Login</p>
+        <input type="text" name="login"/>
+        <p>Haslo</p>
+        <input type="password" name="password"/>
+        <input type="submit">
+        {% if error %}
+        <p class="error">{{error}}</p>
+        {% endif %}
+    </form>
+</div>
+<div id="opis">
 
-<form method="post">
-    <input type="text" name="login"/>
-    <input type="password" name="password"/>
-    <input type="submit">
-    {% if error %}
-    <p class="error">{{error}}</p>
-    {% endif %}
-</form>
-
+    <p> Aplikacja wspomagająca terapię behawioralną. System żetonowy przeznaczony dla
+        dziecka/ucznia. Pozwala na zdobywanie punktów za wykonywane czynności
+        oraz wymienianie ich na nagrody.
+    </p>
+</div>
+<img height="10%;" width="10%;"
+     src="https://vita.biz.pl/images/produkty/7100.733_Play_Chips_Dice_Round_11.5gr_without_Value_Red.jpg" alt="">
 </body>
 </html>
 
