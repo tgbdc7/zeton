@@ -4,3 +4,4 @@ INSERT INTO users VALUES(2,'testowy','pbkdf2:sha256:50000$NGYfLYhY$6b57387f50ec4
 
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence VALUES('users',2);
+ 

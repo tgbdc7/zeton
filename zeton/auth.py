@@ -1,15 +1,16 @@
 import functools
 
 from flask import Blueprint, redirect, render_template, request, url_for, session
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
-from . import db
+from db import get_db
 
+# bp = Blueprint('auth', __name__, url_prefix='/auth')
 bp = Blueprint('auth', __name__)
 
 
 def get_user_data(login):
-    result = db.get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
+    result = get_db().execute("SELECT id, password FROM users WHERE username = ?", [login])
     user_data = result.fetchone()
 
     if user_data:
@@ -30,7 +31,7 @@ def login():
 
         if hashed_password and check_password_hash(hashed_password, password):
             session['user_id'] = user_id
-            return redirect(url_for('views.index'))
+            return redirect(url_for('hello'))
         else:
             error = 'Invalid login or username'
     return render_template('login.html', error=error)
@@ -43,12 +44,12 @@ def logout():
 
 
 # login required decorator
-def login_required(view):
-    @functools.wraps(view)
-    def wrapped_view(*args, **kwargs):
+def login_required(f):
+    @functools.wraps(f)
+    def wrap(*args, **kwargs):
         if 'user_id' in session:
-            return view(*args, **kwargs)
+            return f(*args, **kwargs)
         else:
             return redirect(url_for('auth.login'))
 
-    return wrapped_view
+    return wrap
