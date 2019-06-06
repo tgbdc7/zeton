@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  background-color: #6fc2d0;
+}
+
+body header {
+  width: 100%;
+  height: 8%;
+  background-color: #6fc2d0;
+  color: #ffffff;
+}
+
+body header .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100px;
+}
+
+body header .container .row .col h1 {
+  text-transform: uppercase;
+  line-height: 1em;
+  color: #ffffff;
+  margin: 0;
+  position: relative;
+  text-shadow: 1px 0px 6px #0c99c1;
+}
+
+@media (min-width: 418.98px) {
+  body header .container .row .col h1 {
+    line-height: 2em;
+  }
+}
+
+body header .container .row .col .circle {
+  background-color: #313848;
+  border: dashed 7px #0c99c1;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: absolute;
+  top: 3px;
+  left: 38%;
+  -webkit-transform: rotate(75deg);
+          transform: rotate(75deg);
+  -webkit-box-shadow: 1px 0px 7px #313848;
+          box-shadow: 1px 0px 7px #313848;
+}
+
+@media (min-width: 418.98px) {
+  body header .container .row .col .circle {
+    top: 0px;
+    left: 45%;
+  }
+}
+
+@media (min-width: 576.98px) {
+  body header .container .row .col .circle {
+    top: 2px;
+    left: 45%;
+  }
+}
+
+body main {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: #6fc2d0;
+}
+
+body main .login {
+  max-width: 1200px;
+  height: 50%;
+  margin: 0 auto;
+  padding: 0 0 20px 0;
+}
+
+body main .login .container {
+  height: 100%;
+}
+
+body main .login .container .row {
+  height: 100%;
+}
+
+body main .login .container .row .col {
+  padding: 20px;
+  background-color: #ffcbcb;
+  border: solid 8px #ffffff;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px #313848;
+          box-shadow: 1px 1px 5px #313848;
+  color: #313848;
+}
+
+body main .login .container .row .col form h2 {
+  text-align: center;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+body main .login .container .row .col form .button {
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
+}
+
+body main .login .container .row .col form .button .btn-primary {
+  background-color: #0c99c1;
+  border: solid 2px #ffffff;
+  outline: none;
+}
+
+body main .login .container .row .col form .button .btn-primary:hover {
+  background-color: #313848;
+}
+
+body main .text {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 0 20px 0;
+}
+
+body main .text .container .row .col {
+  padding: 20px;
+  background-color: #0c99c1;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px #0c99c1;
+          box-shadow: 1px 1px 5px #0c99c1;
+  color: #ffffff;
+  height: 100%;
+}
+
+body main .text .container .row .col p {
+  line-height: 1.2em;
+  font-weight: normal;
+  margin: 0;
+}
+
+@media (min-width: 576.98px) {
+  body main .text .container .row .col p {
+    line-height: 1.5em;
+  }
+}
+/*# sourceMappingURL=login.css.map */
