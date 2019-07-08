@@ -16,6 +16,12 @@ def get_points(user_id):
     return None
 
 
+def subtract_points(user_id, points):
+    query = 'update users SET points = points - ? WHERE id = ?;'
+    g.db.cursor().execute(query, [points, user_id])
+    g.db.commit()
+
+
 def get_weekly_highscore(user_id):
     query = 'select school_weekly_highscore from users where id = ?'
     result = g.db.cursor().execute(query, [user_id])

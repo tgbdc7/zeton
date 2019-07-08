@@ -25,12 +25,26 @@ def dodaj_punkt(target_id):
         return redirect(url_for('views.child', child_id=target_id))
 
 
-@bp.route("/wykorzystanie_punktow", methods=['POST', 'GET'])
+@bp.route("/wykorzystanie_punktow/<target_id>", methods=['POST'])
 @auth.login_required
-def wykorzystaj_punkty():
+def wykorzystaj_punkty(target_id):
+    db.get_db()
+    USER_ID = session.get('user_id', None)
+    current_points = data_access.get_points(target_id)
+
+    if not data_access.is_child_under_caregiver(target_id, USER_ID):
+        return abort(403)
+
     if request.method == 'POST':
-        # TODO: zaimplementować wykorzystywanie punktów
-        return redirect(url_for('views.index'))
+        try:
+            used_points = int(request.form['points_to_be_used'])
+            if used_points > 0:
+                if used_points < current_points or used_points == current_points:
+                    data_access.subtract_points(target_id, used_points)
+        except Exception as e:
+            print(e)
+
+    return redirect(url_for('views.child', child_id=target_id))
 
 
 @bp.route("/ban/<target_id>")

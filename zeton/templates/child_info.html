@@ -54,8 +54,8 @@
 
     <div id="odejmowanie" class="square">
         <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/api/wykorzystanie_punktow" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
+        <form style="text-align: center;" action="/api/wykorzystanie_punktow/{{child.id}}" method="post">
+            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points_to_be_used"
                                        required><br/>
             <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
             <h4>NAGRODY</h4>
