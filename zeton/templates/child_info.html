@@ -79,7 +79,7 @@
     </div>
     <div id="bany_warny" class="square">
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
-        <H4>WARNY</H4>
+
         <ol>
             <li>warn--> ostrżezenie ustne</li>
             <li>warn--> ostrżezenie ustne</li>
@@ -91,6 +91,12 @@
             <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
 
         </ol>
+        <div style="text-align: center;"><a href="/api/warn/{{ child.id }}">
+            <button>DAJ WARNA</button>
+        </a></div>
+        <div style="text-align: center;"><a href="/api/kick/{{ child.id }}">
+            <button>DAJ KICKA</button>
+        </a></div>
         <div style="text-align: center;"><a href="/api/ban/{{ child.id }}">
             <button>DAJ BANA</button>
         </a></div>

@@ -59,3 +59,31 @@ def daj_bana(target_id):
     ten_minutes = 10
     data_access.give_ban(target_id, ten_minutes)
     return redirect(url_for('views.child', child_id=target_id))
+
+@bp.route("/warn/<target_id>")
+@auth.login_required
+def daj_warna(target_id):
+    #TODO
+    db.get_db()
+    USER_ID = session.get('user_id', None)
+
+    if not data_access.is_child_under_caregiver(target_id, USER_ID):
+        return abort(403)
+
+    ten_minutes = 10
+    data_access.give_ban(target_id, ten_minutes)
+    return redirect(url_for('views.child', child_id=target_id))
+
+@bp.route("/kick/<target_id>")
+@auth.login_required
+def daj_kicka(target_id):
+    #TODO
+    db.get_db()
+    USER_ID = session.get('user_id', None)
+
+    if not data_access.is_child_under_caregiver(target_id, USER_ID):
+        return abort(403)
+
+    ten_minutes = 10
+    data_access.give_ban(target_id, ten_minutes)
+    return redirect(url_for('views.child', child_id=target_id))
