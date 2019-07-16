@@ -70,8 +70,7 @@ def daj_warna(target_id):
     if not data_access.is_child_under_caregiver(target_id, USER_ID):
         return abort(403)
 
-    ten_minutes = 10
-    data_access.give_ban(target_id, ten_minutes)
+    data_access.give_warn(target_id)
     return redirect(url_for('views.child', child_id=target_id))
 
 @bp.route("/kick/<target_id>")
@@ -84,6 +83,5 @@ def daj_kicka(target_id):
     if not data_access.is_child_under_caregiver(target_id, USER_ID):
         return abort(403)
 
-    ten_minutes = 10
-    data_access.give_ban(target_id, ten_minutes)
+    data_access.give_kick(target_id)
     return redirect(url_for('views.child', child_id=target_id))

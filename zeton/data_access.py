@@ -46,13 +46,22 @@ def get_user_data(user_id):
     return None
 
 
-def _add_ban_data(children):
+#
+# def _add_ban_data(children):
+#     new_children = []
+#     for child in children:
+#         child = dict(child)
+#         ban_data = get_last_active_ban(child['id'])
+#         if ban_data:
+#             child['ban'] = ban_data
+#         new_children.append(child)
+#     return new_children
+
+def _update_bans_data(children):
     new_children = []
     for child in children:
         child = dict(child)
-        ban_data = get_last_active_ban(child['id'])
-        if ban_data:
-            child['ban'] = ban_data
+        child['bans'] = check_bans_status(child['id'])
         new_children.append(child)
     return new_children
 
@@ -67,8 +76,7 @@ def get_caregivers_children(user_id):
     """
     result = g.db.cursor().execute(query, (user_id,))
     children = result.fetchall()
-    # to powinno być też rozwiązane po stronie bazy danych
-    # children = _add_ban_data(children) # narazie wykomentowalem TODO
+    children = _update_bans_data(children)
     return children
 
 
@@ -95,8 +103,8 @@ def check_bans_status(child_id):
     result = {}
     for ban_id, ban_name in bans_name.items():
         try:
-            start = parse_iso_timestamp(all_bans[ban_id]['start'])
-            stop = parse_iso_timestamp(all_bans[ban_id]['stop'])
+            start = datetime.fromisoformat(all_bans[ban_id]['start'])
+            stop = datetime.fromisoformat(all_bans[ban_id]['stop'])
             if datetime.now() < stop:
                 active = True
             else:
@@ -121,24 +129,75 @@ def get_child_data(child_id):
     result = g.db.cursor().execute(query, (child_id,))
     child = dict(result.fetchone())
     child['bans'] = check_bans_status(child_id)
-    # child['ban'] = get_last_active_ban(child_id)
     return child
 
 
-def get_last_active_ban(user_id):
-    all_bans = get_all_bans(user_id)
-    # sqlite3 nie wspiera typu datetime, więc obliczenia trzeba zrobić samemu
-    for ban_id, _, start, end in reversed(all_bans):
-        start = parse_iso_timestamp(start)
-        end = parse_iso_timestamp(end)
+#
+# def get_last_active_ban(user_id):
+#     all_bans = get_all_bans(user_id)
+#     # sqlite3 nie wspiera typu datetime, więc obliczenia trzeba zrobić samemu
+#     for ban_id, _, start, end in reversed(all_bans):
+#         start = parse_iso_timestamp(start)
+#         end = parse_iso_timestamp(end)
+#
+#         if start < datetime.now() < end:
+#             return {'ban_id': ban_id, 'start': start, 'end': end}
 
-        if start < datetime.now() < end:
-            return {'ban_id': ban_id, 'start': start, 'end': end}
+
+def set_to_midnight(dt):
+    midnight = datetime.min.time()
+    return datetime.combine(dt.date(), midnight)
+
+
+def calculate_end_time_warn(start, ban_id):
+    if ban_id <= 3:
+        end = set_to_midnight(start + timedelta(days=1))
+    elif ban_id == 4:
+        end = start + timedelta(minutes=30)
+    elif ban_id >= 5:
+        end = start + timedelta(days=1)
+
+    return end.isoformat()
+
+
+def update_warn_per_ban_id(child_id, ban_id):
+    start = datetime.now()
+    start_timestamp = start.isoformat()
+    end_timestamp = calculate_end_time_warn(start, ban_id)
+    query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
+    params = (start_timestamp, end_timestamp, child_id, ban_id)
+    g.db.cursor().execute(query, params)
+    g.db.commit()
+
+
+def add_warn_per_ban_id(child_id, ban_id):
+    start = datetime.now()
+    start_timestamp = start.isoformat()
+    end_timestamp = calculate_end_time_warn(start, ban_id)
+    query = 'INSERT INTO bans valueS (NULL, ?, ?, ?, ?)'
+    params = (child_id, ban_id, start_timestamp, end_timestamp)
+    g.db.cursor().execute(query, params)
+    g.db.commit()
+
+
+def give_warn(child_id):
+    bans_status = check_bans_status(child_id)
+    for ban_id, ban in bans_status.items():
+        if not ban['start']:
+            return add_warn_per_ban_id(child_id, ban_id)
+        elif not ban['active']:
+            return update_warn_per_ban_id(child_id, ban_id)
+
+
+def give_kick(child_id):
+    bans_status = check_bans_status(child_id)
+    # TODO
 
 
 def give_ban(child_id, duration_minutes):
     bans_status = check_bans_status(child_id)
-
+    start = datetime.now()
+    start_timestamp = start.isoformat()
     try:
         if bans_status[6]['start']:
             # jeśli jest wpis bazie to robimy update
@@ -148,23 +207,18 @@ def give_ban(child_id, duration_minutes):
                 # jeśli jest aktywny to aktualizujemy czas końca bana
                 end = bans_status[6]['stop'] + timedelta(minutes=duration_minutes)
                 end_timestamp = end.isoformat()
-
                 query = 'UPDATE bans SET   end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
                 params = (end_timestamp, child_id, 6)
 
             else:
                 # jeśli jest ban ale nieaktywny to ustawimy czasy od początku,
-                start = datetime.now()
                 end = start + timedelta(minutes=duration_minutes)
-                start_timestamp = start.isoformat()
                 end_timestamp = end.isoformat()
                 query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
                 params = (start_timestamp, end_timestamp, child_id, 6)
 
         else:
             # jeśli nie ma wpisu w bazie to robimy nowy wpis
-            start = datetime.now()
-            start_timestamp = start.isoformat()
             end = start + timedelta(minutes=duration_minutes)
             end_timestamp = end.isoformat()
             query = 'INSERT INTO bans valueS (NULL, ?, ?, ?, ?)'

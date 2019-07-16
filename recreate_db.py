@@ -21,7 +21,7 @@ def get_sql_scripts(dir):
 
 def run_scripts(scripts_list):
     for script in scripts_list:
-        with open(script) as f:
+        with open(script, encoding='utf-8') as f:
             db.executescript(f.read())
         print(f'Script "{f.name}" executed')
 

@@ -19,31 +19,31 @@ INSERT INTO caregiver_to_child VALUES(8,7,6);
 
 INSERT INTO bans_name VALUES(1,2,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(2,2,2,'2 ustne ostrzeżenie');
-INSERT INTO bans_name VALUES(3,2,3,'Przerwanie obecnej aktywności i udanie się do pokoju');
-INSERT INTO bans_name VALUES(4,2,4,'brak komputera i telefonu');
-INSERT INTO bans_name VALUES(5,2,5,'brak telefonu');
-INSERT INTO bans_name VALUES(6,2,6,'brak komputera i telefonu');
+INSERT INTO bans_name VALUES(3,2,3,'KICK Przerwanie obecnej aktywności i udanie się do pokoju');
+INSERT INTO bans_name VALUES(4,2,4,'BAN 2 stopnia na 30 min - brak komputera i telefonu');
+INSERT INTO bans_name VALUES(5,2,5,'BAN 1 stopnia na 24h - brak telefonu');
+INSERT INTO bans_name VALUES(6,2,6,'BAN 2 stopnia na 24h - brak komputera i telefonu');
 
 INSERT INTO bans_name VALUES(7,3,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(8,3,2,'2 ustne ostrzeżenie');
-INSERT INTO bans_name VALUES(9,3,3,'Przerwanie obecnej aktywności i udanie się do pokoju');
-INSERT INTO bans_name VALUES(10,3,4,'brak tableta i telefonu');
-INSERT INTO bans_name VALUES(11,3,5,'brak telefonu');
-INSERT INTO bans_name VALUES(12,3,6,'brak tableta i telefonu');
+INSERT INTO bans_name VALUES(9,3,3,'KICK Przerwanie obecnej aktywności i udanie się do pokoju');
+INSERT INTO bans_name VALUES(10,3,4,'BAN 2 stopnia na 30 min - brak tableta i telefonu');
+INSERT INTO bans_name VALUES(11,3,5,'BAN 1 stopnia na 24h - brak telefonu');
+INSERT INTO bans_name VALUES(12,3,6,'BAN 2 stopnia na 24h - brak tableta i telefonu');
 
 INSERT INTO bans_name VALUES(13,5,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(14,5,2,'2 ustne ostrzeżenie');
-INSERT INTO bans_name VALUES(15,5,3,'Przerwanie obecnej aktywności i udanie się do pokoju');
-INSERT INTO bans_name VALUES(16,5,4,'brak telewizji i tableta');
-INSERT INTO bans_name VALUES(17,5,5,'brak tableta');
-INSERT INTO bans_name VALUES(18,5,6,'brak telewizji i tableta');
+INSERT INTO bans_name VALUES(15,5,3,'KICK Przerwanie obecnej aktywności i udanie się do pokoju');
+INSERT INTO bans_name VALUES(16,5,4,'BAN 2 stopnia na 30 min - brak telewizji i tableta');
+INSERT INTO bans_name VALUES(17,5,5,'BAN 1 stopnia na 24h - brak tableta');
+INSERT INTO bans_name VALUES(18,5,6,'BAN 2 stopnia na 24h - brak telewizji i tableta');
 
 INSERT INTO bans_name VALUES(19,6,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(20,6,2,'2 ustne ostrzeżenie');
-INSERT INTO bans_name VALUES(21,6,3,'Przerwanie obecnej aktywności i udanie się do pokoju');
-INSERT INTO bans_name VALUES(22,6,4,'brak bajek i gier');
-INSERT INTO bans_name VALUES(23,6,5,'brak gier');
-INSERT INTO bans_name VALUES(24,6,6,'brak bajek i gier');
+INSERT INTO bans_name VALUES(21,6,3,'KICK Przerwanie obecnej aktywności i udanie się do pokoju');
+INSERT INTO bans_name VALUES(22,6,4,'BAN 2 stopnia na 30 min - brak bajek i gier');
+INSERT INTO bans_name VALUES(23,6,5,'BAN 1 stopnia na 24h - brak gier');
+INSERT INTO bans_name VALUES(24,6,6,'BAN 2 stopnia na 24h - brak bajek i gier');
 
 
 DELETE FROM sqlite_sequence;

@@ -22,11 +22,11 @@
         <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
         <h3>Punkty: {{ child.points }} punkty.</h3>
 
-        {% if child.ban %}
-            <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-            <h4> Ban kończy się: {{ child.ban.end }}</h4>
+        {% if child.bans.6.active %}
+        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+        <h4> Ban kończy się: {{ child.bans.6.stop }}</h4>
         {% else %}
-            <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
     </div>
 
@@ -81,15 +81,13 @@
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
 
         <ol>
-            <li>warn--> ostrżezenie ustne</li>
-            <li>warn--> ostrżezenie ustne</li>
-            <li>warn--> kick - przerwanie obecnej aktywnosci <br> i udanie się do pokoju w celu zresetowanie
-                "routera"
-            </li>
-            <li>warn--> ban 2 stopnia na 30min (brak komputera i telefonu)</li>
-            <li>warn--> ban 1 stopnia na 24h (brak telefonu)</li>
-            <li>warn--> ban 2 stopnia na 24h (brak komputera i telefonu)</li>
+            {% for ban in child.bans.values() %}
+            <li {%if ban.active %}  style ="color:red"  {% endif%}>WARM--> {{ban.name}}
 
+
+            </li>
+
+            {% endfor %}
         </ol>
         <div style="text-align: center;"><a href="/api/warn/{{ child.id }}">
             <button>DAJ WARNA</button>
