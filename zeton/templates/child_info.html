@@ -82,25 +82,28 @@
 
         <ol>
             {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red"  {% endif%}>WARM--> {{ban.name}}
+            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
 
 
             </li>
 
             {% endfor %}
         </ol>
-        <div style="text-align: center;"><a href="/api/warn/{{ child.id }}">
-            <button>DAJ WARNA</button>
-        </a></div>
-        <div style="text-align: center;"><a href="/api/kick/{{ child.id }}">
-            <button>DAJ KICKA</button>
-        </a></div>
-        <div style="text-align: center;"><a href="/api/ban/{{ child.id }}">
-            <button>DAJ BANA</button>
-        </a></div>
+        <div style="margin-left:auto; margin-right:auto;" >
+            <a href="/api/warn/{{ child.id }}#bany_warny">
+                <button style="text-align: left;">DAJ WARNA</button>
+            </a>
+            <a href="/api/kick/{{ child.id }}#bany_warny">
+                <button {% if child.bans.3.active %} disabled="disabled" {%endif%} >
+                    DAJ KICKA
+                </button>
+            </a>
+            <a href="/api/ban/{{ child.id }}#bany_warny">
+                <button style="text-align: right;">DAJ BANA</button>
+            </a>
 
+        </div>
     </div>
-
     <div id="punkty_szkola" class="square">
 
         <h2> *** Punkty ze Szkoły *** </h2>

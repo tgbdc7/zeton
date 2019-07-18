@@ -163,6 +163,7 @@ def calculate_end_time_warn(start, ban_id):
 def update_warn_per_ban_id(child_id, ban_id):
     start = datetime.now()
     start_timestamp = start.isoformat()
+
     end_timestamp = calculate_end_time_warn(start, ban_id)
     query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
     params = (start_timestamp, end_timestamp, child_id, ban_id)
@@ -191,7 +192,14 @@ def give_warn(child_id):
 
 def give_kick(child_id):
     bans_status = check_bans_status(child_id)
-    # TODO
+    #TODO - ustawić warny 1-2 na aktywne
+    if not bans_status[3]['start']:
+        return add_warn_per_ban_id(child_id, 3)
+    elif not bans_status[3]['active']:
+        return update_warn_per_ban_id(child_id, 3)
+    else:
+        # TODO dać komunikat do użytkownika
+        pass
 
 
 def give_ban(child_id, duration_minutes):
