@@ -40,24 +40,13 @@
         <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
 
         <ul style="text-align:left;">
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Nazwa</th>
-                    <th>Punkty</th>
-                    <th>Max. dziennie</th>
-                    <th>Max. tygodniowo</th>
-                </tr>
-                {% for task in tasks %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.points }}</td>
-                    <td>{{ task.max_day }}</td>
-                    <td>{{ task.max_week }}</td>
-                </tr>
-                {% endfor %}
-            </table>
+            <li>sprzątanie pokoju--> 20pkt</li>
+            <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
+            <li>odrobionie lekcji--> 20pkt</li>
+            <li>spakowanie plecaka--> 20pkt</li>
+            <li>spakowanie plecaka (z mamą)--> 5pkt</li>
+            <li>pomoc rodzicom--> 10-60pkt</li>
+            <li>zenek--> 20pkt</li>
         </ul>
         <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
     </div>

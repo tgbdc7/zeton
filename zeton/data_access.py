@@ -243,8 +243,3 @@ def is_child_under_caregiver(child_id, caregiver_id):
     query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
     result = g.db.cursor().execute(query, (child_id, caregiver_id))
     return result.fetchone()
-
-def get_tasks(user_id):
-    query = "SELECT * FROM home_points WHERE user_id = ? ORDER BY points LIMIT 10"
-    result = g.db.cursor().execute(query, (user_id,))
-    return result.fetchall()
