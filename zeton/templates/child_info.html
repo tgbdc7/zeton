@@ -71,18 +71,26 @@
             <h4>NAGRODY</h4>
 
             <ul style="text-align:left;">
-
-                <li>1 pkt--> 1 min komputer</li>
-                <li>40 pkt--> cola (200ml) (raz na 7 dni )</li>
-                <li>50 pkt--> cola (330ml) (raz na 7 dni)</li>
-                <li>60 pkt--> zakupy w żabce (bez chipsów i Coca Coli)</li>
-                <li>100 pkt--> kino domowe</li>
-                <Li>200 pkt--> 6zł do wydania na mc.skyblock.pl</Li>
-                <li>250 pkt--> jump city</li>
-                <li>250 pkt--> kino</li>
-                <li>250 pkt--> Aquapark reda</li>
-                <li>250 pkt--> piżama party</li>
-
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nazwa</th>
+                    <th>Punkty</th>
+                    <th>Max. dziennie</th>
+                    <th>Max. tygodniowo</th>
+                    <th>Max. miesięcznie</th>
+                </tr>
+                {% for prize in prizes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ prize.name }}</td>
+                    <td>{{ prize.points }}</td>
+                    <td>{{ prize.max_day }}</td>
+                    <td>{{ prize.max_week }}</td>
+                    <td>{{ prize.max_month }}</td>
+                </tr>
+                {% endfor %}
+            </table>
             </ul>
 
         </form>

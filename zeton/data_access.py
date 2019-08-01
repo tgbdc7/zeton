@@ -248,3 +248,8 @@ def get_tasks(user_id):
     query = "SELECT * FROM home_points WHERE user_id = ? ORDER BY points LIMIT 10"
     result = g.db.cursor().execute(query, (user_id,))
     return result.fetchall()
+
+def get_prizes(user_id):
+    query = "SELECT * FROM prizes WHERE user_id = ? ORDER BY points"
+    result = g.db.cursor().execute(query, (user_id,))
+    return result.fetchall()

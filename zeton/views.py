@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Blueprint, session, render_template, abort
 
-from zeton.data_access import get_child_data, get_tasks
+from zeton.data_access import get_child_data, get_tasks, get_prizes
 from . import auth, data_access, db
 
 bp = Blueprint('views', __name__)
@@ -51,7 +51,8 @@ def child(child_id):
 
     child = get_child_data(child_id)
     tasks = get_tasks(child_id)
+    prizes = get_prizes(child_id)
 
-    context = {'child': child, 'tasks': tasks}
+    context = {'child': child, 'tasks': tasks, 'prizes': prizes}
 
     return render_template('child_info.html', **context)

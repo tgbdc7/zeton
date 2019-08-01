@@ -20,6 +20,14 @@ def create_task(user_id, name, points, max_day, max_week):
     cur.execute(query, params)
     db.commit()
 
+def create_prize(user_id, name, points, max_day, max_week, max_month):
+    query = "INSERT INTO prizes (user_id, name, points, max_day, max_week, max_month) VALUES (?, ?, ?, ?, ?, ?)"
+
+    cur = db.cursor()
+    params = (user_id, name, points, max_day, max_week, max_month)
+    cur.execute(query, params)
+    db.commit()
+
 def get_sql_scripts(dir):
     p = pathlib.Path(dir)
     scripts = p.glob('*.sql')
@@ -72,5 +80,21 @@ if __name__ == '__main__':
     create_task(6, "karmienie rybek", 5, 1, 7)
     create_task(6, "naprawianie motocyklu", 20, 1, 2)
     create_task(6, "powrót do domu przed 20", 10, 1, 7)
+
+    create_prize(2, "1 min komputer", 1, 30, 180, 720)
+    create_prize(2, "cola (200ml)", 20, 1, 1, 4)
+    create_prize(2, "zakupy w żabce (bez chipsów i Coca Coli)", 60, 1, 1, 4)
+    create_prize(2, "kino domowe", 100, 1, 2, 8)
+
+    create_prize(3, "6zł do wydania na mc.skyblock.pl", 200, 1, 1, 4)
+    create_prize(3, "jump city", 600, 1, 1, 3)
+    create_prize(3, "kino", 250, 1, 1, 2)
+
+    create_prize(5, "Aquapark reda", 250, 1, 1, 1)
+    create_prize(5, "piżama party", 250, 1, 1, 1)
+
+    create_prize(6, "nowe części do motocykla", 600, 1, 1, 1)
+    create_prize(6, "nowa książka", 100, 1, 1, 4)
+    create_prize(6, "nowa rybka", 20, 1, 1, 1)
 
     db.close()
