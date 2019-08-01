@@ -1,7 +1,7 @@
 body {
     background-color: #3f3f3f;
     font-family: Verdana;
-    color: white;
+    color: #1e1b1b;
 }
 
 #container {
@@ -34,7 +34,7 @@ body {
 
 
 #dodawanie {
-    background-color: blue;
+    background-color: #1c8041;
 }
 
 #odejmowanie {

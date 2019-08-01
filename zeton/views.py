@@ -27,7 +27,7 @@ def index():
                         "role": role,
                         "children": children})
     elif role == 'child':
-        ban = data_access.get_last_active_ban(USER_ID)
+        # ban = data_access.get_last_active_ban(USER_ID)
         points = data_access.get_points(USER_ID)
         weekly_highscore = data_access.get_weekly_highscore(user_id=1)
 
