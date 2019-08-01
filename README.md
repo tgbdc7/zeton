@@ -11,7 +11,7 @@ oraz wymienianie ich na nagrody.
 
 
 ## Wymagania
-- Python 3.6
+- Python 3.7
 
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
