@@ -1,18 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+
 body {
     background-color: #3f3f3f;
     font-family: Verdana;
-    color: white;
-}
-
-#container {
-    width: 1010px;
-    background: gray;
-    margin-left: auto;
-    margin-right: auto;
-    border-style: solid;
-    border-width: medium;
+    color: #1e1b1b;
 
 }
+
+
+
+
 
 .rectangle {
     margin: 10px;
@@ -23,30 +26,31 @@ body {
 
 }
 
-.square {
-
-    border-style: solid;
-    border-width: medium;
-    margin: 10px;
-    width: 480px;
-    padding: 10px;
-}
-
 
 #dodawanie {
-    background-color: blue;
+    background-color: #1c8041;
+    border-style: solid;
+    border-width: medium;
 }
 
 #odejmowanie {
     background-color: #FF1CAE;
+    border-style: solid;
+    border-width: medium;
+
 }
 
 #bany_warny {
     background-color: #00cccc;
+    border-style: solid;
+    border-width: medium;
+
 
 }
 
 #punkty_szkola {
     background-color: #66ff99;
-}
+    border-style: solid;
+    border-width: medium;
 
+}
