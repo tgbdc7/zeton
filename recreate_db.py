@@ -59,42 +59,4 @@ if __name__ == '__main__':
 
     create_user('dyrektor', 'dyrektor', 'Zbigniew', 'caregiver')
 
-    create_task(2, "sprzątanie pokoju", 20, 1, 7)
-    create_task(2, "wykonanie polecenia bez zwłoki", 20, 1, 7)
-    create_task(2, "odrobienie lekcji", 20, 1, 5)
-    create_task(2, "spakowanie plecaka", 20, 1, 5)
-    create_task(2, "spakowanie plecaka z rodzicem", 20, 1, 5)
-    create_task(2, "pomoc rodzicom", 10, 3, 35)
-    create_task(2, "podlanie kwiatów", 5, 1, 7)
-    create_task(2, "pomoc ślepej sąsiadce", 20, 1, 7)
-
-    create_task(3, "granie na instrumencie", 20, 1, 7)
-    create_task(3, "wyprowadzanie psa", 5, 3, 35)
-    create_task(3, "sprawdzanie skrzynki na listy", 5, 1, 2)
-
-    create_task(5, "ścieranie kurzy", 10, 1, 3)
-    create_task(5, "czytanie książki", 10, 1, 7)
-    create_task(5, "trening na basenie", 20, 1, 2)
-    create_task(5, "mycie okien", 100, 1, 1)
-
-    create_task(6, "karmienie rybek", 5, 1, 7)
-    create_task(6, "naprawianie motocyklu", 20, 1, 2)
-    create_task(6, "powrót do domu przed 20", 10, 1, 7)
-
-    create_prize(2, "1 min komputer", 1, 30, 180, 720)
-    create_prize(2, "cola (200ml)", 20, 1, 1, 4)
-    create_prize(2, "zakupy w żabce (bez chipsów i Coca Coli)", 60, 1, 1, 4)
-    create_prize(2, "kino domowe", 100, 1, 2, 8)
-
-    create_prize(3, "6zł do wydania na mc.skyblock.pl", 200, 1, 1, 4)
-    create_prize(3, "jump city", 600, 1, 1, 3)
-    create_prize(3, "kino", 250, 1, 1, 2)
-
-    create_prize(5, "Aquapark reda", 250, 1, 1, 1)
-    create_prize(5, "piżama party", 250, 1, 1, 1)
-
-    create_prize(6, "nowe części do motocykla", 600, 1, 1, 1)
-    create_prize(6, "nowa książka", 100, 1, 1, 4)
-    create_prize(6, "nowa rybka", 20, 1, 1, 1)
-
     db.close()
