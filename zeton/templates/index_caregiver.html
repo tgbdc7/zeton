@@ -2,38 +2,80 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+
     <title>Żeton</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
 </head>
 
 
-<html>
 <body>
-<div id="container">
-    <div class="logout-link">
-        <a href="/logout">
-            <button>LOGOUT</button>
-        </a></div>
-    <div class="rectangle ">
-        <h2>Witaj {{ firstname }}</h2>
-        <h3>Twoi podopieczni to: </h3>
-        <ul>
-            {% for child in children %}
-                <li>
-                    <a href="/child/{{ child.id }}">
-                        {{ child.firstname }}
-                    </a>
-                    : ma {{ child.points }} punktów.
-                    {% if child.bans.6.active %}
-                        <b>MA BANA!</b> od {{ child.bans.6.start }} do {{ child.bans.6.stop }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+<header>
+    <div id="top" class="container">
+        <div class="row justify-content-center align-items-center text-center">
+            <div class="col col-11 col-sm-10 col-md-8 col-lg-6">
+                <div class="circle">
+                </div>
+                <h1>Projekt Żeton</h1>
+            </div>
+        </div>
     </div>
-</div>
+</header>
+<main>
+    <section class="login">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div id="logowanie" class="col col-11 col-sm-10 col-md-8 col-lg-6">
+
+                    <form>
+                        <h2>Witaj {{ firstname }}</h2>
+
+                        <center><h3>Twoi podopieczni to: </h3></center>
+
+                            <div class="list-group">
 
 
+                                {% for child in children %}
+                                <a href="/child/{{ child.id }}"
+                                   class="list-group-item list-group-item-action list-group-item-light">{{
+                                    child.firstname }}
+                                    : ma {{ child.points }} punktów.
+                                    {% if child.bans.6.active %}
+                                    <b>MA BANA!</b> od {{ child.bans.6.start }} do {{ child.bans.6.stop }}
+                                    {% endif %}
+                                </a>
+                                <br>
+                                {% endfor %}
+                            </div>
+                    </form>
+                    <form action="/logout">
+
+                            <div class="form-group button">
+                                <button class="btn btn-primary">Wyloguj</button>
+                            </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 </body>
 </html>
 
