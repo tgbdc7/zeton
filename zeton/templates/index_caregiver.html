@@ -25,7 +25,7 @@
                     </a>
                     : ma {{ child.points }} punktów.
                     {% if child.bans.6.active %}
-                        <b>MA BANA!</b> od {{ child.bans.6.start }} do {{ child.bans.6.stop }}
+                        <b>MA BANA!</b> od {{ child.bans.6.start|ban_time}} do {{ child.bans.6.stop|ban_time }}
                     {% endif %}
                 </li>
             {% endfor %}
