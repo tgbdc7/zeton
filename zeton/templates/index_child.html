@@ -19,7 +19,7 @@
         <h3>Szkolny rekord tygodnia : {{ school_weekly_highscore }}</h3>
         {% if ban %}
             <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-            <h4> koniec bana za {{ time_ban_stop }} minuty</h4>
+            <h4> koniec bana za {{ time_ban_stop|ban_time }} minuty</h4>
         {% else %}
             <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
