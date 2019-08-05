@@ -1,6 +1,6 @@
 * {
   margin: 0;
-  padding: 0;
+  padding: 10;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -100,6 +100,15 @@ body main .login .container .row .col {
   color: #313848;
 }
 
+body main .text .login .container .row .col {
+  padding: 20px;
+  background-color: #0c99c1;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px #0c99c1;
+          box-shadow: 1px 1px 5px #0c99c1;
+  color: #ffffff;
+  width: auto;
+}
 body main .login .container .row .col form h2 {
   text-align: center;
   text-transform: uppercase;
@@ -112,13 +121,13 @@ body main .login .container .row .col form .button {
   text-align: center;
 }
 
-body main .login .container .row .col form .button .btn-primary {
+body main .login .container .col form .button .btn-primary {
   background-color: #0c99c1;
   border: solid 2px #ffffff;
   outline: none;
 }
 
-body main .login .container .row .col form .button .btn-primary:hover {
+body main .login .container .col form .button .btn-primary:hover {
   background-color: #313848;
 }
 
@@ -149,5 +158,30 @@ body main .text .container .row .col p {
     line-height: 1.5em;
   }
 }
-/*# sourceMappingURL=login.css.map */
-/*test_pawel*/
+
+.square {
+
+    border: solid 5px #ffffff;
+    border-radius: 5px;
+    border-width: auto;
+    margin: 10px;
+    max-width: 535px;
+    padding: 10px;
+}
+
+#dodawanie {
+    background-color: #1c8041;
+}
+
+#odejmowanie {
+    background-color: #FF1CAE;
+}
+
+#bany_warny {
+    background-color: #00cccc;
+
+}
+
+#punkty_szkola {
+    background-color: #66ff99;
+}

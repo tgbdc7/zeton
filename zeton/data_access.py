@@ -103,17 +103,23 @@ def check_bans_status(child_id):
     result = {}
     for ban_id, ban_name in bans_name.items():
         try:
-            start1 = datetime.fromisoformat(all_bans[ban_id]['start'])
-            print('start=',start1)
-            start = ('{:%Y-%m-%d %H:%M}'.format(start1))
-            print('START+++++++',start)
-            stop1 = datetime.fromisoformat(all_bans[ban_id]['stop'])
-            stop=('{:%Y-%m-%d %H:%M}'.format(stop1))
-            print('stop=', stop)
-            if datetime.now() < stop1:
+            start = datetime.fromisoformat(all_bans[ban_id]['start'])
+            stop = datetime.fromisoformat(all_bans[ban_id]['stop'])
+            if datetime.now() < stop:
                 active = True
             else:
                 active = False
+
+            # start1 = datetime.fromisoformat(all_bans[ban_id]['start'])
+            # start = ('{:%Y-%m-%d %H:%M}'.format(start1))
+            #
+            # stop1 = datetime.fromisoformat(all_bans[ban_id]['stop'])
+            # stop=('{:%Y-%m-%d %H:%M}'.format(stop1))
+            #
+            # if datetime.now() < stop1:
+            #     active = True
+            # else:
+            #     active = False
         except KeyError:
             start = None
             stop = None

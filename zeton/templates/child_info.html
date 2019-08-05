@@ -2,120 +2,186 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+
     <title>Żeton</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+
 </head>
 
 
 <body>
-<div id="container">
-    <div class="logout-link">
-        <a href="/logout">
-            <button>LOGOUT</button>
-        </a>
-        <a href="/">Wróć do strony głównej</a>
-    </div>
-
-    <div class="rectangle">
-        <h2>Informacje na temat {{ child.firstname }}</h2>
-        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
-        <h3>Punkty: {{ child.points }} punkty.</h3>
-
-        {% if child.bans.6.active %}
-        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-        <h4> Ban kończy się: {{ child.bans.6.stop }}</h4>
-        {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
-        {% endif %}
-    </div>
-
-    <div id="dodawanie" class="square">
-        <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
-        <form style="text-align: center;" action="/api/dodaj_punkt/{{ child.id }}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
-                                       required><br/>
-            <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
-        </form>
-
-        <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
-
-        <ul style="text-align:left;">
-            <li>sprzątanie pokoju--> 20pkt</li>
-            <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
-            <li>odrobionie lekcji--> 20pkt</li>
-            <li>spakowanie plecaka--> 20pkt</li>
-            <li>spakowanie plecaka (z mamą)--> 5pkt</li>
-            <li>pomoc rodzicom--> 10-60pkt</li>
-            <li>zenek--> 20pkt</li>
-        </ul>
-        <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
-    </div>
-
-    <div id="odejmowanie" class="square">
-        <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/api/wykorzystanie_punktow/{{child.id}}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points_to_be_used"
-                                       required><br/>
-            <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-            <h4>NAGRODY</h4>
-
-            <ul style="text-align:left;">
-
-                <li>1 pkt--> 1 min komputer</li>
-                <li>40 pkt--> cola (200ml) (raz na 7 dni )</li>
-                <li>50 pkt--> cola (330ml) (raz na 7 dni)</li>
-                <li>60 pkt--> zakupy w żabce (bez chipsów i Coca Coli)</li>
-                <li>100 pkt--> kino domowe</li>
-                <Li>200 pkt--> 6zł do wydania na mc.skyblock.pl</Li>
-                <li>250 pkt--> jump city</li>
-                <li>250 pkt--> kino</li>
-                <li>250 pkt--> Aquapark reda</li>
-                <li>250 pkt--> piżama party</li>
-
-            </ul>
-
-        </form>
-    </div>
-    <div id="bany_warny" class="square">
-        <h2 style="text-align: center;"> *****Warny i bany****** </h2>
-
-        <ol>
-            {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
-
-
-            </li>
-
-            {% endfor %}
-        </ol>
-        <div style="margin-left:auto; margin-right:auto;" >
-            <a href="/api/warn/{{ child.id }}#bany_warny">
-                <button style="text-align: left;">DAJ WARNA</button>
-            </a>
-            <a href="/api/kick/{{ child.id }}#bany_warny">
-                <button {% if child.bans.3.active %} disabled="disabled" {%endif%} >
-                    DAJ KICKA
-                </button>
-            </a>
-            <a href="/api/ban/{{ child.id }}#bany_warny">
-                <button style="text-align: right;">DAJ BANA</button>
-            </a>
-
+<header>
+    <div id="top" class="container">
+        <div class="row justify-content-center align-items-center text-center">
+            <div class="col col-sm-12">
+                <div class="circle">
+                </div>
+                <h1>Projekt Żeton</h1>
+            </div>
         </div>
     </div>
-    <div id="punkty_szkola" class="square">
+</header>
 
-        <h2> *** Punkty ze Szkoły *** </h2>
-        <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
-        <div><label> <input type="checkbox"> przyklad 4 </label></div>
-        <div><label> <input type="checkbox"> przyklad 5 </label></div>
+<main>
+    <section class="login">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col col-sm-12">
 
-    </div>
+                    <form action="/">
+                        <div class="form-group button">
+                            <button class="btn btn-primary">Strona główna</button>
+                        </div>
+                    </form>
 
-</div>
+                    <center><h2>Informacje na temat {{ child.firstname }}</h2>
+                        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+                        <h3>Punkty: {{ child.points }} punkty.</h3>
 
+                        {% if child.bans.6.active %}
+                        <h4><b class="text-danger">MA BANA! </b> do {{ child.bans.6.stop }}</h4>
+
+                        {% else %}
+                        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+                        {% endif %}
+                    </center>
+                    <br>
+                    <div class="row">
+
+                        <div id="dodawanie" class=" col-sm-12 square">
+                            <center><h2>Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
+                                <form action="/api/dodaj_punkt/{{ child.id }}" method="post">
+
+                                        Liczba punktów <br> <input class="btn btn-light" type="number_format" name="liczba_punktow"
+                                                               required><br/>
+
+                                    <div class="form-group button">
+                                        <input class="btn btn-primary" type="submit" name="dodaj punkty"
+                                               value="Dodaj punkty"/>
+                                    </div>
+                                </form>
+
+                                <h4>SPOSOBY NA ZDOBYCIE PUNKTÓW</h4></center>
+                            <form>
+                                <ul>
+                                    <li>sprzątanie pokoju--> 20pkt</li>
+                                    <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
+                                    <li>odrobionie lekcji--> 20pkt</li>
+                                    <li>spakowanie plecaka--> 20pkt</li>
+                                    <li>spakowanie plecaka (z mamą)--> 5pkt</li>
+                                    <li>pomoc rodzicom--> 10-60pkt</li>
+                                    <li>zenek--> 20pkt</li>
+                                </ul>
+                            </form>
+                            <center><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></center>
+                        </div>
+
+                        <div id="odejmowanie" class="col-sm-12 square">
+                            <center><h2>Wykorzystaj punkty</h2>
+                                <form action="/api/wykorzystanie_punktow/{{child.id}}" method="post">
+                                    Liczba punktów <br> <input class="btn btn-light" type="number_format" name="points_to_be_used"
+                                                               required><br/>
+                                    <div class="form-group button">
+                                        <input class="btn btn-primary" type="submit" name="wykorzystaj punkty"
+                                               value="Wykorzystaj punkty"/>
+                                    </div>
+                                    <h4>NAGRODY</h4>
+                                </form>
+                            </center>
+                            <ul>
+
+                                <li>1 pkt--> 1 min komputer</li>
+                                <li>40 pkt--> cola (200ml) (raz na 7 dni )</li>
+                                <li>50 pkt--> cola (330ml) (raz na 7 dni)</li>
+                                <li>60 pkt--> zakupy w żabce (bez chipsów i Coca Coli)</li>
+                                <li>100 pkt--> kino domowe</li>
+                                <Li>200 pkt--> 6zł do wydania na mc.skyblock.pl</Li>
+                                <li>250 pkt--> jump city</li>
+                                <li>250 pkt--> kino</li>
+                                <li>250 pkt--> Aquapark reda</li>
+                                <li>250 pkt--> piżama party</li>
+
+                            </ul>
+
+
+                        </div>
+                        <div id="bany_warny" class="col-sm-12 square">
+                            <h2 style="text-align: center;"> *****Warny i bany****** </h2>
+
+                            <ol>
+                                {% for ban in child.bans.values() %}
+                                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}
+
+
+                                </li>
+
+                                {% endfor %}
+                            </ol>
+                            <center>
+                                <div class="btn-group">
+
+
+                                    <form action="/api/warn/{{ child.id }}#bany_warny">
+                                        <div class="form-group button">
+                                            <button class="btn btn-primary">DAJ WARNA</button>
+                                        </div>
+                                    </form>
+                                    <form action="/api/kick/{{ child.id }}#bany_warny">
+                                        <div class="form-group button">
+                                            <button class="btn btn-primary" {% if child.bans.3.active %}
+                                                    disabled="disabled"
+                                                    {%endif%}>
+                                                DAJ KICKA
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                    <form action="/api/ban/{{ child.id }}#bany_warny">
+                                        <div class="form-group button">
+                                            <button class="btn btn-primary">DAJ BANA</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </center>
+                        </div>
+                        <div id="punkty_szkola" class="col-sm-12 square">
+
+                            <h2> *** Punkty ze Szkoły *** </h2>
+                            <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
+                            <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
+                            <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
+                            <div><label> <input type="checkbox"> przyklad 4 </label></div>
+                            <div><label> <input type="checkbox"> przyklad 5 </label></div>
+
+                        </div>
+                    </div>
+                    <form action="/logout">
+                        <div class="form-group button">
+                            <button class="btn btn-primary">Wyloguj</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+</script>
 </body>
 </html>
 
