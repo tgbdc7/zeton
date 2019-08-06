@@ -45,18 +45,6 @@ def get_user_data(user_id):
         return dict(row)
     return None
 
-
-#
-# def _add_ban_data(children):
-#     new_children = []
-#     for child in children:
-#         child = dict(child)
-#         ban_data = get_last_active_ban(child['id'])
-#         if ban_data:
-#             child['ban'] = ban_data
-#         new_children.append(child)
-#     return new_children
-
 def _update_bans_data(children):
     new_children = []
     for child in children:
@@ -141,18 +129,6 @@ def get_child_data(child_id):
     child = dict(result.fetchone())
     child['bans'] = check_bans_status(child_id)
     return child
-
-
-#
-# def get_last_active_ban(user_id):
-#     all_bans = get_all_bans(user_id)
-#     # sqlite3 nie wspiera typu datetime, więc obliczenia trzeba zrobić samemu
-#     for ban_id, _, start, end in reversed(all_bans):
-#         start = parse_iso_timestamp(start)
-#         end = parse_iso_timestamp(end)
-#
-#         if start < datetime.now() < end:
-#             return {'ban_id': ban_id, 'start': start, 'end': end}
 
 
 def set_to_midnight(dt):
