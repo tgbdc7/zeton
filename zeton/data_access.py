@@ -16,8 +16,9 @@ def get_points(user_id):
     return None
 
 
-def subtract_points(user_id, points):
-    query = 'update users SET points = points - ? WHERE id = ?;'
+def change_points_by(user_id, points):
+    ''' used both to add and subtract points from the current amount'''
+    query = 'UPDATE users SET points = points + ? WHERE id = ?;'
     g.db.cursor().execute(query, [points, user_id])
     g.db.commit()
 
@@ -31,12 +32,6 @@ def get_weekly_highscore(user_id):
     return None
 
 
-def add_points(user_id, points):
-    query = 'UPDATE users SET points = points + ? WHERE id = ?;'
-    g.db.cursor().execute(query, [points, user_id])
-    g.db.commit()
-
-
 def get_user_data(user_id):
     query = 'select * from users where id = ?'
     result = g.db.cursor().execute(query, (user_id,))
@@ -44,6 +39,7 @@ def get_user_data(user_id):
     if row:
         return dict(row)
     return None
+
 
 def _update_bans_data(children):
     new_children = []
@@ -168,7 +164,7 @@ def give_warn(child_id):
 
 def give_kick(child_id):
     bans_status = check_bans_status(child_id)
-    #TODO - ustawić warny 1-2 na aktywne
+    # TODO - ustawić warny 1-2 na aktywne
     if not bans_status[3]['start']:
         return add_warn_per_ban_id(child_id, 3)
     elif not bans_status[3]['active']:

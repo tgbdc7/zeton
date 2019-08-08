@@ -22,16 +22,16 @@
         <h3>Punkty: {{ child.points }} punkty.</h3>
 
         {% if child.bans.6.active %}
-        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
+            <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+            <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+            <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
     </div>
 
     <div id="dodawanie" class="square">
         <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
-        <form style="text-align: center;" action="/api/dodaj_punkt/{{ child.id }}" method="post">
+        <form style="text-align: center;" action="/api/child/{{ child.id }}/points/add" method="post">
             Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
                                        required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
@@ -53,8 +53,9 @@
 
     <div id="odejmowanie" class="square">
         <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/api/wykorzystanie_punktow/{{child.id}}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points_to_be_used"
+        <form style="text-align: center;" action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}"
+              method="post">
+            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points"
                                        required><br/>
             <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
             <h4>NAGRODY</h4>
@@ -81,19 +82,19 @@
 
         <ol>
             {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
+                <li {% if ban.active %}  style="color:red;"  {% endif %}>WARN--> {{ ban.name }}
 
 
-            </li>
+                </li>
 
             {% endfor %}
         </ol>
-        <div style="margin-left:auto; margin-right:auto;" >
+        <div style="margin-left:auto; margin-right:auto;">
             <a href="/api/warn/{{ child.id }}#bany_warny">
                 <button style="text-align: left;">DAJ WARNA</button>
             </a>
             <a href="/api/kick/{{ child.id }}#bany_warny">
-                <button {% if child.bans.3.active %} disabled="disabled" {%endif%} >
+                <button {% if child.bans.3.active %} disabled="disabled" {% endif %} >
                     DAJ KICKA
                 </button>
             </a>
