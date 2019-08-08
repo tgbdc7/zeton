@@ -49,7 +49,7 @@ def wykorzystaj_punkty(target_id):
 
 @bp.route("/ban/<target_id>")
 @auth.login_required
-def daj_bana(target_id):
+def give_ban(target_id):
     db.get_db()
     USER_ID = session.get('user_id', None)
 
@@ -62,8 +62,8 @@ def daj_bana(target_id):
 
 @bp.route("/warn/<target_id>")
 @auth.login_required
-def daj_warna(target_id):
-    #TODO
+def give_warn(target_id):
+
     db.get_db()
     USER_ID = session.get('user_id', None)
 
@@ -75,8 +75,8 @@ def daj_warna(target_id):
 
 @bp.route("/kick/<target_id>")
 @auth.login_required
-def daj_kicka(target_id):
-    #TODO
+def give_kick(target_id):
+
     db.get_db()
     USER_ID = session.get('user_id', None)
 
