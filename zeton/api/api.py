@@ -1,6 +1,9 @@
 from flask import Blueprint, session, request, redirect, url_for, abort
 
-from zeton import auth, db, data_access
+import zeton.data_access.bans
+import zeton.data_access.points
+from zeton import auth, db
+from zeton.data_access import data_access
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -20,7 +23,7 @@ def dodaj_punkt(target_id):
         print(ex)
     else:
         if nowe_punkty > 0:
-            data_access.change_points_by(target_id, nowe_punkty)
+            zeton.data_access.points.change_points_by(target_id, nowe_punkty)
     finally:
         return redirect(url_for('views.child', child_id=target_id))
 
@@ -38,13 +41,13 @@ def use_points(child_id):
         if not (child_id == logged_user_id or data_access.is_child_under_caregiver(child_id, logged_user_id)):
             return abort(403)
 
-        current_points = data_access.get_points(child_id)
+        current_points = zeton.data_access.points.get_points(child_id)
 
         try:
             used_points = int(request.form['points'])
             if used_points > 0:
                 if used_points <= current_points:
-                    data_access.change_points_by(child_id, -1 * used_points)
+                    zeton.data_access.points.change_points_by(child_id, -1 * used_points)
         except ValueError as ex:
             return {'message': 'Bad request'}, 400
 
@@ -61,7 +64,7 @@ def give_ban(target_id):
         return abort(403)
 
     ten_minutes = 10
-    data_access.give_ban(target_id, ten_minutes)
+    zeton.data_access.bans.give_ban(target_id, ten_minutes)
     return redirect(url_for('views.child', child_id=target_id))
 
 
@@ -74,7 +77,7 @@ def give_warn(target_id):
     if not data_access.is_child_under_caregiver(target_id, USER_ID):
         return abort(403)
 
-    data_access.give_warn(target_id)
+    zeton.data_access.bans.give_warn(target_id)
     return redirect(url_for('views.child', child_id=target_id))
 
 
@@ -87,5 +90,5 @@ def give_kick(target_id):
     if not data_access.is_child_under_caregiver(target_id, USER_ID):
         return abort(403)
 
-    data_access.give_kick(target_id)
+    zeton.data_access.bans.give_kick(target_id)
     return redirect(url_for('views.child', child_id=target_id))
