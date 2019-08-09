@@ -13,6 +13,9 @@
         <a href="/logout">
             <button>LOGOUT</button>
         </a>
+        <a href="/settings">
+            <button>SETTINGS</button>
+        </a>
         <a href="/">Wróć do strony głównej</a>
     </div>
 
@@ -81,19 +84,19 @@
 
         <ol>
             {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
+            <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}
 
 
             </li>
 
             {% endfor %}
         </ol>
-        <div style="margin-left:auto; margin-right:auto;" >
+        <div style="margin-left:auto; margin-right:auto;">
             <a href="/api/warn/{{ child.id }}#bany_warny">
                 <button style="text-align: left;">DAJ WARNA</button>
             </a>
             <a href="/api/kick/{{ child.id }}#bany_warny">
-                <button {% if child.bans.3.active %} disabled="disabled" {%endif%} >
+                <button {% if child.bans.3.active %} disabled="disabled" {%endif%}>
                     DAJ KICKA
                 </button>
             </a>

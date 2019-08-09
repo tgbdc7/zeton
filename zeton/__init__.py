@@ -9,8 +9,7 @@ import os
 from zeton.custom_jinja2_filters import jinja2_ban_datetime_filter
 from . import api, auth, views, db
 
-
-def create_app(test_config=None):
+def create_app(test_config=None, settings=None):
     app = Flask(__name__, instance_relative_config=True)
 
     app.config.from_mapping(

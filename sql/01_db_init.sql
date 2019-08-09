@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS bans_name;
 
 
 create table users

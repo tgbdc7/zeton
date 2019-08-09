@@ -13,21 +13,25 @@
     <div class="logout-link">
         <a href="/logout">
             <button>LOGOUT</button>
-        </a></div>
+        </a>
+        <a href="/settings">
+            <button>SETTINGS</button>
+        </a>
+    </div>
     <div class="rectangle ">
         <h2>Witaj {{ firstname }}</h2>
         <h3>Twoi podopieczni to: </h3>
         <ul>
             {% for child in children %}
-                <li>
-                    <a href="/child/{{ child.id }}">
-                        {{ child.firstname }}
-                    </a>
-                    : ma {{ child.points }} punktów.
-                    {% if child.bans.6.active %}
-                        <b>MA BANA!</b> od {{ child.bans.6.start|ban_time}} do {{ child.bans.6.stop|ban_time }}
-                    {% endif %}
-                </li>
+            <li>
+                <a href="/child/{{ child.id }}">
+                    {{ child.firstname }}
+                </a>
+                : ma {{ child.points }} punktów.
+                {% if child.bans.6.active %}
+                <b>MA BANA!</b> od {{ child.bans.6.start|ban_time}} do {{ child.bans.6.stop|ban_time }}
+                {% endif %}
+            </li>
             {% endfor %}
         </ul>
     </div>
