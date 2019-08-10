@@ -26,16 +26,11 @@ def index():
         context.update({"firstname": user_data['firstname'],
                         "role": role,
                         "children": children})
-    elif role == 'child':
-        # ban = data_access.get_last_active_ban(USER_ID)
-        points = data_access.get_points(USER_ID)
-        weekly_highscore = data_access.get_weekly_highscore(user_id=1)
 
+    elif role == 'child':
         template = 'index_child.html'
         child = get_child_data(USER_ID)
-        context.update(**child)
-        if child['ban']:
-            context["time_ban_stop"] = (child['ban']['end'] - datetime.now()).seconds // 60
+        context = {'child': child}
 
     return render_template(template, **context)
 
