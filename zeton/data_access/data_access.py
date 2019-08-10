@@ -22,8 +22,8 @@ def get_weekly_highscore(user_id):
 def load_logged_in_user_data():
     session_user_id = session.get('user_id', None)
     user_data = get_user_data(session_user_id)
-    g.user_data = user_data
-    # TODO: load only necessary data to g, not the dict
+    if not 'user_data' in g:
+        g.user_data = user_data
 
 
 def get_user_data(user_id):
@@ -31,6 +31,7 @@ def get_user_data(user_id):
     result = get_db().execute(query, (user_id,))
     row = result.fetchone()
     if row:
+        # TODO: load only necessary data to g, not the whole dict
         return dict(row)
     return None
 
