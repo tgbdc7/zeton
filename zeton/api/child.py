@@ -4,17 +4,16 @@ import zeton.data_access.bans
 import zeton.data_access.points
 from zeton import auth
 from zeton.api import bp
-from zeton.data_access import data_access
-from zeton.data_access.data_access import load_logged_in_user_data
+from zeton.data_access import users
 
 
 @bp.route("/child/<target_id>/points/add", methods=['POST'])
 @auth.login_required
 def add_points(target_id):
-    load_logged_in_user_data()
+    users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
 
-    if not data_access.is_child_under_caregiver(target_id, logged_user_id):
+    if not users.is_child_under_caregiver(target_id, logged_user_id):
         return abort(403)
 
     try:
@@ -31,7 +30,7 @@ def add_points(target_id):
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
 @auth.login_required
 def use_points(child_id):
-    load_logged_in_user_data()
+    users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
 
     child_id = int(child_id)
@@ -39,7 +38,7 @@ def use_points(child_id):
     return_url = request.args.get('return_url', '/')
 
     if not (child_id == logged_user_id or
-            data_access.is_child_under_caregiver(child_id, logged_user_id)):
+            users.is_child_under_caregiver(child_id, logged_user_id)):
         return abort(403)
 
     current_points = zeton.data_access.points.get_points(child_id)
