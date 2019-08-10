@@ -162,7 +162,7 @@ def add_warn_per_ban_id(child_id, ban_id):
     start = datetime.now()
     start_timestamp = start.isoformat()
     end_timestamp = calculate_end_time_warn(start, ban_id)
-    query = 'INSERT INTO bans valueS (NULL, ?, ?, ?, ?)'
+    query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
     params = (child_id, ban_id, start_timestamp, end_timestamp)
     g.db.cursor().execute(query, params)
     g.db.commit()
@@ -216,7 +216,7 @@ def give_ban(child_id, duration_minutes):
             # jeśli nie ma wpisu w bazie to robimy nowy wpis
             end = start + timedelta(minutes=duration_minutes)
             end_timestamp = end.isoformat()
-            query = 'INSERT INTO bans valueS (NULL, ?, ?, ?, ?)'
+            query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
             params = (child_id, 6, start_timestamp, end_timestamp)
 
         g.db.cursor().execute(query, params)

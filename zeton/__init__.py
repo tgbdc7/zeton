@@ -6,6 +6,7 @@ Aplikacja: system żetonowy ucznia/dziecka
 from flask import Flask
 import os
 
+from zeton.custom_jinja2_filters import jinja2_ban_datetime_filter
 from . import api, auth, views, db
 
 
@@ -24,6 +25,8 @@ def create_app(test_config=None):
         app.config.from_mapping(test_config)
 
     app.teardown_appcontext(db.close_db)
+
+    app.add_template_filter(jinja2_ban_datetime_filter, 'ban_time')
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(views.bp)
