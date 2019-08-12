@@ -6,8 +6,8 @@ Aplikacja: system żetonowy ucznia/dziecka
 from flask import Flask
 import os
 
+from zeton import api, auth, views, db
 from zeton.custom_jinja2_filters import jinja2_ban_datetime_filter
-from . import api, auth, views, db
 
 
 def create_app(test_config=None):
