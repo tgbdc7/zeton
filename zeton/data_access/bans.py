@@ -1,83 +1,18 @@
 from datetime import datetime, timedelta
 
-from flask import g
-
-
-def parse_iso_timestamp(timestamp):
-    return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
-
-
-def get_points(user_id):
-    query = 'select points from users where id = ?'
-    result = g.db.cursor().execute(query, [user_id])
-    row = result.fetchone()
-    if row:
-        return row['points']
-    return None
-
-
-def subtract_points(user_id, points):
-    query = 'update users SET points = points - ? WHERE id = ?;'
-    g.db.cursor().execute(query, [points, user_id])
-    g.db.commit()
-
-
-def get_weekly_highscore(user_id):
-    query = 'select school_weekly_highscore from users where id = ?'
-    result = g.db.cursor().execute(query, [user_id])
-    row = result.fetchone()
-    if row:
-        return row['school_weekly_highscore']
-    return None
-
-
-def add_points(user_id, points):
-    query = 'UPDATE users SET points = points + ? WHERE id = ?;'
-    g.db.cursor().execute(query, [points, user_id])
-    g.db.commit()
-
-
-def get_user_data(user_id):
-    query = 'select * from users where id = ?'
-    result = g.db.cursor().execute(query, (user_id,))
-    row = result.fetchone()
-    if row:
-        return dict(row)
-    return None
-
-def _update_bans_data(children):
-    new_children = []
-    for child in children:
-        child = dict(child)
-        child['bans'] = check_bans_status(child['id'])
-        new_children.append(child)
-    return new_children
-
-
-def get_caregivers_children(user_id):
-    query = """
-    SELECT u.* 
-    FROM caregiver_to_child AS ctc 
-    JOIN users AS u on ctc.child_id = u.id
-    WHERE ctc.caregiver_id = ?
-    AND u.role = 'child'
-    """
-    result = g.db.cursor().execute(query, (user_id,))
-    children = result.fetchall()
-    children = _update_bans_data(children)
-    return children
+from zeton.db import get_db
 
 
 def get_bans_name(child_id):
     query = 'select ban_id, ban_name from bans_name where child_id = ? ORDER BY ban_id'
-    result = g.db.cursor().execute(query, [child_id, ])
+    result = get_db().execute(query, [child_id, ])
     result = dict(result.fetchall())
     return result
 
 
 def get_all_bans(child_id):
     query = 'select * from bans where child_id = ? ORDER BY ban_id'
-    bans = g.db.cursor().execute(query, [child_id])
+    bans = get_db().execute(query, [child_id])
     result = {}
     for ban in bans.fetchall():
         result[ban[2]] = {'start': ban[3], 'stop': ban[4]}
@@ -117,20 +52,6 @@ def check_bans_status(child_id):
     return result
 
 
-def get_child_data(child_id):
-    query = """
-    SELECT u.* 
-    FROM caregiver_to_child AS ctc 
-    JOIN users AS u on ctc.child_id = u.id
-    WHERE ctc.child_id = ?
-    AND u.role = 'child'
-    """
-    result = g.db.cursor().execute(query, (child_id,))
-    child = dict(result.fetchone())
-    child['bans'] = check_bans_status(child_id)
-    return child
-
-
 def set_to_midnight(dt):
     midnight = datetime.min.time()
     return datetime.combine(dt.date(), midnight)
@@ -154,8 +75,8 @@ def update_warn_per_ban_id(child_id, ban_id):
     end_timestamp = calculate_end_time_warn(start, ban_id)
     query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
     params = (start_timestamp, end_timestamp, child_id, ban_id)
-    g.db.cursor().execute(query, params)
-    g.db.commit()
+    get_db().execute(query, params)
+    get_db().commit()
 
 
 def add_warn_per_ban_id(child_id, ban_id):
@@ -164,8 +85,8 @@ def add_warn_per_ban_id(child_id, ban_id):
     end_timestamp = calculate_end_time_warn(start, ban_id)
     query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
     params = (child_id, ban_id, start_timestamp, end_timestamp)
-    g.db.cursor().execute(query, params)
-    g.db.commit()
+    get_db().execute(query, params)
+    get_db().commit()
 
 
 def give_warn(child_id):
@@ -179,7 +100,7 @@ def give_warn(child_id):
 
 def give_kick(child_id):
     bans_status = check_bans_status(child_id)
-    #TODO - ustawić warny 1-2 na aktywne
+    # TODO - ustawić warny 1-2 na aktywne
     if not bans_status[3]['start']:
         return add_warn_per_ban_id(child_id, 3)
     elif not bans_status[3]['active']:
@@ -219,14 +140,8 @@ def give_ban(child_id, duration_minutes):
             query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
             params = (child_id, 6, start_timestamp, end_timestamp)
 
-        g.db.cursor().execute(query, params)
-        g.db.commit()
+        get_db().execute(query, params)
+        get_db().commit()
 
     except IndexError as e:
         print(e)
-
-
-def is_child_under_caregiver(child_id, caregiver_id):
-    query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
-    result = g.db.cursor().execute(query, (child_id, caregiver_id))
-    return result.fetchone()
