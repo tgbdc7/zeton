@@ -32,7 +32,7 @@
     <div id="dodawanie" class="square">
         <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
         <form style="text-align: center;" action="/api/child/{{ child.id }}/points/add" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
+            Liczba punktów <br> <input style="text-align: center;" type="number" name="liczba_punktow"
                                        required><br/>
             <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
         </form>
@@ -55,7 +55,7 @@
         <h2 style="text-align: center">Wykorzystaj punkty</h2>
         <form style="text-align: center;" action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}"
               method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points"
+            Liczba punktów <br> <input style="text-align: center;" type="number" name="points"
                                        required><br/>
             <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
             <h4>NAGRODY</h4>
