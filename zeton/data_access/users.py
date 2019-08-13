@@ -72,3 +72,11 @@ def is_child_under_caregiver(child_id, caregiver_id):
     query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
     result = get_db().execute(query, (child_id, caregiver_id))
     return result.fetchone()
+
+def add_new_user(user_data):
+    query = "INSERT INTO 'users' " \
+            "(username, password, firstname, role) " \
+            "VALUES (?, ?, ?, ?) "
+
+    get_db().execute(query, user_data)
+    get_db().commit()
