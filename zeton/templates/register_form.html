@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block password %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endblock password %}
+
+{% block content %}
+<div class="col col-sm-4">
+    <form action="/api/user" method="POST">
+
+        <h2>Rejestracja</h2>
+
+        {% block add_person %}{% endblock add_person %}
+        <div class="form-group">
+            <label>Nazwa użytkownika:</label>
+            <input class="form-control" type="text" name="username" placeholder="Nazwa użytkownika" required>
+        </div>
+        <div class="form-group">
+            <label>Hasło:</label>
+            <div class="input-group">
+                <input class="form-control pwd" type="password" name="password" placeholder="Hasło" required>
+                <div class="input-group-append">
+                    <span class="input-group-btn"></span><button class="btn btn-light reveal" type="button"><i
+                            class="fa fa-eye"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group button">
+            <a href="{{ prev_url }}" class="btn btn-info">Powrót</a>
+            <button type="submit" class="btn btn-info">Zarejestruj</button>
+        </div>
+    </form>
+</div>
+<script>
+    $(".reveal").on('click', function () {
+        var $pwd = $(".pwd");
+        if ($pwd.attr('type') === 'password') {
+            $pwd.attr('type', 'text');
+        } else {
+            $pwd.attr('type', 'password');
+        }
+    });
+</script>
+{% endblock content %}
