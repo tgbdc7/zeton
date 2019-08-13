@@ -33,16 +33,7 @@ def check_bans_status(child_id):
             else:
                 active = False
 
-            # start1 = datetime.fromisoformat(all_bans[ban_id]['start'])
-            # start = ('{:%Y-%m-%d %H:%M}'.format(start1))
-            #
-            # stop1 = datetime.fromisoformat(all_bans[ban_id]['stop'])
-            # stop=('{:%Y-%m-%d %H:%M}'.format(stop1))
-            #
-            # if datetime.now() < stop1:
-            #     active = True
-            # else:
-            #     active = False
+
         except KeyError:
             start = None
             stop = None
