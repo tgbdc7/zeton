@@ -1,28 +1,26 @@
-<body>
-    Nowy formularz
+{% extends "base.html" %}
+{% block content %}
+ <div class="col col-sm-3">
     <form action="" method="POST">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username" required>
+        <h2>Rejestracja</h2>
+        <div class="form-group">
+            <input type="text" name="username" placeholder="Username" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="email" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" placeholder="Password" required>
         </div>
         <div>
-            <label>Email</label>
-            <input type="text" name="email" required>
+            <input type="text" name="role" placeholder="Role" required>
         </div>
         <div>
-            <label>Password</label>
-            <input type="text" name="password" required>
+            <input type="text" name="first_name" placeholder="First Name" required>
         </div>
-        <div>
-            <label>Role</label>
-            <input type="text" name="role" required>
-        </div>
-        <div>
-            <label>First Name</label>
-            <input type="text" name="first_name" required>
-        </div>
-        <div>
-            <input type="submit">
+        <div class="form-group button">
+            <button type="submit" class="btn btn-info">Zarejestruj</button>
         </div>
     </form>
-</body>
+ </div>
+{% endblock content %}
