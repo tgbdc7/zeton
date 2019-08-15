@@ -21,7 +21,7 @@
                 <h2>Dodawaj punkty</h2>
                 <form action="/api/child/{{ child.id }}/points/add" method="post">
                     <div class="form-group button">
-                        Liczba punktów: <input class="btn btn-light" type="number"
+                        Liczba punktów: <input class="form-control" type="number"
                                                name="liczba_punktow" required>
                         <input class="btn btn-info" type="submit" name="dodaj punkty"
                                value="Dodaj punkty"/>
@@ -51,13 +51,22 @@
         <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
     </div>
 
-    <div id="odejmowanie" class="square">
-        <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/api/wykorzystanie_punktow/{{child.id}}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="points_to_be_used"
-                                       required><br/>
-            <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-            <h4>NAGRODY</h4>
+        <div id="odejmowanie" class="col-xl-6 square">
+            <center>
+                <h2>Wykorzystaj punkty</h2>
+                <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
+                    <div class="form-group button">
+                        Liczba punktów: <input class="form-control" type="number"
+                                               name="points"
+                                               required>
+
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty"
+                               value="Wykorzystaj punkty"/>
+                    </div>
+                    <h4>NAGRODY</h4>
+                </form>
+            </center>
+            <ul>
 
             <ul style="text-align:left;">
 
