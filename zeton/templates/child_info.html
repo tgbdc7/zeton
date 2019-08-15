@@ -21,7 +21,7 @@
                 <h2>Dodawaj punkty</h2>
                 <form action="/api/child/{{ child.id }}/points/add" method="post">
                     <div class="form-group button">
-                        Liczba punktów: <input class="btn btn-light" type="number"
+                        Liczba punktów: <input class="form-control" type="number"
                                                name="liczba_punktow" required>
                         <input class="btn btn-info" type="submit" name="dodaj punkty"
                                value="Dodaj punkty"/>
@@ -49,7 +49,7 @@
                 <h2>Wykorzystaj punkty</h2>
                 <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
                     <div class="form-group button">
-                        Liczba punktów: <input class="btn btn-light" type="number"
+                        Liczba punktów: <input class="form-control" type="number"
                                                name="points"
                                                required>
 
