@@ -34,14 +34,14 @@ if __name__ == '__main__':
     scripts = get_sql_scripts(SQL_SCRIPTS_DIR)
     run_scripts(scripts)
 
-    create_user('opiekun1', 'opiekun1', 'Antoni', 'caregiver')
-    create_user('dziecko1', 'dziecko1', 'Bazyli', 'child')
-    create_user('dziecko2', 'dziecko2', 'Celina', 'child')
-
-    create_user('opiekun2', 'opiekun2', 'Dominika', 'caregiver')
-    create_user('dziecko3', 'dziecko3', 'Ewelina', 'child')
-    create_user('dziecko4', 'dziecko4', 'Filip', 'child')
-
-    create_user('dyrektor', 'dyrektor', 'Zbigniew', 'caregiver')
+    # create_user('opiekun1', 'opiekun1', 'Antoni', 'caregiver')
+    # create_user('dziecko1', 'dziecko1', 'Bazyli', 'child')
+    # create_user('dziecko2', 'dziecko2', 'Celina', 'child')
+    #
+    # create_user('opiekun2', 'opiekun2', 'Dominika', 'caregiver')
+    # create_user('dziecko3', 'dziecko3', 'Ewelina', 'child')
+    # create_user('dziecko4', 'dziecko4', 'Filip', 'child')
+    #
+    # create_user('dyrektor', 'dyrektor', 'Zbigniew', 'caregiver')
 
     db.close()
