@@ -1,45 +1,35 @@
-<!doctype html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Żeton</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
+{% extends "base.html" %}
+{% block content %}
+<div class="col col-sm-12">
 
-
-<body>
-<div id="container">
-    <div class="logout-link">
-        <a href="/logout">
-            <button>LOGOUT</button>
-        </a>
-        <a href="/">Wróć do strony głównej</a>
-    </div>
-
-    <div class="rectangle">
-        <h2>Informacje na temat {{ child.firstname }}</h2>
+    <center><h2>Informacje na temat {{ child.firstname }}</h2>
         <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
         <h3>Punkty: {{ child.points }} punkty.</h3>
 
         {% if child.bans.6.active %}
-        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
-        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
+        <h4><b class="text-danger">MA BANA! </b> do {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
-    </div>
 
-    <div id="dodawanie" class="square">
-        <h2 style="text-align: center;">Dodawanie punktów dla użytkownika {{ child.firstname }}</h2>
-        <form style="text-align: center;" action="/api/dodaj_punkt/{{ child.id }}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
-                                       required><br/>
-            <br><input style="text-align: center;" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
-        </form>
+    </center>
+    <br>
+    <div class="row">
+
+        <div id="dodawanie" class="col-xl-6 square">
+            <center>
+                <h2>Dodawaj punkty</h2>
+                <form action="/api/child/{{ child.id }}/points/add" method="post">
+                    <div class="form-group button">
+                        Liczba punktów: <input class="btn btn-light" type="number"
+                                               name="liczba_punktow" required>
+                        <input class="btn btn-info" type="submit" name="dodaj punkty"
+                               value="Dodaj punkty"/>
+                    </div>
+                </form>
 
         <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
 
-        <ul style="text-align:left;">
             <table>
                 <tr>
                     <th>Id</th>
@@ -58,7 +48,6 @@
                 </tr>
                 {% endfor %}
             </table>
-        </ul>
         <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
     </div>
 
@@ -71,6 +60,7 @@
             <h4>NAGRODY</h4>
 
             <ul style="text-align:left;">
+
             <table>
                 <tr>
                     <th>Id</th>
@@ -91,50 +81,60 @@
                 </tr>
                 {% endfor %}
             </table>
+
             </ul>
 
         </form>
     </div>
-    <div id="bany_warny" class="square">
+    <div  id="bany_warny" class="col-xl-6 square">
         <h2 style="text-align: center;"> *****Warny i bany****** </h2>
 
-        <ol>
-            {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
+            <ol>
+                {% for ban in child.bans.values() %}
+                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}</li>
+                {% endfor %}
+            </ol>
+
+            <center>
+                <form>
+                    <div class="form-group button">
+                        <a class="btn btn-info" href="/api/warn/{{ child.id }}#bany_warny">DAJ WARNA</a>
+
+                        <a class="btn btn-info" {% if child.bans.3.active %}
+                           disabled="disabled"
+                           {%endif%} href="/api/kick/{{ child.id }}#bany_warny">DAJ KICKA</a>
+
+                        <a class="btn btn-info" href="/api/ban/{{ child.id }}#bany_warny">DAJ BANA</a>
+
+                    </div>
+                </form>
+            </center>
+        </div>
 
 
-            </li>
+        <div id="punkty_szkola" class="col-xl-6 square">
 
-            {% endfor %}
-        </ol>
-        <div style="margin-left:auto; margin-right:auto;" >
-            <a href="/api/warn/{{ child.id }}#bany_warny">
-                <button style="text-align: left;">DAJ WARNA</button>
-            </a>
-            <a href="/api/kick/{{ child.id }}#bany_warny">
-                <button {% if child.bans.3.active %} disabled="disabled" {%endif%} >
-                    DAJ KICKA
-                </button>
-            </a>
-            <a href="/api/ban/{{ child.id }}#bany_warny">
-                <button style="text-align: right;">DAJ BANA</button>
-            </a>
+            <center><h2> *** Punkty ze Szkoły *** </h2></center>
+            <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
+            <div><label> <input type="checkbox"> przyklad 4 </label></div>
+            <div><label> <input type="checkbox"> przyklad 5 </label></div>
 
         </div>
-    </div>
-    <div id="punkty_szkola" class="square">
-
-        <h2> *** Punkty ze Szkoły *** </h2>
-        <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
-        <div><label> <input type="checkbox"> przyklad 4 </label></div>
-        <div><label> <input type="checkbox"> przyklad 5 </label></div>
 
     </div>
+    <center>
+        <form>
+            <div class="form-group button">
 
+                <a class="btn btn-info" href="/">Strona główna</a>
+
+                <a class="btn btn-info" href="/logout">Wyloguj</a>
+
+            </div>
+        </form>
+    </center>
 </div>
-
-</body>
-</html>
+{% endblock %}
 
