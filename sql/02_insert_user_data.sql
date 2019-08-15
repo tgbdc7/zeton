@@ -88,5 +88,6 @@ INSERT INTO prizes VALUES(14,6, "nowa rybka", 20, 1, 1, 1);
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence VALUES('users',7);
 INSERT INTO sqlite_sequence VALUES('caregiver_to_child',8);
-INSERT INTO sqlite_sequence VALUES('bans_name',24);
+INSERT INTO sqlite_sequence VALUES('home_points', 18);
+INSERT INTO sqlite_sequence VALUES('prizes',14);
 COMMIT;
