@@ -49,4 +49,4 @@ def child(child_id):
 
     context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
-    return render_template('child_info.html', **context)
+    return render_template('caregiver_panel.html', **context)
