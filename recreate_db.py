@@ -12,21 +12,6 @@ def create_user(username, password, firstname, role):
     cur.execute(query, params)
     db.commit()
 
-def create_task(user_id, name, points, max_day, max_week):
-    query = "INSERT INTO home_points (user_id, name, points, max_day, max_week) VALUES (?, ?, ?, ?, ?)"
-
-    cur = db.cursor()
-    params = (user_id, name, points, max_day, max_week)
-    cur.execute(query, params)
-    db.commit()
-
-def create_prize(user_id, name, points, max_day, max_week, max_month):
-    query = "INSERT INTO prizes (user_id, name, points, max_day, max_week, max_month) VALUES (?, ?, ?, ?, ?, ?)"
-
-    cur = db.cursor()
-    params = (user_id, name, points, max_day, max_week, max_month)
-    cur.execute(query, params)
-    db.commit()
 
 def get_sql_scripts(dir):
     p = pathlib.Path(dir)
