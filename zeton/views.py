@@ -1,10 +1,7 @@
-from datetime import datetime
+from flask import Blueprint, render_template, abort, g
 
-from flask import Blueprint, session, render_template, abort
-
-from zeton.data_access import get_child_data, get_tasks, get_prizes
-
-from . import auth, data_access, db
+from . import auth
+from zeton.data_access import users, prizes, tasks
 
 bp = Blueprint('views', __name__)
 
