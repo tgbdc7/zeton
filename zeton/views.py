@@ -27,7 +27,9 @@ def index():
     elif role == 'child':
         template = 'index_child.html'
         child = users.get_child_data(logged_user_id)
-        context = {'child': child}
+        childs_tasks = tasks.get_tasks(logged_user_id)
+        childs_prizes = prizes.get_prizes(logged_user_id)
+        context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
     return render_template(template, **context)
 

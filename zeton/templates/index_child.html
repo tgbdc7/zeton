@@ -28,15 +28,15 @@
                     <th>Max. dziennie</th>
                     <th>Max. tygodniowo</th>
                 </tr>
-                <!--{% for task in tasks %}-->
-                <!--<tr>-->
-                    <!--<td>{{ loop.index }}</td>-->
-                    <!--<td>{{ task.name }}</td>-->
-                    <!--<td>{{ task.points }}</td>-->
-                    <!--<td>{{ task.max_day }}</td>-->
-                    <!--<td>{{ task.max_week }}</td>-->
-                <!--</tr>-->
-                <!--{% endfor %}-->
+                {% for task in childs_tasks %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.points }}</td>
+                    <td>{{ task.max_day }}</td>
+                    <td>{{ task.max_week }}</td>
+                </tr>
+                {% endfor %}
             </table>
             </ul>
             <center><h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5></center>
@@ -67,16 +67,16 @@
                     <th>Max. tygodniowo</th>
                     <th>Max. miesięcznie</th>
                 </tr>
-                <!--{% for prize in prizes %}-->
-                <!--<tr>-->
-                    <!--<td>{{ loop.index }}</td>-->
-                    <!--<td>{{ prize.name }}</td>-->
-                    <!--<td>{{ prize.points }}</td>-->
-                    <!--<td>{{ prize.max_day }}</td>-->
-                    <!--<td>{{ prize.max_week }}</td>-->
-                    <!--<td>{{ prize.max_month }}</td>-->
-                <!--</tr>-->
-                <!--{% endfor %}-->
+                {% for prize in childs_prizes %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ prize.name }}</td>
+                    <td>{{ prize.points }}</td>
+                    <td>{{ prize.max_day }}</td>
+                    <td>{{ prize.max_week }}</td>
+                    <td>{{ prize.max_month }}</td>
+                </tr>
+                {% endfor %}
             </table>
             </ul>
 
