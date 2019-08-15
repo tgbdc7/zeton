@@ -136,9 +136,3 @@ def give_ban(child_id, duration_minutes):
 
     except IndexError as e:
         print(e)
-
-
-def is_child_under_caregiver(child_id, caregiver_id):
-    query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
-    result = g.db.cursor().execute(query, (child_id, caregiver_id))
-    return result.fetchone()
