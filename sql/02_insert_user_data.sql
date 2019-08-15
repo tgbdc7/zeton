@@ -71,7 +71,7 @@ INSERT INTO prizes VALUES(1,2,"1 min komputer", 1, 30, 180, 720);
 INSERT INTO prizes VALUES(2,2,"cola (200ml)", 20, 1, 1, 4);
 INSERT INTO prizes VALUES(3,2,"zakupy w żabce (bez chipsów i Coca Coli)", 60, 1, 1, 4);
 INSERT INTO prizes VALUES(4,2,"kino domowe", 100, 1, 2, 8);
-INSERT INTO prizes VALUES(5,2,"kino domowe", 100, 1, 2, 8);
+INSERT INTO prizes VALUES(5,2,"piżama party", 100, 1, 2, 8);
 
 INSERT INTO prizes VALUES(6,3, "6zł do wydania na mc.skyblock.pl", 200, 1, 1, 4);
 INSERT INTO prizes VALUES(7,3, "jump city", 600, 1, 1, 3);
@@ -79,7 +79,7 @@ INSERT INTO prizes VALUES(8,3, "kino", 250, 1, 1, 2);
 
 INSERT INTO prizes VALUES(9,5, "Aquapark reda", 250, 1, 1, 1);
 INSERT INTO prizes VALUES(10,5, "piżama party", 250, 1, 1, 1);
-INSERT INTO prizes VALUES(11,5, "piżama party", 250, 1, 1, 1);
+INSERT INTO prizes VALUES(11,5, "kino domowe", 250, 1, 1, 1);
 
 INSERT INTO prizes VALUES(12,6, "nowe części do motocykla", 600, 1, 1, 1);
 INSERT INTO prizes VALUES(13,6, "nowa książka", 100, 1, 1, 4);
