@@ -42,9 +42,9 @@ def child(child_id):
         return abort(403)
 
     child = users.get_child_data(child_id)
-    tasks = tasks.get_tasks(child_id)
-    prizes = prizes.get_prizes(child_id)
+    childs_tasks = tasks.get_tasks(child_id)
+    childs_prizes = prizes.get_prizes(child_id)
 
-    context = {'child': child, 'tasks': tasks, 'prizes': prizes}
+    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
     return render_template('child_info.html', **context)

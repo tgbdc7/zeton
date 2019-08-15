@@ -38,7 +38,7 @@
                     <th>Max. dziennie</th>
                     <th>Max. tygodniowo</th>
                 </tr>
-                {% for task in tasks %}
+                {% for task in childs_tasks %}
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ task.name }}</td>
@@ -70,7 +70,7 @@
                     <th>Max. tygodniowo</th>
                     <th>Max. miesięcznie</th>
                 </tr>
-                {% for prize in prizes %}
+                {% for prize in childs_prizes %}
                 <tr>
                     <td>{{ loop.index }}</td>
                     <td>{{ prize.name }}</td>
