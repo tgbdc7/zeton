@@ -45,24 +45,16 @@ def logout():
 def register():
     if request.method == 'POST':
         username = request.form['username']
-        email = request.form['email']
         password = request.form['password']
-        # password2 = request.form['password2']
         password_hash = generate_password_hash(password)
-        role = request.form['role']
-        first_name = request.form['first_name']
+        role = 'caregiver'
 
-        data = (username, password_hash, first_name, role)
+        data = (username, password_hash, role)
         add_new_user(data)
 
         return redirect(url_for('views.index'))
 
     return render_template('register_form.html')
-
-
-
-
-
 
 
 # login required decorator
