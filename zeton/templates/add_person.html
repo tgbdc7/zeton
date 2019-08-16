@@ -1,0 +1,13 @@
+{% extends 'register_form.html' %}
+
+{% block add_person %}
+<div class="form-group">
+    <select name="role" class="custom-select">
+        <option value="child">Dziecko</option>
+        <option value="caregiver">Opiekun</option>
+    </select>
+</div>
+<div class="form-group">
+    <input class="form-control" type="text" placeholder="Imię">
+</div>
+{% endblock add_person %}
