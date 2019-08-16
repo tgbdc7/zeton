@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort, g
 
 from . import auth
-from zeton.data_access import users
+from zeton.data_access import users, prizes, tasks
 
 bp = Blueprint('views', __name__)
 
@@ -27,7 +27,9 @@ def index():
     elif role == 'child':
         template = 'index_child.html'
         child = users.get_child_data(logged_user_id)
-        context = {'child': child}
+        childs_tasks = tasks.get_tasks(logged_user_id)
+        childs_prizes = prizes.get_prizes(logged_user_id)
+        context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
     return render_template(template, **context)
 
@@ -42,7 +44,9 @@ def child(child_id):
         return abort(403)
 
     child = users.get_child_data(child_id)
+    childs_tasks = tasks.get_tasks(child_id)
+    childs_prizes = prizes.get_prizes(child_id)
 
-    context = {'child': child}
+    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
     return render_template('child_info.html', **context)

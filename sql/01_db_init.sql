@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS home_points;
+DROP TABLE IF EXISTS prizes;
 
 
 create table users
@@ -44,4 +46,27 @@ create table bans_name
   ban_id           INTEGER not null,
   ban_name         text not null,
   FOREIGN KEY (child_id) REFERENCES users (id)
+);
+
+create table home_points
+(
+  id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  user_id         INTEGER,
+  name            TEXT NOT NULL,
+  points          INTEGER NOT NULL,
+  max_day         INTEGER NOT NULL,
+  max_week        INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+create table prizes
+(
+  id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  user_id         INTEGER,
+  name            TEXT NOT NULL,
+  points          INTEGER NOT NULL,
+  max_day         INTEGER NOT NULL,
+  max_week        INTEGER NOT NULL,
+  max_month       INTEGER NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES users (id)
 );
