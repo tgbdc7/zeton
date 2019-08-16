@@ -64,9 +64,9 @@ create table prizes
   id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
   user_id         INTEGER,
   name            TEXT NOT NULL,
-  points          INTEGER NOT NULL DEFAULT NULL,
-  max_day         INTEGER NOT NULL DEFAULT NULL,
-  max_week        INTEGER NOT NULL DEFAULT NULL,
-  max_month       INTEGER NOT NULL DEFAULT NULL,
+  points          INTEGER NOT NULL,
+  max_day         INTEGER NOT NULL,
+  max_week        INTEGER NOT NULL,
+  max_month       INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
