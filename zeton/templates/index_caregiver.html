@@ -1,43 +1,33 @@
-<!doctype html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Żeton</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
+{% extends "base.html" %}
+{% block content %}
+<div class="col col-sm-6">
 
-
-<html>
-<body>
-<div id="container">
-    <div class="logout-link">
-        <a href="/logout">
-            <button>LOGOUT</button>
-        </a>
-        <a href="/settings">
-            <button>SETTINGS</button>
-        </a>
-    </div>
-    <div class="rectangle ">
+    <form>
         <h2>Witaj {{ firstname }}</h2>
-        <h3>Twoi podopieczni to: </h3>
-        <ul>
+
+        <center><h3>Twoi podopieczni to: </h3></center>
+
+        <div class="list-group">
             {% for child in children %}
-            <li>
-                <a href="/child/{{ child.id }}">
-                    {{ child.firstname }}
-                </a>
+            <a href="/child/{{ child.id }}"
+               class="list-group-item list-group-item-action list-group-item-light">{{
+                child.firstname }}
                 : ma {{ child.points }} punktów.
                 {% if child.bans.6.active %}
-                <b>MA BANA!</b> od {{ child.bans.6.start|ban_time}} do {{ child.bans.6.stop|ban_time }}
+                <br>
+                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do {{ child.bans.6.stop|ban_time }}
                 {% endif %}
-            </li>
+            </a>
+            <br>
             {% endfor %}
-        </ul>
-    </div>
+        </div>
+    </form>
+    <form action="/logout">
+        <div class="form-group button">
+            <button class="btn btn-info">Wyloguj</button>
+        </div>
+    </form>
+
 </div>
-
-
-</body>
-</html>
+{% endblock %}
 
