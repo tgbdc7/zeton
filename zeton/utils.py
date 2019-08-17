@@ -13,3 +13,6 @@ def odliczaj_czas_warna(t):
         time.sleep(1)
         t -= 1
     print("Koniec warna")
+
+def change_password(new_password):
+    pass

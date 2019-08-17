@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, g
+from flask import Blueprint, render_template, abort, g, request, flash, get_flashed_messages, redirect
 
 from . import auth
 from zeton.data_access import users, prizes, tasks
@@ -53,42 +53,41 @@ def child(child_id):
 
     return render_template('child_info.html', **context)
 
-@bp.route('/settings', methods=['GET', 'POST'])
+@bp.route('/settings/', methods=['GET', 'POST'])
 @auth.login_required
 def user_settings():
     if request.method == 'GET':
-        db.get_db()
 
-        USER_ID = session.get('user_id', None)
-        user_data = data_access.get_user_data(USER_ID)
+        users.load_logged_in_user_data()
+        logged_user_id = g.user_data['id']
+        user_data = users.get_user_data(logged_user_id)
+
         context = {'user_data': user_data}
         messages = get_flashed_messages()
 
         return render_template('user_settings.html', **context, messages=messages)
 
-
     if request.method == 'POST':
+
+        users.load_logged_in_user_data()
+        logged_user_id = g.user_data['id']
+        logged_user_password = g.user_data['password']
+        user_data = users.get_user_data(logged_user_id)
 
         password = request.form['password']
         new_password = request.form['new_password']
+        repeat_new_password = request.form['repeat_new_password']
+
         hashed_new_password = generate_password_hash(new_password)
-        new_password = hashed_new_password
 
-        db.get_db()
-        USER_ID = session.get('user_id', None)
-        user_data = get_user_data(USER_ID)
+        if new_password == repeat_new_password:
+            if user_data:
+                if check_password_hash(logged_user_password, password):
+                    users.update_password(logged_user_id, hashed_new_password)
+                    flash('Nowe hasło wprowadzone poprawnie')
+                else:
+                    flash('Aktualne hasło zostało źle wprowadzone. Spróbuj ponownie')
+        else:
+            flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
 
-        if user_data:
-            password_from_db = user_data['password']
-            user_id = user_data['id']
-
-            if check_password_hash(password_from_db, password):
-                query = "UPDATE users SET password = ? WHERE id = ?"
-                params = (new_password, user_id)
-                g.db.cursor().execute(query, params)
-                g.db.commit()
-                flash('Nowe hasło wprowadzone poprawnie')
-            else:
-                flash('Aktualne hasło zostało źle wprowadzone. Spróbuj ponownie')
-
-    return redirect('/settings')
+        return redirect('/settings/')
