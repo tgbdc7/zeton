@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="col col-sm-6">
-    <form action="/api/set_password?return_url=/settings" method="post">
+    <form action="api/settings/set_password" method="post">
         <div class="form-group">
             <label for="inputPassword1">Aby zmienić hasło wpisz poniżej aktualne hasło </label>
             <br>
@@ -24,9 +24,9 @@
         <div class="form-group button">
             <button type="submit" class="btn btn-primary">Prześlij</button>
         </div>
-        {% if messages %}
-        <div class="alert alert-dark">{{ messages[0] }}</div>
-        {% endif %}
+        <!--{% if messages %}-->
+        <!--<div class="alert alert-dark">{{ messages[0] }}</div>-->
+        <!--{% endif %}-->
     </form>
 
 
