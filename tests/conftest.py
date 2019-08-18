@@ -5,10 +5,13 @@ import pytest
 
 from zeton import create_app
 from zeton.db import get_db
-from flaskr.db import init_db
 
 # read in SQL for populating test data
-with open(os.path.join(os.path.dirname(__file__), "data.sql"), "rb") as f:
+
+with open("../sql/01_db_init.sql", "rb") as f:
+    _init_data_sql = f.read().decode("utf8")
+
+with open("../sql/02_insert_user_data.sql", "rb") as f:
     _data_sql = f.read().decode("utf8")
 
 
@@ -22,7 +25,7 @@ def app():
 
     # create the database and load test data
     with app.app_context():
-        init_db()
+        get_db().executescript(_init_data_sql)
         get_db().executescript(_data_sql)
 
     yield app
@@ -48,9 +51,9 @@ class AuthActions(object):
     def __init__(self, client):
         self._client = client
 
-    def login(self, username="test", password="test"):
+    def login(self, username, password):
         return self._client.post(
-            "/auth/login", data={"username": username, "password": password}
+            "/login", data={"login": username, "password": password}
         )
 
     def logout(self):

@@ -13,7 +13,7 @@ def get_user_data(login):
     return result.fetchone()
 
 
-@bp.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['POST'])
 def login():
     error = None
     if request.method == 'POST':
