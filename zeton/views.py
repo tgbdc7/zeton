@@ -61,7 +61,7 @@ def user_settings():
     user_data = users.get_user_data(logged_user_id)
 
     context = {'user_data': user_data}
-    # messages = get_flashed_messages()
+    messages = get_flashed_messages()
 
-    # return render_template('user_settings.html', **context, messages=messages)
-    return render_template('user_settings.html', **context)
+    return render_template('user_settings.html', **context, messages=messages)
+    # return render_template('user_settings.html', **context)
