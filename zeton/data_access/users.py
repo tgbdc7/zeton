@@ -76,17 +76,27 @@ def is_child_under_caregiver(child_id, caregiver_id):
 
 def add_new_user(user_data):
     query = "INSERT INTO 'users' " \
-            "(username, password, role) " \
-            "VALUES (?, ?, ?) "
+            "(username, password, role, firstname) " \
+            "VALUES (?, ?, ?, ?) "
 
-    get_db().commit()
     get_db().execute(query, user_data)
+    get_db().commit()
 
 
-def associate_child_with_caregiver(data):
+def get_child_id(child_username):
+    query = """
+    SELECT id FROM users
+    WHERE username = ?
+    """
+    result = get_db().execute(query, (child_username,))
+
+    return result.fetchone()['id']
+
+
+def associate_child_with_caregiver(caregiver_id, child_id):
     query = "INSERT INTO 'caregiver_to_child' " \
             "(caregiver_id, child_id)" \
             "VALUES (?, ?)"
 
+    get_db().execute(query, (caregiver_id, child_id))
     get_db().commit()
-    get_db().execute(query, data)
