@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, g
+from flask import Blueprint, render_template, abort, g, get_flashed_messages
 
 from . import auth
 from zeton.data_access import users, prizes, tasks
@@ -63,4 +63,3 @@ def user_settings():
     messages = get_flashed_messages()
 
     return render_template('user_settings.html', **context, messages=messages)
-    # return render_template('user_settings.html', **context)
