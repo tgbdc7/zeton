@@ -1,0 +1,31 @@
+{% extends 'index_child.html' %}
+{% block add_points %}
+<div class="text-center">
+    <h2>Dodawaj punkty</h2>
+    <form action="/api/child/{{ child.id }}/points/add" method="post">
+        <div class="form-group button">
+            Liczba punktów: <input class="form-control" type="number" name="liczba_punktow" required>
+            <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty" />
+        </div>
+    </form>
+</div>
+{% endblock add_points %}
+
+{% block bans %}
+<form>
+    <div class="form-group button">
+        <a class="btn btn-info" href="/api/warn/{{ child.id }}#bany_warny">DAJ WARNA</a>
+
+        <a class="btn btn-info" {% if child.bans.3.active %}
+           disabled="disabled"
+           {%endif%} href="/api/kick/{{ child.id }}#bany_warny">DAJ KICKA</a>
+
+        <a class="btn btn-info" href="/api/ban/{{ child.id }}#bany_warny">DAJ BANA</a>
+
+    </div>
+</form>
+{% endblock bans %}
+
+{% block home_button %}
+<a class="btn btn-info" href="/">Strona główna</a>
+{% endblock home_button %}
