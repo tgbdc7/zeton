@@ -47,7 +47,11 @@
         <div id="odejmowanie" class="col-xl-6 square">
             <h2 class="text-center">Wykorzystaj punkty</h2>
 
+            {% if role == 'caregiver' %}
             <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
+            {% else %}
+            <form action="/api/child/{{ child.id }}/points/use" method="post">
+            {% endif %}
                 <div class="form-group button">
                     Liczba punktów: <input class="form-control" type="number" name="points" required>
 

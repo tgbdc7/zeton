@@ -46,7 +46,8 @@ def child(child_id):
     child = users.get_child_data(child_id)
     childs_tasks = tasks.get_tasks(child_id)
     childs_prizes = prizes.get_prizes(child_id)
+    role = g.user_data['role']
 
-    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
+    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes, 'role': role}
 
     return render_template('caregiver_panel.html', **context)
