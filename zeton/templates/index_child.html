@@ -47,7 +47,7 @@
         <div id="odejmowanie" class="col-xl-6 square">
             <h2 class="text-center">Wykorzystaj punkty</h2>
 
-            <form action="/api/child/{{ child.id }}/points/use" method="post">
+            <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
                 <div class="form-group button">
                     Liczba punktów: <input class="form-control" type="number" name="points" required>
 
@@ -90,6 +90,8 @@
                 {% endfor %}
             </ol>
 
+            {% block bans %}{% endblock bans %}
+
         </div>
 
         <div id="punkty_szkola" class="col-xl-6 square">
@@ -106,6 +108,7 @@
     </div>
     <form>
         <div class="button">
+            {% block home_button %}{% endblock home_button %}
             <a class="btn btn-info" href="/logout">Wyloguj</a>
         </div>
     </form>
