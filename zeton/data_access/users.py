@@ -79,5 +79,14 @@ def add_new_user(user_data):
             "(username, password, role) " \
             "VALUES (?, ?, ?) "
 
-    get_db().execute(query, user_data)
     get_db().commit()
+    get_db().execute(query, user_data)
+
+
+def associate_child_with_caregiver(data):
+    query = "INSERT INTO 'caregiver_to_child' " \
+            "(caregiver_id, child_id)" \
+            "VALUES (?, ?)"
+
+    get_db().commit()
+    get_db().execute(query, data)
