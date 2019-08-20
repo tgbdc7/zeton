@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS home_points;
 DROP TABLE IF EXISTS prizes;
+DROP TABLE IF EXISTS points_history;
 
 
 create table users
@@ -69,4 +70,16 @@ create table prizes
   max_week        INTEGER NOT NULL,
   max_month       INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+create table points_history
+(
+  id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  child_id        INTEGER NOT NULL,
+  points_change   INTEGER NOT NULL,
+  id_changing_user INTEGER NOT NULL,
+  name            TEXT NOT NULL DEFAULT 'points_name',
+  change_timestamp TEXT NOT NULL,
+  FOREIGN KEY (child_id) REFERENCES users (id),
+  FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );

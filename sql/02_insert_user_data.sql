@@ -90,4 +90,5 @@ INSERT INTO sqlite_sequence VALUES('users',7);
 INSERT INTO sqlite_sequence VALUES('caregiver_to_child',8);
 INSERT INTO sqlite_sequence VALUES('home_points', 18);
 INSERT INTO sqlite_sequence VALUES('prizes',14);
+INSERT INTO sqlite_sequence VALUES('points_history',1);
 COMMIT;
