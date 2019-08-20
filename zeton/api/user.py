@@ -1,6 +1,7 @@
-from flask import request, redirect, url_for, g, flash, get_flashed_messages, abort
+from flask import request, redirect, url_for, g, flash,  abort
 
 from zeton import auth
+from zeton.auth import password_validation
 from zeton.api import bp
 from zeton.data_access import users
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -25,7 +26,7 @@ def set_password():
 
     if not (password == '' or new_password == '' or repeat_new_password == ''):
         if new_password == repeat_new_password:
-            if users.password_validation(new_password) == True:
+            if password_validation(new_password) == True:
                 if user_data:
                     if check_password_hash(logged_user_password, password):
                         users.update_password(logged_user_id, hashed_new_password)
