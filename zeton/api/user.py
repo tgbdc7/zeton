@@ -25,11 +25,13 @@ def set_password():
 
     if not (password == '' or new_password == '' or repeat_new_password == ''):
         if new_password == repeat_new_password:
-            if user_data:
-                if check_password_hash(logged_user_password, password):
-                    users.update_password(logged_user_id, hashed_new_password)
-                    flash('Nowe hasło wprowadzone poprawnie')
-                flash('Aktualne hasło zostało źle wprowadzone. Spróbuj ponownie')
+            if users.password_validation(new_password) == True:
+                if user_data:
+                    if check_password_hash(logged_user_password, password):
+                        users.update_password(logged_user_id, hashed_new_password)
+                        flash('Nowe hasło wprowadzone poprawnie')
+                    flash('Aktualne hasło zostało źle wprowadzone. Spróbuj ponownie')
+            flash('Hasło musi zawierać 1 dużą literę, 1 małą literę, 1 cyfrę i musi mieć długość 8 znaków')
         flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
     else:
         flash('Wypełnij wszystkie pola')

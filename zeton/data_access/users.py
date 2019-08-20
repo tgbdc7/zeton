@@ -79,3 +79,7 @@ def update_password(user_id, hashed_new_password):
     params = (hashed_new_password, user_id)
     get_db().cursor().execute(query, params)
     get_db().commit()
+
+def password_validation(password):
+    if (any(x.isupper() for x in password) and any(x.islower() for x in password) and any(x.isdigit() for x in password) and len(password) >= 8):
+        return True
