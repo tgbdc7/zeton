@@ -6,10 +6,6 @@ from zeton.data_access.bans import check_bans_status
 from zeton.db import get_db
 
 
-def parse_iso_timestamp(timestamp):
-    return datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
-
-
 def get_weekly_highscore(user_id):
     query = 'select school_weekly_highscore from users where id = ?'
     result = get_db().execute(query, [user_id])

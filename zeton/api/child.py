@@ -17,14 +17,15 @@ def add_points(target_id):
         return abort(403)
 
     try:
-        nowe_punkty = int(request.form['liczba_punktow'])
+        added_points = int(request.form['liczba_punktow'])
     except ValueError as ex:
         print(ex)
-    else:
-        if nowe_punkty > 0:
-            zeton.data_access.points.change_points_by(target_id, nowe_punkty)
-    finally:
-        return redirect(url_for('views.child', child_id=target_id))
+        return {'message': 'Bad request'}, 400
+
+    if added_points > 0:
+        zeton.data_access.points.change_points_by(target_id, added_points)
+
+    return redirect(url_for('views.child', child_id=target_id))
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
@@ -45,10 +46,12 @@ def use_points(child_id):
 
     try:
         used_points = int(request.form['points'])
-        if used_points > 0:
-            if used_points <= current_points:
-                zeton.data_access.points.change_points_by(child_id, -1 * used_points)
-    except ValueError:
+    except ValueError as ex:
+        print(ex)
         return {'message': 'Bad request'}, 400
+
+    if used_points > 0:
+        if used_points <= current_points:
+            zeton.data_access.points.change_points_by(child_id, -used_points)
 
     return redirect(return_url)
