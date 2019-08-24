@@ -1,36 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col col-sm-6">
+    <div class="col col-sm-6">
 
-    <form>
-        <h2>Witaj {{ firstname }}</h2>
+        <form>
+            <h2>Witaj {{ firstname }}</h2>
 
-        <center><h3>Twoi podopieczni to: </h3></center>
+            <h3 class="text-center">Twoi podopieczni to: </h3>
 
-        <div class="list-group">
-            {% for child in children %}
-            <a href="/child/{{ child.id }}"
-               class="list-group-item list-group-item-action list-group-item-light">{{
-                child.firstname }}
-                : ma {{ child.points }} punktów.
-                {% if child.bans.6.active %}
-                <br>
-                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do {{ child.bans.6.stop|ban_time }}
-                {% endif %}
-            </a>
-            <br>
-            {% endfor %}
-        </div>
-    </form>
-    <form>
-            <div class="form-group button">
-
-                <a class="btn btn-info" href="/logout">Wyloguj</a>
-
-                <a class="btn btn-info" href="/settings">Ustawienia</a>
-
+            <div class="list-group">
+                {% for child in children %}
+                    <a href="/child/{{ child.id }}"
+                       class="list-group-item list-group-item-action list-group-item-light">{{ child.firstname }}
+                        : ma {{ child.points }} punktów.
+                        {% if child.bans.6.active %}
+                            <br>
+                            <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do
+                            {{ child.bans.6.stop|ban_time }}
+                        {% endif %}
+                    </a>
+                    <br>
+                {% endfor %}
             </div>
         </form>
-</div>
+        <div class="form-group button">
+            <a class="btn btn-info" href="/logout">Wyloguj</a>
+            <a class="btn btn-info" href="/settings">Ustawienia</a>
+        </div>
+    </div>
 {% endblock %}
 

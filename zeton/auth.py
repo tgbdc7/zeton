@@ -12,9 +12,14 @@ def get_user_data(login):
     result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
     return result.fetchone()
 
+
 def password_validation(password):
-    if (any(x.isupper() for x in password) and any(x.islower() for x in password) and any(x.isdigit() for x in password) and len(password) >= 8):
+    if (any(x.isupper() for x in password)
+            and any(x.islower() for x in password)
+            and any(x.isdigit() for x in password)
+            and len(password) >= 8):
         return True
+    return False
 
 
 @bp.route('/login', methods=['GET', 'POST'])
