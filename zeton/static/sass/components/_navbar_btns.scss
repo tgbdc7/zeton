@@ -1,7 +1,15 @@
 .navbar-btn {
     margin: 0;
+    //vertical-align: middle;
 
-    
+    &:hover {
+        background-color: $zet-blue-color;
+        cursor: pointer;
+
+        .navbar-btn__text {
+            color: $zet-white-color;
+        }
+    }
 
     @media only screen and (max-width: $zet-screen-lg-max) {
 
@@ -10,11 +18,19 @@
 
     @media only screen and (min-width: $zet-screen-lg-min) {
         display: inline-block;
-        margin: 0 calc(10px + 1%);
+        padding: 8px calc(10px + 1%);
+        height: 80px;
+        margin: 0;
     }
-
+    .navbar-btn__img {
+        height: 30px;
+        line-height: 100%;
+        display: inline;
+        margin-right: 5px;
+    }
     .navbar-btn__text {
         margin: 0;
-        line-height: 100%;
+        line-height: calc(80px - 16px);
+        display: inline;
     }
 }

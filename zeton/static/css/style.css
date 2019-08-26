@@ -51,10 +51,11 @@ body {
       -ms-flex-align: start;
           align-items: flex-start;
   z-index: 99;
+  padding: 0;
 }
 
 .navbar .navbar-brand {
-  padding: 0;
+  padding: 8px 16px;
 }
 
 .navbar .navbar-brand .logo {
@@ -134,6 +135,15 @@ body {
   margin: 0;
 }
 
+.navbar-btn:hover {
+  background-color: #0141c5;
+  cursor: pointer;
+}
+
+.navbar-btn:hover .navbar-btn__text {
+  color: #ffffff;
+}
+
 @media only screen and (max-width: 991px) {
   .navbar-btn {
     display: block;
@@ -143,13 +153,23 @@ body {
 @media only screen and (min-width: 992px) {
   .navbar-btn {
     display: inline-block;
-    margin: 0 calc(10px + 1%);
+    padding: 8px calc(10px + 1%);
+    height: 80px;
+    margin: 0;
   }
+}
+
+.navbar-btn .navbar-btn__img {
+  height: 30px;
+  line-height: 100%;
+  display: inline;
+  margin-right: 5px;
 }
 
 .navbar-btn .navbar-btn__text {
   margin: 0;
-  line-height: 100%;
+  line-height: calc(80px - 16px);
+  display: inline;
 }
 
 /* Sections */
