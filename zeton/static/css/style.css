@@ -160,7 +160,7 @@ body {
 }
 
 .navbar-btn .navbar-btn__img {
-  height: 30px;
+  height: 25px;
   line-height: 100%;
   display: inline;
   margin-right: 5px;
@@ -170,6 +170,7 @@ body {
   margin: 0;
   line-height: calc(80px - 16px);
   display: inline;
+  font-size: 14px;
 }
 
 /* Sections */
