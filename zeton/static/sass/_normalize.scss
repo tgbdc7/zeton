@@ -21,4 +21,12 @@ li {
 /*main sections*/
 body {
     background-color: $zet-bg-color;
+
+    @media only screen and (max-width: $zet-screen-lg-max) {
+        padding-left: 80px;         
+    }
+    
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        padding-top: 80px;        
+    }
 }

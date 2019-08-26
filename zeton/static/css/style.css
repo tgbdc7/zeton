@@ -26,6 +26,39 @@ body {
   background-color: #f4f5f9;
 }
 
+@media only screen and (max-width: 991px) {
+  body {
+    padding-left: 80px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
 /* Components */
+.navbar {
+  background-color: white;
+  position: absolute;
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar {
+    width: 80px;
+    height: 100%;
+    left: 0;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar {
+    height: 80px;
+    width: 100%;
+    top: 0;
+  }
+}
+
 /* Sections */
 /*# sourceMappingURL=style.css.map */
