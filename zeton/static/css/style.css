@@ -1,0 +1,30 @@
+/* Colors */
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/*main sections*/
+body {
+  background-color: #f4f5f9;
+}
+
+/* Components */
+/* Sections */
+/*# sourceMappingURL=style.css.map */
