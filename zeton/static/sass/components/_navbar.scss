@@ -1,16 +1,59 @@
 .navbar {
-    background-color: $zet-white-color;    
+    background-color: $zet-white-color;
     position: absolute;
     box-shadow: $zet-box-shadow;
+    justify-content: start;
+    align-items: flex-start;
+    z-index: 99;
+
+    .navbar-brand {
+        padding: 0;
+
+        .logo {
+            background-image: url(../images/zeton1b.jpg);
+            background-repeat: no-repeat;
+            background-position: center;            
+            background-size: 100%;
+            height: calc(80px - 16px);
+            width: 100px;
+        }
+    }
 
     @media only screen and (max-width: $zet-screen-lg-max) {
         width: 80px;
         height: 100%;
-        left: 0; 
-        transition: .2s;  
-        
+        left: 0;        
+        transition: .2s;
+
+        .navbar-brand {
+
+            .logo {
+                background-image: url(../images/zeton1b-small.jpg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 55%;
+                width: calc(80px - 32px);
+                height: 80px;
+                margin: 0 auto;
+                transition: .2s;
+            }
+        }
+
         &:hover {
             width: 200px;
+
+            .navbar-brand {
+
+                .logo {
+                    background-image: url(../images/zeton1b.jpg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 65%;
+                    width: calc(200px - 32px);
+                    //height: 80px;
+                    margin: 0 auto;
+                }
+            }
         }
     }
 
@@ -18,5 +61,19 @@
         height: 80px;
         width: 100%;
         top: 0;
+
+        .navbar-brand {
+
+            .logo {
+                .logo {
+                    background-image: url(../images/zeton1b.jpg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    height: calc(80px - 16px);
+                    width: 100px;
+                }
+            }
+        }
     }
 }

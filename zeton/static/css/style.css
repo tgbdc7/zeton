@@ -44,6 +44,26 @@ body {
   position: absolute;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  z-index: 99;
+}
+
+.navbar .navbar-brand {
+  padding: 0;
+}
+
+.navbar .navbar-brand .logo {
+  background-image: url(../images/zeton1b.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  height: calc(80px - 16px);
+  width: 100px;
 }
 
 @media only screen and (max-width: 991px) {
@@ -54,8 +74,27 @@ body {
     -webkit-transition: .2s;
     transition: .2s;
   }
+  .navbar .navbar-brand .logo {
+    background-image: url(../images/zeton1b-small.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 55%;
+    width: calc(80px - 32px);
+    height: 80px;
+    margin: 0 auto;
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
   .navbar:hover {
     width: 200px;
+  }
+  .navbar:hover .navbar-brand .logo {
+    background-image: url(../images/zeton1b.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 65%;
+    width: calc(200px - 32px);
+    margin: 0 auto;
   }
 }
 
@@ -64,6 +103,14 @@ body {
     height: 80px;
     width: 100%;
     top: 0;
+  }
+  .navbar .navbar-brand .logo .logo {
+    background-image: url(../images/zeton1b.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(80px - 16px);
+    width: 100px;
   }
 }
 
