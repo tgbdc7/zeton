@@ -51,3 +51,20 @@ def child(child_id):
     context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes, 'role': role}
 
     return render_template('caregiver_panel.html', **context)
+
+@bp.route('/prizes_detail/<child_id>')
+@auth.login_required
+def prizes_detail(child_id):
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+
+    # if not (child_id == logged_user_id or
+    #         users.is_child_under_caregiver(child_id, logged_user_id)):
+    #     return abort(403)
+
+    child = users.get_child_data(child_id)
+    childs_prizes = prizes.get_prizes(child_id)
+
+    context = {'child': child, 'childs_prizes': childs_prizes}
+
+    return render_template('prizes_detail.html', **context)
