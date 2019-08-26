@@ -9,21 +9,53 @@
 
     .navbar-brand {
         padding: 8px 16px;
+        max-width: 20%;
 
         .logo {
             background-image: url(../images/zeton1b.jpg);
             background-repeat: no-repeat;
-            background-position: center;            
+            background-position: center;
             background-size: 100%;
             height: calc(80px - 16px);
             width: 100px;
         }
     }
 
+    .navbar-nav {
+        @media only screen and (max-width: $zet-screen-lg-max) {
+            width: 100%;
+            display: block;
+        }
+
+        @media only screen and (min-width: $zet-screen-lg-min) {
+            width: 60%;            
+            margin: 0 calc(10px);
+            display: inline-block;
+            text-align: center;
+        }
+    }
+
+    .navbar-nav_settings {
+        @media only screen and (max-width: $zet-screen-lg-max) {
+            width: 100%;
+            display: block;
+
+        }
+
+        @media only screen and (min-width: $zet-screen-lg-min) {
+            max-width: 20%;
+            margin: 0 calc(10px);
+            display: inline-block;
+            text-align: right;
+
+        }
+
+    }
+
     @media only screen and (max-width: $zet-screen-lg-max) {
         width: 80px;
         height: 100%;
-        left: 0;        
+        left: 0;
         transition: .2s;
 
         .navbar-brand {
@@ -55,6 +87,15 @@
                     margin: 0 auto;
                 }
             }
+
+            .navbar-nav, .navbar-nav_settings {
+                .navbar-btn {
+                    .navbar-nav__text {
+                        display: inline;
+                    }
+
+                }
+            }
         }
     }
 
@@ -62,6 +103,7 @@
         height: 80px;
         width: 100%;
         top: 0;
+        justify-content: space-between;
 
         .navbar-brand {
 
@@ -78,16 +120,5 @@
         }
     }
 
-    .navbar-nav {
-        @media only screen and (max-width: $zet-screen-lg-max) {
-            width: 100%;
-            display: block;
-        }
-        @media only screen and (min-width: $zet-screen-lg-min) {
-            width: 80%;
-            margin: 0 calc(10px + 1%);
-            display: inline-block;
-            text-align: center;
-        }
-    }
+    
 }

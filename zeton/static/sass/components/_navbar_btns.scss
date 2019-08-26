@@ -22,16 +22,23 @@
         height: 80px;
         margin: 0;
     }
+
     .navbar-btn__img {
         height: 25px;
-        line-height: 100%;
+        line-height: calc(80px - 16px);
         display: inline;
         margin-right: 5px;        
+
+        @media only screen and (min-width: $zet-screen-lg-min) {
+            display: none;
+        }
     }
+
     .navbar-btn__text {
         margin: 0;
         line-height: calc(80px - 16px);
         display: inline;
-        font-size: 14px;
+        font-size: 14px;      
+
     }
 }
