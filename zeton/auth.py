@@ -44,32 +44,12 @@ def logout():
 
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        password_hash = generate_password_hash(password)
-        role = 'caregiver'
-
-        data = (username, password_hash, role)
-        add_new_user(data)
-
-        return redirect(url_for('views.index'))
 
     return render_template('register_form.html')
 
 
 @bp.route('/add-person', methods=['GET', 'POST'])
 def add_person():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        password_hash = generate_password_hash(password)
-        role = request.form['role']
-
-        data = (username, password_hash, role)
-        add_new_user(data)
-
-        return redirect(url_for('views.index'))
 
     return render_template('add_person.html')
 
