@@ -114,5 +114,43 @@ body {
   }
 }
 
+@media only screen and (max-width: 991px) {
+  .navbar .navbar-nav {
+    width: 100%;
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar .navbar-nav {
+    width: 80%;
+    margin: 0 calc(10px + 1%);
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.navbar-btn {
+  margin: 0;
+}
+
+@media only screen and (max-width: 991px) {
+  .navbar-btn {
+    display: block;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar-btn {
+    display: inline-block;
+    margin: 0 calc(10px + 1%);
+  }
+}
+
+.navbar-btn .navbar-btn__text {
+  margin: 0;
+  line-height: 100%;
+}
+
 /* Sections */
 /*# sourceMappingURL=style.css.map */

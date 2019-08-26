@@ -76,4 +76,17 @@
             }
         }
     }
+
+    .navbar-nav {
+        @media only screen and (max-width: $zet-screen-lg-max) {
+            width: 100%;
+            display: block;
+        }
+        @media only screen and (min-width: $zet-screen-lg-min) {
+            width: 80%;
+            margin: 0 calc(10px + 1%);
+            display: inline-block;
+            text-align: center;
+        }
+    }
 }
