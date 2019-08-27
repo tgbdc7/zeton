@@ -27,7 +27,7 @@ body {
   background-color: #f4f5f9;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.99px) {
   body {
     padding-left: 80px;
   }
@@ -80,14 +80,14 @@ body {
           flex: 3;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.99px) {
   .navbar .navbar-nav {
     width: 100%;
     display: block;
   }
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 992px) and (max-width: 1199.99px) {
   .navbar .navbar-nav {
     width: 60%;
     display: inline-block;
@@ -133,7 +133,7 @@ body {
           flex: 1;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.99px) {
   .navbar .navbar-nav_settings {
     width: 100%;
     display: block;
@@ -160,7 +160,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.99px) {
   .navbar {
     width: 80px;
     height: 100%;
@@ -275,7 +275,7 @@ body {
   color: #ffffff;
 }
 
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991.99px) {
   .navbar-btn {
     display: block;
   }
