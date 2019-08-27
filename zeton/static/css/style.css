@@ -320,6 +320,7 @@ body {
   .login {
     width: 80%;
     min-width: 200px;
+    margin: 5vh auto;
   }
 }
 
@@ -327,6 +328,18 @@ body {
   .login {
     min-width: 500px;
     padding: 15px 2vw;
+    margin: 0 auto;
   }
+}
+
+.login-header {
+  display: block;
+  width: 100%;
+  margin: calc(20px + 2vh) auto;
+  text-align: center;
+}
+
+.login-header .login-logo {
+  height: 100px;
 }
 /*# sourceMappingURL=style.css.map */

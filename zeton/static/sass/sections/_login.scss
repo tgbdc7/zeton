@@ -10,10 +10,12 @@
     @media only screen and (max-width: $zet-screen-lg-max) {
         width: 80%;
         min-width: 200px;
+        margin: 5vh auto;
     }
 
     @media only screen and (min-width: $zet-screen-lg-min) {
         min-width: 500px;
         padding: 15px 2vw;
+        margin: 0 auto;
     }
 }
