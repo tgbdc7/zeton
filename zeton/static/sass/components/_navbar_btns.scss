@@ -1,6 +1,8 @@
 .navbar-btn {
     margin: 0;
     //vertical-align: middle;
+    transition: .2s;
+    //line-height: calc(80px - 16px);    
 
     &:hover {
         background-color: $zet-blue-color;
@@ -18,27 +20,24 @@
 
     @media only screen and (min-width: $zet-screen-lg-min) {
         display: inline-block;
-        padding: 8px calc(10px + 1%);
+        padding: 8px calc(10px);
         height: 80px;
         margin: 0;
+        width: 120px;
     }
 
     .navbar-btn__img {
         height: 25px;
-        line-height: calc(80px - 16px);
-        display: inline;
-        margin-right: 5px;        
-
-        @media only screen and (min-width: $zet-screen-lg-min) {
-            display: none;
-        }
+        //line-height: calc(80px - 16px);
+        display: block;
+        margin: 10px auto 0;  
+        //transform: translateY(-50%);    
     }
 
     .navbar-btn__text {
         margin: 0;
-        line-height: calc(80px - 16px);
-        display: inline;
-        font-size: 14px;      
-
+        //line-height: calc(80px - 16px);
+        display: block;
+        font-size: 13px; 
     }
 }

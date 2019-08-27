@@ -2,14 +2,16 @@
     background-color: $zet-white-color;
     position: absolute;
     box-shadow: $zet-box-shadow;
-    justify-content: start;
-    align-items: flex-start;
+    justify-content: space-between;
+    align-items: center;
     z-index: 99;
     padding: 0;
+    flex-wrap: nowrap;
 
     .navbar-brand {
         padding: 8px 16px;
-        max-width: 20%;
+        flex: 1;
+        //max-width: 20%;
 
         .logo {
             background-image: url(../images/zeton1b.jpg);
@@ -22,36 +24,92 @@
     }
 
     .navbar-nav {
+        font-size: 0;
+        flex: 3;
+
         @media only screen and (max-width: $zet-screen-lg-max) {
             width: 100%;
             display: block;
         }
 
-        @media only screen and (min-width: $zet-screen-lg-min) {
-            width: 60%;            
-            margin: 0 calc(10px);
+        @media only screen and (min-width: $zet-screen-lg-min) and (max-width: $zet-screen-xl-max) {
+            width: 60%;
+            //margin: 0 calc(10px);
+            display: inline-block;
+            text-align: center;
+
+            .navbar-btn {
+                width: 15%;
+
+                .navbar-btn__img {
+                    margin: 20px auto 0;
+                }
+
+                .navbar-btn__text {
+                    display: none;
+                }
+
+                &:hover {
+                    width: 120px;
+                    text-align: center;
+
+                    .navbar-btn__img {
+                        margin: 10px auto 0;
+                    }
+
+                    .navbar-btn__text {
+                        display: block;
+                        float: left;
+                        margin: 0 50%;
+                        transform: translateX(-50%);
+                    }
+                }
+            }
+        }
+
+        @media only screen and (min-width: $zet-screen-xl-min) {
+            width: 60%;
+            //margin: 0 calc(10px);
             display: inline-block;
             text-align: center;
         }
     }
 
     .navbar-nav_settings {
+        font-size: 0;
+        flex: 1;
+
         @media only screen and (max-width: $zet-screen-lg-max) {
             width: 100%;
             display: block;
-
         }
 
-        @media only screen and (min-width: $zet-screen-lg-min) {
-            max-width: 20%;
-            margin: 0 calc(10px);
+        @media only screen and (min-width: $zet-screen-lg-min) and (max-width: 1247.9px) {
+            //max-width: 20%;
+            //margin: 0 calc(10px) 0;
             display: inline-block;
-            text-align: right;
+            text-align: center;
 
+            .navbar-btn {
+                width: calc(80px + 1vw);
+
+                &:hover {
+                    width: calc(80px + 1vw);
+                    text-align: center;
+                }
+            }
+        }
+
+        @media only screen and (min-width: 1248px) {
+
+            .navbar-btn {
+                width: 50%;
+            }
         }
 
     }
 
+    //pasek boczny
     @media only screen and (max-width: $zet-screen-lg-max) {
         width: 80px;
         height: 100%;
@@ -88,9 +146,10 @@
                 }
             }
 
-            .navbar-nav, .navbar-nav_settings {
+            .navbar-nav,
+            .navbar-nav_settings {
                 .navbar-btn {
-                    .navbar-nav__text {
+                    .navbar-btn__text {
                         display: inline;
                     }
 
@@ -119,6 +178,4 @@
             }
         }
     }
-
-    
 }
