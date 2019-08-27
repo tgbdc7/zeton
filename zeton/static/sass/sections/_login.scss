@@ -4,6 +4,7 @@
     margin: calc(100px + 5vh) auto;    
     background-color: $zet-white-color;
     box-shadow: $zet-box-shadow;
+    border-radius: $zet-box-radius;
     padding: 15px 0;
 
     @media only screen and (max-width: $zet-screen-lg-max) {
@@ -13,5 +14,6 @@
 
     @media only screen and (min-width: $zet-screen-lg-min) {
         min-width: 500px;
+        padding: 15px 2vw;
     }
 }

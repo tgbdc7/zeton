@@ -1,5 +1,6 @@
 /* Colors */
 /* Media queries */
+/* Margins */
 html {
   scroll-behavior: smooth;
 }
@@ -311,6 +312,7 @@ body {
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
   padding: 15px 0;
 }
 
@@ -324,6 +326,7 @@ body {
 @media only screen and (min-width: 992px) {
   .login {
     min-width: 500px;
+    padding: 15px 2vw;
   }
 }
 /*# sourceMappingURL=style.css.map */
