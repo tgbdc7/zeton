@@ -18,27 +18,28 @@
 
         <div id="dodawanie" class="col-xl-6 square text-align-right">
             {% block add_points %}{% endblock add_points %}
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>
             <h2 class="text-center">Sposób na zdobycie punktów</h2>
             <br>
             <ul>
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Nazwa</th>
-                    <th>Punkty</th>
-                    <th>Max. dziennie</th>
-                    <th>Max. tygodniowo</th>
-                </tr>
-                {% for task in childs_tasks %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ task.name }}</td>
-                    <td>{{ task.points }}</td>
-                    <td>{{ task.max_day }}</td>
-                    <td>{{ task.max_week }}</td>
-                </tr>
-                {% endfor %}
-            </table>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Punkty</th>
+                    </tr>
+                    {% for task in childs_tasks %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ task.name }}</td>
+                        <td>{{ task.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </ul>
 
             <h5 class="text-center">SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
@@ -49,39 +50,39 @@
 
             {% if role == 'caregiver' %}
             <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
-            {% else %}
-            <form action="/api/child/{{ child.id }}/points/use" method="post">
-            {% endif %}
-                <div class="form-group button">
-                    Liczba punktów: <input class="form-control" type="number" name="points" required>
+                {% else %}
+                <form action="/api/child/{{ child.id }}/points/use" method="post">
+                    {% endif %}
+                    <div class="form-group button">
+                        Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty" />
-                </div>
-                <h4 class="text-center">NAGRODY</h4>
-            </form>
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                    </div>
+                    <h4 class="text-center">NAGRODY</h4>
+                </form>
 
-            <ul style="text-align:left;">
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Nazwa</th>
-                    <th>Punkty</th>
-                    <th>Max. dziennie</th>
-                    <th>Max. tygodniowo</th>
-                    <th>Max. miesięcznie</th>
-                </tr>
-                {% for prize in childs_prizes %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ prize.name }}</td>
-                    <td>{{ prize.points }}</td>
-                    <td>{{ prize.max_day }}</td>
-                    <td>{{ prize.max_week }}</td>
-                    <td>{{ prize.max_month }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            </ul>
+                <ul style="text-align:left;">
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Punkty</th>
+                            <th>Max. dziennie</th>
+                            <th>Max. tygodniowo</th>
+                            <th>Max. miesięcznie</th>
+                        </tr>
+                        {% for prize in childs_prizes %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ prize.name }}</td>
+                            <td>{{ prize.points }}</td>
+                            <td>{{ prize.max_day }}</td>
+                            <td>{{ prize.max_week }}</td>
+                            <td>{{ prize.max_month }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
 
         </div>
 
