@@ -1,17 +1,22 @@
 import functools
 
 from flask import Blueprint, redirect, render_template, request, url_for, session
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import check_password_hash
 
 from . import db
-from zeton.data_access.users import add_new_user
 
 bp = Blueprint('auth', __name__)
 
 
 def get_user_data(login):
     result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
-    return result.fetchone()
+    user_data = result.fetchall()
+    if len(user_data) == 0:
+        return None
+    elif len(user_data) == 1:
+        return user_data[0]
+    else:
+        raise Exception("Database error: duplicate username found!")
 
 
 @bp.route('/login', methods=['GET', 'POST'])

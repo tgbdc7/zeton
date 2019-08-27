@@ -1,17 +1,17 @@
 PRAGMA foreign_keys = ON;
 
+DROP TABLE IF EXISTS prizes;
+DROP TABLE IF EXISTS home_points;
 DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS home_points;
-DROP TABLE IF EXISTS prizes;
 
 
 create table users
 (
   id                      integer UNIQUE primary key autoincrement,
-  username                text not null,
+  username                text UNIQUE not null,
   password                text not null,
   role                    text not NULL check ( role in ('caregiver', 'child') ),
   firstname               text,
