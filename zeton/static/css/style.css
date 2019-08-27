@@ -303,4 +303,10 @@ body {
     width: 100px;
   }
 }
+
+.login {
+  max-width: 1200px;
+  margin: calc(100px + 5vh) auto;
+  background-color: #ffffff;
+}
 /*# sourceMappingURL=style.css.map */
