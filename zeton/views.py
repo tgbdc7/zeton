@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, g
+from flask import Blueprint, render_template, abort, g, get_flashed_messages
 
 from . import auth
 from zeton.data_access import users, prizes, tasks
@@ -70,3 +70,15 @@ def task_detail(child_id):
 
     return render_template('task_detail.html', **context)
 
+
+@bp.route('/settings/')
+@auth.login_required
+def user_settings():
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+
+    context = {'user_data': user_data}
+    messages = get_flashed_messages()
+
+    return render_template('user_settings.html', **context, messages=messages)
