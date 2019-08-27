@@ -8,7 +8,8 @@
         "../sass/components/_navbar_btns.scss",
         "../sass/sections/_navbar.scss",
         "../sass/sections/_login.scss",
-        "../sass/sections/_login-header.scss"
+        "../sass/sections/_login-header.scss",
+        "../sass/sections/_welcome.scss"
     ],
     "names": [],
     "file": "style.css"
