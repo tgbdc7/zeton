@@ -1,5 +1,17 @@
 .login {
+    width: 500px;
     max-width: 1200px;
     margin: calc(100px + 5vh) auto;    
     background-color: $zet-white-color;
+    box-shadow: $zet-box-shadow;
+    padding: 15px 0;
+
+    @media only screen and (max-width: $zet-screen-lg-max) {
+        width: 80%;
+        min-width: 200px;
+    }
+
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        min-width: 500px;
+    }
 }
