@@ -58,12 +58,13 @@ def prizes_detail(child_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
 
-    # if not (child_id == logged_user_id or
-    #         users.is_child_under_caregiver(child_id, logged_user_id)):
-    #     return abort(403)
-
     child = users.get_child_data(child_id)
     childs_prizes = prizes.get_prizes(child_id)
+
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(child_id, logged_user_id)):
+        return abort(403)
+
 
     context = {'child': child, 'childs_prizes': childs_prizes}
 
