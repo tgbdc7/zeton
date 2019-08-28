@@ -59,29 +59,30 @@
                     </div>
                     <h4 class="text-center">NAGRODY</h4>
                 </form>
+            </form>
 
-                <ul style="text-align:left;">
-                    <table>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nazwa</th>
-                            <th>Punkty</th>
-                            <th>Max. dziennie</th>
-                            <th>Max. tygodniowo</th>
-                            <th>Max. miesięcznie</th>
-                        </tr>
-                        {% for prize in childs_prizes %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ prize.name }}</td>
-                            <td>{{ prize.points }}</td>
-                            <td>{{ prize.max_day }}</td>
-                            <td>{{ prize.max_week }}</td>
-                            <td>{{ prize.max_month }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </ul>
+            <ul style="text-align:left;">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Punkty</th>
+                        <th>Max. dziennie</th>
+                        <th>Max. tygodniowo</th>
+                        <th>Max. miesięcznie</th>
+                    </tr>
+                    {% for prize in childs_prizes %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ prize.name }}</td>
+                        <td>{{ prize.points }}</td>
+                        <td>{{ prize.max_day }}</td>
+                        <td>{{ prize.max_week }}</td>
+                        <td>{{ prize.max_month }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
 
         </div>
 
