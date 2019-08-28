@@ -1,19 +1,17 @@
 * {
   margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  padding: 10;
 }
 
 body {
   font-family: "Roboto", "Arial", sans-serif;
-  background-color: #6fc2d0;
+  background-color: #17a2b8;
 }
 
 body header {
   width: 100%;
   height: 8%;
-  background-color: #6fc2d0;
+  background-color: #17a2b8;
   color: #ffffff;
 }
 
@@ -72,7 +70,7 @@ body main {
   max-width: 1200px;
   height: 100%;
   margin: 0 auto;
-  background-color: #6fc2d0;
+  background-color: #17a2b8;
 }
 
 body main .login {
@@ -95,11 +93,17 @@ body main .login .container .row .col {
   background-color: #ffcbcb;
   border: solid 8px #ffffff;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 5px #313848;
-          box-shadow: 1px 1px 5px #313848;
-  color: #313848;
 }
 
+body main .text .login .container .row .col {
+  padding: 20px;
+  background-color: #0c99c1;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px #0c99c1;
+          box-shadow: 1px 1px 5px #0c99c1;
+  color: #ffffff;
+  width: auto;
+}
 body main .login .container .row .col form h2 {
   text-align: center;
   text-transform: uppercase;
@@ -112,13 +116,14 @@ body main .login .container .row .col form .button {
   text-align: center;
 }
 
-body main .login .container .row .col form .button .btn-primary {
-  background-color: #0c99c1;
+body main .login .container .col form .button .btn-info {
+
   border: solid 2px #ffffff;
   outline: none;
+
 }
 
-body main .login .container .row .col form .button .btn-primary:hover {
+body main .login .container .col form .button .btn-info:hover {
   background-color: #313848;
 }
 
@@ -130,10 +135,10 @@ body main .text {
 
 body main .text .container .row .col {
   padding: 20px;
-  background-color: #0c99c1;
+  background-color: #157EB3;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 5px #0c99c1;
-          box-shadow: 1px 1px 5px #0c99c1;
+  -webkit-box-shadow: 1px 1px 5px #157EB3;
+          box-shadow: 1px 1px 5px #157EB3;
   color: #ffffff;
   height: 100%;
 }
@@ -149,5 +154,27 @@ body main .text .container .row .col p {
     line-height: 1.5em;
   }
 }
-/*# sourceMappingURL=login.css.map */
-/*test_pawel*/
+
+.square {
+
+    border: solid 5px #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#dodawanie {
+    background-color: #C2FFC8;
+}
+
+#odejmowanie {
+    background-color: #E0E0EA
+}
+
+#bany_warny {
+    background-color: #FAEFCF
+
+}
+
+#punkty_szkola {
+    background-color: #FFE3B2
+}

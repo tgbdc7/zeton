@@ -1,9 +1,7 @@
-from datetime import datetime
+from flask import Blueprint, render_template, abort, g, get_flashed_messages
 
-from flask import Blueprint, session, render_template, abort
-
-from zeton.data_access import get_child_data
-from . import auth, data_access, db
+from . import auth
+from zeton.data_access import users, prizes, tasks
 
 bp = Blueprint('views', __name__)
 
@@ -11,26 +9,27 @@ bp = Blueprint('views', __name__)
 @bp.route('/')
 @auth.login_required
 def index():
-    db.get_db()
-    USER_ID = session.get('user_id', None)
-    user_data = data_access.get_user_data(USER_ID)  # TODO: załadować wszystko do sesji?
+    users.load_logged_in_user_data()
 
-    role = user_data['role']
+    role = g.user_data['role']
+    logged_user_id = g.user_data['id']
 
     template = None
     context = {}
 
     if role == 'caregiver':
-        children = data_access.get_caregivers_children(USER_ID)
+        children = users.get_caregivers_children(logged_user_id)
         template = 'index_caregiver.html'
-        context.update({"firstname": user_data['firstname'],
+        context.update({"firstname": g.user_data['firstname'],
                         "role": role,
                         "children": children})
 
     elif role == 'child':
         template = 'index_child.html'
-        child = get_child_data(USER_ID)
-        context = {'child': child}
+        child = users.get_child_data(logged_user_id)
+        childs_tasks = tasks.get_tasks(logged_user_id)
+        childs_prizes = prizes.get_prizes(logged_user_id)
+        context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
     return render_template(template, **context)
 
@@ -38,14 +37,48 @@ def index():
 @bp.route('/child/<child_id>')
 @auth.login_required
 def child(child_id):
-    db.get_db()
-    USER_ID = session.get('user_id', None)
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
 
-    if not data_access.is_child_under_caregiver(child_id, USER_ID):
+    if not users.is_child_under_caregiver(child_id, logged_user_id):
         return abort(403)
 
-    child = get_child_data(child_id)
+    child = users.get_child_data(child_id)
+    childs_tasks = tasks.get_tasks(child_id)
+    childs_prizes = prizes.get_prizes(child_id)
+    role = g.user_data['role']
 
-    context = {'child': child}
+    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes, 'role': role}
 
-    return render_template('child_info.html', **context)
+    return render_template('caregiver_panel.html', **context)
+
+@bp.route('/task_detail/<child_id>')
+@auth.login_required
+def task_detail(child_id):
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+
+    child = users.get_child_data(child_id)
+    childs_tasks = tasks.get_tasks(child_id)
+
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(child_id, logged_user_id)):
+        return abort(403)
+
+
+    context = {'child': child, 'childs_tasks': childs_tasks}
+
+    return render_template('task_detail.html', **context)
+
+
+@bp.route('/settings/')
+@auth.login_required
+def user_settings():
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+
+    context = {'user_data': user_data}
+    messages = get_flashed_messages()
+
+    return render_template('user_settings.html', **context, messages=messages)

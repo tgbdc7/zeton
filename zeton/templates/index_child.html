@@ -1,105 +1,122 @@
-<!doctype html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Żeton</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-
-
-<html>
-<body>
-<div id="container">
-    <div class="logout-link">
-        <a href="/logout">
-            <button>LOGOUT</button>
-        </a></div>
-    <div class="rectangle child">
-        <h2>Witaj {{ child.firstname  }}, obecnie masz {{ child.points }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ school_weekly_highscore }}</h3>
+{% extends "base.html" %}
+{% block content %}
+<div class="col col-sm-12">
+    <div class="text-center">
+        <h2>{{ child.firstname }}</h2>
+        <h2> Ilość punktów {{ child.points }} punktów</h2>
+        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
 
         {% if child.bans.6.active %}
-        <h2 style="text-align: center; color: red;"> Masz BANA !</h2>
+        <h2 style="color: red;"> Masz BANA !</h2>
         <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
-
     </div>
+    <br>
+    <div class="row">
 
-    <div id="dodawanie" class="square">
-        <h4 style="text-align: center;">SPOSOBY NA ZDOBYCIE PUNKTÓW</h4>
-        <ul style="text-align:left;">
-            <li>sprzątanie pokoju--> 20pkt</li>
-            <li>wykonanie polecenia bez zwłoki--> 2pkt</li>
-            <li>odrobionie lekcji--> 20pkt</li>
-            <li>spakowanie plecaka--> 20pkt</li>
-            <li>spakowanie plecaka (z mamą)--> 5pkt</li>
-            <li>pomoc rodzicom--> 10-60pkt</li>
-            <li>zenek--> 20pkt</li>
-        </ul>
-        <h5>SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
+        <div id="dodawanie" class="col-xl-6 square text-align-right">
+            {% block add_points %}{% endblock add_points %}
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>
+            <h2 class="text-center">Sposób na zdobycie punktów</h2>
+            <br>
+            <ul>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Punkty</th>
+                    </tr>
+                    {% for task in childs_tasks %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ task.name }}</td>
+                        <td>{{ task.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
+
+            <h5 class="text-center">SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
+        </div>
+
+        <div id="odejmowanie" class="col-xl-6 square">
+            <h2 class="text-center">Wykorzystaj punkty</h2>
+
+            {% if role == 'caregiver' %}
+            <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
+                {% else %}
+                <form action="/api/child/{{ child.id }}/points/use" method="post">
+                    {% endif %}
+                    <div class="form-group button">
+                        Liczba punktów: <input class="form-control" type="number" name="points" required>
+
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                    </div>
+                    <h4 class="text-center">NAGRODY</h4>
+                </form>
+
+                <ul style="text-align:left;">
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Punkty</th>
+                            <th>Max. dziennie</th>
+                            <th>Max. tygodniowo</th>
+                            <th>Max. miesięcznie</th>
+                        </tr>
+                        {% for prize in childs_prizes %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ prize.name }}</td>
+                            <td>{{ prize.points }}</td>
+                            <td>{{ prize.max_day }}</td>
+                            <td>{{ prize.max_week }}</td>
+                            <td>{{ prize.max_month }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
+
+        </div>
+
+        <div id="bany_warny" class="col-xl-6 square">
+            <h2 style="text-align: center;"> *****Warny i bany****** </h2>
+            <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
+            <ol>
+                {% for ban in child.bans.values() %}
+                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}</li>
+                {% endfor %}
+            </ol>
+
+            {% block bans %}{% endblock bans %}
+
+        </div>
+
+        <div id="punkty_szkola" class="col-xl-6 square">
+
+            <h2 class="text-center"> *** Punkty ze Szkoły *** </h2>
+
+            <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
+            <div><label> <input type="checkbox"> przyklad 4 </label></div>
+            <div><label> <input type="checkbox"> przyklad 5 </label></div>
+
+        </div>
     </div>
-
-    <div id="odejmowanie" class="square">
-        <h2 style="text-align: center">Wykorzystaj punkty</h2>
-        <form style="text-align: center;" action="/api/wykorzystanie_punktow/{{ id }}" method="post">
-            Liczba punktów <br> <input style="text-align: center;" type="number_format" name="liczba_punktow"
-                                       required><br/>
-            <br><input type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-        </form>
-
-        <h4>NAGRODY</h4>
-
-        <ul style="text-align:left;">
-
-            <li>1 pkt--> 1 min komputer</li>
-            <li>40 pkt--> cola (200ml) (raz na 7 dni )</li>
-            <li>50 pkt--> cola (330ml) (raz na 7 dni)</li>
-            <li>60 pkt--> zakupy w żabce (bez chipsów i Coca Coli)</li>
-            <li>100 pkt--> kino domowe</li>
-            <Li>200 pkt--> 6zł do wydania na mc.skyblock.pl</Li>
-            <li>250 pkt--> jump city</li>
-            <li>250 pkt--> kino</li>
-            <li>250 pkt--> Aquapark reda</li>
-            <li>250 pkt--> piżama party</li>
-        </ul>
-
-    </div>
-
-    <div style="clear:both"></div>
-    <div id="bany_warny" class="square">
-        <h2 style="text-align: center;"> *****Warny i bany****** </h2>
-        <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
-         <ol>
-            {% for ban in child.bans.values() %}
-            <li {%if ban.active %}  style ="color:red;"  {% endif%}>WARN--> {{ban.name}}
-
-
-            </li>
-
-            {% endfor %}
-        </ol>
-    </div>
-
-    <div id="punkty_szkola" class="square">
-
-        <h2> *** Punkty ze Szkoły *** </h2>
-        <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
-        <div><label> <input type="checkbox"> przyklad 4 </label></div>
-        <div><label> <input type="checkbox"> przyklad 5 </label></div>
-
-
-    </div>
-
-    <div style="clear:both"></div>
-
-
+    <form>
+        <div class="button">
+            {% block home_button %}{% endblock home_button %}
+            <a class="btn btn-info" href="/logout">Wyloguj</a>
+            <a class="btn btn-info" href="/settings">Ustawienia</a>
+        </div>
+    </form>
 </div>
-
-
-</body>
-</html>
-
+{%endblock%}

@@ -13,6 +13,15 @@ def get_user_data(login):
     return result.fetchone()
 
 
+def password_validation(password):
+    if (any(x.isupper() for x in password)
+            and any(x.islower() for x in password)
+            and any(x.isdigit() for x in password)
+            and len(password) >= 8):
+        return True
+    return False
+
+
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
