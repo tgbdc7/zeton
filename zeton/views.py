@@ -58,7 +58,11 @@ def prizes_detail(child_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
 
-    child = users.get_child_data(child_id)
+    try:
+        child = users.get_child_data(child_id)
+    except TypeError:
+        return abort(403)
+
     childs_prizes = prizes.get_prizes(child_id)
 
     if not (child['id'] == logged_user_id or
