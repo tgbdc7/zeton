@@ -3,14 +3,14 @@
 <div class="col col-sm-12">
     <div class="text-center">
         <h2>{{ child.firstname }}</h2>
-        <h2> Ilosc punktów {{ child.points }} punktów</h2>
+        <h2> Ilość punktów {{ child.points }} punktów</h2>
         <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
 
         {% if child.bans.6.active %}
         <h2 style="color: red;"> Masz BANA !</h2>
-        <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
+        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
-        <h2 style="color: green;">Mozesz korzystac z komputera</h2>
+        <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
     </div>
             <div id="punkty_szkola" class="col-xl-12 square">
