@@ -57,6 +57,7 @@ def child(child_id):
 def prizes_detail(child_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
+    role = g.user_data['role']
 
     try:
         child = users.get_child_data(child_id)
@@ -70,6 +71,6 @@ def prizes_detail(child_id):
         return abort(403)
 
 
-    context = {'child': child, 'childs_prizes': childs_prizes}
+    context = {'child': child, 'childs_prizes': childs_prizes, 'role': role}
 
     return render_template('prizes_detail.html', **context)
