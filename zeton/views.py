@@ -31,7 +31,9 @@ def index():
         childs_prizes = prizes.get_prizes(logged_user_id)
         context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
 
-    return render_template(template, **context)
+    messages = get_flashed_messages()
+
+    return render_template(template, **context, messages = messages)
 
 
 @bp.route('/child/<child_id>')
