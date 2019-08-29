@@ -52,35 +52,31 @@
             </form>
             <h2 class="text-center">Wykorzystaj punkty</h2>
 
-            {% if role == 'caregiver' %}
             <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
-                {% else %}
-                <form action="/api/child/{{ child.id }}/points/use" method="post">
-                    {% endif %}
-                    <div class="form-group button">
-                        Liczba punktów: <input class="form-control" type="number" name="points" required>
+                <div class="form-group button">
+                    Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-                    </div>
-                    <h4 class="text-center">NAGRODY</h4>
-                </form>
+                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                </div>
+                <h4 class="text-center">NAGRODY</h4>
+            </form>
 
-                <ul style="text-align:left;">
-                    <table>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nazwa</th>
-                            <th>Punkty</th>
-                        </tr>
-                        {% for prize in childs_prizes %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ prize.name }}</td>
-                            <td>{{ prize.points }}</td>
-                        </tr>
-                        {% endfor %}
-                    </table>
-                </ul>
+            <ul style="text-align:left;">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Punkty</th>
+                    </tr>
+                    {% for prize in childs_prizes %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ prize.name }}</td>
+                        <td>{{ prize.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
 
         </div>
 

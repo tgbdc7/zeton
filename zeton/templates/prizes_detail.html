@@ -13,23 +13,19 @@
         <h2 style="color: green;">Mozesz korzystac z komputera</h2>
         {% endif %}
     </div>
-        <div id="odejmowanie" class="col-xl-12 square">
-            <h2 class="text-center">Wykorzystaj punkty</h2>
+    <div id="odejmowanie" class="col-xl-12 square">
+        <h2 class="text-center">Wykorzystaj punkty</h2>
 
-            {% if role == 'caregiver' %}
-            <form action="/api/child/{{ child.id }}/points/use?return_url=/child/{{ child.id }}" method="post">
-            {% else %}
-            <form action="/api/child/{{ child.id }}/points/use" method="post">
-            {% endif %}
-                <div class="form-group button">
-                    Liczba punktów: <input class="form-control" type="number" name="points" required>
+        <form action="/api/child/{{ child.id }}/points/use?return_url=/prizes_detail/{{ child.id }}" method="post">
+            <div class="form-group button">
+                Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty" />
-                </div>
-                <h4 class="text-center">NAGRODY</h4>
-            </form>
+                <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+            </div>
+            <h4 class="text-center">NAGRODY</h4>
+        </form>
 
-            <ul style="text-align:left;">
+        <ul style="text-align:left;">
             <table>
                 <tr>
                     <th>Id</th>
@@ -50,15 +46,15 @@
                 </tr>
                 {% endfor %}
             </table>
-            </ul>
+        </ul>
 
-        </div>
-
-<form>
-    <div class="button">
-        <a class="btn btn-info" href="/">Strona główna</a>
-        <a class="btn btn-info" href="/logout">Wyloguj</a>
     </div>
-</form>
 
-{% endblock %}
+    <form>
+        <div class="button">
+            <a class="btn btn-info" href="/">Wróć</a>
+            <a class="btn btn-info" href="/logout">Wyloguj</a>
+        </div>
+    </form>
+
+    {% endblock %}
