@@ -56,9 +56,9 @@ def use_points(child_id):
         else:
             missing_points = abs(current_points - used_points)
             if missing_points == 1:
-                points = 'punkta'
+                points_word = 'punkta'
             else:
-                points = 'punktów'
-            flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points}')
+                points_word = 'punktów'
+            flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
 
     return redirect(return_url)
