@@ -52,10 +52,10 @@
 
     <form>
         <div class="button">
-            <input type="button" value="Wróć" onclick="history.go(-1)">
             {% if role == 'caregiver' %}
-            <a class="btn btn-info" href="/">Strona główna</a>
+            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
             {% endif %}
+            <a class="btn btn-info" href="/">Strona główna</a>
             <a class="btn btn-info" href="/logout">Wyloguj</a>
         </div>
     </form>
