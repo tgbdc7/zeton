@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, abort, g
+from flask import request, redirect, url_for, abort, g, flash
 
 import zeton.data_access.bans
 import zeton.data_access.points
@@ -53,5 +53,12 @@ def use_points(child_id):
     if used_points > 0:
         if used_points <= current_points:
             zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id)
+        else:
+            missing_points = abs(current_points - used_points)
+            if missing_points == 1:
+                points = 'punkta'
+            else:
+                points = 'punktów'
+            flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points}')
 
     return redirect(return_url)

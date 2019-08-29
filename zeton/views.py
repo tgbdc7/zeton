@@ -50,7 +50,10 @@ def child(child_id):
 
     context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes, 'role': role}
 
-    return render_template('caregiver_panel.html', **context)
+    messages = get_flashed_messages()
+
+    return render_template('caregiver_panel.html', **context, messages=messages)
+
 
 @bp.route('/task_detail/<child_id>')
 @auth.login_required
@@ -64,7 +67,6 @@ def task_detail(child_id):
     if not (child['id'] == logged_user_id or
             users.is_child_under_caregiver(child_id, logged_user_id)):
         return abort(403)
-
 
     context = {'child': child, 'childs_tasks': childs_tasks}
 
