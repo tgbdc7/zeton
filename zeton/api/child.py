@@ -23,7 +23,7 @@ def add_points(target_id):
         return {'message': 'Bad request'}, 400
 
     if added_points > 0:
-        zeton.data_access.points.change_points_by(target_id, added_points)
+        zeton.data_access.points.change_points_by(target_id, added_points, logged_user_id)
 
     return redirect(url_for('views.child', child_id=target_id))
 
@@ -52,6 +52,6 @@ def use_points(child_id):
 
     if used_points > 0:
         if used_points <= current_points:
-            zeton.data_access.points.change_points_by(child_id, -used_points)
+            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id)
 
     return redirect(return_url)
