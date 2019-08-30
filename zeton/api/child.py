@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, abort, g
+from flask import request, redirect, url_for, abort, g, flash
 
 import zeton.data_access.bans
 import zeton.data_access.points
@@ -23,7 +23,7 @@ def add_points(target_id):
         return {'message': 'Bad request'}, 400
 
     if added_points > 0:
-        zeton.data_access.points.change_points_by(target_id, added_points)
+        zeton.data_access.points.change_points_by(target_id, added_points, logged_user_id)
 
     return redirect(url_for('views.child', child_id=target_id))
 
@@ -52,6 +52,13 @@ def use_points(child_id):
 
     if used_points > 0:
         if used_points <= current_points:
-            zeton.data_access.points.change_points_by(child_id, -used_points)
+            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id)
+        else:
+            missing_points = abs(current_points - used_points)
+            if missing_points == 1:
+                points_word = 'punktu'
+            else:
+                points_word = 'punktów'
+            flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
 
     return redirect(return_url)
