@@ -22,6 +22,19 @@ li {
 /*main sections*/
 body {
     background-color: $zet-bg-color;
+}
+
+.wrapper_clear {
+    @media only screen and (max-width: $zet-screen-lg-max) {
+        padding-left: 0;         
+    }
+    
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        padding-top: 0;        
+    }
+}
+
+.wrapper_forNavbar {    
 
     @media only screen and (max-width: $zet-screen-lg-max) {
         padding-left: 80px;         

@@ -29,13 +29,25 @@ body {
 }
 
 @media only screen and (max-width: 991.99px) {
-  body {
+  .wrapper_clear {
+    padding-left: 0;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .wrapper_clear {
+    padding-top: 0;
+  }
+}
+
+@media only screen and (max-width: 991.99px) {
+  .wrapper_forNavbar {
     padding-left: 80px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  body {
+  .wrapper_forNavbar {
     padding-top: 80px;
   }
 }
