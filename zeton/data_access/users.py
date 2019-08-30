@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import session, g
 
 from zeton.data_access.bans import check_bans_status
+
 from zeton.db import get_db
 
 
@@ -72,3 +73,9 @@ def is_child_under_caregiver(child_id, caregiver_id):
     query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
     result = get_db().execute(query, (child_id, caregiver_id))
     return result.fetchone()
+
+def update_password(user_id, hashed_new_password):
+    query = "UPDATE users SET password = ? WHERE id = ?"
+    params = (hashed_new_password, user_id)
+    get_db().cursor().execute(query, params)
+    get_db().commit()
