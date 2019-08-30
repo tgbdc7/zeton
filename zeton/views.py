@@ -82,3 +82,26 @@ def user_settings():
     messages = get_flashed_messages()
 
     return render_template('user_settings.html', **context, messages=messages)
+
+@bp.route('/prizes_detail/<child_id>')
+@auth.login_required
+def prizes_detail(child_id):
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+    role = g.user_data['role']
+
+    try:
+        child = users.get_child_data(child_id)
+    except TypeError:
+        return abort(403)
+
+    childs_prizes = prizes.get_prizes(child_id)
+
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(child_id, logged_user_id)):
+        return abort(403)
+
+
+    context = {'child': child, 'childs_prizes': childs_prizes, 'role': role}
+
+    return render_template('prizes_detail.html', **context)
