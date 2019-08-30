@@ -46,6 +46,11 @@
         </div>
 
         <div id="odejmowanie" class="col-xl-6 square">
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/prizes_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>
             <h2 class="text-center">Wykorzystaj punkty</h2>
 
             {% if role == 'caregiver' %}
@@ -67,18 +72,12 @@
                             <th>Id</th>
                             <th>Nazwa</th>
                             <th>Punkty</th>
-                            <th>Max. dziennie</th>
-                            <th>Max. tygodniowo</th>
-                            <th>Max. miesięcznie</th>
                         </tr>
                         {% for prize in childs_prizes %}
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ prize.name }}</td>
                             <td>{{ prize.points }}</td>
-                            <td>{{ prize.max_day }}</td>
-                            <td>{{ prize.max_week }}</td>
-                            <td>{{ prize.max_month }}</td>
                         </tr>
                         {% endfor %}
                     </table>
