@@ -1,3 +1,4 @@
+import pytest
 from lxml import html
 
 
@@ -8,8 +9,12 @@ def test_not_logged_redirects_to_login_page(client):
     assert response.location == 'http://localhost/login'
 
 
-def test_logged_with_correct_credentials(client, auth):
-    auth.login("dziecko1", "dziecko1")
+@pytest.mark.parametrize(('username', 'password', 'firstname'), (
+        # ('caregiver_login', 'caregiver_password', 'Pafnucy'),  // TODO: fix for caregiver
+        ('child_login', 'child_password', 'Bonifacy')
+))
+def test_logged_with_correct_credentials(client, auth, username, password, firstname):
+    auth.login(username, password)
 
     response = client.get("/")
 
@@ -19,7 +24,7 @@ def test_logged_with_correct_credentials(client, auth):
     username_element = tree.xpath('//div[@name="user_summary"]//h2[@name="username"]')[0]
     username = username_element.text
 
-    assert username == 'Bazyli'
+    assert username == firstname
 
 
 def test_logged_with_incorrect_credentials(client, auth):

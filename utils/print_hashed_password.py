@@ -1,6 +1,6 @@
 from werkzeug.security import generate_password_hash
 
-password = 'abc'
+password = 'child_password'
 
 hashed_password = generate_password_hash(password)
 

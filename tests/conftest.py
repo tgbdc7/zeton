@@ -8,10 +8,11 @@ from zeton.db import get_db
 
 # read in SQL for populating test data
 
+# TODO: paths cannot be relative to pytest starting point
 with open("sql/01_db_init.sql", "rb") as f:
     _init_data_sql = f.read().decode("utf8")
 
-with open("sql/02_insert_user_data.sql", "rb") as f:
+with open("tests/basic_data.sql", "rb") as f:
     _data_sql = f.read().decode("utf8")
 
 
