@@ -1,3 +1,6 @@
+from lxml import html
+
+
 def test_not_logged_redirects_to_login_page(client):
     response = client.get("/")
 
@@ -11,11 +14,16 @@ def test_logged_with_correct_credentials(client, auth):
     response = client.get("/")
 
     assert response.status_code == 200
-    assert b'Bazyli' in response.data  # TODO: very naive test, needs to be changed
+
+    tree = html.fromstring(response.data)
+    username_element = tree.xpath('//div[@name="user_summary"]//h2[@name="username"]')[0]
+    username = username_element.text
+
+    assert username == 'Bazyli'
 
 
 def test_logged_with_incorrect_credentials(client, auth):
-    auth.login("non-existant-user", "wrong-password")
+    auth.login("non-existent-user", "wrong-password")
 
     response = client.get("/")
 

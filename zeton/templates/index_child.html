@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="col col-sm-12">
-    <div class="text-center">
-        <h2>{{ child.firstname }}</h2>
-        <h2> Ilość punktów {{ child.points }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+    <div name="user_summary"class="text-center">
+        <h2 name="username">{{ child.firstname }}</h2>
+        <h2 name="points_number"> Ilość punktów {{ child.points }} punktów</h2>
+        <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
 
         {% if child.bans.6.active %}
         <h2 style="color: red;"> Masz BANA !</h2>
