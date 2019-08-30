@@ -17,7 +17,7 @@ oraz wymienianie ich na nagrody.
 - `pip install -r requirements.txt` - instalacja zależności
 - `python recreate_db.py` - stworzenie tabeli w bazie
 - `python run.py` - uruchomienie serwera
-
+- `pip install -r requirements.txt` - instalacja zależności
 
 ### Testowi użytkownicy:
 - na ten moment użytkownicy i ich hasła zapisane są w wykomentowanym kodzie w `recreate_db.py`
