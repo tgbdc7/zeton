@@ -211,7 +211,114 @@ body {
   }
 }
 
-@media only screen and (max-width: 991.99px) {
+@media only screen and (max-width: 575.99px) {
+  .navbar {
+    -webkit-transition: .2s;
+    transition: .2s;
+  }
+  .navbar .navbar-brand {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    padding: 0 17px;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  }
+  .navbar .navbar-brand .logo {
+    background-image: url(../images/zeton1b-small.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 55%;
+    width: calc(80px - 32px);
+    height: 80px;
+    margin: 0 auto;
+    -webkit-transition: .1s;
+    transition: .1s;
+  }
+  .navbar .navbar-nav,
+  .navbar .navbar-nav_settings {
+    display: none;
+    -webkit-transition: .3s;
+    transition: .3s;
+  }
+  .navbar .navbar-nav .navbar-btn,
+  .navbar .navbar-nav_settings .navbar-btn {
+    font-size: 0;
+    height: 58px;
+    padding: 0 10px;
+    overflow: hidden;
+  }
+  .navbar .navbar-nav .navbar-btn .navbar-btn__img,
+  .navbar .navbar-nav_settings .navbar-btn .navbar-btn__img {
+    display: block;
+    float: left;
+    margin: 15px 20px;
+    overflow: hidden;
+  }
+  .navbar .navbar-nav .navbar-btn .navbar-btn__text,
+  .navbar .navbar-nav_settings .navbar-btn .navbar-btn__text {
+    visibility: hidden;
+    line-height: 57px;
+    margin-left: 0px;
+  }
+  .navbar:hover {
+    width: 200px;
+    min-height: 550px;
+    height: 100%;
+    left: 0;
+    -webkit-transition: .2s;
+    transition: .2s;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .navbar:hover .navbar-brand {
+    position: relative;
+    background-color: transparent;
+    border-radius: 0x;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .navbar:hover .navbar-brand .logo {
+    background-image: url(../images/zeton1b.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 65%;
+    width: calc(200px - 32px);
+    margin: 0 auto;
+  }
+  .navbar:hover .navbar-nav,
+  .navbar:hover .navbar-nav_settings {
+    display: block;
+  }
+  .navbar:hover .navbar-nav .navbar-btn .navbar-btn__img,
+  .navbar:hover .navbar-nav_settings .navbar-btn .navbar-btn__img {
+    display: block;
+    float: left;
+    margin-right: 10px;
+  }
+  .navbar:hover .navbar-nav .navbar-btn .navbar-btn__text,
+  .navbar:hover .navbar-nav_settings .navbar-btn .navbar-btn__text {
+    visibility: visible;
+    line-height: 57px;
+    margin-left: 50px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 991.99px) {
   .navbar {
     min-height: 550px;
     width: 80px;

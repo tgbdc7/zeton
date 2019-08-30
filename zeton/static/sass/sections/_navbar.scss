@@ -109,9 +109,116 @@
 
     }
 
+    //pasek dla mobile-portrait//
+
+    @media only screen and (max-width: $zet-screen-sm-max) {
+        transition: .2s;
+        //display: none;
+
+        .navbar-brand {
+            position: absolute;            
+            top: 7px;
+            left: 7px;
+            background-color: $zet-white-color;
+            border-radius: 50px;
+            padding: 0 17px;
+            box-shadow: $zet-box-shadow;
+
+            .logo {
+                background-image: url(../images/zeton1b-small.jpg);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 55%;
+                width: calc(80px - 32px);
+                height: 80px;
+                margin: 0 auto;
+                transition: .1s;
+            }
+        }
+
+        .navbar-nav,
+        .navbar-nav_settings {
+            display: none;
+            transition: .3s;
+
+            .navbar-btn {
+                font-size: 0;
+                height: 58px;
+                padding: 0 10px;
+                overflow: hidden;
+
+                .navbar-btn__img {
+                    display: block;
+                    float: left;
+                    margin: 15px 20px;
+                    //background-color: $zet-white-color;
+                    overflow: hidden;
+                }
+
+                .navbar-btn__text {
+                    //display: none;
+                    visibility: hidden;
+                    line-height: 57px;
+                    margin-left: 0px;
+                }
+            }
+        }
+
+        &:hover {
+            width: 200px;
+            min-height: 550px;
+            height: 100%;
+            left: 0;
+            transition: .2s;
+            justify-content: space-between;
+            align-items: stretch;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .navbar-brand {
+                position: relative;
+                background-color: transparent;
+                border-radius: 0x;
+                box-shadow: none;
+                padding: 0;
+                cursor: pointer;
+
+                .logo {
+                    background-image: url(../images/zeton1b.jpg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 65%;
+                    width: calc(200px - 32px);
+                    //height: 80px;
+                    margin: 0 auto;
+                }
+            }
+
+            .navbar-nav,
+            .navbar-nav_settings {
+                display: block;
+                .navbar-btn {
+
+                    .navbar-btn__img {
+                        display: block;
+                        float: left;
+                        margin-right: 10px;
+                    }
+
+                    .navbar-btn__text {
+                        //display: block;
+                        visibility: visible;
+                        line-height: 57px;
+                        margin-left: 50px;
+                    }
+                }
+            }
+        }
+    }
+
     //pasek boczny//
 
-    @media only screen and (max-width: $zet-screen-lg-max) {
+    @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {
         min-height: 550px;
         width: 80px;
         height: 100%;
@@ -144,21 +251,22 @@
                 font-size: 0;
                 height: 58px;
                 padding: 0 10px;
-                overflow: hidden;                
+                overflow: hidden;
 
                 .navbar-btn__img {
                     display: block;
                     float: left;
-                    margin: 15px 20px;                    
+                    margin: 15px 20px;
                     //background-color: $zet-white-color;
                     overflow: hidden;
                 }
+
                 .navbar-btn__text {
                     //display: none;
                     visibility: hidden;
-                    line-height: 57px;                  
-                    margin-left: 0px;         
-                }   
+                    line-height: 57px;
+                    margin-left: 0px;
+                }
             }
         }
 
@@ -184,14 +292,15 @@
 
                     .navbar-btn__img {
                         display: block;
-                        float: left;                        
+                        float: left;
                         margin-right: 10px;
                     }
+
                     .navbar-btn__text {
                         //display: block;
                         visibility: visible;
                         line-height: 57px;
-                        margin-left: 50px;                        
+                        margin-left: 50px;
                     }
                 }
             }
