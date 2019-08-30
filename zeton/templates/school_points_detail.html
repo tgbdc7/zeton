@@ -27,7 +27,10 @@
 
     <form>
         <div class="button">
-            <a class="btn btn-info" href="/">Wróć</a>
+            {% if role == 'caregiver' %}
+            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+            {% endif %}
+            <a class="btn btn-info" href="/">Strona główna</a>
             <a class="btn btn-info" href="/logout">Wyloguj</a>
         </div>
     </form>
