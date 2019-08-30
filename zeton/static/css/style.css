@@ -28,26 +28,20 @@ body {
   background-color: #f4f5f9;
 }
 
-@media only screen and (max-width: 991.99px) {
-  .wrapper_clear {
+@media only screen and (orientation: portrait) and (max-width: 575.99px) {
+  .wrapper_withNavbar {
     padding-left: 0;
   }
 }
 
-@media only screen and (min-width: 992px) {
-  .wrapper_clear {
-    padding-top: 0;
-  }
-}
-
-@media only screen and (max-width: 991.99px) {
-  .wrapper_forNavbar {
+@media only screen and (min-width: 576px) and (max-width: 991.99px) {
+  .wrapper_withNavbar {
     padding-left: 80px;
   }
 }
 
 @media only screen and (min-width: 992px) {
-  .wrapper_forNavbar {
+  .wrapper_withNavbar {
     padding-top: 80px;
   }
 }
