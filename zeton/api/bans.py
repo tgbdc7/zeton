@@ -1,4 +1,4 @@
-from flask import g, abort, redirect, url_for
+from flask import g, abort, redirect, request
 
 import zeton.data_access
 from zeton import auth
@@ -17,7 +17,7 @@ def give_ban(target_id):
 
     ten_minutes = 10
     zeton.data_access.bans.give_ban(target_id, ten_minutes)
-    return redirect(url_for('views.child', child_id=target_id))
+    return redirect(request.referrer)
 
 
 @bp.route("/warn/<target_id>")
@@ -30,7 +30,7 @@ def give_warn(target_id):
         return abort(403)
 
     zeton.data_access.bans.give_warn(target_id)
-    return redirect(url_for('views.child', child_id=target_id))
+    return redirect(request.referrer)
 
 
 @bp.route("/kick/<target_id>")
@@ -43,4 +43,4 @@ def give_kick(target_id):
         return abort(403)
 
     zeton.data_access.bans.give_kick(target_id)
-    return redirect(url_for('views.child', child_id=target_id))
+    return redirect(request.referrer)
