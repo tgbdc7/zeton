@@ -56,7 +56,7 @@ def use_points(child_id):
         else:
             missing_points = abs(current_points - used_points)
             if missing_points == 1:
-                points_word = 'punkta'
+                points_word = 'punktu'
             else:
                 points_word = 'punktów'
             flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
