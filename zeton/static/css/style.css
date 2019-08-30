@@ -213,6 +213,7 @@ body {
 
 @media only screen and (max-width: 991.99px) {
   .navbar {
+    min-height: 550px;
     width: 80px;
     height: 100%;
     left: 0;
