@@ -52,11 +52,13 @@ def child(child_id):
 
     return render_template('caregiver_panel.html', **context)
 
+
 @bp.route('/bans_detail/<child_id>')
 @auth.login_required
 def bans_detail(child_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
+    role = g.user_data['role']
 
     try:
         child = users.get_child_data(child_id)
@@ -67,7 +69,6 @@ def bans_detail(child_id):
             users.is_child_under_caregiver(child_id, logged_user_id)):
         return abort(403)
 
-
-    context = {'child': child}
+    context = {'child': child, 'role': role}
 
     return render_template('bans_detail.html', **context)
