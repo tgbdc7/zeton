@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort, g, get_flashed_messages
 
 from . import auth
-from zeton.data_access import users, prizes, tasks
+from zeton.data_access import users, prizes, tasks, bans
 
 bp = Blueprint('views', __name__)
 
@@ -129,3 +129,24 @@ def school_points_detail(child_id):
     context = {'child': child, 'role': role}
 
     return render_template('school_points_detail.html', **context)
+
+
+@bp.route('/bans_detail/<child_id>')
+@auth.login_required
+def bans_detail(child_id):
+    users.load_logged_in_user_data()
+    logged_user_id = g.user_data['id']
+    role = g.user_data['role']
+
+    try:
+        child = users.get_child_data(child_id)
+    except TypeError:
+        return abort(403)
+
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(child_id, logged_user_id)):
+        return abort(403)
+
+    context = {'child': child, 'role': role}
+
+    return render_template('bans_detail.html', **context)

@@ -65,10 +65,10 @@
                     <div class="form-group button">
                         Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-                    </div>
-                    <h4 class="text-center">NAGRODY</h4>
-                </form>
+                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                </div>
+                <h4 class="text-center">NAGRODY</h4>
+            </form>
 
                 <ul style="text-align:left;">
                     <table>
@@ -90,6 +90,11 @@
         </div>
 
         <div id="bany_warny" class="col-xl-6 square">
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/bans_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>
             <h2 style="text-align: center;"> *****Warny i bany****** </h2>
             <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
             <ol>
