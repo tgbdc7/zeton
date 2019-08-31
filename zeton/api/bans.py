@@ -11,8 +11,10 @@ from zeton.data_access import users
 def give_ban(target_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
+    child = users.get_child_data(target_id)
 
-    if not users.is_child_under_caregiver(target_id, logged_user_id):
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(target_id, logged_user_id)):
         return abort(403)
 
     ten_minutes = 10
@@ -25,8 +27,10 @@ def give_ban(target_id):
 def give_warn(target_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
+    child = users.get_child_data(target_id)
 
-    if not users.is_child_under_caregiver(target_id, logged_user_id):
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(target_id, logged_user_id)):
         return abort(403)
 
     zeton.data_access.bans.give_warn(target_id)
@@ -38,8 +42,10 @@ def give_warn(target_id):
 def give_kick(target_id):
     users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
+    child = users.get_child_data(target_id)
 
-    if not users.is_child_under_caregiver(target_id, logged_user_id):
+    if not (child['id'] == logged_user_id or
+            users.is_child_under_caregiver(target_id, logged_user_id)):
         return abort(403)
 
     zeton.data_access.bans.give_kick(target_id)
