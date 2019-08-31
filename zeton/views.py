@@ -9,8 +9,6 @@ bp = Blueprint('views', __name__)
 @bp.route('/')
 @auth.login_required
 def index():
-    users.load_logged_in_user_data()
-
     role = g.user_data['role']
     logged_user_id = g.user_data['id']
 
@@ -33,24 +31,22 @@ def index():
 
     messages = get_flashed_messages()
 
-    return render_template(template, **context, messages = messages)
+    return render_template(template, **context, messages=messages)
 
 
 @bp.route('/child/<child_id>')
 @auth.login_required
+@auth.caregiver_only
 def child(child_id):
-    users.load_logged_in_user_data()
-    logged_user_id = g.user_data['id']
-
-    if not users.is_child_under_caregiver(child_id, logged_user_id):
-        return abort(403)
-
     child = users.get_child_data(child_id)
     childs_tasks = tasks.get_tasks(child_id)
     childs_prizes = prizes.get_prizes(child_id)
     role = g.user_data['role']
 
-    context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes, 'role': role}
+    context = {'child': child,
+               'childs_tasks': childs_tasks,
+               'childs_prizes': childs_prizes,
+               'role': role}
 
     messages = get_flashed_messages()
 
@@ -59,16 +55,10 @@ def child(child_id):
 
 @bp.route('/task_detail/<child_id>')
 @auth.login_required
+@auth.logged_child_or_caregiver_only
 def task_detail(child_id):
-    users.load_logged_in_user_data()
-    logged_user_id = g.user_data['id']
-
     child = users.get_child_data(child_id)
     childs_tasks = tasks.get_tasks(child_id)
-
-    if not (child['id'] == logged_user_id or
-            users.is_child_under_caregiver(child_id, logged_user_id)):
-        return abort(403)
 
     context = {'child': child, 'childs_tasks': childs_tasks}
 
@@ -78,7 +68,6 @@ def task_detail(child_id):
 @bp.route('/settings/')
 @auth.login_required
 def user_settings():
-    users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
     user_data = users.get_user_data(logged_user_id)
 
@@ -87,11 +76,11 @@ def user_settings():
 
     return render_template('user_settings.html', **context, messages=messages)
 
+
 @bp.route('/prizes_detail/<child_id>')
 @auth.login_required
+@auth.logged_child_or_caregiver_only
 def prizes_detail(child_id):
-    users.load_logged_in_user_data()
-    logged_user_id = g.user_data['id']
     role = g.user_data['role']
 
     try:
@@ -101,29 +90,20 @@ def prizes_detail(child_id):
 
     childs_prizes = prizes.get_prizes(child_id)
 
-    if not (child['id'] == logged_user_id or
-            users.is_child_under_caregiver(child_id, logged_user_id)):
-        return abort(403)
-
-
     context = {'child': child, 'childs_prizes': childs_prizes, 'role': role}
 
     return render_template('prizes_detail.html', **context)
 
+
 @bp.route('/school_points_detail/<child_id>')
 @auth.login_required
+@auth.logged_child_or_caregiver_only
 def school_points_detail(child_id):
-    users.load_logged_in_user_data()
-    logged_user_id = g.user_data['id']
     role = g.user_data['role']
 
     try:
         child = users.get_child_data(child_id)
     except TypeError:
-        return abort(403)
-
-    if not (child['id'] == logged_user_id or
-            users.is_child_under_caregiver(child_id, logged_user_id)):
         return abort(403)
 
     context = {'child': child, 'role': role}
@@ -133,18 +113,13 @@ def school_points_detail(child_id):
 
 @bp.route('/bans_detail/<child_id>')
 @auth.login_required
+@auth.logged_child_or_caregiver_only
 def bans_detail(child_id):
-    users.load_logged_in_user_data()
-    logged_user_id = g.user_data['id']
     role = g.user_data['role']
 
     try:
         child = users.get_child_data(child_id)
     except TypeError:
-        return abort(403)
-
-    if not (child['id'] == logged_user_id or
-            users.is_child_under_caregiver(child_id, logged_user_id)):
         return abort(403)
 
     context = {'child': child, 'role': role}
