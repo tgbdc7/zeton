@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from flask import session, g
 
 from zeton.data_access.bans import check_bans_status

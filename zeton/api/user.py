@@ -9,7 +9,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 @bp.route('/settings/set_password', methods=['POST'])
 @auth.login_required
 def set_password():
-    users.load_logged_in_user_data()
     logged_user_id = g.user_data['id']
     logged_user_password = g.user_data['password']
 
