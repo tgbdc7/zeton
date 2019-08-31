@@ -65,8 +65,8 @@ def login_required(view):
 
 def caregiver_only(view):
     """
-    This decorator allows only requests made by a caregiver
-    for a resource related to a child under his/hers care
+    This decorator allows only requests made by:
+    - a caregiver for a resource related to a child under his/hers care
 
     the decorated view MUST take parameter named 'child_id'
     """
@@ -78,7 +78,7 @@ def caregiver_only(view):
             child_id = int(kwargs['child_id'])
         except KeyError:
             print(f"The view '{view.__name__}' did not pass 'child_id' parameter")
-            return (abort(500))
+            return abort(500)
 
         if not users.is_child_under_caregiver(child_id, logged_user_id):
             return abort(403)
@@ -105,7 +105,7 @@ def logged_child_or_caregiver_only(view):
             child_id = int(kwargs['child_id'])
         except KeyError:
             print(f"The view '{view.__name__}' did not pass 'child_id' parameter")
-            return (abort(500))
+            return abort(500)
 
         if not (child_id == logged_user_id or
                 users.is_child_under_caregiver(child_id, logged_user_id)):
