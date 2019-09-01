@@ -1,8 +1,9 @@
 import functools
 
-from flask import Blueprint, redirect, render_template, request, url_for, session
+from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort
 from werkzeug.security import check_password_hash
 
+from zeton.data_access import users
 from . import db
 
 bp = Blueprint('auth', __name__)
@@ -11,6 +12,15 @@ bp = Blueprint('auth', __name__)
 def get_user_data(login):
     result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
     return result.fetchone()
+
+
+def password_validation(password):
+    if (any(x.isupper() for x in password)
+            and any(x.islower() for x in password)
+            and any(x.isdigit() for x in password)
+            and len(password) >= 8):
+        return True
+    return False
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -49,5 +59,58 @@ def login_required(view):
             return view(*args, **kwargs)
         else:
             return redirect(url_for('auth.login'))
+
+    return wrapped_view
+
+
+def caregiver_only(view):
+    """
+    This decorator allows only requests made by:
+    - a caregiver for a resource related to a child under his/hers care
+
+    the decorated view MUST take parameter named 'child_id'
+    """
+
+    @functools.wraps(view)
+    def wrapped_view(*args, **kwargs):
+        logged_user_id = g.user_data['id']
+        try:
+            child_id = int(kwargs['child_id'])
+        except KeyError:
+            print(f"The view '{view.__name__}' did not pass 'child_id' parameter")
+            return abort(500)
+
+        if not users.is_child_under_caregiver(child_id, logged_user_id):
+            return abort(403)
+
+        return view(*args, **kwargs)
+
+    return wrapped_view
+
+
+def logged_child_or_caregiver_only(view):
+    """
+    This decorator allows only requests made by:
+    - a caregiver for a resource related to a child under his/hers care
+    OR
+    - a child for a resource related to itself
+
+    the decorated view MUST take parameter named 'child_id'
+    """
+
+    @functools.wraps(view)
+    def wrapped_view(*args, **kwargs):
+        logged_user_id = g.user_data['id']
+        try:
+            child_id = int(kwargs['child_id'])
+        except KeyError:
+            print(f"The view '{view.__name__}' did not pass 'child_id' parameter")
+            return abort(500)
+
+        if not (child_id == logged_user_id or
+                users.is_child_under_caregiver(child_id, logged_user_id)):
+            return abort(403)
+
+        return view(*args, **kwargs)
 
     return wrapped_view

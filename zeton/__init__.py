@@ -7,7 +7,8 @@ from flask import Flask
 import os
 
 from zeton import api, auth, views, db
-from zeton.custom_jinja2_filters import jinja2_ban_datetime_filter
+from zeton.core.custom_jinja2_filters import jinja2_ban_datetime_filter
+from zeton.data_access import users
 
 
 def create_app(test_config=None):
@@ -31,5 +32,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
     app.register_blueprint(views.bp)
     app.register_blueprint(api.bp)
+
+    app.before_request(users.load_logged_in_user_data)
 
     return app
