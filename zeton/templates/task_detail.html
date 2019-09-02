@@ -3,19 +3,17 @@
 <div class="col col-sm-12">
     <div class="text-center">
         <h2>{{ child.firstname }}</h2>
-        <h2> Ilosc punktów {{ child.points }} punktów</h2>
+        <h2> Ilość punktów {{ child.points }} punktów</h2>
         <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
 
 
         {% if child.bans.6.active %}
         <h2 style="color: red;"> Masz BANA !</h2>
-        <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
+        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
-        <h2 style="color: green;">Mozesz korzystac z komputera</h2>
+        <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
     </div>
-    <div class="col col-sm-12">
-        <div class="row">
             <div id="dodawanie" class="col-xl-6 square text-align-right">
                 <h2 class="text-center">Sposoby na zdobycie punktów</h2>
                 <br>
@@ -40,10 +38,34 @@
                     </table>
                 </ul>
             </div>
+        <div id="historia" class="col-xl-6 square text-align-right">
+            <h4 class="text-center">Historia ostatnich 10 zdarzeń na punktach</h4>
+            <br>
+            <ul>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Liczba punktów</th>
+                        <th>Zmienił/ła (id)</th>
+                        <th>Data</th>
+                    </tr>
+                    {% for mod in childs_points_history %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ mod.points_change }}</td>
+                        <td>{{ mod.id_changing_user }}</td>
+                        <td>{{ mod.change_timestamp }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </ul>
         </div>
 
         <form>
             <div class="button">
+                {% if role == 'caregiver' %}
+                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                {% endif %}
                 <a class="btn btn-info" href="/">Strona główna</a>
                 <a class="btn btn-info" href="/logout">Wyloguj</a>
             </div>
