@@ -46,14 +46,14 @@
                     <tr>
                         <th>Id</th>
                         <th>Liczba punktów</th>
-                        <th>Zmienił/ła (id)</th>
+                        <th>Kto zmienił</th>
                         <th>Data</th>
                     </tr>
                     {% for mod in childs_points_history %}
                     <tr>
                         <td>{{ loop.index }}</td>
                         <td>{{ mod.points_change }}</td>
-                        <td>{{ mod.id_changing_user }}</td>
+                        <td>{{ mod.firstname_changing_user }}</td>
                         <td>{{ mod.change_timestamp }}</td>
                     </tr>
                     {% endfor %}

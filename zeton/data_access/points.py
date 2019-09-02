@@ -10,10 +10,10 @@ def get_points(user_id):
     return None
 
 
-def change_points_by(target_id, points, user_id):
+def change_points_by(target_id, points, user_id, logged_user_firstname):
     """ used both to add and subtract points from the current amount """
-    query = 'UPDATE users SET points = points + ?, last_insert_id = ?   WHERE id = ?;'
-    get_db().execute(query, [points, user_id, target_id])
+    query = 'UPDATE users SET points = points + ?, last_insert_id = ?, last_insert_firstname = ?   WHERE id = ?;'
+    get_db().execute(query, [points, user_id, logged_user_firstname, target_id])
     get_db().commit()
 
 def get_points_history(child_id):

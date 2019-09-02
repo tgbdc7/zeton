@@ -19,6 +19,7 @@ create table users
   lastname                text,
   points                  integer default 0,
   last_insert_id          integer default 0,
+  last_insert_firstname   text default null,
   school_weekly_highscore integer default 0
 
 );
@@ -82,12 +83,14 @@ create table points_history
   id_changing_user          INTEGER NOT NULL,
   points_name               TEXT NOT NULL DEFAULT 'points_name',
   change_timestamp          TEXT NOT NULL,
+  firstname_changing_user   TEXT,
   FOREIGN KEY (child_id) REFERENCES users (id),
-  FOREIGN KEY (id_changing_user) REFERENCES users (id)
+  FOREIGN KEY (id_changing_user) REFERENCES users (id),
+  FOREIGN KEY (firstname_changing_user) REFERENCES users (last_insert_firstname)
 );
 
 CREATE TRIGGER points_log  AFTER UPDATE ON users for each row when new.points <> old.points
     begin
-        INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp)
-        VALUES ( new.id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP);
+        INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp, firstname_changing_user)
+        VALUES ( new.id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP, new.last_insert_firstname);
     END;
