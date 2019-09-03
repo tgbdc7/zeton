@@ -107,14 +107,13 @@
                 width: 50%;
             }
         }
-
     }
 
     //pasek dla mobile-portrait//
 
     @media only screen and (max-width: $zet-screen-sm-max) {
         transition: .2s;
-        //display: none;        
+        //display: none;    
 
         .navbar-brand {
             position: absolute;            
