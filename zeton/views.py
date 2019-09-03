@@ -59,14 +59,16 @@ def child(child_id):
 def task_detail(child_id):
     child = users.get_child_data(child_id)
     childs_tasks = tasks.get_tasks(child_id)
-    childs_points_history = points.get_points_history(child_id)
+    logged_user_id = g.user_data['id']
+    childs_points_history = points.get_points_history(child_id, logged_user_id)
     role = g.user_data['role']
 
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
-               'role': role
+               'role': role,
+               'logged_user_id': logged_user_id
                }
 
     return render_template('task_detail.html', **context)

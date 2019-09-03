@@ -16,7 +16,12 @@ def change_points_by(target_id, points, user_id):
     get_db().execute(query, [points, user_id, target_id])
     get_db().commit()
 
-def get_points_history(child_id):
-    query = 'SELECT * FROM points_history WHERE child_id = ? ORDER BY id DESC LIMIT 10'
-    result = get_db().execute(query, [child_id,])
+def get_points_history(child_id, id_changing_user):
+    query = 'SELECT p.points_change, p.change_timestamp, u.firstname ' \
+            'FROM points_history p ' \
+            'JOIN users u ' \
+            'ON (p.id_changing_user=u.id) ' \
+            'WHERE (p.child_id = ? AND u.firstname = ?) ' \
+            'ORDER BY p.id DESC LIMIT 10'
+    result = get_db().execute(query, [child_id, id_changing_user,])
     return result.fetchall()
