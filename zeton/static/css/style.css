@@ -191,6 +191,25 @@ body {
   margin: 0 auto;
 }
 
+.button-checkout {
+  width: calc(100px + 3vw);
+  padding: 10px 15px;
+  border-radius: 25px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: .2s;
+  transition: .2s;
+  border: solid 1px #0141c5;
+  background-color: #0141c5;
+  color: #ffffff;
+}
+
+.button-checkout:hover {
+  border: solid 1px darkgray;
+  background-color: darkgray;
+  color: #000000;
+}
+
 /* Sections */
 .navbar {
   background-color: #ffffff;
