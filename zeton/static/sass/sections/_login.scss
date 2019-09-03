@@ -18,4 +18,16 @@
         padding: 15px 2vw;
         margin: 0 auto;
     }
+
+    .col {
+        form {
+            .article__item {
+                display: flex;
+                justify-content: center;
+                vertical-align: center;                
+                padding: 5px;
+
+            }
+        }
+    }
 }

@@ -4,13 +4,13 @@
     border-radius: 25px;
     box-shadow: $zet-box-shadow;
     transition: .2s;
-    border: solid 1px $zet-blue-color;
-    background-color: $zet-blue-color;
+    border: solid 1px $zet-gray-color;
+    background-color: $zet-gray-color;
     color: $zet-white-color;
 
     &:hover {
-        border: solid 1px $zet-gray-color;
-        background-color: $zet-gray-color;
-        color: $zet-black-color;
+        border: solid 1px $zet-blue-color;
+        background-color: $zet-blue-color;
+        color: $zet-white-color;
     }
 }

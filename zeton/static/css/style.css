@@ -199,15 +199,15 @@ body {
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .2s;
   transition: .2s;
-  border: solid 1px #0141c5;
-  background-color: #0141c5;
+  border: solid 1px darkgray;
+  background-color: darkgray;
   color: #ffffff;
 }
 
 .button-checkout:hover {
-  border: solid 1px darkgray;
-  background-color: darkgray;
-  color: #000000;
+  border: solid 1px #0141c5;
+  background-color: #0141c5;
+  color: #ffffff;
 }
 
 /* Sections */
@@ -596,6 +596,17 @@ body {
     padding: 15px 2vw;
     margin: 0 auto;
   }
+}
+
+.login .col form .article__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  vertical-align: center;
+  padding: 5px;
 }
 
 .login-header {
