@@ -17,8 +17,7 @@
 <body>
     <div class="wrapper_withNavbar">
         {% block navbar %}
-        <header class="main-header">
-            <nav class="navbar">
+        <nav class="navbar">
                 <div class="navbar-brand">
                     <div class="logo"></div>
                 </div>
@@ -49,13 +48,17 @@
                         <img src="../static/images/settings.svg" alt="icon-settings" class="navbar-btn__img">
                         <p class="navbar-btn__text">Ustawienia</p>
                     </a>
-                    <a class="navbar-btn">
+                    <a class="navbar-btn" href="login.html">
                         <img src="../static/images/logout.svg" alt="icon-logout" class="navbar-btn__img">
                         <p class="navbar-btn__text">Wyloguj</p>
                     </a>
                 </div>
             </nav>
-        </header>
+            <header class="mobile-header">
+                <div class="mobile-brand">
+        
+                </div>
+            </header>
         {%endblock%}
 
         <main>
