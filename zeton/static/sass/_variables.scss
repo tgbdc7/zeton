@@ -2,9 +2,11 @@
 $zet-bg-color: #f4f5f9;
 $zet-white-color: #ffffff;
 $zet-blue-color: #0141c5;
+$zet-blueLigher-color: #0084ff;
 $zet-black-color: #000000;
 $zet-gray-color: darkgray;
 $zet-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+$zet-bg-gradient: linear-gradient(to right, $zet-blue-color , $zet-blueLigher-color);
 
 /* Media queries */
 $zet-screen-sm-max: 575.99px;

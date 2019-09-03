@@ -9,8 +9,9 @@
     color: $zet-white-color;
 
     &:hover {
-        border: solid 1px $zet-blue-color;
+        border: solid 1px transparent;
         background-color: $zet-blue-color;
+        background-image: $zet-bg-gradient;
         color: $zet-white-color;
     }
 }

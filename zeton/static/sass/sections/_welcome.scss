@@ -1,6 +1,7 @@
 .welcome {
     .col {
         .article__container {
+            border-radius: $zet-box-radius;
             .article__item {
                 &:first-of-type {
                     .article__image {
@@ -19,6 +20,25 @@
                 }
             }
         }
-    }
+    } 
 
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+
+        .col {
+            width: 100%;
+            padding: 0;
+            flex: 1;
+
+            .article__container {
+                width: calc(90% + 2vw - 5px);
+                border-radius: $zet-box-radius;
+            }
+        }
+    }
 }

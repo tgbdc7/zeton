@@ -6,6 +6,7 @@
             .article__box {
                 padding: 20px 10px;
                 background-color: $zet-blue-color;
+                background-image: $zet-bg-gradient;
                 border-radius: $zet-box-radius;
                 display: flex;
                 //flex-direction: row-reverse;
@@ -54,12 +55,14 @@
 
                 &:nth-of-type(2) {
                     display: none;
+                    background-image: none;
                 }
             }
 
             &:hover {
                 .article__box {
                     background-color: $zet-white-color;
+                    background-image: none;
 
                     .article__item {
 
@@ -81,6 +84,7 @@
                 &:not(.active):hover {
                     .article__box {
                         background-color: $zet-blue-color;
+                        background-image: $zet-bg-gradient;
 
                         .article__item {
 
@@ -97,6 +101,7 @@
 
                         &:nth-of-type(2) {
                             background-color: $zet-white-color;
+                            background-image: none;
                         }
                     }
                 }
@@ -117,8 +122,71 @@
                         }
                     }
                 }
+            }
+
+            @media only screen and (min-width: $zet-screen-lg-min) {
+                flex-direction: column;
+                width: 100%;
+                min-width: 400px;
+
+                &:not(.active):hover {
+                    .article__box {
+                        background-color: $zet-blue-color; 
+                        background-image: $zet-bg-gradient;                     
+
+                        .article__item {
+
+                            .image__container {
+                                border: solid 5px $zet-white-color;
+                            }
+
+                            .section__title_light,
+                            .article__title_light,
+                            .article__text {
+                                color: $zet-white-color;
+                            }
+                        }
+
+                        &:nth-of-type(2) {
+                            background-color: $zet-white-color;
+                            background-image: none;
+                        }
+                    }
+                }
+
+                .article__box {
+                    border-radius: $zet-box-radius $zet-box-radius 0 0;                    
+
+                    &:nth-of-type(2) {
+                        display: flex;
+                        border-radius: 0 0 $zet-box-radius $zet-box-radius;
+                        background-color: $zet-white-color;
+                    }
+
+                    .article__item {
+
+                        .article__title_light {
+                            padding-bottom: 10px;
+                        }
+                    }
+                }
 
             }
+        }
+    }
+
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .col {
+            width: 100%;
+            padding: 0;
+            flex: 1;
         }
     }
 }
