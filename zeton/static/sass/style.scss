@@ -4,10 +4,15 @@
 /* Components */
 
 @import "components/navbar_btns";
-@import "components/article-container";
+@import "components/containers";
+@import "components/titles";
+@import "components/paragraphs";
+@import "components/images";
 
 /* Sections */
 @import "sections/navbar";
+@import "sections/mobile-header";
 @import "sections/login";
 @import "sections/login-header";
 @import "sections/welcome";
+@import "sections/children";

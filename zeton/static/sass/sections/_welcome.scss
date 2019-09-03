@@ -1,3 +1,21 @@
 .welcome {
-    
+    .article__container {
+        .article__item {
+            &:first-of-type {
+                .article__image {
+
+                    left: 0;
+                    bottom: 0;
+                }
+            }
+
+            &:last-of-type {
+
+                .article__image {
+                    right: 0;
+                    top: 0;
+                }
+            }
+        }
+    }
 }
