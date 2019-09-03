@@ -28,7 +28,7 @@
                             height: 90px;
                             padding: 0;
                             background-color: $zet-white-color;
-                            margin: 0 auto;
+                            margin: 0 auto 15px;
                             border: solid 5px $zet-white-color;
                             box-shadow: $zet-box-shadow;
 
@@ -51,6 +51,10 @@
                         }
                     }
                 }
+
+                &:nth-of-type(2) {
+                    display: none;
+                }
             }
 
             &:hover {
@@ -70,6 +74,43 @@
                         }
                     }
                 }
+            }
+
+            @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {
+
+                &:not(.active):hover {
+                    .article__box {
+                        background-color: $zet-blue-color;
+
+                        .article__item {
+
+                            .image__container {
+                                border: solid 5px $zet-white-color;
+                            }
+
+                            .section__title_light,
+                            .article__title_light,
+                            .article__text {
+                                color: $zet-white-color;
+                            }
+                        }
+
+                        &:nth-of-type(2) {
+                            background-color: $zet-white-color;
+                        }
+                    }
+                }
+
+                .article__box {
+                    border-radius: $zet-box-radius 0 0 $zet-box-radius;
+
+                    &:nth-of-type(2) {
+                        display: flex;
+                        border-radius: 0 $zet-box-radius $zet-box-radius 0;
+                        background-color: $zet-white-color;
+                    }
+                }
+
             }
         }
     }
