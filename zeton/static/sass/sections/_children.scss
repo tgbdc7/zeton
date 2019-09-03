@@ -109,6 +109,13 @@
                         border-radius: 0 $zet-box-radius $zet-box-radius 0;
                         background-color: $zet-white-color;
                     }
+
+                    .article__item {
+
+                        .article__title_light {
+                            padding-bottom: 10px;
+                        }
+                    }
                 }
 
             }

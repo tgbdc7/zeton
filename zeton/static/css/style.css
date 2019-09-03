@@ -718,5 +718,8 @@ body {
     border-radius: 0 4px 4px 0;
     background-color: #ffffff;
   }
+  .children .col .article__container .article__box .article__item .article__title_light {
+    padding-bottom: 10px;
+  }
 }
 /*# sourceMappingURL=style.css.map */
