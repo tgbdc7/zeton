@@ -72,6 +72,7 @@ def is_child_under_caregiver(child_id, caregiver_id):
     result = get_db().execute(query, (child_id, caregiver_id))
     return result.fetchone()
 
+
 def update_password(user_id, hashed_new_password):
     query = "UPDATE users SET password = ? WHERE id = ?"
     params = (hashed_new_password, user_id)

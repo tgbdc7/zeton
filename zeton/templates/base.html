@@ -17,27 +17,16 @@
 <body>
     <div class="wrapper_withNavbar">
             {% block navbar %}
-            {% include "menu.html" %}
-            {%endblock%}
+                {% include "menu.html" %}
+            {% endblock %}
         
         {%endblock%}
         <main>
-            <section class="welcome">
-                <div class="col col-sm-12 col-md-12 col-lg-12">
-                    <article class="article__container">
-                        <div class="article__item">
-                            <img class="article__image" src="../static/images/watercolor-flower.png">
-                        </div>
-                        <div class="article__item">
-                            <h3 class="article__title">Witaj, Bazyli</h3>
-                            <p class="article__text">Wybierz podopiecznego</p>
-                        </div>
-                        <div class="article__item">
-                            <img class="article__image" src="../static/images/watercolor-flower2.png">
-                        </div>
-                    </article>
-                </div>
-            </section>
+            {% block top %}
+                {% include "top.html" %}
+            {%endblock%}
+
+            {% block content%}
             <section class="children">
                 <div class="col col-sm-12 col-md-12 col-lg-5">
                     <article class="article__container">
@@ -82,6 +71,7 @@
                     </article>
                 </div>
             </section>
+            {% endblock %}
         </main>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
