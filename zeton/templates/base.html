@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=latin-ext"
         rel="stylesheet">
     {% block background%}
+    <!--#TODO refactor blok background-->
     <title>Żeton</title>
 </head>
 
@@ -19,58 +20,15 @@
             {% block navbar %}
                 {% include "menu.html" %}
             {% endblock %}
-        
-        {%endblock%}
+
+    {%endblock%}
         <main>
             {% block top %}
                 {% include "top.html" %}
             {%endblock%}
 
             {% block content%}
-            <section class="children">
-                <div class="col col-sm-12 col-md-12 col-lg-5">
-                    <article class="article__container">
-                        <div class="article__box">
-                            <div class="article__item">
-                                <h3 class="article__title_light">Krzysztof</h3>
-                                <div class="image__container">
-                                    <img class="portrait__image" src="../static/images/boy1.jpg">
-                                </div>
-                            </div>
-                            <div class="article__item">
-                                <p class="article__text">PKT</p>
-                                <h2 class="section__title_light">210</h2>
-                            </div>
-                        </div>
-                        <div class="article__box">
-                            <a href="#" class="article__item">
-                                <button class="button-checkout">Wybierz</button>
-                            </a> 
-                        </div>
-                    </article>
-                </div>            
-                <div class="col col-sm-12 col-md-12 col-lg-5">
-                    <article class="article__container">
-                        <div class="article__box">
-                            <div class="article__item">
-                                <h3 class="article__title_light">Przemysław</h3>
-                                <div class="image__container">
-                                    <img class="portrait__image" src="../static/images/boy2.jpg">
-                                </div>
-                            </div>
-                            <div class="article__item">
-                                <p class="article__text">PKT</p>
-                                <h2 class="section__title_light">170</h2>
-                            </div>
-                        </div>
-                        <div class="article__box">
-                            <a href="#" class="article__item">
-                                <button class="button-checkout">Wybierz</button>
-                            </a> 
-                        </div>
-                    </article>
-                </div>
-            </section>
+                <!--we fill this block with content from other templates -->
             {% endblock %}
         </main>
 
