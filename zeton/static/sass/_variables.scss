@@ -21,3 +21,16 @@ $zet-screen-xl-min: 1200px;
 
 /* Margins */
 $zet-box-radius: 4px;
+
+
+/* Font size */
+%section-title {
+    font-size: calc(24px + 1vw);
+    //font-weight: bold;
+    line-height: 180%;
+}
+
+%article-title {
+    font-size: calc(18px + 1vw);
+    line-height: 180%;
+}

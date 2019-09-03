@@ -1,11 +1,19 @@
+.section__title {    
+    @extend %section-title;
+    color: $zet-black-color;
+}
+
+.section__title_light {
+    @extend %section-title;
+    color: $zet-white-color;
+}
+
 .article__title {
-    font-size: calc(18px + 1vw);
-    line-height: 180%;
+    @extend %article-title;
     color: $zet-black-color;
 }
 
 .article__title_light {
-    font-size: calc(18px + 1vw);
-    line-height: 180%;
+    @extend %article-title;
     color: $zet-white-color;
 }

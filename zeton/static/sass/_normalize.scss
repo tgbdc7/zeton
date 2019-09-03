@@ -12,7 +12,12 @@ html {
 
 a {
     text-decoration: none;  
-    margin: 0;  
+    margin: 0;
+    color: $zet-black-color;  
+
+    &:hover {
+        text-decoration: none; 
+    }
 }
 
 li {
