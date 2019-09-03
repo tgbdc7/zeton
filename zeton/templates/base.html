@@ -16,50 +16,10 @@
 
 <body>
     <div class="wrapper_withNavbar">
-        {% block navbar %}
-        <nav class="navbar">
-            <div class="navbar-brand">
-                <div class="logo"></div>
-            </div>
-            <div class="navbar-nav">
-                <a class="navbar-btn">
-                    <img src="../static/images/contact.svg" alt="icon-message" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Powiadomienia</p>
-                </a>
-                <a class="navbar-btn">
-                    <img src="../static/images/employees.svg" alt="icon-people" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Podopieczni</p>
-                </a>
-                <a class="navbar-btn">
-                    <img src="../static/images/list.svg" alt="icon-tasks" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Zadania</p>
-                </a>
-                <a class="navbar-btn">
-                    <img src="../static/images/favorites.svg" alt="icon-award" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Nagrody</p>
-                </a>
-                <a class="navbar-btn">
-                    <img src="../static/images/ban-circle-symbol.svg" alt="icon-ban" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Warny</p>
-                </a>
-            </div>
-            <div class="navbar-nav navbar-nav_settings">
-                <a class="navbar-btn">
-                    <img src="../static/images/settings.svg" alt="icon-settings" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Ustawienia</p>
-                </a>
-                <a class="navbar-btn" href="login.html">
-                    <img src="../static/images/logout.svg" alt="icon-logout" class="navbar-btn__img">
-                    <p class="navbar-btn__text">Wyloguj</p>
-                </a>
-            </div>
-        </nav>
-        <header class="mobile-header">
-            <div class="mobile-brand">
-
-            </div>
-        </header>
-        {%endblock%}
+            {% block navbar %}
+            {% include "menu.html" %}
+            {%endblock%}
+        
         {%endblock%}
         <main>
             <section class="welcome">
