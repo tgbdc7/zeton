@@ -199,8 +199,8 @@ body {
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .2s;
   transition: .2s;
-  border: solid 1px darkgray;
-  background-color: darkgray;
+  border: solid 1px #a2a4aa;
+  background-color: #a2a4aa;
   color: #ffffff;
 }
 
@@ -560,7 +560,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: darkgray;
+    background-color: #a2a4aa;
     background-image: url(../images/zeton1c-white.png);
     background-size: 40%;
     background-repeat: no-repeat;
