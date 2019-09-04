@@ -31,7 +31,6 @@ def add_points(child_id):
 def use_points(child_id):
     logged_user_id = g.user_data['id']
 
-
     child_id = int(child_id)
 
     return_url = request.args.get('return_url', '/')

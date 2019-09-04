@@ -62,7 +62,6 @@ def task_detail(child_id):
     childs_points_history = points.get_points_history(child_id)
     role = g.user_data['role']
 
-
     context = {'child': child,
                'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
