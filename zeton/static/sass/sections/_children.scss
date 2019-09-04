@@ -4,7 +4,7 @@
             padding: 0;
 
             .article__box {
-                padding: 20px 10px;
+                padding: calc(5px + 2vh) 10px;
                 background-color: $zet-blue-color;
                 background-image: $zet-bg-gradient;
                 border-radius: $zet-box-radius;
@@ -108,6 +108,7 @@
 
                 .article__box {
                     border-radius: $zet-box-radius 0 0 $zet-box-radius;
+                    padding: 20px 10px;
 
                     &:nth-of-type(2) {
                         display: flex;
