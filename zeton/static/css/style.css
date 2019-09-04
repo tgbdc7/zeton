@@ -602,7 +602,13 @@ body {
   }
 }
 
-.login .col form .article__item {
+.login .col .form .section__title {
+  line-height: 150%;
+  padding: 5px 0 calc(10px + 2vh);
+  text-align: center;
+}
+
+.login .col .form .article__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -610,7 +616,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   vertical-align: center;
-  padding: 5px;
+  padding: calc(5px + 2vh) 0 calc(5px + 2vh);
 }
 
 .login-header {

@@ -1,7 +1,7 @@
 .login {
     width: 500px;
     max-width: 1200px;
-    margin: calc(100px + 5vh) auto;    
+    margin: calc(100px + 5vh) auto;
     background-color: $zet-white-color;
     box-shadow: $zet-box-shadow;
     border-radius: $zet-box-radius;
@@ -20,12 +20,19 @@
     }
 
     .col {
-        form {
+        .form {
+
+            .section__title {
+                line-height: 150%;
+                padding: 5px 0 calc(10px + 2vh);
+                text-align: center;
+            }
+
             .article__item {
                 display: flex;
                 justify-content: center;
-                vertical-align: center;                
-                padding: 5px;
+                vertical-align: center;
+                padding: calc(5px + 2vh) 0 calc(5px + 2vh);
 
             }
         }
