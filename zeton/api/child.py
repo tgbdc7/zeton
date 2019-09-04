@@ -12,7 +12,6 @@ from zeton.data_access import users
 @auth.caregiver_only
 def add_points(child_id):
     logged_user_id = g.user_data['id']
-    logged_user_firstname = g.user_data['firstname']
 
     try:
         added_points = int(request.form['liczba_punktow'])
@@ -21,7 +20,7 @@ def add_points(child_id):
         return {'message': 'Bad request'}, 400
 
     if added_points > 0:
-        zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id, logged_user_firstname)
+        zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
 
     return redirect(url_for('views.child', child_id=child_id))
 
@@ -31,7 +30,6 @@ def add_points(child_id):
 @auth.logged_child_or_caregiver_only
 def use_points(child_id):
     logged_user_id = g.user_data['id']
-    logged_user_firstname = g.user_data['firstname']
 
 
     child_id = int(child_id)
@@ -48,7 +46,7 @@ def use_points(child_id):
 
     if used_points > 0:
         if used_points <= current_points:
-            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id, logged_user_firstname)
+            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id)
         else:
             missing_points = abs(current_points - used_points)
             if missing_points == 1:
