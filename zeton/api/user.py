@@ -45,7 +45,7 @@ def register():
     password = request.form['password']
     password_hash = generate_password_hash(password)
     role = request.form.get('role') or 'caregiver'
-    firstname = request.form.get('name') or 'NoName'
+    firstname = request.form.get('name') or username
 
     data = (username, password_hash, role, firstname)
 
