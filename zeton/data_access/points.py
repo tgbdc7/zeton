@@ -15,3 +15,8 @@ def change_points_by(target_id, points, user_id):
     query = 'UPDATE users SET points = points + ?, last_insert_id = ?   WHERE id = ?;'
     get_db().execute(query, [points, user_id, target_id])
     get_db().commit()
+
+def add_exp(exp, user_id):
+    query = 'UPDATE users SET exp = exp + ?  WHERE id = ?;'
+    get_db().execute(query, [exp, user_id])
+    get_db().commit()

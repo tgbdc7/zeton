@@ -19,8 +19,8 @@ create table users
   lastname                text,
   points                  integer default 0,
   last_insert_id          integer default 0,
-  school_weekly_highscore integer default 0
-
+  school_weekly_highscore integer default 0,
+  exp                     integer default 0
 );
 
 create table caregiver_to_child

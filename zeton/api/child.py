@@ -21,6 +21,7 @@ def add_points(child_id):
 
     if added_points > 0:
         zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
+        zeton.data_access.points.add_exp(added_points, child_id)
 
     return redirect(url_for('views.child', child_id=child_id))
 
