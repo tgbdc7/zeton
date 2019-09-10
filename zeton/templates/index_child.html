@@ -4,7 +4,12 @@
     <div name="user_summary"class="text-center">
         <h2 name="username">{{ child.firstname }}</h2>
         <h2 name="points_number"> Ilość punktów {{ child.points }} punktów</h2>
+        <h2> Punkty doświadczenia {{ child.exp }} punktów</h2>
         <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+
+            {% if messages %}
+            <div class="alert alert-dark">{{ messages[0] }}</div>
+            {% endif %}
 
         {% if child.bans.6.active %}
         <h2 style="color: red;"> Masz BANA !</h2>
@@ -61,10 +66,10 @@
                     <div class="form-group button">
                         Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-                    </div>
-                    <h4 class="text-center">NAGRODY</h4>
-                </form>
+                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                </div>
+                <h4 class="text-center">NAGRODY</h4>
+            </form>
 
                 <ul style="text-align:left;">
                     <table>
@@ -82,10 +87,15 @@
                         {% endfor %}
                     </table>
                 </ul>
-
+            </form>
         </div>
 
         <div id="bany_warny" class="col-xl-6 square">
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/bans_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>
             <h2 style="text-align: center;"> *****Warny i bany****** </h2>
             <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
             <ol>

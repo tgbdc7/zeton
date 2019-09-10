@@ -1,4 +1,7 @@
 # ZETON
+
+<img src="/doc/zeton-logo-black.jpg" height="200" />
+
 Aplikacja wspomagająca terapię behawioralną. System żetonowy przeznaczony dla 
 dziecka/ucznia. Pozwala na zdobywanie punktów za wykonywane czynności 
 oraz wymienianie ich na nagrody.
@@ -17,7 +20,6 @@ oraz wymienianie ich na nagrody.
 - `pip install -r requirements.txt` - instalacja zależności
 - `python recreate_db.py` - stworzenie tabeli w bazie
 - `python run.py` - uruchomienie serwera
-
 
 ### Testowi użytkownicy:
 - na ten moment użytkownicy i ich hasła zapisane są w wykomentowanym kodzie w `recreate_db.py`
