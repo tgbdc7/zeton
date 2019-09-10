@@ -9,12 +9,13 @@ def test_not_logged_redirects_to_login_page(client):
     assert response.location == 'http://localhost/login'
 
 
-@pytest.mark.parametrize(('username', 'password', 'firstname'), (
-        # ('caregiver_login', 'caregiver_password', 'Pafnucy'),  // TODO: fix for caregiver
-        ('child_login', 'child_password', 'Bonifacy')
-))
-def test_logged_with_correct_credentials(client, auth, username, password, firstname):
-    auth.login(username, password)
+CHILD_LOGIN = 'child_login'
+CHILD_PASSWORD = 'child_password'
+CHILD_FIRSTNAME = 'Bonifacy'
+
+
+def test_logged_child_with_correct_credentials(client, auth):
+    auth.login(CHILD_LOGIN, CHILD_PASSWORD)
 
     response = client.get("/")
 
@@ -24,7 +25,7 @@ def test_logged_with_correct_credentials(client, auth, username, password, first
     username_element = tree.xpath('//div[@name="user_summary"]//h2[@name="username"]')[0]
     username = username_element.text
 
-    assert username == firstname
+    assert username == CHILD_FIRSTNAME
 
 
 def test_logged_with_incorrect_credentials(client, auth):
