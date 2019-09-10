@@ -2,6 +2,7 @@
     .col {
         .article__container {
             padding: 0;
+            transition: .2s;
 
             .article__box {
                 padding: calc(5px + 2vh) 10px;
@@ -60,6 +61,8 @@
             }
 
             &:hover {
+                position: relative;
+
                 .article__box {
                     background-color: $zet-white-color;
                     background-image: none;
@@ -74,6 +77,21 @@
                         .article__title_light,
                         .article__text {
                             color: $zet-black-color;
+                        }
+                    }
+
+                    &:nth-of-type(2) {
+                        display: flex;
+                        position: absolute;
+                        height: 100%;
+                        justify-content: center;
+                        align-items: center;
+
+                        .article__item {
+                            width: 50%;
+                            max-width: 150px;
+                            height: 50%;
+                            margin: 0 auto;
                         }
                     }
                 }
@@ -132,8 +150,8 @@
 
                 &:not(.active):hover {
                     .article__box {
-                        background-color: $zet-blue-color; 
-                        background-image: $zet-bg-gradient;                     
+                        background-color: $zet-blue-color;
+                        background-image: $zet-bg-gradient;
 
                         .article__item {
 
@@ -156,7 +174,7 @@
                 }
 
                 .article__box {
-                    border-radius: $zet-box-radius $zet-box-radius 0 0;                    
+                    border-radius: $zet-box-radius $zet-box-radius 0 0;
 
                     &:nth-of-type(2) {
                         display: flex;
