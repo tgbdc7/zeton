@@ -71,7 +71,7 @@ def user_settings():
     return render_template('user_settings.html')
 
 
-@bp.route('/password/')
+@bp.route('/settings/password')
 @auth.login_required
 def password_change():
     logged_user_id = g.user_data['id']
