@@ -1,0 +1,22 @@
+<div class="text-center">
+<h2>{{ child.firstname }}</h2>
+<h2> Ilość punktów {{ child.points }} punktów</h2>
+<h3>Punkty doświadczenia {{ child.exp }} punktów</h3>
+<h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+
+{% if child.bans.6.active %}
+    <h2 style="color: red;"> Masz BANA !</h2>
+    <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
+{% else %}
+    <h2 style="color: green;">Możesz korzystać z komputera</h2>
+{% endif %}
+<div id="bany_warny" class="col-xl-12 square">
+    <h2 style="text-align: center;"> *****Warny i bany****** </h2>
+    <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
+    <ol>
+        {% for ban in child.bans.values() %}
+            <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
+        {% endfor %}
+    </ol>
+</div>
+</div>
