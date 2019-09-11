@@ -2,23 +2,43 @@
 {% block content %}
 <section class="index-child">
   <div class="col col-sm-12">
-    <div class="text-center">
-      <h2>{{ child.firstname }}</h2>
-      <h2> Ilość punktów {{ child.points }} punktów</h2>
-      <h2> Punkty doświadczenia {{ child.exp }} punktów</h2>
-      <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+    <article class="article__container">
+      <div class="article__box">
+        <div class="article__item">
+          <h3 class="article__title_light">{{ child.firstname }}</h3>
+          <div class="image__container">
+              <img class="portrait__image" src="../static/images/boy1.jpg">
+              <!--#TODO add avatar different for each child or default avatar -->
+          </div>
+        </div>
+        <div class="article__item">
+          <p class="article__text"> Ilość punktów </p>
+          <h2 class="section__title_light">{{ child.points }}</h2>      
+        </div>
+        <div class="article__item">
+          <p class="article__text">Punkty doświadczenia </p>
+          <h2 class="section__title_light">{{ child.exp }}</h2>  
+        </div>
+        <div class="article__item">
+          <p class="article__text">Szkolny rekord tygodnia</p>
+          <h2 class="section__title_light">{{ child.school_weekly_highscore }}</h2>
+        </div>
+      </div>
+      <div class="article__box">
+        <div class="article__item">
+          {% if messages %}
+          <div class="alert alert-dark">{{ messages[0] }}</div>
+          {% endif %}
 
-      {% if messages %}
-      <div class="alert alert-dark">{{ messages[0] }}</div>
-      {% endif %}
-
-      {% if child.bans.6.active %}
-      <h2 style="color: red;"> Masz BANA !</h2>
-      <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
-      {% else %}
-      <h2 style="color: green;">Możesz korzystać z komputera</h2>
-      {% endif %}
-    </div>
+          {% if child.bans.6.active %}
+          <h3 class="article__title" style="color: red;"> Masz BANA !</h3>
+          <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
+          {% else %}
+          <h3 class="article__title" style="color: lightgreen;">Możesz korzystać z komputera</h3>
+          {% endif %}
+        </div>
+      </div>
+    </article>
     <br>
     <div class="row">
 
