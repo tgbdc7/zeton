@@ -16,7 +16,8 @@
         "../sass/sections/_login.scss",
         "../sass/sections/_login-header.scss",
         "../sass/sections/_welcome.scss",
-        "../sass/sections/_children.scss"
+        "../sass/sections/_children.scss",
+        "../sass/sections/_index-child.scss"
     ],
     "names": [],
     "file": "style.css"
