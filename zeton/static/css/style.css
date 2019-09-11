@@ -756,44 +756,41 @@ body {
   background-image: none;
 }
 
-.children .col .article__container:hover {
-  position: relative;
-}
-
-.children .col .article__container:hover .article__box {
-  background-color: #ffffff;
-  background-image: none;
-}
-
-.children .col .article__container:hover .article__box .article__item .image__container {
-  border: solid 5px #0141c5;
-}
-
-.children .col .article__container:hover .article__box .article__item .section__title_light,
-.children .col .article__container:hover .article__box .article__item .article__title_light,
-.children .col .article__container:hover .article__box .article__item .article__text {
-  color: #000000;
-}
-
-.children .col .article__container:hover .article__box:nth-of-type(2) {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  position: absolute;
-  height: 100%;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.children .col .article__container:hover .article__box:nth-of-type(2) .article__item {
-  width: 50%;
-  max-width: 150px;
-  height: 50%;
-  margin: 0 auto;
+@media only screen and (max-width: 575.99px) {
+  .children .col .article__container:hover {
+    position: relative;
+  }
+  .children .col .article__container:hover .article__box {
+    background-color: #ffffff;
+    background-image: none;
+  }
+  .children .col .article__container:hover .article__box .article__item .image__container {
+    border: solid 5px #0141c5;
+  }
+  .children .col .article__container:hover .article__box .article__item .section__title_light,
+  .children .col .article__container:hover .article__box .article__item .article__title_light,
+  .children .col .article__container:hover .article__box .article__item .article__text {
+    color: #000000;
+  }
+  .children .col .article__container:hover .article__box:nth-of-type(2) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    height: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .children .col .article__container:hover .article__box:nth-of-type(2) .article__item {
+    width: 50%;
+    max-width: 150px;
+    height: 50%;
+    margin: 0 auto;
+  }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 991.99px) {
