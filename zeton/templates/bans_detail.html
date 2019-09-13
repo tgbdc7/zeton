@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col col-sm-12">
+    <div class="text-center">
+        <h2>{{ child.firstname }}</h2>
+        <h2> Ilość punktów {{ child.points }} punktów</h2>
+        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+
+        {% if child.bans.6.active %}
+        <h2 style="color: red;"> Masz BANA !</h2>
+        <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
+        {% else %}
+        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        {% endif %}
+        <div id="bany_warny" class="col-xl-12 square">
+            <h2 style="text-align: center;"> *****Warny i bany****** </h2>
+            <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
+            <ol>
+                {% for ban in child.bans.values() %}
+                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}</li>
+                {% endfor %}
+            </ol>
+
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/api/warn/{{ child.id }}?return_url=/bans_detail/{{ child.id }}">DAJ WARNA</a>
+
+                    <a class="btn btn-info" {% if child.bans.3.active %}
+                       disabled="disabled"
+                       {%endif%} href="/api/kick/{{ child.id }}?return_url=/bans_detail/{{ child.id }}">DAJ KICKA</a>
+
+                    <a class="btn btn-info" href="/api/ban/{{ child.id }}?return_url=/bans_detail/{{ child.id }}">DAJ BANA</a>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <form>
+        <div class="button">
+            {% if role == 'caregiver' %}
+            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+            {% endif %}
+            <a class="btn btn-info" href="/">Strona główna</a>
+            <a class="btn btn-info" href="/logout">Wyloguj</a>
+        </div>
+    </form>
+
+    {% endblock %}

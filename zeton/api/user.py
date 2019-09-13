@@ -1,11 +1,41 @@
-from flask import request, url_for, g
-from werkzeug.security import generate_password_hash
-from werkzeug.utils import redirect
+from flask import request, redirect, url_for, g, flash, abort
+from werkzeug.security import generate_password_hash, check_password_hash
 
+from zeton import auth
 from zeton.api import bp
 from zeton.data_access import users
 from zeton.data_access.bans import insert_all_default_bans
-from zeton.data_access.users import add_new_user, get_child_id, associate_child_with_caregiver
+from zeton.data_access.users import add_new_user, get_user_id, associate_child_with_caregiver
+
+
+@bp.route('/settings/set_password', methods=['POST'])
+@auth.login_required
+def set_password():
+    logged_user_id = g.user_data['id']
+    logged_user_password = g.user_data['password']
+
+    password = request.form['password']
+    new_password = request.form['new_password']
+    repeat_new_password = request.form['repeat_new_password']
+
+    hashed_new_password = generate_password_hash(new_password)
+
+    if not logged_user_id:
+        return abort(403)
+
+    if not (password == '' or new_password == '' or repeat_new_password == ''):
+        if new_password == repeat_new_password:
+            if auth.password_validation(new_password):
+                if check_password_hash(logged_user_password, password):
+                    users.update_password(logged_user_id, hashed_new_password)
+                    flash('Nowe hasło wprowadzone poprawnie')
+                flash('Aktualne hasło zostało źle wprowadzone. Spróbuj ponownie')
+            flash('Hasło musi zawierać 1 dużą literę, 1 małą literę, 1 cyfrę i musi mieć długość 8 znaków')
+        flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
+    else:
+        flash('Wypełnij wszystkie pola')
+
+    return redirect(url_for('views.user_settings'))
 
 
 @bp.route("/user", methods=['POST'])
@@ -15,23 +45,21 @@ def register():
     password = request.form['password']
     password_hash = generate_password_hash(password)
     role = request.form.get('role') or 'caregiver'
-    firstname = request.form.get('name') or '-'
+    firstname = request.form.get('name') or username
 
     data = (username, password_hash, role, firstname)
-    try:
-        add_new_user(data)
-    except Exception as ex:
-        print(ex)
-        return {'message': 'Bad request'}, 400
+
+    if username is None or password is None:
+        abort(400)
+    if get_user_id(username):
+        abort(400) # user already exists
+
+    add_new_user(data)
 
     if role == 'child':
-        try:
-            child_id = get_child_id(username)
-            caregiver_id = g.user_data['id']
-            associate_child_with_caregiver(caregiver_id, child_id)
-            insert_all_default_bans(child_id)
-        except Exception as ex:
-            print(ex)
-            return {'message': 'Bad request'}, 400
+        child_id = get_user_id(username)
+        caregiver_id = g.user_data['id']
+        associate_child_with_caregiver(caregiver_id, child_id)
+        insert_all_default_bans(child_id)
 
     return redirect(url_for('views.index'))

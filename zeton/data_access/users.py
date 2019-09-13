@@ -1,8 +1,7 @@
-from datetime import datetime
-
 from flask import session, g
 
 from zeton.data_access.bans import check_bans_status
+
 from zeton.db import get_db
 
 
@@ -74,6 +73,13 @@ def is_child_under_caregiver(child_id, caregiver_id):
     return result.fetchone()
 
 
+def update_password(user_id, hashed_new_password):
+    query = "UPDATE users SET password = ? WHERE id = ?"
+    params = (hashed_new_password, user_id)
+    get_db().cursor().execute(query, params)
+    get_db().commit()
+
+
 def add_new_user(user_data):
     query = "INSERT INTO 'users' " \
             "(username, password, role, firstname) " \
@@ -83,14 +89,16 @@ def add_new_user(user_data):
     get_db().commit()
 
 
-def get_child_id(child_username):
+def get_user_id(username):
     query = """
     SELECT id FROM users
     WHERE username = ?
     """
-    result = get_db().execute(query, (child_username,))
-
-    return result.fetchone()['id']
+    result = get_db().execute(query, (username,))
+    row = result.fetchone()
+    if row:
+        return row['id']
+    return False
 
 
 def associate_child_with_caregiver(caregiver_id, child_id):
