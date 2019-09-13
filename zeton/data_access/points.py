@@ -16,6 +16,10 @@ def change_points_by(target_id, points, user_id):
     get_db().execute(query, [points, user_id, target_id])
     get_db().commit()
 
+def add_exp(exp, user_id):
+    query = 'UPDATE users SET exp = exp + ?  WHERE id = ?;'
+    get_db().execute(query, [exp, user_id])
+    get_db().commit()
 def get_points_history(child_id):
     query = 'SELECT p.points_change, p.change_timestamp, u.firstname ' \
             'FROM points_history p ' \
