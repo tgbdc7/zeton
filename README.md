@@ -1,4 +1,7 @@
 # ZETON
+
+<img src="/doc/zeton-logo-black.jpg" height="200" />
+
 Aplikacja wspomagająca terapię behawioralną. System żetonowy przeznaczony dla 
 dziecka/ucznia. Pozwala na zdobywanie punktów za wykonywane czynności 
 oraz wymienianie ich na nagrody.
