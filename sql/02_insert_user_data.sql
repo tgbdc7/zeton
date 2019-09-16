@@ -7,6 +7,8 @@ INSERT INTO users VALUES(4,'opiekun2','pbkdf2:sha256:50000$UXPZgrr8$0981537e8e9d
 INSERT INTO users VALUES(5,'dziecko3','pbkdf2:sha256:50000$plsLYnx2$db59410c22b1e5a9bda5e1ee1a74a8f3ff219bb83e7f7ce2de00930006e9673c','child','Ewelina',NULL,0,0,0,0);
 INSERT INTO users VALUES(6,'dziecko4','pbkdf2:sha256:50000$qYXjlGbk$ffbb4b0157f254d360dd80ebef8895462d3b569362e45108728be2c4672fcd0b','child','Filip',NULL,0,0,0,0);
 INSERT INTO users VALUES(7,'dyrektor','pbkdf2:sha256:50000$uqVtNvPR$345a77790d4315661830b14f1545528a518722273952cc06c3a4b810454d24e8','caregiver','Zbigniew',NULL,0,0,0,0);
+INSERT INTO users VALUES(8, 'opiekun_biz','hash_password','caregiver','Marcin',NULL,0,0,0,0);
+INSERT INTO users VALUES(9, 'dziecko_biz', 'hash_password','child','Marcinek',NULL,0,0,0,0);
 
 INSERT INTO caregiver_to_child VALUES(1,1,2);
 INSERT INTO caregiver_to_child VALUES(2,1,3);
@@ -16,6 +18,7 @@ INSERT INTO caregiver_to_child VALUES(5,7,2);
 INSERT INTO caregiver_to_child VALUES(6,7,3);
 INSERT INTO caregiver_to_child VALUES(7,7,5);
 INSERT INTO caregiver_to_child VALUES(8,7,6);
+INSERT INTO caregiver_to_child VALUES(9,8,9);
 
 INSERT INTO bans_name VALUES(1,2,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(2,2,2,'2 ustne ostrzeżenie');
