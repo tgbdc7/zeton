@@ -7,8 +7,8 @@ INSERT INTO users VALUES(4,'opiekun2','pbkdf2:sha256:50000$UXPZgrr8$0981537e8e9d
 INSERT INTO users VALUES(5,'dziecko3','pbkdf2:sha256:50000$plsLYnx2$db59410c22b1e5a9bda5e1ee1a74a8f3ff219bb83e7f7ce2de00930006e9673c','child','Ewelina',NULL,0,0,0,0);
 INSERT INTO users VALUES(6,'dziecko4','pbkdf2:sha256:50000$qYXjlGbk$ffbb4b0157f254d360dd80ebef8895462d3b569362e45108728be2c4672fcd0b','child','Filip',NULL,0,0,0,0);
 INSERT INTO users VALUES(7,'dyrektor','pbkdf2:sha256:50000$uqVtNvPR$345a77790d4315661830b14f1545528a518722273952cc06c3a4b810454d24e8','caregiver','Zbigniew',NULL,0,0,0,0);
-INSERT INTO users VALUES(8, 'opiekun_biz','pbkdf2:sha256:150000$R8U7pplv$448a636615ee60c76ad28ebbe42a1222f1361300a13b0658a058f2dc8d13a9ad','caregiver','Marcin',NULL,0,0,0,0);
-INSERT INTO users VALUES(9, 'dziecko_biz', 'pbkdf2:sha256:150000$R8U7pplv$448a636615ee60c76ad28ebbe42a1222f1361300a13b0658a058f2dc8d13a9ad','child','Marcinek',NULL,0,0,0,0);
+INSERT INTO users VALUES(8, 'opiekun_biz', 'pbkdf2:sha256:50000$5U7dVrlX$2cf9e45852c9e857c6237499199b977c418a50e0505f792882de4928ad64fe4c', 'caregiver','Marcin',NULL,0,0,0,0);
+INSERT INTO users VALUES(9, 'dziecko_biz', 'pbkdf2:sha256:50000$5U7dVrlX$2cf9e45852c9e857c6237499199b977c418a50e0505f792882de4928ad64fe4c','child','Filip',NULL,0,0,0,0);
 
 INSERT INTO caregiver_to_child VALUES(1,1,2);
 INSERT INTO caregiver_to_child VALUES(2,1,3);
@@ -47,6 +47,13 @@ INSERT INTO bans_name VALUES(21,6,3,'KICK Przerwanie obecnej aktywności i udani
 INSERT INTO bans_name VALUES(22,6,4,'BAN 2 stopnia na 30 min - brak bajek i gier');
 INSERT INTO bans_name VALUES(23,6,5,'BAN 1 stopnia na 24h - brak gier');
 INSERT INTO bans_name VALUES(24,6,6,'BAN 2 stopnia na 24h - brak bajek i gier');
+
+INSERT INTO bans_name VALUES(25,9,1,'1 ustne ostrzeżenie');
+INSERT INTO bans_name VALUES(26,9,2,'2 ustne ostrzeżenie');
+INSERT INTO bans_name VALUES(27,9,3,'KICK Przerwanie obecnej aktywności i udanie się do pokoju');
+INSERT INTO bans_name VALUES(28,9,4,'BAN 2 stopnia na 30 min - brak bajek i gier');
+INSERT INTO bans_name VALUES(29,9,5,'BAN 1 stopnia na 24h - brak gier');
+INSERT INTO bans_name VALUES(30,9,6,'BAN 2 stopnia na 24h - brak bajek i gier');
 
 INSERT INTO home_points VALUES(1,2,"sprzątanie pokoju",20,1,7);
 INSERT INTO home_points VALUES(2,2,"wykonanie polecenia bez zwłoki",20,1,7);
@@ -89,8 +96,8 @@ INSERT INTO prizes VALUES(13,6, "nowa książka", 100, 1, 1, 4);
 INSERT INTO prizes VALUES(14,6, "nowa rybka", 20, 1, 1, 1);
 
 DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('users',7);
-INSERT INTO sqlite_sequence VALUES('caregiver_to_child',8);
+INSERT INTO sqlite_sequence VALUES('users',9);
+INSERT INTO sqlite_sequence VALUES('caregiver_to_child',9);
 INSERT INTO sqlite_sequence VALUES('home_points', 18);
 INSERT INTO sqlite_sequence VALUES('prizes',14);
 INSERT INTO sqlite_sequence VALUES('points_history',1);
