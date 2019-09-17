@@ -88,6 +88,17 @@ def password_change():
 
     return render_template('password_change.html', **context, messages=messages)
 
+@bp.route('/settings/firstname')
+@auth.login_required
+def firstname_change():
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+
+    context = {'user_data': user_data}
+    messages = get_flashed_messages()
+
+    return render_template('firstname_change.html', **context, messages=messages)
+
 
 @bp.route('/prizes_detail/<child_id>')
 @auth.login_required
