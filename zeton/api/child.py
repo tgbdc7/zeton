@@ -7,14 +7,14 @@ from zeton.api import bp
 from zeton.data_access import users
 
 
-@bp.route("/child/<child_id>/points/add", methods=['POST'])
+@bp.route("/child/<child_id>/points/add/<points>", methods=['GET'])
 @auth.login_required
 @auth.caregiver_only
-def add_points(child_id):
+def add_points(child_id,points):
     logged_user_id = g.user_data['id']
 
     try:
-        added_points = int(request.form['liczba_punktow'])
+        added_points = int(points)
     except ValueError as ex:
         print(ex)
         return {'message': 'Bad request'}, 400
