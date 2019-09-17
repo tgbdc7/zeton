@@ -35,14 +35,12 @@
                     <tr>
                         <th>Id</th>
                         <th>Nazwa</th>
-                        <th>Punkty</th>
                         <th></th>
                     </tr>
                     {% for task in  childs_tasks %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ task.name }}</td>
-                                <td>{{ task.points }}</td>
                                 <td><a class="btn btn-info" href="/api/child/{{ child.id }}/points/add/{{ task.points }}">Dodaj</a></td>
                             </tr>
                     {% endfor %}
