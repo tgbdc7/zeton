@@ -37,14 +37,12 @@
                         <th>Nazwa</th>
                         <th>Punkty</th>
                     </tr>
-                    {% for task in childs_tasks %}
-                        {% if task.is_active %}
+                    {% for task in  childs_tasks %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ task.name }}</td>
                                 <td>{{ task.points }}</td>
                             </tr>
-                        {% endif %}
                     {% endfor %}
                 </table>
             </ul>
