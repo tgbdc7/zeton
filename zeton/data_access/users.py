@@ -77,3 +77,9 @@ def update_password(user_id, hashed_new_password):
     params = (hashed_new_password, user_id)
     get_db().cursor().execute(query, params)
     get_db().commit()
+
+def update_firstname(user_id, new_firstname):
+    query = "UPDATE users SET firstname = ? WHERE id = ?"
+    params = (new_firstname, user_id)
+    get_db().cursor().execute(query, params)
+    get_db().commit()
