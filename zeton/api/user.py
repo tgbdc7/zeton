@@ -34,3 +34,15 @@ def set_password():
         flash('Wypełnij wszystkie pola')
 
     return redirect(url_for('views.password_change'))
+
+
+@bp.route('/settings/set_firstname', methods=['POST'])
+@auth.login_required
+def set_firstname():
+    logged_user_id = g.user_data['id']
+
+    new_firstname = request.form('new_firstname')
+
+    users.update_firstname(logged_user_id, new_firstname)
+
+    return redirect(url_for('views.firstname_change'))
