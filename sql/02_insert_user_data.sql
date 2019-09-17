@@ -48,27 +48,27 @@ INSERT INTO bans_name VALUES(22,6,4,'BAN 2 stopnia na 30 min - brak bajek i gier
 INSERT INTO bans_name VALUES(23,6,5,'BAN 1 stopnia na 24h - brak gier');
 INSERT INTO bans_name VALUES(24,6,6,'BAN 2 stopnia na 24h - brak bajek i gier');
 
-INSERT INTO home_points VALUES(1,2,"sprzątanie pokoju",20,1,7);
-INSERT INTO home_points VALUES(2,2,"wykonanie polecenia bez zwłoki",20,1,7);
-INSERT INTO home_points VALUES(3,2,"odrobienie lekcji",20,1,5);
-INSERT INTO home_points VALUES(4,2,"spakowanie plecaka",20,1,5);
-INSERT INTO home_points VALUES(5,2,"spakowanie plecaka z rodzicem",20,1,5);
-INSERT INTO home_points VALUES(6,2,"pomoc rodzicom",10,3,35);
-INSERT INTO home_points VALUES(7,2,"podlanie kwiatów",5,1,7);
-INSERT INTO home_points VALUES(8,2,"pomoc ślepej sąsiadce",20,1,7);
+INSERT INTO home_points VALUES(1,2,"sprzątanie pokoju",20,1,7,1);
+INSERT INTO home_points VALUES(2,2,"wykonanie polecenia bez zwłoki",20,1,7,1);
+INSERT INTO home_points VALUES(3,2,"odrobienie lekcji",20,1,5,0);
+INSERT INTO home_points VALUES(4,2,"spakowanie plecaka",20,1,5,0);
+INSERT INTO home_points VALUES(5,2,"spakowanie plecaka z rodzicem",20,1,5,0);
+INSERT INTO home_points VALUES(6,2,"pomoc rodzicom",10,3,35,0);
+INSERT INTO home_points VALUES(7,2,"podlanie kwiatów",5,1,7,1);
+INSERT INTO home_points VALUES(8,2,"pomoc ślepej sąsiadce",20,1,7,1);
 
-INSERT INTO home_points VALUES(9,3,"granie na instrumencie",20,1,7);
-INSERT INTO home_points VALUES(10,3,"wyprowadzanie psa",5,3,35);
-INSERT INTO home_points VALUES(11,3,"sprawdzanie skrzynki na listy",20,1,7);
+INSERT INTO home_points VALUES(9,3,"granie na instrumencie",20,1,7,1);
+INSERT INTO home_points VALUES(10,3,"wyprowadzanie psa",5,3,35,0);
+INSERT INTO home_points VALUES(11,3,"sprawdzanie skrzynki na listy",20,1,7,1);
 
-INSERT INTO home_points VALUES(12,5,"ścieranie kurzy",10,1,3);
-INSERT INTO home_points VALUES(13,5,"czytanie książki",10,1,7);
-INSERT INTO home_points VALUES(14,5,"trening na basenie",20,1,2);
-INSERT INTO home_points VALUES(15,5,"mycie okien",100,1,1);
+INSERT INTO home_points VALUES(12,5,"ścieranie kurzy",10,1,3,1);
+INSERT INTO home_points VALUES(13,5,"czytanie książki",10,1,7,1);
+INSERT INTO home_points VALUES(14,5,"trening na basenie",20,1,2,0);
+INSERT INTO home_points VALUES(15,5,"mycie okien",100,1,1,0);
 
-INSERT INTO home_points VALUES(16,6,"karmienie rybek",5,1,7);
-INSERT INTO home_points VALUES(17,6,"naprawianie motocyklu - 20 min",20,1,2);
-INSERT INTO home_points VALUES(18,6,"powrót do domu przed 20",10,1,7);
+INSERT INTO home_points VALUES(16,6,"karmienie rybek",5,1,7,0);
+INSERT INTO home_points VALUES(17,6,"naprawianie motocyklu - 20 min",20,1,2,1);
+INSERT INTO home_points VALUES(18,6,"powrót do domu przed 20",10,1,7,1);
 
 INSERT INTO prizes VALUES(1,2,"1 min komputer", 1, 30, 180, 720);
 INSERT INTO prizes VALUES(2,2,"cola (200ml)", 20, 1, 1, 4);
