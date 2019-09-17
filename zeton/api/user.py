@@ -41,8 +41,11 @@ def set_password():
 def set_firstname():
     logged_user_id = g.user_data['id']
 
-    new_firstname = request.form('new_firstname')
+    new_firstname = request.form.get('new_firstname')
 
-    users.update_firstname(logged_user_id, new_firstname)
+    if new_firstname:
+        users.update_firstname(logged_user_id, new_firstname)
+    else:
+        flash('Wprowadź imię')
 
     return redirect(url_for('views.firstname_change'))
