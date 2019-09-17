@@ -47,5 +47,6 @@ def set_firstname():
         users.update_firstname(logged_user_id, new_firstname)
     else:
         flash('Wprowadź imię')
+    flash('Imię zostało zmienione')
 
     return redirect(url_for('views.firstname_change'))
