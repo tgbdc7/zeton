@@ -1083,6 +1083,12 @@ body {
   }
 }
 
+@media only screen and (max-width: 575.99px) {
+  .add-points .col {
+    padding: 0;
+  }
+}
+
 /*Test-SASS*/
 .testowy {
   color: red;

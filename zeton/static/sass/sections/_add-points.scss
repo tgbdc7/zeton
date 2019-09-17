@@ -1,0 +1,12 @@
+.add-points {
+    .col {
+        .article__container {}
+    }
+
+    @media only screen and (max-width: $zet-screen-sm-max) {
+
+        .col {
+            padding: 0;
+        }
+    }
+}
