@@ -1,4 +1,10 @@
 {% extends "base.html" %}
+{% block top %}
+  {{ super() }}
+  <style type="text/css">
+    .welcome { display: none; }
+  </style>
+{% endblock %}
 {% block content %}
 <section class="index-child">
   <div class="col col-sm-12">
