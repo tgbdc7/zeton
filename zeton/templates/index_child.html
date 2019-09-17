@@ -38,11 +38,13 @@
                         <th>Punkty</th>
                     </tr>
                     {% for task in childs_tasks %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.points }}</td>
-                    </tr>
+                        {% if task.is_active %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.points }}</td>
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                 </table>
             </ul>
