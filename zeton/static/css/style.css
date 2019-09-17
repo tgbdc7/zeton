@@ -957,6 +957,9 @@ body {
 }
 
 @media only screen and (max-width: 575.99px) {
+  .index-child .col {
+    padding: 0;
+  }
   .index-child .col .article__container {
     padding: 10px;
   }

@@ -49,8 +49,10 @@
   }
 
   @media only screen and (max-width: $zet-screen-sm-max) {
+    
+    .col {      
+      padding: 0;
 
-    .col {
       .article__container {
         padding: 10px;
         .article__box {
