@@ -5,7 +5,6 @@ from zeton import auth
 from zeton.api import bp
 from zeton.data_access import users
 from zeton.data_access.bans import insert_all_default_bans
-from zeton.data_access.users import add_new_user, get_user_id, associate_child_with_caregiver
 
 
 @bp.route('/settings/set_password', methods=['POST'])
@@ -51,15 +50,15 @@ def register():
 
     if username is None or password is None:
         abort(400)
-    if get_user_id(username):
+    if users.get_user_id(username):
         abort(400) # user already exists
 
-    add_new_user(data)
+    users.add_new_user(data)
 
     if role == 'child':
-        child_id = get_user_id(username)
+        child_id = users.get_user_id(username)
         caregiver_id = g.user_data['id']
-        associate_child_with_caregiver(caregiver_id, child_id)
+        users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
 
     return redirect(url_for('views.index'))
