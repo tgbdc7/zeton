@@ -15,6 +15,7 @@
         </div>
         <div class="form-group button">
             <button type="submit" class="btn btn-info">Prześlij</button>
+            <a href="{{ url_for('auth.register') }}" class="btn btn-info" role="button">Zarejestruj się</a>
         </div>
         {% if error %}
         <h3 style="text-align: center; color: red;">Błędny login lub hasło</h3>
