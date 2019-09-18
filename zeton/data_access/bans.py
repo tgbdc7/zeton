@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 from zeton.db import get_db
 
-default_bans = [
+DEFAULT_BANS = [
     (1, '1 ustne ostrzeżenie'),
     (2, '2 ustne ostrzeżenie'),
     (3, 'KICK Przerwanie obecnej aktywności i udanie się do pokoju'),
@@ -24,7 +24,7 @@ def insert_default_ban(child_id, ban_id, ban_name):
 
 
 def insert_all_default_bans(child_id):
-    for values in default_bans:
+    for values in DEFAULT_BANS:
         ban_id, ban_name = values
         insert_default_ban(child_id, ban_id, ban_name)
 
