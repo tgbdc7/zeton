@@ -2,6 +2,7 @@ from flask import request, redirect, url_for, abort, g, flash
 
 import zeton.data_access.bans
 import zeton.data_access.points
+import datetime
 from zeton import auth
 from zeton.api import bp
 from zeton.data_access import users
@@ -11,17 +12,18 @@ from zeton.data_access import users
 @auth.login_required
 @auth.caregiver_only
 def add_points(child_id,points):
-    logged_user_id = g.user_data['id']
+    if(datetime.datetime.now().timetuple().tm_yday>0):
+        logged_user_id = g.user_data['id']
 
-    try:
-        added_points = int(points)
-    except ValueError as ex:
-        print(ex)
-        return {'message': 'Bad request'}, 400
+        try:
+            added_points = int(points)
+        except ValueError as ex:
+            print(ex)
+            return {'message': 'Bad request'}, 400
 
-    if added_points > 0:
-        zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
-        zeton.data_access.points.add_exp(added_points, child_id)
+        if added_points > 0:
+            zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
+            zeton.data_access.points.add_exp(added_points, child_id)
 
     return redirect(url_for('views.child', child_id=child_id))
 

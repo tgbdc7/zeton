@@ -22,7 +22,7 @@
     <div class="row">
 
         <div id="dodawanie" class="col-xl-6 square text-align-right">
-            {% block add_points %}{% endblock add_points %}
+<!--            {% block add_points %}{% endblock add_points %}-->
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
@@ -35,12 +35,13 @@
                     <tr>
                         <th>Id</th>
                         <th>Nazwa</th>
-                        <th></th>
+                        <th>Punkty</th>
                     </tr>
                     {% for task in  childs_tasks %}
                             <tr>
                                 <td>{{ loop.index }}</td>
                                 <td>{{ task.name }}</td>
+                                <td>{{ task.points }}</td>
                                 <td><a class="btn btn-info" href="/api/child/{{ child.id }}/points/add/{{ task.points }}">Dodaj</a></td>
                             </tr>
                     {% endfor %}
