@@ -34,7 +34,7 @@ def set_password():
     else:
         flash('Wypełnij wszystkie pola')
 
-    return redirect(url_for('views.user_settings'))
+    return redirect(url_for('views.password_change'))
 
 
 @bp.route("/user", methods=['POST'])

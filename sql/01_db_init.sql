@@ -20,8 +20,8 @@ create table users
   lastname                text,
   points                  integer default 0,
   last_insert_id          integer default 0,
-  school_weekly_highscore integer default 0
-
+  school_weekly_highscore integer default 0,
+  exp                     integer default 0
 );
 
 create table caregiver_to_child
@@ -77,12 +77,12 @@ create table prizes
 
 create table points_history
 (
-  id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
-  child_id        INTEGER NOT NULL,
-  points_change   INTEGER NOT NULL,
-  id_changing_user INTEGER NOT NULL,
-  points_name            TEXT NOT NULL DEFAULT 'points_name',
-  change_timestamp TEXT NOT NULL,
+  id                        INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  child_id                  INTEGER NOT NULL,
+  points_change             INTEGER NOT NULL,
+  id_changing_user          INTEGER NOT NULL,
+  points_name               TEXT NOT NULL DEFAULT 'points_name',
+  change_timestamp          TEXT NOT NULL,
   FOREIGN KEY (child_id) REFERENCES users (id),
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );
