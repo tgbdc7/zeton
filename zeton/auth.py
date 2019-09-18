@@ -11,7 +11,13 @@ bp = Blueprint('auth', __name__)
 
 def get_user_data(login):
     result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
-    return result.fetchone()
+    user_data = result.fetchall()
+    if len(user_data) == 0:
+        return None
+    elif len(user_data) == 1:
+        return user_data[0]
+    else:
+        raise Exception("Database error: duplicate username found!")
 
 
 def password_validation(password):
@@ -49,6 +55,18 @@ def login():
 def logout():
     session.pop('user_id', None)
     return redirect(url_for('auth.login'))
+
+
+@bp.route('/register', methods=['GET'])
+def register():
+    prev_url = request.referrer
+    return render_template('register_form.html', prev_url=prev_url)
+
+
+@bp.route('/add-person', methods=['GET'])
+def add_person():
+    prev_url = request.referrer
+    return render_template('add_person.html', prev_url=prev_url)
 
 
 # login required decorator

@@ -24,6 +24,10 @@ oraz wymienianie ich na nagrody.
 ### Testowi użytkownicy:
 - na ten moment użytkownicy i ich hasła zapisane są w wykomentowanym kodzie w `recreate_db.py`
 
+### Uruchamianie testów
+
+- Aby uruchomić testy, należy uruchomić polecenie `pytest` z głównego katalogu projektu.
+- Aby wyświetlały się w konsoli polecenia `print()` należy uruchomić testy poleceniem `pytest -s`
 
 ### Triki (Linux)
 - W przypadku serwera Flaskowego, który odłączył się od PyCharma i nie da się go wyłączyć:
