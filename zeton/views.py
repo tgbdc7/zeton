@@ -64,6 +64,9 @@ def task_detail(child_id):
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
+               'role': role}
+    context = {'child': child,
+               'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
                'role': role,
                }
@@ -102,7 +105,9 @@ def prizes_detail(child_id):
 
     childs_prizes = prizes.get_prizes(child_id)
 
-    context = {'child': child, 'childs_prizes': childs_prizes, 'role': role}
+    context = {'child': child,
+               'childs_prizes': childs_prizes,
+               'role': role}
 
     return render_template('prizes_detail.html', **context)
 
@@ -118,7 +123,8 @@ def school_points_detail(child_id):
     except TypeError:
         return abort(403)
 
-    context = {'child': child, 'role': role}
+    context = {'child': child,
+               'role': role}
 
     return render_template('school_points_detail.html', **context)
 
@@ -134,6 +140,7 @@ def bans_detail(child_id):
     except TypeError:
         return abort(403)
 
-    context = {'child': child, 'role': role}
+    context = {'child': child,
+               'role': role}
 
     return render_template('bans_detail.html', **context)
