@@ -6,7 +6,7 @@ from zeton.db import get_db
 
 
 def get_weekly_highscore(user_id):
-    query = 'select school_weekly_highscore from users where id = ?'
+    query = 'select school_weekly_highscore from main_points where id = ?'
     result = get_db().execute(query, [user_id])
     row = result.fetchone()
     if row:
@@ -67,10 +67,24 @@ def get_child_data(child_id):
     return child
 
 
+def get_child_points(id):
+    query = """
+    SELECT mp.* 
+    FROM users AS u 
+    JOIN main_points AS mp on u.id = mp.child_id
+    WHERE u.id = ?
+    AND u.role = 'child'
+    """
+    result = get_db().execute(query, (id,))
+    child_points = dict(result.fetchone())
+    return child_points
+
+
 def is_child_under_caregiver(child_id, caregiver_id):
     query = "SELECT * FROM caregiver_to_child WHERE child_id = ? AND caregiver_id = ?"
     result = get_db().execute(query, (child_id, caregiver_id))
     return result.fetchone()
+
 
 def update_password(user_id, hashed_new_password):
     query = "UPDATE users SET password = ? WHERE id = ?"

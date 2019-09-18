@@ -36,7 +36,6 @@ def use_points(child_id):
     return_url = request.args.get('return_url', '/')
 
     current_points = zeton.data_access.points.get_points(child_id)
-
     try:
         used_points = int(request.form['points'])
     except ValueError as ex:

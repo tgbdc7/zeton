@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS points_history;
 DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
+DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
-
 
 create table users
 (
@@ -16,7 +16,13 @@ create table users
   password                text not null,
   role                    text not NULL check ( role in ('caregiver', 'child') ),
   firstname               text,
-  lastname                text,
+  lastname                text
+);
+
+create table main_points
+(
+  id                      integer UNIQUE primary key autoincrement,
+  child_id                INTEGER,
   points                  integer default 0,
   last_insert_id          integer default 0,
   school_weekly_highscore integer default 0,
