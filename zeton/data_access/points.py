@@ -24,11 +24,8 @@ def add_exp(exp, child_id):
 
 def get_child_points(id):
     query = """
-    SELECT mp.* 
-    FROM users AS u 
-    JOIN main_points AS mp on u.id = mp.child_id
-    WHERE u.id = ?
-    AND u.role = 'child'
+    SELECT * FROM  main_points
+    WHERE main_points.child_id=?
     """
     result = get_db().execute(query, (id,))
     child_points = dict(result.fetchone())
