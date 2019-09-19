@@ -5,6 +5,7 @@ from zeton.data_access.bans import check_bans_status
 from zeton.db import get_db
 
 
+
 def get_weekly_highscore(user_id):
     query = 'select school_weekly_highscore from main_points where id = ?'
     result = get_db().execute(query, [user_id])
@@ -65,19 +66,6 @@ def get_child_data(child_id):
     child = dict(result.fetchone())
     child['bans'] = check_bans_status(child_id)
     return child
-
-
-def get_child_points(id):
-    query = """
-    SELECT mp.* 
-    FROM users AS u 
-    JOIN main_points AS mp on u.id = mp.child_id
-    WHERE u.id = ?
-    AND u.role = 'child'
-    """
-    result = get_db().execute(query, (id,))
-    child_points = dict(result.fetchone())
-    return child_points
 
 
 def is_child_under_caregiver(child_id, caregiver_id):

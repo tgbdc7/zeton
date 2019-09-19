@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort, g, get_flashed_messages
 
 from . import auth
-from zeton.data_access import users, prizes, tasks, bans
+from zeton.data_access import users, prizes, tasks, bans, points
 
 bp = Blueprint('views', __name__)
 
@@ -44,7 +44,7 @@ def child(child_id):
     childs_tasks = tasks.get_tasks(child_id)
     childs_prizes = prizes.get_prizes(child_id)
     role = g.user_data['role']
-    child_points = users.get_child_points(child['id'])
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
@@ -63,7 +63,7 @@ def child(child_id):
 def task_detail(child_id):
     child = users.get_child_data(child_id)
     childs_tasks = tasks.get_tasks(child_id)
-    child_points = users.get_child_points(child['id'])
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child, 'childs_tasks': childs_tasks,'child_points':child_points}
 
@@ -100,7 +100,7 @@ def prizes_detail(child_id):
         return abort(403)
 
     childs_prizes = prizes.get_prizes(child_id)
-    child_points = users.get_child_points(child['id'])
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child, 'child_points':child_points, 'childs_prizes': childs_prizes, 'role': role}
 
@@ -118,7 +118,7 @@ def school_points_detail(child_id):
     except TypeError:
         return abort(403)
 
-    child_points = users.get_child_points(child['id'])
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child, 'child_points':child_points, 'role': role}
 
@@ -136,7 +136,7 @@ def bans_detail(child_id):
     except TypeError:
         return abort(403)
 
-    child_points = users.get_child_points(child['id'])
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child, 'role': role, 'child_points':child_points}
 
