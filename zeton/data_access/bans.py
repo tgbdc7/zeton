@@ -2,6 +2,32 @@ from datetime import datetime, timedelta
 
 from zeton.db import get_db
 
+DEFAULT_BANS = [
+    (1, '1 ustne ostrzeżenie'),
+    (2, '2 ustne ostrzeżenie'),
+    (3, 'KICK Przerwanie obecnej aktywności i udanie się do pokoju'),
+    (4, 'BAN 2 stopnia na 30 min - brak komputera i telefonu'),
+    (5, 'BAN 1 stopnia na 24h - brak telefonu'),
+    (6, 'BAN 2 stopnia na 24h - brak komputera i telefonu'),
+]
+
+
+def insert_default_ban(child_id, ban_id, ban_name):
+    query = """
+    INSERT INTO  'bans_name'
+    VALUES (NULL, ?, ?, ?)
+    """
+    params = (child_id, ban_id, ban_name)
+
+    get_db().execute(query, params)
+    get_db().commit()
+
+
+def insert_all_default_bans(child_id):
+    for values in DEFAULT_BANS:
+        ban_id, ban_name = values
+        insert_default_ban(child_id, ban_id, ban_name)
+
 
 def get_bans_name(child_id):
     query = 'select ban_id, ban_name from bans_name where child_id = ? ORDER BY ban_id'
