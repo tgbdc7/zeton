@@ -1,14 +1,17 @@
 {% extends 'index_child.html' %}
 {% block add_points %}
-<div class="text-center">
-    <h2>Dodawaj punkty</h2>
-    <form action="/api/child/{{ child.id }}/points/add" method="post">
+  
+    <form id="dodaj" action="/api/child/{{ child.id }}/points/add" method="post">
         <div class="form-group button">
             Liczba punktów: <input class="form-control" type="number" name="liczba_punktow" required>
-            <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty" />
+            <button class="button-number" form="dodaj" type="submit" name="addOne" value="1">+1</button>
+            <button class="button-number" form="dodaj" type="submit" name="addFive" value="5">+5</button>
+            <button class="button-number" form="dodaj" type="submit" name="addTen" value="10">+10</button>
+            <button class="button-number" form="dodaj" type="reset" value="Reset">x</button>
+            <input class="button-add" type="submit" name="dodaj punkty" value="Dodaj" />
         </div>
     </form>
-</div>
+
 {% endblock add_points %}
 
 {% block bans %}

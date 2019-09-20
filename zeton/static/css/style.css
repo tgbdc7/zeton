@@ -163,6 +163,10 @@ body {
   width: 100%;
 }
 
+.form-group {
+  margin: 0;
+}
+
 .section__title {
   color: #000000;
 }
@@ -183,6 +187,11 @@ body {
   line-height: 130%;
 }
 
+.large {
+  font-size: 2em;
+  line-height: 0.4em;
+}
+
 .article__image {
   position: absolute;
   max-height: 100%;
@@ -193,7 +202,7 @@ body {
   margin: 0 auto;
 }
 
-.button-checkout {
+.button-switch {
   width: calc(100px + 3vw);
   padding: 10px 15px;
   border-radius: 25px;
@@ -206,11 +215,51 @@ body {
   color: #ffffff;
 }
 
-.button-checkout:hover {
+.button-switch:hover {
   border: solid 1px transparent;
   background-color: #0141c5;
   background-image: -webkit-gradient(linear, left top, right top, from(#0141c5), to(#0084ff));
   background-image: linear-gradient(to right, #0141c5, #0084ff);
+  color: #ffffff;
+}
+
+.button-add {
+  margin: 10px 2px;
+  width: auto;
+  padding: 10px 15px;
+  border-radius: 25px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: .2s;
+  transition: .2s;
+  border: solid 2px #0141c5;
+  background-color: #ffffff;
+  color: #0141c5;
+  text-align: center;
+}
+
+.button-add:hover {
+  background-color: #0141c5;
+  color: #ffffff;
+}
+
+.button-number {
+  margin: 10px 1vw;
+  width: auto;
+  padding: 10px 15px;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-transition: .2s;
+  transition: .2s;
+  border: solid 2px #ffffff;
+  background-color: #ffffff;
+  color: red;
+  text-align: center;
+}
+
+.button-number:hover {
+  background-color: red;
   color: #ffffff;
 }
 
@@ -1083,10 +1132,112 @@ body {
   }
 }
 
+.add-points .col .article__container {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.add-points .col .article__container .article__box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 @media only screen and (max-width: 575.99px) {
   .add-points .col {
     padding: 0;
   }
+  .add-points .col .article__container {
+    padding: 0;
+  }
+  .add-points .col .article__container .article__box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding: 0;
+    cursor: pointer;
+  }
+  .add-points .col .article__container .article__box .article__item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+    padding: 15px;
+  }
+  .add-points .col .article__container .article__box .article__item .large {
+    vertical-align: -35%;
+  }
+  .add-points .col .article__container .article__box .article__item .article__title {
+    color: #0141c5;
+  }
+  .add-points .col .article__container .article__box .article__item:first-of-type {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .add-points .col .article__container .article__box .article__item:last-of-type {
+    display: none;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(2) {
+    background-color: #a2a4aa;
+    padding: 0 10px;
+    border-bottom: solid 1px #ffffff;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(2) .article__item {
+    min-height: 40px;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(2) .article__item .article__text {
+    color: white;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(3) {
+    background-color: #a2a4aa;
+    border-radius: 0 0 4px 4px;
+    padding: 0 10px;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(3) .article__item {
+    min-height: 40px;
+  }
+  .add-points .col .article__container .article__box:nth-of-type(3) .article__item .article__text {
+    color: white;
+  }
+}
+
+#dodaj {
+  text-align: center;
+}
+
+#dodaj button[form] {
+  padding: 10px;
+  color: green;
+  font-size: 18px;
+  width: 60px;
+  height: 60px;
+}
+
+#dodaj button[form]:hover {
+  color: #ffffff;
+  background-color: green;
+}
+
+#dodaj button[form]:nth-of-type(4) {
+  color: red;
+}
+
+#dodaj button[form]:nth-of-type(4):hover {
+  background-color: red;
+  color: #ffffff;
 }
 
 /*Test-SASS*/

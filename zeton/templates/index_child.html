@@ -54,37 +54,58 @@
 </section>
 
 <section class="add-points">
-  <div class="col col-sm-12 col-md-6">
+  <div class="col col-sm-12 col-md-12">
     <article class="article__container">
-      <div id="dodawanie" class="col-xl-6 square text-align-right">
-        {% block add_points %}{% endblock add_points %}
-        <form>
-          <div class="form-group button">
-            <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
-          </div>
-        </form>
+      <!--dodawanie-->
+      <div id="dodawanie" class="article__box">
+        <div class="article__item" data-switch-target="one">
+          <h3 class="article__title"><span class="large">+</span></h3>
+          <h3 class="article__title">Dodaj punkty</h3>
+        </div>
+        <div class="article__item" data-switch-target="two">          
+          {% block add_points %}{% endblock add_points %}
+        </div>
+      </div>
+      <!--szczegóły-->
+      <div id="details-container" class="article__box">
+        <div class="article__item" data-switch-target="three">
+          <p class="article__text">Szczegóły</p>
+        </div>
+        <div class="article__item" data-switch-target="four">
+          <h3 class="article__title">Sposób na zdobycie punktów</h3>
+          <br>
+          <ul>
+            <table>
+              <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Punkty</th>
+              </tr>
+              {% for task in childs_tasks %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ task.name }}</td>
+                <td>{{ task.points }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+          </ul>
+        </div>
+      </div>
+      <!--historia-->
+      <div id="history-container" class="article__box">
+        <div class="article__item" data-switch-target="five">
+          <p class="article__text">Historia</p>
+        </div>
+        <div class="article__item" data-switch-target="six">    
+          <p>Test test</p>      
+          {% block history %}{% endblock history %}
+        </div>
       </div>
     </article>
   </div>
-  <div class="col col-sm-12 col-md-6">
-    <h2 class="text-center">Sposób na zdobycie punktów</h2>
-    <br>
-    <ul>
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Nazwa</th>
-          <th>Punkty</th>
-        </tr>
-        {% for task in childs_tasks %}
-        <tr>
-          <td>{{ loop.index }}</td>
-          <td>{{ task.name }}</td>
-          <td>{{ task.points }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-    </ul>
+  <div class="col col-sm-12 col-md-12">
+
   </div>
   <h5 class="text-center">SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
   </div>
@@ -174,4 +195,5 @@
 
   </div>
 </section>
+<script type="text/javascript" src="../static/scripts/openContainer.js"></script>
 {%endblock%}

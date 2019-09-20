@@ -1,12 +1,118 @@
 .add-points {
     .col {
-        .article__container {}
+        .article__container {
+            flex-direction: column;
+
+            .article__box {
+                display: flex;
+            }
+        }
     }
 
     @media only screen and (max-width: $zet-screen-sm-max) {
 
         .col {
             padding: 0;
+
+            .article__container {
+                //flex-direction: column;
+                padding: 0;
+
+                .article__box {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0;
+                    cursor: pointer;
+
+                    .article__item {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        padding: 15px;
+
+                        .large {
+                            vertical-align: -35%;
+                        }
+
+                        .article__title {
+                            color: $zet-blue-color;
+                        }
+
+                        &:first-of-type {
+                            display: flex;
+                        }
+
+                        &:last-of-type {
+
+
+                            display: none;
+
+
+                        }
+                    }
+
+
+                    &:nth-of-type(2) {
+                        background-color: $zet-gray-color;
+                        //border-radius: 0 0 $zet-box-radius $zet-box-radius;
+                        padding: 0 10px;
+                        border-bottom: solid 1px $zet-white-color;
+
+                        .article__item {
+                            min-height: 40px;
+
+                            .article__text {
+                                color: white;
+                            }
+                        }
+                    }
+
+                    &:nth-of-type(3) {
+                        background-color: $zet-gray-color;
+                        border-radius: 0 0 $zet-box-radius $zet-box-radius;
+                        padding: 0 10px;
+
+                        .article__item {
+                            min-height: 40px;
+
+                            .article__text {
+                                color: white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#dodaj {
+    text-align: center;
+
+    button[form] {
+        //border-radius: 50%;
+        padding: 10px;
+        color: $zet-green-color;
+        font-size: 18px;
+        width: 60px;
+        height: 60px;
+
+        &:hover {
+            color: $zet-white-color;
+            background-color: $zet-green-color;
+
+        }
+
+        &:nth-of-type(4) {
+            color: $zet-red-color;
+
+            &:hover {
+
+                background-color: $zet-red-color;
+                color: $zet-white-color;
+
+            }
         }
     }
 }

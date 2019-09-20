@@ -1,4 +1,4 @@
-.button-checkout {
+.button-switch {
     width: calc(100px + 3vw);
     padding: 10px 15px;
     border-radius: 25px;
@@ -15,3 +15,44 @@
         color: $zet-white-color;
     }
 }
+
+.button-add {
+    margin: 10px 2px;
+    width: auto;
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: $zet-box-shadow;
+    transition: .2s;
+    border: solid 2px $zet-blue-color;
+    background-color: $zet-white-color;
+    color: $zet-blue-color;
+    text-align: center;
+
+    &:hover {
+        //border: solid 1px $zet-blue-color;
+        background-color: $zet-blue-color;
+        //background-image: $zet-bg-gradient;
+        color: $zet-white-color;
+    }
+}
+
+.button-number {
+    margin: 10px 1vw;
+    width: auto;
+    padding: 10px 15px;
+    border-radius: $zet-box-radius;
+    box-shadow: $zet-box-shadow;
+    transition: .2s;
+    border: solid 2px $zet-white-color;
+    background-color: $zet-white-color;
+    color: $zet-red-color;
+    text-align: center;
+
+    &:hover {
+        //border: solid 1px $zet-blue-color;
+        background-color: $zet-red-color;
+        //background-image: $zet-bg-gradient;
+        color: $zet-white-color;
+    }
+}
+
