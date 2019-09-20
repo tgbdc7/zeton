@@ -20,3 +20,12 @@ def add_exp(exp, user_id):
     query = 'UPDATE users SET exp = exp + ?  WHERE id = ?;'
     get_db().execute(query, [exp, user_id])
     get_db().commit()
+def get_points_history(child_id):
+    query = 'SELECT p.points_change, p.change_timestamp, u.firstname ' \
+            'FROM points_history p ' \
+            'INNER JOIN users u ' \
+            'ON (p.id_changing_user=u.id) ' \
+            'WHERE p.child_id = ? ' \
+            'ORDER BY p.id DESC LIMIT 10'
+    result = get_db().execute(query, [child_id,])
+    return result.fetchall()

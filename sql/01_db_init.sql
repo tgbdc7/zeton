@@ -1,5 +1,6 @@
 PRAGMA foreign_keys = ON;
 
+
 DROP TABLE IF EXISTS home_points;
 DROP TABLE IF EXISTS prizes;
 DROP TABLE IF EXISTS points_history;
@@ -12,7 +13,7 @@ DROP TABLE IF EXISTS users;
 create table users
 (
   id                      integer UNIQUE primary key autoincrement,
-  username                text not null,
+  username                text UNIQUE not null,
   password                text not null,
   role                    text not NULL check ( role in ('caregiver', 'child') ),
   firstname               text,
@@ -77,12 +78,12 @@ create table prizes
 
 create table points_history
 (
-  id              INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
-  child_id        INTEGER NOT NULL,
-  points_change   INTEGER NOT NULL,
-  id_changing_user INTEGER NOT NULL,
-  points_name            TEXT NOT NULL DEFAULT 'points_name',
-  change_timestamp TEXT NOT NULL,
+  id                        INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+  child_id                  INTEGER NOT NULL,
+  points_change             INTEGER NOT NULL,
+  id_changing_user          INTEGER NOT NULL,
+  points_name               TEXT NOT NULL DEFAULT 'points_name',
+  change_timestamp          TEXT NOT NULL,
   FOREIGN KEY (child_id) REFERENCES users (id),
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );
