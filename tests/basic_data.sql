@@ -42,7 +42,7 @@ VALUES (4, 2, 'spakowanie plecaka', 20, 1, 5, 1);
 INSERT INTO home_points
 VALUES (5, 2, 'spakowanie plecaka z rodzicem', 20, 1, 5, 1);
 INSERT INTO home_points
-VALUES (6, 2, 'pomoc rodzicom', 10, 3, 35);
+VALUES (6, 2, 'pomoc rodzicom', 10, 3, 35 ,0);
 INSERT INTO home_points
 VALUES (7, 2, 'podlanie kwiatów', 5, 1, 7, 1);
 INSERT INTO home_points
