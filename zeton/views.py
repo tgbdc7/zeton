@@ -64,9 +64,6 @@ def task_detail(child_id):
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
-               'role': role}
-    context = {'child': child,
-               'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
                'role': role,
                }
@@ -155,3 +152,23 @@ def bans_detail(child_id):
                'role': role}
 
     return render_template('bans_detail.html', **context)
+
+
+@bp.route('/assign/<child_id>/add_caregiver_to_child')
+@auth.login_required
+@auth.logged_child_or_caregiver_only
+def add_caregiver_to_child(child_id):
+    role = g.user_data['role']
+
+    try:
+        child = users.get_child_data(child_id)
+    except TypeError:
+        return abort(403)
+
+    context = {'child': child,
+               'role': role,
+               "firstname": g.user_data['firstname']}
+
+    messages = get_flashed_messages()
+
+    return render_template('add_caregiver_to_child.html', **context, messages=messages)
