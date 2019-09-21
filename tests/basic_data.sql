@@ -32,21 +32,21 @@ INSERT INTO bans_name
 VALUES (6, 2, 6, 'BAN 2 stopnia na 24h - brak komputera i telefonu');
 
 INSERT INTO home_points
-VALUES (1, 2, 'sprzątanie pokoju', 20, 1, 7);
+VALUES (1, 2, 'sprzątanie pokoju', 20, 1, 7, 1);
 INSERT INTO home_points
-VALUES (2, 2, 'wykonanie polecenia bez zwłoki', 20, 1, 7);
+VALUES (2, 2, 'wykonanie polecenia bez zwłoki', 20, 1, 7, 0);
 INSERT INTO home_points
-VALUES (3, 2, 'odrobienie lekcji', 20, 1, 5);
+VALUES (3, 2, 'odrobienie lekcji', 20, 1, 5, 1);
 INSERT INTO home_points
-VALUES (4, 2, 'spakowanie plecaka', 20, 1, 5);
+VALUES (4, 2, 'spakowanie plecaka', 20, 1, 5, 1);
 INSERT INTO home_points
-VALUES (5, 2, 'spakowanie plecaka z rodzicem', 20, 1, 5);
+VALUES (5, 2, 'spakowanie plecaka z rodzicem', 20, 1, 5, 1);
 INSERT INTO home_points
 VALUES (6, 2, 'pomoc rodzicom', 10, 3, 35);
 INSERT INTO home_points
-VALUES (7, 2, 'podlanie kwiatów', 5, 1, 7);
+VALUES (7, 2, 'podlanie kwiatów', 5, 1, 7, 1);
 INSERT INTO home_points
-VALUES (8, 2, 'pomoc ślepej sąsiadce', 20, 1, 7);
+VALUES (8, 2, 'pomoc ślepej sąsiadce', 20, 1, 7, 0);
 
 INSERT INTO prizes
 VALUES (1, 2, '1 min komputer', 1, 30, 180, 720);
