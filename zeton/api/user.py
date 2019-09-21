@@ -78,3 +78,26 @@ def set_firstname():
     flash('Imię zostało zmienione')
 
     return redirect(url_for('views.firstname_change'))
+
+
+@bp.route('/<child_id>/assign/set_caregiver_to_child', methods=['POST'])
+@auth.login_required
+@auth.caregiver_only
+def set_caregiver_to_child(child_id):
+    child_id = int(child_id)
+
+    caregiver_username_to_child = request.form.get('caregiver_username_to_child')
+    caregiver_id_to_child = users.get_user_id(caregiver_username_to_child)
+    caregiver_data_to_child = users.get_user_data(caregiver_id_to_child)
+
+    if caregiver_id_to_child:
+        if caregiver_data_to_child['role'] == g.user_data['role']:
+            if not users.is_child_under_caregiver(child_id, caregiver_id_to_child):
+                users.associate_child_with_caregiver(caregiver_id_to_child, child_id)
+                flash('Opiekun został przydzielony do dziecka')
+            else:
+                flash('Dziecko już należy do tego opiekuna')
+    else:
+        flash('Wprowadź poprawny login (username) opiekuna')
+
+    return redirect(url_for('views.add_caregiver_to_child', child_id=child_id))
