@@ -60,6 +60,7 @@ create table home_points
   points          INTEGER NOT NULL,
   max_day         INTEGER NOT NULL,
   max_week        INTEGER NOT NULL,
+  is_active       BIT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

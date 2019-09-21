@@ -37,12 +37,12 @@
                         <th>Nazwa</th>
                         <th>Punkty</th>
                     </tr>
-                    {% for task in childs_tasks %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.points }}</td>
-                    </tr>
+                    {% for task in  childs_tasks %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.points }}</td>
+                            </tr>
                     {% endfor %}
                 </table>
             </ul>
