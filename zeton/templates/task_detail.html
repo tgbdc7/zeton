@@ -1,5 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="col col-sm-12">
+        {% include "childs_basic_data.html" %}
+        <div class="col col-sm-12">
+            <div class="row">
+                <div id="dodawanie" class="col-xl-6 square text-align-right">
+                    <h2 class="text-center">Sposoby na zdobycie punktów</h2>
+                    <br>
+                    <ul>
+                        <table>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nazwa</th>
+                                <th>Punkty</th>
+                                <th>Maksymalnie dziennie</th>
+                                <th>Maksymalnie tygodniowo</th>
+                            </tr>
+                            {% for task in childs_tasks %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ task.name }}</td>
+                                    <td>{{ task.points }}</td>
+                                    <td>{{ task.max_day }}</td>
+                                    <td>{{ task.max_week }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    </ul>
+                </div>
+            </div>
 <div class="col col-sm-12">
     <div class="text-center">
         <h2>{{ child.firstname }}</h2>
@@ -67,14 +96,14 @@
         {% endblock %}
     </div>
 
-    <form>
-        <div class="button">
-            {% if role == 'caregiver' %}
-            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-            {% endif %}
-            <a class="btn btn-info" href="/">Strona główna</a>
-            <a class="btn btn-info" href="/logout">Wyloguj</a>
-        </div>
-    </form>
+            <form>
+                <div class="button">
+                    {% if role == 'caregiver' %}
+                        <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                    {% endif %}
+                    <a class="btn btn-info" href="/">Strona główna</a>
+                    <a class="btn btn-info" href="/logout">Wyloguj</a>
+                </div>
+            </form>
 
-    {% endblock %}
+{% endblock %}

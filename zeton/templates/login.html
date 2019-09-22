@@ -9,7 +9,7 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap&subset=latin-ext"
-        rel="stylesheet">    
+        rel="stylesheet">
     <title>Żeton</title>
 </head>
 
@@ -31,8 +31,10 @@
                     <label for="inputPassword1">Hasło</label>
                     <input type="password" class="form-control" name="password" id="inputPassword1" placeholder="Hasło">
                 </div>
-                <div class="form-group button article__item">                    
+                <div class="form-group button article__item">
                     <button type="submit" class="button-switch">Prześlij</button>
+                    <!--#TODO add and styling button `Zarejestruj się`   -->
+                    <a href="{{ url_for('auth.register') }}" class="btn btn-info" role="button">Zarejestruj się</a>
                 </div>
                 {% if error %}
                 <h3 style="text-align: center; color: red;">Błędny login lub hasło</h3>

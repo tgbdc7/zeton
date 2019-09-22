@@ -1,62 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col col-sm-12">
-    <div class="text-center">
-        <h2>{{ child.firstname }}</h2>
-        <h2> Ilość punktów {{ child.points }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+    <div class="col col-sm-12">
+        {% include "childs_basic_data.html" %}
+        <div id="odejmowanie" class="col-xl-12 square">
+            <h2 class="text-center">Wykorzystaj punkty</h2>
 
-        {% if child.bans.6.active %}
-        <h2 style="color: red;"> Masz BANA !</h2>
-        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
-        {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
-        {% endif %}
-    </div>
-    <div id="odejmowanie" class="col-xl-12 square">
-        <h2 class="text-center">Wykorzystaj punkty</h2>
+            <form action="/api/child/{{ child.id }}/points/use?return_url=/prizes_detail/{{ child.id }}" method="post">
+                <div class="form-group button">
+                    Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-        <form action="/api/child/{{ child.id }}/points/use?return_url=/prizes_detail/{{ child.id }}" method="post">
-            <div class="form-group button">
-                Liczba punktów: <input class="form-control" type="number" name="points" required>
+                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                </div>
+                <h4 class="text-center">NAGRODY</h4>
+            </form>
 
-                <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-            </div>
-            <h4 class="text-center">NAGRODY</h4>
-        </form>
+            <ul style="text-align:left;">
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nazwa</th>
+                        <th>Punkty</th>
+                        <th>Max. dziennie</th>
+                        <th>Max. tygodniowo</th>
+                        <th>Max. miesięcznie</th>
+                    </tr>
+                    {% for prize in childs_prizes %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ prize.name }}</td>
+                            <td>{{ prize.points }}</td>
+                            <td>{{ prize.max_day }}</td>
+                            <td>{{ prize.max_week }}</td>
+                            <td>{{ prize.max_month }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </ul>
 
-        <ul style="text-align:left;">
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>Nazwa</th>
-                    <th>Punkty</th>
-                    <th>Max. dziennie</th>
-                    <th>Max. tygodniowo</th>
-                    <th>Max. miesięcznie</th>
-                </tr>
-                {% for prize in childs_prizes %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ prize.name }}</td>
-                    <td>{{ prize.points }}</td>
-                    <td>{{ prize.max_day }}</td>
-                    <td>{{ prize.max_week }}</td>
-                    <td>{{ prize.max_month }}</td>
-                </tr>
-                {% endfor %}
-            </table>
-        </ul>
-
-    </div>
-
-    <form>
-        <div class="button">
-            {% if role == 'caregiver' %}
-            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-            {% endif %}
-            <a class="btn btn-info" href="/">Strona główna</a>
-            <a class="btn btn-info" href="/logout">Wyloguj</a>
         </div>
-    </form>
-    {% endblock %}
+
+        <form>
+            <div class="button">
+                {% if role == 'caregiver' %}
+                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                {% endif %}
+                <a class="btn btn-info" href="/">Strona główna</a>
+                <a class="btn btn-info" href="/logout">Wyloguj</a>
+            </div>
+        </form>
+{% endblock %}

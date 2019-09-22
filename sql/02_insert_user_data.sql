@@ -7,6 +7,8 @@ INSERT INTO users VALUES(4,'opiekun2','pbkdf2:sha256:50000$UXPZgrr8$0981537e8e9d
 INSERT INTO users VALUES(5,'dziecko3','pbkdf2:sha256:50000$plsLYnx2$db59410c22b1e5a9bda5e1ee1a74a8f3ff219bb83e7f7ce2de00930006e9673c','child','Ewelina',NULL,0,0,0,0);
 INSERT INTO users VALUES(6,'dziecko4','pbkdf2:sha256:50000$qYXjlGbk$ffbb4b0157f254d360dd80ebef8895462d3b569362e45108728be2c4672fcd0b','child','Filip',NULL,0,0,0,0);
 INSERT INTO users VALUES(7,'dyrektor','pbkdf2:sha256:50000$uqVtNvPR$345a77790d4315661830b14f1545528a518722273952cc06c3a4b810454d24e8','caregiver','Zbigniew',NULL,0,0,0,0);
+INSERT INTO users VALUES(8, 'opiekun_biz','hash_password','caregiver','Marcin',NULL,0,0,0,0);
+INSERT INTO users VALUES(9, 'dziecko_biz', 'hash_password','child','Marcinek',NULL,0,0,0,0);
 
 INSERT INTO caregiver_to_child VALUES(1,1,2);
 INSERT INTO caregiver_to_child VALUES(2,1,3);
@@ -16,6 +18,7 @@ INSERT INTO caregiver_to_child VALUES(5,7,2);
 INSERT INTO caregiver_to_child VALUES(6,7,3);
 INSERT INTO caregiver_to_child VALUES(7,7,5);
 INSERT INTO caregiver_to_child VALUES(8,7,6);
+INSERT INTO caregiver_to_child VALUES(9,8,9);
 
 INSERT INTO bans_name VALUES(1,2,1,'1 ustne ostrzeżenie');
 INSERT INTO bans_name VALUES(2,2,2,'2 ustne ostrzeżenie');
@@ -45,27 +48,27 @@ INSERT INTO bans_name VALUES(22,6,4,'BAN 2 stopnia na 30 min - brak bajek i gier
 INSERT INTO bans_name VALUES(23,6,5,'BAN 1 stopnia na 24h - brak gier');
 INSERT INTO bans_name VALUES(24,6,6,'BAN 2 stopnia na 24h - brak bajek i gier');
 
-INSERT INTO home_points VALUES(1,2,"sprzątanie pokoju",20,1,7);
-INSERT INTO home_points VALUES(2,2,"wykonanie polecenia bez zwłoki",20,1,7);
-INSERT INTO home_points VALUES(3,2,"odrobienie lekcji",20,1,5);
-INSERT INTO home_points VALUES(4,2,"spakowanie plecaka",20,1,5);
-INSERT INTO home_points VALUES(5,2,"spakowanie plecaka z rodzicem",20,1,5);
-INSERT INTO home_points VALUES(6,2,"pomoc rodzicom",10,3,35);
-INSERT INTO home_points VALUES(7,2,"podlanie kwiatów",5,1,7);
-INSERT INTO home_points VALUES(8,2,"pomoc ślepej sąsiadce",20,1,7);
+INSERT INTO home_points VALUES(1,2,"sprzątanie pokoju",20,1,7,1);
+INSERT INTO home_points VALUES(2,2,"wykonanie polecenia bez zwłoki",20,1,7,1);
+INSERT INTO home_points VALUES(3,2,"odrobienie lekcji",20,1,5,0);
+INSERT INTO home_points VALUES(4,2,"spakowanie plecaka",20,1,5,0);
+INSERT INTO home_points VALUES(5,2,"spakowanie plecaka z rodzicem",20,1,5,0);
+INSERT INTO home_points VALUES(6,2,"pomoc rodzicom",10,3,35,0);
+INSERT INTO home_points VALUES(7,2,"podlanie kwiatów",5,1,7,1);
+INSERT INTO home_points VALUES(8,2,"pomoc ślepej sąsiadce",20,1,7,1);
 
-INSERT INTO home_points VALUES(9,3,"granie na instrumencie",20,1,7);
-INSERT INTO home_points VALUES(10,3,"wyprowadzanie psa",5,3,35);
-INSERT INTO home_points VALUES(11,3,"sprawdzanie skrzynki na listy",20,1,7);
+INSERT INTO home_points VALUES(9,3,"granie na instrumencie",20,1,7,1);
+INSERT INTO home_points VALUES(10,3,"wyprowadzanie psa",5,3,35,0);
+INSERT INTO home_points VALUES(11,3,"sprawdzanie skrzynki na listy",20,1,7,1);
 
-INSERT INTO home_points VALUES(12,5,"ścieranie kurzy",10,1,3);
-INSERT INTO home_points VALUES(13,5,"czytanie książki",10,1,7);
-INSERT INTO home_points VALUES(14,5,"trening na basenie",20,1,2);
-INSERT INTO home_points VALUES(15,5,"mycie okien",100,1,1);
+INSERT INTO home_points VALUES(12,5,"ścieranie kurzy",10,1,3,1);
+INSERT INTO home_points VALUES(13,5,"czytanie książki",10,1,7,1);
+INSERT INTO home_points VALUES(14,5,"trening na basenie",20,1,2,0);
+INSERT INTO home_points VALUES(15,5,"mycie okien",100,1,1,0);
 
-INSERT INTO home_points VALUES(16,6,"karmienie rybek",5,1,7);
-INSERT INTO home_points VALUES(17,6,"naprawianie motocyklu - 20 min",20,1,2);
-INSERT INTO home_points VALUES(18,6,"powrót do domu przed 20",10,1,7);
+INSERT INTO home_points VALUES(16,6,"karmienie rybek",5,1,7,0);
+INSERT INTO home_points VALUES(17,6,"naprawianie motocyklu - 20 min",20,1,2,1);
+INSERT INTO home_points VALUES(18,6,"powrót do domu przed 20",10,1,7,1);
 
 INSERT INTO prizes VALUES(1,2,"1 min komputer", 1, 30, 180, 720);
 INSERT INTO prizes VALUES(2,2,"cola (200ml)", 20, 1, 1, 4);
