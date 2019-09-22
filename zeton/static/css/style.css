@@ -224,7 +224,7 @@ body {
 
 .button-add {
   margin: 10px 2px;
-  width: auto;
+  width: calc(110px + 4vw);
   min-width: 133px;
   padding: 10px 15px;
   border-radius: 25px;
@@ -259,6 +259,14 @@ body {
 .button-number:hover {
   background-color: red;
   color: #ffffff;
+}
+
+.form .form-group {
+  margin: 0 0 5px;
+}
+
+.form .form-group .form__label {
+  margin: 5px 0;
 }
 
 /* Sections */
