@@ -1,17 +1,19 @@
 .button-switch {
-    width: calc(100px + 3vw);
+    width: calc(110px + 4vw);
+    min-width: 133px;
     padding: 10px 15px;
     border-radius: 25px;
     box-shadow: $zet-box-shadow;
     transition: .2s;
-    border: solid 1px $zet-gray-color;
-    background-color: $zet-gray-color;
+    border: solid 1px $zet-blue-color;
+    background-color: $zet-blue-color;
     color: $zet-white-color;
 
     &:hover {
-        border: solid 1px transparent;
-        background-color: $zet-blue-color;
-        background-image: $zet-bg-gradient;
+        border: solid 1px $zet-gray-color;
+        background-color: $zet-gray-color;
+
+        //background-image: $zet-bg-gradient;
         color: $zet-white-color;
     }
 }
@@ -19,11 +21,12 @@
 .button-add {
     margin: 10px 2px;
     width: auto;
+    min-width: 133px;
     padding: 10px 15px;
     border-radius: 25px;
-    box-shadow: $zet-box-shadow;
+    //box-shadow: $zet-box-shadow;
     transition: .2s;
-    border: solid 2px $zet-blue-color;
+    border: solid 1.5px $zet-blue-color;
     background-color: $zet-white-color;
     color: $zet-blue-color;
     text-align: center;
@@ -55,4 +58,3 @@
         color: $zet-white-color;
     }
 }
-

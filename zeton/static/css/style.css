@@ -203,36 +203,34 @@ body {
 }
 
 .button-switch {
-  width: calc(100px + 3vw);
+  width: calc(110px + 4vw);
+  min-width: 133px;
   padding: 10px 15px;
   border-radius: 25px;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .2s;
   transition: .2s;
-  border: solid 1px #a2a4aa;
-  background-color: #a2a4aa;
+  border: solid 1px #0141c5;
+  background-color: #0141c5;
   color: #ffffff;
 }
 
 .button-switch:hover {
-  border: solid 1px transparent;
-  background-color: #0141c5;
-  background-image: -webkit-gradient(linear, left top, right top, from(#0141c5), to(#0084ff));
-  background-image: linear-gradient(to right, #0141c5, #0084ff);
+  border: solid 1px #a2a4aa;
+  background-color: #a2a4aa;
   color: #ffffff;
 }
 
 .button-add {
   margin: 10px 2px;
   width: auto;
+  min-width: 133px;
   padding: 10px 15px;
   border-radius: 25px;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-          box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .2s;
   transition: .2s;
-  border: solid 2px #0141c5;
+  border: solid 1.5px #0141c5;
   background-color: #ffffff;
   color: #0141c5;
   text-align: center;
@@ -627,6 +625,7 @@ body {
 .login {
   width: 500px;
   max-width: 1200px;
+  min-width: 296px;
   margin: calc(100px + 5vh) auto;
   background-color: #ffffff;
   -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -666,6 +665,29 @@ body {
           justify-content: center;
   vertical-align: center;
   padding: calc(5px + 2vh) 0 calc(5px + 2vh);
+}
+
+.login .col .form .article__item .button-switch,
+.login .col .form .article__item .button-add {
+  margin: 0 5px;
+}
+
+@media only screen and (max-width: 575.99px) {
+  .login .col .form .article__item {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .login .col .form .article__item .button-switch {
+    margin: 5px auto 10px;
+    width: auto;
+    max-width: 90%;
+  }
+  .login .col .form .article__item .button-add {
+    margin: 10px auto 0;
+    max-width: 90%;
+  }
 }
 
 .login-header {

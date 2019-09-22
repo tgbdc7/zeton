@@ -1,6 +1,7 @@
 .login {
     width: 500px;
     max-width: 1200px;
+    min-width: 296px;
     margin: calc(100px + 5vh) auto;
     background-color: $zet-white-color;
     box-shadow: $zet-box-shadow;
@@ -34,6 +35,25 @@
                 vertical-align: center;
                 padding: calc(5px + 2vh) 0 calc(5px + 2vh);
 
+                .button-switch,
+                .button-add {
+                    margin: 0 5px;
+                }
+
+                @media only screen and (max-width: $zet-screen-sm-max) {
+                    flex-direction: column;
+
+                    .button-switch {
+                        margin: 5px auto 10px;
+                        width: auto;
+                        max-width: 90%;
+                    }
+
+                    .button-add {
+                        margin: 10px auto 0;
+                        max-width: 90%;
+                    }
+                }
             }
         }
     }
