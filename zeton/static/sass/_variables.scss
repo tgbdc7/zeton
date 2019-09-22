@@ -1,0 +1,40 @@
+/* Colors */
+$zet-bg-color: #f4f5f9;
+$zet-white-color: #ffffff;
+$zet-blue-color: #0141c5;
+$zet-blueLigher-color: #0084ff;
+$zet-black-color: #000000;
+$zet-gray-color: #a2a4aa;
+$zet-red-color: red;
+$zet-green-color: green;
+$zet-box-shadow: 0 0 10px 0 rgba(0, 0, 0, .1);
+$zet-bg-gradient: linear-gradient(to right, $zet-blue-color , $zet-blueLigher-color);
+
+/* Media queries */
+$zet-screen-sm-max: 575.99px;
+$zet-screen-sm-min: 576px;
+
+$zet-screen-md-max: 767.99px;
+$zet-screen-md-min: 768px;
+
+$zet-screen-lg-max: 991.99px;
+$zet-screen-lg-min: 992px;
+
+$zet-screen-xl-max: 1199.99px;
+$zet-screen-xl-min: 1200px;
+
+/* Margins */
+$zet-box-radius: 4px;
+
+
+/* Font size */
+%section-title {
+    font-size: calc(24px + 1vw);
+    //font-weight: bold;
+    line-height: 180%;
+}
+
+%article-title {
+    font-size: calc(18px + 1vw);
+    line-height: 180%;
+}
