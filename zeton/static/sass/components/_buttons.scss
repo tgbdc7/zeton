@@ -19,13 +19,9 @@
 }
 
 .button-add {
+    @extend .button-switch;
     margin: 10px 2px;
-    width: calc(110px + 4vw);
-    min-width: 133px;
-    padding: 10px 15px;
-    border-radius: 25px;
-    //box-shadow: $zet-box-shadow;
-    transition: .2s;
+    box-shadow: none;    
     border: solid 1.5px $zet-blue-color;
     background-color: $zet-white-color;
     color: $zet-blue-color;

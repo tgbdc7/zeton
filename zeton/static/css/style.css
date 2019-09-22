@@ -202,7 +202,7 @@ body {
   margin: 0 auto;
 }
 
-.button-switch {
+.button-switch, .button-add {
   width: calc(110px + 4vw);
   min-width: 133px;
   padding: 10px 15px;
@@ -216,7 +216,7 @@ body {
   color: #ffffff;
 }
 
-.button-switch:hover {
+.button-switch:hover, .button-add:hover {
   border: solid 1px #a2a4aa;
   background-color: #a2a4aa;
   color: #ffffff;
@@ -224,12 +224,8 @@ body {
 
 .button-add {
   margin: 10px 2px;
-  width: calc(110px + 4vw);
-  min-width: 133px;
-  padding: 10px 15px;
-  border-radius: 25px;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-box-shadow: none;
+          box-shadow: none;
   border: solid 1.5px #0141c5;
   background-color: #ffffff;
   color: #0141c5;
@@ -675,7 +671,7 @@ body {
   padding: calc(5px + 2vh) 0 calc(5px + 2vh);
 }
 
-.login .col .form .article__item .button-switch,
+.login .col .form .article__item .button-switch, .login .col .form .article__item .button-add,
 .login .col .form .article__item .button-add {
   margin: 0 5px;
 }
@@ -687,7 +683,7 @@ body {
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .login .col .form .article__item .button-switch {
+  .login .col .form .article__item .button-switch, .login .col .form .article__item .button-add {
     margin: 5px auto 10px;
     width: auto;
     max-width: 90%;
