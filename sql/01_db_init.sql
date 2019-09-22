@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS points_history;
 DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
+DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
 
 
@@ -17,12 +18,20 @@ create table users
   password                text not null,
   role                    text not NULL check ( role in ('caregiver', 'child') ),
   firstname               text,
-  lastname                text,
+  lastname                text
+);
+
+create table main_points
+(
+  id                      integer UNIQUE primary key autoincrement,
+  child_id                INTEGER,
   points                  integer default 0,
   last_insert_id          integer default 0,
   school_weekly_highscore integer default 0,
-  exp                     integer default 0
+  exp                     integer default 0,
+  FOREIGN KEY (child_id) REFERENCES users (id)
 );
+
 
 create table caregiver_to_child
 (
@@ -88,8 +97,8 @@ create table points_history
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );
 
-CREATE TRIGGER points_log  AFTER UPDATE ON users for each row when new.points <> old.points
+CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.points <> old.points
     begin
         INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp)
-        VALUES ( new.id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP);
+        VALUES ( new.child_id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP);
     END;

@@ -6,14 +6,23 @@ VALUES (1,
         'pbkdf2:sha256:150000$3YLzOKDd$2e1d50b8fc485efa0ee45fb20d15158712aab90538d3577e31b3dadf0fa0cf7d',
         'caregiver',
         'Pafnucy',
-        NULL, 0, 0, 0, 0);
+        NULL);
 INSERT INTO users
 VALUES (2,
         'child_login',
         'pbkdf2:sha256:150000$nbHPlxsT$5cad215cd4d5f0a5da6af2ebf3df8102decfe8e34fb0c651a34c69819e2e7cb5',
         'child',
         'Bonifacy',
-        NULL, 0, 0, 0, 0);
+        NULL);
+
+
+INSERT INTO main_points
+VALUES(1,
+       2,
+       0,
+       0,
+       0,
+       0);
 
 INSERT INTO caregiver_to_child
 VALUES (1, 1, 2);
