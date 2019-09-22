@@ -22,7 +22,7 @@ def test_logged_child_with_correct_credentials(client, auth):
     assert response.status_code == 200
 
     tree = html.fromstring(response.data)
-    username_element = tree.xpath('//div[@name="user_summary"]//h2[@name="username"]')[0]
+    username_element = tree.xpath('//h3[@name="username"]')[0]
     username = username_element.text
 
     assert username == CHILD_FIRSTNAME
