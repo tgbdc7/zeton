@@ -1,33 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col col-sm-6">
+            <section class="children">
+                {% for child in children %}
+                    <div class="col col-sm-12 col-md-12 col-lg-5">
+                        <article class="article__container">
+                            <div class="article__box">
+                                <div class="article__item">
+                                    <h3 class="article__title_light">{{ child.firstname }}</h3>
+                                    <div class="image__container">
+                                        <img class="portrait__image" src="../static/images/boy1.jpg">
+                                        <!--#TODO add avatar different for each child or default avatar -->
+                                    </div>
+                                </div>
+                                <div class="article__item">
+                                    <p class="article__text">PKT</p>
+                                    <h2 class="section__title_light">{{ child.points }}</h2>
+                                </div>
+                            </div>
+                            <div class="article__box">
+                                <a href="/child/{{ child.id }}" class="article__item">
+                                    <button class="button-switch">Wybierz</button>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                {% endfor %}
 
-    <form>
-        <h2>Witaj {{ firstname }}</h2>
+            </section>
 
-        <h3 class="text-center">Twoi podopieczni to: </h3>
-
-        <div class="list-group">
-            {% for child in children %}
-            <a href="/child/{{ child.id }}"
-               class="list-group-item list-group-item-action list-group-item-light">{{ child.firstname }}
-                : ma {{ child.points }} punktów.
-                {% if child.bans.6.active %}
-                <br>
-                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do
-                {{ child.bans.6.stop|ban_time }}
-                {% endif %}
-            </a>
-            <br>
-            {% endfor %}
-        </div>
-
+        <!--#TODO refactor and style this button group-->
         <div class="form-group button">
             <a class="btn btn-info" href="/logout">Wyloguj</a>
             <a class="btn btn-info" href="/settings">Ustawienia</a>
             <a href="{{ url_for('auth.add_person') }}" class="btn btn-info" role="button">Dodaj Osobę</a>
         </div>
-    </form>
-</div>
 {% endblock %}
 
