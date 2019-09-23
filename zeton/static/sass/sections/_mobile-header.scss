@@ -1,0 +1,25 @@
+.mobile-header {
+
+    display: none;
+
+    @media only screen and (max-width: $zet-screen-sm-max) {
+        display: block;
+        width: 100vw;
+        //display: none;
+
+        .mobile-brand {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $zet-gray-color;
+            background-image: url(../images/zeton1c-white.png);
+            background-size: 40%;
+            background-repeat: no-repeat;
+            background-position: 70%;
+            padding: 0 calc(100vw - 20px - 48px) 0 20px;
+            box-shadow: $zet-box-shadow;
+            height: 80px;
+            width: 100%;            
+        }
+    }
+}
