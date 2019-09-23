@@ -1,0 +1,35 @@
+{
+  "name": "zeton",
+  "version": "1.0.0",
+  "description": "Aplikacja wspomagająca terapię behawioralną. System żetonowy przeznaczony dla \r dziecka/ucznia. Pozwala na zdobywanie punktów za wykonywane czynności \r oraz wymienianie ich na nagrody.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgbdc7/zeton.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tgbdc7/zeton/issues"
+  },
+  "homepage": "https://github.com/tgbdc7/zeton#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5"
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "directories": {
+    "doc": "doc"
+  }
+}
