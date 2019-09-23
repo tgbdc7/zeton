@@ -35,3 +35,13 @@ def test_logged_with_incorrect_credentials(client, auth):
 
     assert response.status_code == 302
     assert response.location == 'http://localhost/login'
+
+
+def test_logout(client, auth):
+    auth.login(CHILD_LOGIN, CHILD_PASSWORD)
+    auth.logout()
+
+    response = client.get("/")
+
+    assert response.status_code == 302
+    assert response.location == 'http://localhost/login'
