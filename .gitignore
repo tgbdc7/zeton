@@ -6,3 +6,4 @@ _config.yml
 .vscode
 # database should not be stored in the repo
 db.sqlite
+.node_modules
