@@ -754,13 +754,20 @@ body {
   padding: 0;
   -webkit-transition: .2s;
   transition: .2s;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+@media only screen and (max-width: 575.99px) {
+  .children .col .article__container {
+    margin-bottom: calc(10px + 2vh);
+    margin-top: calc(10px + 2vh);
+  }
 }
 
 .children .col .article__container .article__box {
-  padding: calc(5px + 2vh) 10px;
+  padding: calc(5px + 1vh) 10px;
   background-color: #0141c5;
-  background-image: -webkit-gradient(linear, left top, right top, from(#0141c5), to(#0084ff));
-  background-image: linear-gradient(to right, #0141c5, #0084ff);
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -795,8 +802,8 @@ body {
 .children .col .article__container .article__box .article__item:nth-of-type(1) .image__container {
   border-radius: 50%;
   overflow: hidden;
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   padding: 0;
   background-color: #ffffff;
   margin: 0 auto 15px;
@@ -806,8 +813,20 @@ body {
 }
 
 .children .col .article__container .article__box .article__item:nth-of-type(1) .image__container .portrait__image {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
+}
+
+@media only screen and (max-width: 575.99px) {
+  .children .col .article__container .article__box .article__item:nth-of-type(1) .image__container {
+    width: 70px;
+    height: 70px;
+    border: solid 4px #ffffff;
+  }
+  .children .col .article__container .article__box .article__item:nth-of-type(1) .image__container .portrait__image {
+    width: 62px;
+    height: 62px;
+  }
 }
 
 .children .col .article__container .article__box .article__item:nth-of-type(2) {
@@ -874,8 +893,7 @@ body {
 @media only screen and (min-width: 576px) and (max-width: 991.99px) {
   .children .col .article__container:not(.active):hover .article__box {
     background-color: #0141c5;
-    background-image: -webkit-gradient(linear, left top, right top, from(#0141c5), to(#0084ff));
-    background-image: linear-gradient(to right, #0141c5, #0084ff);
+    width: 50%;
   }
   .children .col .article__container:not(.active):hover .article__box .article__item .image__container {
     border: solid 5px #ffffff;
