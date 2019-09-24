@@ -1,7 +1,8 @@
 import pytest
 from lxml import html
+from pytest import mark
 
-
+@mark.auth
 def test_not_logged_redirects_to_login_page(client):
     response = client.get("/")
 
@@ -14,6 +15,7 @@ CHILD_PASSWORD = 'child_password'
 CHILD_FIRSTNAME = 'Bonifacy'
 
 
+@mark.auth
 def test_logged_child_with_correct_credentials(client, auth):
     auth.login(CHILD_LOGIN, CHILD_PASSWORD)
 
@@ -28,6 +30,7 @@ def test_logged_child_with_correct_credentials(client, auth):
     assert username == CHILD_FIRSTNAME
 
 
+@mark.auth
 def test_logged_with_incorrect_credentials(client, auth):
     auth.login("non-existent-user", "wrong-password")
 
@@ -37,6 +40,7 @@ def test_logged_with_incorrect_credentials(client, auth):
     assert response.location == 'http://localhost/login'
 
 
+@mark.auth
 def test_logout(client, auth):
     auth.login(CHILD_LOGIN, CHILD_PASSWORD)
     auth.logout()
