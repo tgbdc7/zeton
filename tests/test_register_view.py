@@ -32,3 +32,19 @@ def test_api_registration(client):
     assert re.search('Witaj testowy_1', response.get_data(as_text=True))
 
 
+def test_register_with_missing_data(client):
+    # register with username missing
+    response = client.post('api/user', data={
+        'username': None,
+        'password': 'testowy_2'
+    })
+    assert response.status_code == 400
+
+    # register with password missing
+    response = client.post('/api/user', data={
+        'username': 'testowy_3',
+        'password': None
+    })
+    assert response.status_code == 400
+
+
