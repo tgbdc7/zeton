@@ -616,15 +616,16 @@ body {
     top: 0;
     left: 0;
     background-color: #a2a4aa;
-    background-image: url(../images/zeton1c-white.png);
-    background-size: 40%;
+    background-image: url(../images/zeton_white_transp.png);
+    background-size: calc(100px + 10%);
     background-repeat: no-repeat;
-    background-position: 70%;
+    background-position: 80%;
     padding: 0 calc(100vw - 20px - 48px) 0 20px;
     -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     height: 80px;
     width: 100%;
+    min-width: 250px;
   }
 }
 
