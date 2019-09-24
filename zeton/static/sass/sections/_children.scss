@@ -6,8 +6,10 @@
             margin-bottom: 30px;
             margin-top: 30px;
 
-            @media only screen and (max-width: $zet-screen-sm-max) { margin-bottom: calc(10px + 2vh);
-                margin-top: calc(10px + 2vh);}
+            @media only screen and (max-width: $zet-screen-sm-max) {
+                margin-bottom: calc(10px + 2vh);
+                margin-top: calc(10px + 2vh);
+            }
 
             .article__box {
                 padding: calc(5px + 1vh) 10px;
