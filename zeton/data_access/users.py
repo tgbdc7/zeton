@@ -88,6 +88,12 @@ def add_new_user(user_data):
     get_db().execute(query, user_data)
     get_db().commit()
 
+def add_new_point(child_id):
+    query ="INSERT INTO 'main_points' (child_id) VALUES (?)"
+
+    get_db().execute(query,(child_id,))
+    get_db().commit()
+
 
 def get_user_id(username):
     query = """

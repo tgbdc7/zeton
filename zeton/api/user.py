@@ -57,9 +57,12 @@ def register():
 
     if role == 'child':
         child_id = users.get_user_id(username)
+
         caregiver_id = g.user_data['id']
         users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
+        users.add_new_point(child_id)
+
 
     return redirect(url_for('views.index'))
 

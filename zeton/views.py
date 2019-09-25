@@ -18,9 +18,13 @@ def index():
     if role == 'caregiver':
         children = users.get_caregivers_children(logged_user_id)
         template = 'index_caregiver.html'
+
+        child_points = points.get_child_points(children[2]['id'])
+
         context.update({"firstname": g.user_data['firstname'],
                         "role": role,
-                        "children": children})
+                        "children": children,
+                        "child_points": child_points})
 
     elif role == 'child':
         template = 'index_child.html'
