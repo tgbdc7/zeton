@@ -156,7 +156,7 @@ def bans_detail(child_id):
 
 @bp.route('/assign/<child_id>/add_caregiver_to_child')
 @auth.login_required
-@auth.logged_child_or_caregiver_only
+@auth.caregiver_only
 def add_caregiver_to_child(child_id):
     role = g.user_data['role']
 
