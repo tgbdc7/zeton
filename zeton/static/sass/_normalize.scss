@@ -1,0 +1,50 @@
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+}
+
+a {
+    text-decoration: none;  
+    margin: 0;
+    color: $zet-black-color;  
+
+    &:hover {
+        text-decoration: none; 
+    }
+}
+
+li {
+    list-style: none;
+}
+
+h1, h2, h3, h4, p {
+    margin: 0;
+}
+
+/*main sections*/
+body {
+    background-color: $zet-bg-color;
+}
+
+.wrapper_withNavbar {    
+
+    @media only screen and (orientation: portrait) and (max-width: $zet-screen-sm-max) {
+        padding-left: 0; 
+        padding-top: 80px;        
+    }
+
+    @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {
+        padding-left: 80px;         
+    }
+    
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        padding-top: 80px;        
+    }
+}
