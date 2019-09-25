@@ -42,10 +42,10 @@
                                 <td>{{ loop.index }}</td>
                                 <td>{{ task.name }}</td>
                                 <td>{{ task.points }}</td>
-<<<<<<< HEAD
-                                <td><a class="btn btn-info" href="/api/child/{{ child.id }}/points/add/{{ task.points }}">Dodaj</a></td>
-=======
->>>>>>> master
+                                <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}" method="post">
+                                    <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
+                                </form>
+
                             </tr>
                     {% endfor %}
                 </table>

@@ -7,8 +7,7 @@ from zeton import auth
 from zeton.api import bp
 from zeton.data_access import users
 
-
-@bp.route("/child/<child_id>/points/add/<points>", methods=['GET'])
+@bp.route("/child/<child_id>/points/add/<points>", methods=['POST'])
 @auth.login_required
 @auth.caregiver_only
 def add_points(child_id,points):
