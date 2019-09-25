@@ -72,8 +72,45 @@ def is_child_under_caregiver(child_id, caregiver_id):
     result = get_db().execute(query, (child_id, caregiver_id))
     return result.fetchone()
 
+
 def update_password(user_id, hashed_new_password):
     query = "UPDATE users SET password = ? WHERE id = ?"
     params = (hashed_new_password, user_id)
+    get_db().cursor().execute(query, params)
+    get_db().commit()
+
+
+def add_new_user(user_data):
+    query = "INSERT INTO 'users' " \
+            "(username, password, role, firstname) " \
+            "VALUES (?, ?, ?, ?) "
+
+    get_db().execute(query, user_data)
+    get_db().commit()
+
+
+def get_user_id(username):
+    query = """
+    SELECT id FROM users
+    WHERE username = ?
+    """
+    result = get_db().execute(query, (username,))
+    row = result.fetchone()
+    if row:
+        return row['id']
+    return False
+
+
+def associate_child_with_caregiver(caregiver_id, child_id):
+    query = "INSERT INTO 'caregiver_to_child' " \
+            "(caregiver_id, child_id)" \
+            "VALUES (?, ?)"
+
+    get_db().execute(query, (caregiver_id, child_id))
+    get_db().commit()
+
+def update_firstname(user_id, new_firstname):
+    query = "UPDATE users SET firstname = ? WHERE id = ?"
+    params = (new_firstname, user_id)
     get_db().cursor().execute(query, params)
     get_db().commit()

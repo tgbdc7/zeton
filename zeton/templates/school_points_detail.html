@@ -1,40 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col col-sm-12">
-    <div class="text-center">
-        <h2>{{ child.firstname }}</h2>
-        <h2> Ilość punktów {{ child.points }} punktów</h2>
-        <h3>Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+    <div class="col col-sm-12">
+        {% include "childs_basic_data.html" %}
+        <div id="punkty_szkola" class="col-xl-12 square">
 
-        {% if child.bans.6.active %}
-        <h2 style="color: red;"> Masz BANA !</h2>
-        <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
-        {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
-        {% endif %}
-    </div>
-    <div id="punkty_szkola" class="col-xl-12 square">
+            <h2 class="text-center"> *** Punkty ze Szkoły *** </h2>
 
-        <h2 class="text-center"> *** Punkty ze Szkoły *** </h2>
-
-        <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
-        <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
-        <div><label> <input type="checkbox"> przyklad 4 </label></div>
-        <div><label> <input type="checkbox"> przyklad 5 </label></div>
-
-    </div>
-
-    <form>
-        <div class="button">
-            {% if role == 'caregiver' %}
-            <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-            {% endif %}
-            <a class="btn btn-info" href="/">Strona główna</a>
-            <a class="btn btn-info" href="/logout">Wyloguj</a>
+            <div><label> <input type="checkbox" name="1"> przyklad 1 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 2 </label></div>
+            <div><label> <input type="checkbox" name="1"> przyklad 3 </label></div>
+            <div><label> <input type="checkbox"> przyklad 4 </label></div>
+            <div><label> <input type="checkbox"> przyklad 5 </label></div>
         </div>
-    </form>
-</div>
 
-
+        <form>
+            <div class="button">
+                {% if role == 'caregiver' %}
+                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                {% endif %}
+                <a class="btn btn-info" href="/">Strona główna</a>
+                <a class="btn btn-info" href="/logout">Wyloguj</a>
+            </div>
+        </form>
+    </div>
 {% endblock %}

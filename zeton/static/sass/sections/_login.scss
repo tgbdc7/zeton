@@ -1,0 +1,60 @@
+.login {
+    width: 500px;
+    max-width: 1200px;
+    min-width: 296px;
+    margin: calc(100px + 5vh) auto;
+    background-color: $zet-white-color;
+    box-shadow: $zet-box-shadow;
+    border-radius: $zet-box-radius;
+    padding: 15px 0;
+
+    @media only screen and (max-width: $zet-screen-lg-max) {
+        width: 80%;
+        min-width: 200px;
+        margin: 5vh auto;
+    }
+
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        min-width: 500px;
+        padding: 15px 2vw;
+        margin: 0 auto;
+    }
+
+    .col {
+        .form {
+
+            .section__title {
+                line-height: 150%;
+                padding: 5px 0 calc(10px + 2vh);
+                text-align: center;
+            }
+
+            .article__item {
+                display: flex;
+                justify-content: center;
+                vertical-align: center;
+                padding: calc(5px + 2vh) 0 calc(5px + 2vh);
+
+                .button-switch,
+                .button-add {
+                    margin: 0 5px;
+                }
+
+                @media only screen and (max-width: $zet-screen-sm-max) {
+                    flex-direction: column;
+
+                    .button-switch {
+                        margin: 5px auto 10px;
+                        width: auto;
+                        max-width: 90%;
+                    }
+
+                    .button-add {
+                        margin: 10px auto 0;
+                        max-width: 90%;
+                    }
+                }
+            }
+        }
+    }
+}
