@@ -114,3 +114,11 @@ def update_firstname(user_id, new_firstname):
     params = (new_firstname, user_id)
     get_db().cursor().execute(query, params)
     get_db().commit()
+
+def get_caregiver_id_and_role_by_username(username):
+    query = 'select id, role from users where username = ? and role = "caregiver"'
+    result = get_db().execute(query, (username,))
+    row = result.fetchone()
+    if row:
+        return dict(row)
+    return None
