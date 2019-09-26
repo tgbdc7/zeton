@@ -21,9 +21,10 @@ def index():
 
         context.update({"firstname": g.user_data['firstname'],
                         "role": role,
-                        "children": children)
+                        "children": children})
 
-        elif role == 'child':
+    elif role == 'child':
+
         template = 'index_child.html'
         child = users.get_child_data(logged_user_id)
         child_points = points.get_child_points(child['id'])
@@ -32,7 +33,7 @@ def index():
         context = {'child': child, 'child_points': child_points, 'childs_tasks': childs_tasks,
                    'childs_prizes': childs_prizes}
 
-        messages = get_flashed_messages()
+    messages = get_flashed_messages()
 
     return render_template(template, **context, messages=messages)
 
