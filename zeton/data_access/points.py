@@ -1,7 +1,7 @@
 from zeton.db import get_db
 
 
-def get_points(child_id):
+def get_only_points(child_id):
     query = 'select points from main_points where child_id = ?'
     result = get_db().execute(query, [child_id])
     row = result.fetchone()
@@ -10,10 +10,10 @@ def get_points(child_id):
     return None
 
 
-def change_points_by(target_id, points, child_id):
+def change_points_by(target_id, points, user_id):
     """ used both to add and subtract points from the current amount """
     query = 'UPDATE main_points SET points = points + ?, last_insert_id = ?   WHERE child_id = ?;'
-    get_db().execute(query, [points, child_id, target_id])
+    get_db().execute(query, [points, user_id, target_id])
     get_db().commit()
 
 
@@ -22,12 +22,13 @@ def add_exp(exp, child_id):
     get_db().execute(query, [exp, child_id])
     get_db().commit()
 
-def get_child_points(id):
+
+def get_child_points(child_id):
     query = """
     SELECT * FROM  main_points
     WHERE main_points.child_id=?
     """
-    result = get_db().execute(query, (id,))
+    result = get_db().execute(query, (child_id,))
     child_points = dict(result.fetchone())
     return child_points
 
@@ -39,5 +40,5 @@ def get_points_history(child_id):
             'ON (p.id_changing_user=u.id) ' \
             'WHERE p.child_id = ? ' \
             'ORDER BY p.id DESC LIMIT 10'
-    result = get_db().execute(query, [child_id,])
+    result = get_db().execute(query, [child_id, ])
     return result.fetchall()

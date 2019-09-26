@@ -94,11 +94,20 @@ INSERT INTO prizes VALUES(13,6, "nowa książka", 100, 1, 1, 4);
 INSERT INTO prizes VALUES(14,6, "nowa rybka", 20, 1, 1, 1);
 
 DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('users',7);
-INSERT INTO sqlite_sequence VALUES('caregiver_to_child',8);
+INSERT INTO sqlite_sequence VALUES('users',9);
+INSERT INTO sqlite_sequence VALUES('main_points',4);
+INSERT INTO sqlite_sequence VALUES('caregiver_to_child',9);
 INSERT INTO sqlite_sequence VALUES('home_points', 18);
 INSERT INTO sqlite_sequence VALUES('prizes',14);
 INSERT INTO sqlite_sequence VALUES('points_history',1);
+
+
+
+CREATE TRIGGER add_new_child_main_points  AFTER INSERT ON users for each row when new.role = 'child'
+    begin
+        INSERT INTO main_points  (child_id)
+        VALUES ( new.id);
+    END;
 
 
 COMMIT;

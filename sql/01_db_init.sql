@@ -102,3 +102,5 @@ CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.poi
         INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp)
         VALUES ( new.child_id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP);
     END;
+
+
