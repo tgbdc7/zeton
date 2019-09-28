@@ -87,9 +87,9 @@ def set_caregiver_to_child(child_id):
     child_id = int(child_id)
 
     caregiver_username_to_child = request.form.get('caregiver_username_to_child')
-    caregiver_data = users.get_caregiver_id_and_role_by_username(caregiver_username_to_child)
+    caregiver_data = users.get_username_id_and_role_by_username(caregiver_username_to_child)
 
-    if caregiver_data:
+    if caregiver_data and caregiver_data['role'] == 'caregiver':
         if not users.is_child_under_caregiver(child_id, caregiver_data['id']):
             users.associate_child_with_caregiver(caregiver_data['id'], child_id)
             flash('Opiekun został przydzielony do dziecka')
