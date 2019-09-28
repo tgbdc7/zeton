@@ -10,8 +10,10 @@ jobs:
           name: Create virtualenv
           command: python -m venv venv
       - run:
-          name: activate virtualenv
-          command: source venv/bin/activate
-        
+          name: Install requirements
+          command: |
+            source venv/bin/activate
+            pip install -r requirements.txt
+
 
 
