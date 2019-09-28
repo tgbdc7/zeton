@@ -18,16 +18,20 @@ def index():
     if role == 'caregiver':
         children = users.get_caregivers_children(logged_user_id)
         template = 'index_caregiver.html'
+
         context.update({"firstname": g.user_data['firstname'],
                         "role": role,
                         "children": children})
 
     elif role == 'child':
+
         template = 'index_child.html'
         child = users.get_child_data(logged_user_id)
+        child_points = points.get_child_points(child['id'])
         childs_tasks = tasks.get_tasks(logged_user_id)
         childs_prizes = prizes.get_prizes(logged_user_id)
-        context = {'child': child, 'childs_tasks': childs_tasks, 'childs_prizes': childs_prizes}
+        context = {'child': child, 'child_points': child_points, 'childs_tasks': childs_tasks,
+                   'childs_prizes': childs_prizes}
 
     messages = get_flashed_messages()
 
@@ -42,11 +46,13 @@ def child(child_id):
     childs_tasks = tasks.get_tasks(child_id)
     childs_prizes = prizes.get_prizes(child_id)
     role = g.user_data['role']
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
                'childs_prizes': childs_prizes,
-               'role': role}
+               'role': role,
+               'child_points': child_points}
 
     messages = get_flashed_messages()
 
@@ -61,14 +67,13 @@ def task_detail(child_id):
     childs_tasks = tasks.get_tasks(child_id)
     childs_points_history = points.get_points_history(child_id)
     role = g.user_data['role']
+    child_points = points.get_child_points(child['id'])
 
-    context = {'child': child,
-               'childs_tasks': childs_tasks,
-               'role': role}
     context = {'child': child,
                'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
                'role': role,
+               'child_points': child_points
                }
 
     return render_template('task_detail.html', **context)
@@ -90,6 +95,7 @@ def password_change():
     messages = get_flashed_messages()
 
     return render_template('password_change.html', **context, messages=messages)
+
 
 @bp.route('/settings/firstname')
 @auth.login_required
@@ -115,10 +121,12 @@ def prizes_detail(child_id):
         return abort(403)
 
     childs_prizes = prizes.get_prizes(child_id)
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child,
                'childs_prizes': childs_prizes,
-               'role': role}
+               'role': role,
+               'child_points': child_points}
 
     return render_template('prizes_detail.html', **context)
 
@@ -133,9 +141,11 @@ def school_points_detail(child_id):
         child = users.get_child_data(child_id)
     except TypeError:
         return abort(403)
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child,
-               'role': role}
+               'role': role,
+               'child_points': child_points}
 
     return render_template('school_points_detail.html', **context)
 
@@ -150,8 +160,10 @@ def bans_detail(child_id):
         child = users.get_child_data(child_id)
     except TypeError:
         return abort(403)
+    child_points = points.get_child_points(child['id'])
 
     context = {'child': child,
-               'role': role}
+               'role': role,
+               'child_points': child_points}
 
     return render_template('bans_detail.html', **context)

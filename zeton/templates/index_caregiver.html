@@ -11,7 +11,7 @@
             {% for child in children %}
             <a href="/child/{{ child.id }}"
                class="list-group-item list-group-item-action list-group-item-light">{{ child.firstname }}
-                : ma {{ child.points }} punktów.
+                : ma {{ child.child_points.points }} punktów.
                 {% if child.bans.6.active %}
                 <br>
                 <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do
