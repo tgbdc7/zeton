@@ -14,4 +14,6 @@ jobs:
           command: |
             source venv/bin/activate
             pip install -r requirements.txt
-            python recreate_db.py
+      - run:
+        name: Create db
+          command: python recreate_db.py
