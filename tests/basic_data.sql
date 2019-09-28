@@ -68,4 +68,11 @@ VALUES (4, 2, 'kino domowe', 100, 1, 2, 8);
 INSERT INTO prizes
 VALUES (5, 2, 'piżama party', 100, 1, 2, 8);
 
+CREATE TRIGGER add_new_child_main_points  AFTER INSERT ON users for each row when new.role = 'child'
+    begin
+        INSERT INTO main_points  (child_id)
+        VALUES ( new.id);
+    END;
+
+
 COMMIT;
