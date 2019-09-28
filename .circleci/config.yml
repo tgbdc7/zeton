@@ -28,7 +28,13 @@ jobs:
           name: Install requirements and create db
           command: |
             source venv/bin/activate
-            pip install -r requirements.txt 
+            pip install -r requirements.txt
       - run:
           name: Run test
           command: pytest -s
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
