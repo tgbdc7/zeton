@@ -7,6 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Create virtualenv
-        command: python -m venv venv
+          name: Create virtualenv
+          command: python -m venv venv
 
