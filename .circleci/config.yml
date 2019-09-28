@@ -20,5 +20,28 @@ jobs:
             source venv/bin/activate
             python recreate_db.py
 
+  test:
+    working_directory: ~/project
+    docker:
+      - image: circleci/python:3.7
+    steps:
+      - checkout
+      - run:
+          name: Create virtualenv
+          command: python -m venv venv
+      - run:
+          name: Install requirements
+          command: |
+            source venv/bin/activate
+            pip install -r requirements.txt
+
+      - run:
+          name: Run tests
+          command: |
+            source venv/bin/activate
+            pytest -s
+
+
+
 
 
