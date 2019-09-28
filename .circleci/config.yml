@@ -12,5 +12,5 @@ jobs:
       - run:
           name: Install requirements
           command: |
-            source venv/bin/activat
+            source venv/bin/activate
             pip install -r requirements.txt
