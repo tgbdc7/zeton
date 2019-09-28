@@ -8,5 +8,5 @@ jobs:
       - checkout
       - run:
           name: Create virtualenv
-            command: python -m venv venv
-              
+          command: python -m venv venv
+
