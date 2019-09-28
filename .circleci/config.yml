@@ -16,4 +16,4 @@ jobs:
             pip install -r requirements.txt
       - run:
         name: Create db
-          command: python recreate_db.py
+        command: python recreate_db.py
