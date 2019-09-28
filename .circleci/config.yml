@@ -31,7 +31,9 @@ jobs:
             pip install -r requirements.txt
       - run:
           name: Run test
-          command: pytest -s
+          command: |
+            source venv/bin/activate
+            pytest -s
 
 workflows:
   version: 2
