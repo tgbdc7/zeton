@@ -30,7 +30,9 @@ def index():
         child_points = points.get_child_points(child['id'])
         childs_tasks = tasks.get_tasks(logged_user_id)
         childs_prizes = prizes.get_prizes(logged_user_id)
-        context = {'child': child, 'child_points': child_points, 'childs_tasks': childs_tasks,
+        context = {'child': child,
+                   'child_points': child_points,
+                   'childs_tasks': childs_tasks,
                    'childs_prizes': childs_prizes}
 
     messages = get_flashed_messages()
