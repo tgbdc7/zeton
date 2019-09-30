@@ -51,14 +51,31 @@ def register():
     if username is None or password is None:
         abort(400)
     if users.get_user_id(username):
-        abort(400) # user already exists
+        abort(400)  # user already exists
 
     users.add_new_user(data)
 
     if role == 'child':
         child_id = users.get_user_id(username)
+
         caregiver_id = g.user_data['id']
         users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
 
     return redirect(url_for('views.index'))
+
+
+@bp.route('/settings/set_firstname', methods=['POST'])
+@auth.login_required
+def set_firstname():
+    logged_user_id = g.user_data['id']
+
+    new_firstname = request.form.get('new_firstname')
+
+    if new_firstname:
+        users.update_firstname(logged_user_id, new_firstname)
+    else:
+        flash('Wprowadź imię')
+    flash('Imię zostało zmienione')
+
+    return redirect(url_for('views.firstname_change'))

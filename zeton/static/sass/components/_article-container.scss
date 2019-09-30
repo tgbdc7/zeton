@@ -1,0 +1,21 @@
+.article__container {
+    width: 500px;
+    max-width: 1200px;
+    margin: calc(100px + 5vh) auto;    
+    background-color: $zet-white-color;
+    box-shadow: $zet-box-shadow;
+    border-radius: $zet-box-radius;
+    padding: 15px 0;
+
+    @media only screen and (max-width: $zet-screen-lg-max) {
+        width: 90%;
+        min-width: 200px;
+        margin: 5vh auto;
+    }
+
+    @media only screen and (min-width: $zet-screen-lg-min) {
+        min-width: 500px;
+        padding: 15px 2vw;
+        margin: 0 auto;
+    }
+}

@@ -3,9 +3,9 @@
 <div class="col col-sm-12">
     <div name="user_summary"class="text-center">
         <h2 name="username">{{ child.firstname }}</h2>
-        <h2 name="points_number"> Ilość punktów {{ child.points }} punktów</h2>
-        <h2> Punkty doświadczenia {{ child.exp }} punktów</h2>
-        <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child.school_weekly_highscore }}</h3>
+        <h2 name="points_number"> Ilość punktów {{ child_points.points }} punktów</h2>
+        <h2> Punkty doświadczenia {{ child_points.exp }} punktów</h2>
+        <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
 
             {% if messages %}
             <div class="alert alert-dark">{{ messages[0] }}</div>
@@ -37,12 +37,12 @@
                         <th>Nazwa</th>
                         <th>Punkty</th>
                     </tr>
-                    {% for task in childs_tasks %}
-                    <tr>
-                        <td>{{ loop.index }}</td>
-                        <td>{{ task.name }}</td>
-                        <td>{{ task.points }}</td>
-                    </tr>
+                    {% for task in  childs_tasks %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ task.name }}</td>
+                                <td>{{ task.points }}</td>
+                            </tr>
                     {% endfor %}
                 </table>
             </ul>
