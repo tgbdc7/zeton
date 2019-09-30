@@ -51,12 +51,13 @@ def register():
     if username is None or password is None:
         abort(400)
     if users.get_user_id(username):
-        abort(400) # user already exists
+        abort(400)  # user already exists
 
     users.add_new_user(data)
 
     if role == 'child':
         child_id = users.get_user_id(username)
+
         caregiver_id = g.user_data['id']
         users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
