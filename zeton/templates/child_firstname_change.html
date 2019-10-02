@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="col col-sm-6">
+        <div class="text-center">
+            <h2>{{ user_data.firstname }},</h2>
+            <h2>aktualne imię dziecka to: {{ child.firstname }}</h2>
+
+            {% if messages %}
+                <div class="alert alert-dark">{{ messages[0] }}</div>
+            {% endif %}
+
+            <form action="/api/settings/{{ child.id }}/set_firstname" method="post">
+                <div class="form-group">
+                    <label for="inputFirstname">Wpisz poniżej nowe imię:</label>
+                    <br>
+                    <input type="text" class="form-control" name="new_firstname" id="inputFirstname"
+                           placeholder="Nowe imię">
+                </div>
+                <br>
+                <div class="form-group button">
+                    <button type="submit" class="btn btn-info">Prześlij</button>
+                </div>
+                <div>
+                    <div class="text-center">
+
+                        <form>
+                            <div class="form-group button">
+
+                                <a class="btn btn-info" href="/">Strona główna</a>
+
+                                <a class="btn btn-info" href="/logout">Wyloguj</a>
+
+                                <input class="btn btn-info" value="Wróć" size="5" onclick="history.go(-1);"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
