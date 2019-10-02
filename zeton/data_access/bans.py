@@ -59,7 +59,6 @@ def check_bans_status(child_id):
             else:
                 active = False
 
-
         except KeyError:
             start = None
             stop = None

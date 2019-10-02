@@ -14,9 +14,16 @@
                 </div>
                 <div class="article__item">
                     <p class="article__text">PKT</p>
-                    <h2 class="section__title_light">{{ child.points }}</h2>
+                    <h2 class="section__title_light">{{  child.child_points.points}}</h2>
                 </div>
             </div>
+<!--            #TODO add information aboute active bans nr 6  -->
+<!--              {% if child.bans.6.active %}-->
+<!--                <br>-->
+<!--                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do-->
+<!--                {{ child.bans.6.stop|ban_time }}-->
+<!--                {% endif %}-->
+<!--            -->
             <div class="article__box">
                 <a href="/child/{{ child.id }}" class="article__item">
                     <button class="button-add">Wybierz</button>
@@ -40,3 +47,4 @@
     </div>
 </section>
 {% endblock %}
+
