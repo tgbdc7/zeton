@@ -95,7 +95,7 @@ def set_caregiver_to_child(child_id):
             users.associate_child_with_caregiver(caregiver_data['id'], child_id)
             flash('Opiekun został przydzielony do dziecka')
         else:
-            flash('Dziecko już należy do tego opiekuna')
+            flash('Podany opiekun już był przydzielony')
     else:
         flash('Wprowadź poprawny login (username) opiekuna')
 
