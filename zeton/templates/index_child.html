@@ -17,6 +17,14 @@
         {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
+    {% if role == 'caregiver' %}
+    <form>
+        <div class="button">
+            <a class="btn btn-info" href="/assign/{{ child.id }}/add_caregiver_to_child">Przydziel do opiekuna</a>
+        </div>
+    </form>
+    {% endif %}
+
     </div>
     <br>
     <div class="row">
