@@ -1,6 +1,6 @@
 from zeton.views import bp
 
-from flask import render_template, g, get_flashed_messages
+from flask import render_template, g, get_flashed_messages, abort
 
 from zeton import auth
 from zeton.data_access import users, prizes, tasks, points
@@ -59,3 +59,23 @@ def child(child_id):
     messages = get_flashed_messages()
 
     return render_template('caregiver_panel.html', **context, messages=messages)
+
+
+@bp.route('/assign/<child_id>/add_caregiver_to_child')
+@auth.login_required
+@auth.caregiver_only
+def add_caregiver_to_child(child_id):
+    role = g.user_data['role']
+
+    try:
+        child = users.get_child_data(child_id)
+    except TypeError:
+        return abort(403)
+
+    context = {'child': child,
+               'role': role,
+               "firstname": g.user_data['firstname']}
+
+    messages = get_flashed_messages()
+
+    return render_template('add_caregiver_to_child.html', **context, messages=messages)
