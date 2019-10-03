@@ -1,0 +1,11 @@
+<div class="text-center">
+    <h4>Twój username: {{ user_data.username }}</h4>
+    <h4>Twoje imię: {{ user_data.firstname }}</h4>
+    <h4>Jesteś</h4>
+    {% if role == 'caregiver' %}
+        <h4>opiekunem</h4>
+    {% else %}
+        <h4>dzieckiem</h4>
+    {% endif %}
+</div>
+<br>
