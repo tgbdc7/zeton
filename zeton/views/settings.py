@@ -9,7 +9,14 @@ from zeton.data_access import users
 @bp.route('/settings/')
 @auth.login_required
 def user_settings():
-    return render_template('user_settings.html')
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+    role = user_data['role']
+
+    context = {'user_data': user_data,
+               'role': role}
+
+    return render_template('user_settings.html', **context)
 
 
 @bp.route('/settings/password')
