@@ -1,11 +1,9 @@
 .article__container {
-    width: 500px;
+    width: 100%;
     min-width: 300px;
     max-width: 1200px;
-    margin: 0 auto;
-    background-color: $zet-white-color;
-    box-shadow: $zet-box-shadow;
-    border-radius: $zet-box-radius;
+    margin: 0;
+    background-color: $zet-white-color;    
     padding: 15px;
     display: flex;
     position: relative;
@@ -13,17 +11,15 @@
     @media only screen and (max-width: $zet-screen-sm-max) {
         margin: 0 auto;
         min-width: calc(280px + 2vw);
-        width: 90%;
+        
     }
 
-    @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {
-        width: 90%;
+    @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {        
         min-width: 300px;        
     }
 
     @media only screen and (min-width: $zet-screen-lg-min) {
-        min-width: 500px;
-        width: 80%;
+        min-width: 500px;        
         padding: 15px 2vw;        
     }
 }
@@ -37,6 +33,7 @@
 .article__box {
     margin: 0;
     width: 100%;
+    display: flex;
 }
 
 .form-group {

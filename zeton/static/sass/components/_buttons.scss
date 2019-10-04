@@ -56,3 +56,12 @@
         color: $zet-white-color;
     }
 }
+
+.button__choose {
+    background-color: $zet-white-color;
+    border: solid 3px rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: $zet-blue-color;
+  }
