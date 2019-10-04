@@ -75,7 +75,7 @@ body {
 }
 
 .navbar-btn:hover {
-  background-color: #0141c5;
+  background-color: #4700c9;
   cursor: pointer;
 }
 
@@ -211,8 +211,8 @@ body {
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition: .2s;
   transition: .2s;
-  border: solid 1px #0141c5;
-  background-color: #0141c5;
+  border: solid 1px #4700c9;
+  background-color: #4700c9;
   color: #ffffff;
   font-size: 14px;
 }
@@ -227,15 +227,15 @@ body {
   margin: 10px 2px;
   -webkit-box-shadow: none;
           box-shadow: none;
-  border: solid 1.5px #0141c5;
+  border: solid 1.5px #4700c9;
   background-color: #ffffff;
-  color: #0141c5;
+  color: #4700c9;
   text-align: center;
   font-size: 14px;
 }
 
 .button-add:hover {
-  background-color: #0141c5;
+  background-color: #4700c9;
   color: #ffffff;
 }
 
@@ -767,7 +767,7 @@ body {
 
 .children .col .article__container .article__box {
   padding: calc(5px + 1vh) 10px;
-  background-color: #0141c5;
+  background-color: #4700c9;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -862,7 +862,7 @@ body {
     background-image: none;
   }
   .children .col .article__container:hover .article__box .article__item .image__container {
-    border: solid 5px #0141c5;
+    border: solid 5px #4700c9;
   }
   .children .col .article__container:hover .article__box .article__item .section__title_light,
   .children .col .article__container:hover .article__box .article__item .article__title_light,
@@ -892,7 +892,7 @@ body {
 
 @media only screen and (min-width: 576px) and (max-width: 991.99px) {
   .children .col .article__container:not(.active):hover .article__box {
-    background-color: #0141c5;
+    background-color: #4700c9;
     width: 50%;
   }
   .children .col .article__container:not(.active):hover .article__box .article__item .image__container {
@@ -933,9 +933,9 @@ body {
     min-width: 400px;
   }
   .children .col .article__container:not(.active):hover .article__box {
-    background-color: #0141c5;
-    background-image: -webkit-gradient(linear, left top, right top, from(#0141c5), to(#0084ff));
-    background-image: linear-gradient(to right, #0141c5, #0084ff);
+    background-color: #4700c9;
+    background-image: -webkit-gradient(linear, left top, right top, from(#4700c9), to(#0084ff));
+    background-image: linear-gradient(to right, #4700c9, #0084ff);
   }
   .children .col .article__container:not(.active):hover .article__box .article__item .image__container {
     border: solid 5px #ffffff;
@@ -988,7 +988,7 @@ body {
 }
 
 .index-child .col .article__container {
-  background-color: #0141c5;
+  background-color: #4700c9;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
