@@ -2,7 +2,7 @@
     width: 500px;
     min-width: 300px;
     max-width: 1200px;
-    margin: calc(100px + 5vh) auto;
+    margin: 0 auto;
     background-color: $zet-white-color;
     box-shadow: $zet-box-shadow;
     border-radius: $zet-box-radius;
@@ -11,22 +11,20 @@
     position: relative;
 
     @media only screen and (max-width: $zet-screen-sm-max) {
-        margin: calc(5px + 3vh) auto 10px;
+        margin: 0 auto;
         min-width: calc(280px + 2vw);
         width: 90%;
     }
 
     @media only screen and (min-width: $zet-screen-sm-min) and (max-width: $zet-screen-lg-max) {
         width: 90%;
-        min-width: 300px;
-        margin: 5vh auto;
+        min-width: 300px;        
     }
 
     @media only screen and (min-width: $zet-screen-lg-min) {
         min-width: 500px;
         width: 80%;
-        padding: 15px 2vw;
-        margin: calc(10px + 2vh) auto 10px;
+        padding: 15px 2vw;        
     }
 }
 

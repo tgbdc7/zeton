@@ -29,12 +29,12 @@ $zet-box-radius: 4px;
 
 /* Font size */
 %section-title {
-    font-size: calc(24px + 1vw);
-    //font-weight: bold;
+    font-size: 30px;
     line-height: 180%;
 }
 
 %article-title {
-    font-size: calc(18px + 1vw);
+    font-size: 26px;
     line-height: 180%;
+    font-weight: 300;
 }
