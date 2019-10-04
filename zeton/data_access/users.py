@@ -6,6 +6,15 @@ from zeton.data_access.points import get_child_points
 from zeton.db import get_db
 
 
+def get_weekly_highscore(user_id):
+    query = 'select school_weekly_highscore from users where id = ?'
+    result = get_db().execute(query, [user_id])
+    row = result.fetchone()
+    if row:
+        return row['school_weekly_highscore']
+    return None
+
+
 def load_logged_in_user_data():
     session_user_id = session.get('user_id', None)
     user_data = get_user_data(session_user_id)
@@ -109,3 +118,12 @@ def update_firstname(user_id, new_firstname):
     params = (new_firstname, user_id)
     get_db().cursor().execute(query, params)
     get_db().commit()
+
+
+def get_username_id_and_role_by_username(username):
+    query = 'select id, role from users where username = ?'
+    result = get_db().execute(query, (username,))
+    row = result.fetchone()
+    if row:
+        return dict(row)
+    return None
