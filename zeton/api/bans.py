@@ -1,30 +1,22 @@
-from flask import redirect, request
+from flask import redirect, request, g
 
 import zeton.data_access
 from zeton import auth
 from zeton.api import bp
 
 
-@bp.route("/ban/<child_id>")
+@bp.route("/ban/<child_id>/<ban_type>")
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def give_ban(child_id):
+def give_ban(child_id,ban_type):
+    logged_user_id = g.user_data['id']
     ten_minutes = 10
-    zeton.data_access.bans.give_ban(child_id, ten_minutes)
-    return redirect(request.referrer)
+    
+    if ban_type == 'warn':
+        zeton.data_access.bans.give_warn(child_id, logged_user_id)
+    elif ban_type == 'kick':
+        zeton.data_access.bans.give_kick(child_id, logged_user_id)
+    elif ban_type == 'ban':
+        zeton.data_access.bans.give_ban(child_id, ten_minutes, logged_user_id)
 
-
-@bp.route("/warn/<child_id>")
-@auth.login_required
-@auth.logged_child_or_caregiver_only
-def give_warn(child_id):
-    zeton.data_access.bans.give_warn(child_id)
-    return redirect(request.referrer)
-
-
-@bp.route("/kick/<child_id>")
-@auth.login_required
-@auth.logged_child_or_caregiver_only
-def give_kick(child_id):
-    zeton.data_access.bans.give_kick(child_id)
     return redirect(request.referrer)
