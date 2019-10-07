@@ -8,7 +8,7 @@ from zeton.api import bp
 @bp.route("/ban/<child_id>/<ban_type>")
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def give_ban(child_id,ban_type):
+def give_ban(child_id, ban_type):
     logged_user_id = g.user_data['id']
     ten_minutes = 10
 
