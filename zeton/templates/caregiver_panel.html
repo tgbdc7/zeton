@@ -14,13 +14,15 @@
 {% block bans %}
 <form>
     <div class="form-group button">
-        <a class="btn btn-info" href="/api/warn/{{ child.id }}#bany_warny">DAJ WARNA</a>
+        <a class="btn btn-info" href="/api/ban/{{ child.id }}/warn#bany_warny">DAJ WARNA</a>
 
-        <a class="btn btn-info" {% if child.bans.3.active %}
-           disabled="disabled"
-           {%endif%} href="/api/kick/{{ child.id }}#bany_warny">DAJ KICKA</a>
+        <a class="btn btn-info"
+           {% if child.bans.3.active %}
+             disabled="disabled"
+           {%endif%}
+           href="/api/ban/{{ child.id }}/kick#bany_warny">DAJ KICKA</a>
 
-        <a class="btn btn-info" href="/api/ban/{{ child.id }}#bany_warny">DAJ BANA</a>
+        <a class="btn btn-info" href="/api/ban/{{ child.id }}/ban#bany_warny">DAJ BANA</a>
 
     </div>
 </form>

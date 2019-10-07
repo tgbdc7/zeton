@@ -11,7 +11,7 @@ from zeton.api import bp
 def give_ban(child_id,ban_type):
     logged_user_id = g.user_data['id']
     ten_minutes = 10
-    
+
     if ban_type == 'warn':
         zeton.data_access.bans.give_warn(child_id, logged_user_id)
     elif ban_type == 'kick':
