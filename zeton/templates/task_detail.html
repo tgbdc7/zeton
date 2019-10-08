@@ -7,13 +7,6 @@
                 <div id="dodawanie" class="col-xl-6 square text-align-right">
                     <h2 class="text-center">Sposoby na zdobycie punktów</h2>
                     <br>
-                    <form>
-                        <div class="button">
-                            {% if role == caregiver %}
-                                <a class="btn btn-info" href="/add_task">dodaj zadanie</a>
-                            {% endif %}
-                        </div>
-                    </form>
                     <ul>
                         <table>
                             <tr>
@@ -45,7 +38,10 @@
             <form>
                 <div class="button">
                     {% if role == 'caregiver' %}
+                        <a class="btn btn-info" href="/task_detail/{{ child.id }}/add_task">Dodaj zadanie</a>
+                        <br><br>
                         <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+
                     {% endif %}
                     <a class="btn btn-info" href="/">Strona główna</a>
                     <a class="btn btn-info" href="/logout">Wyloguj</a>
