@@ -7,12 +7,13 @@
                 <div id="dodawanie" class="col-xl-6 square text-align-right">
                     <h2 class="text-center">Sposoby na zdobycie punktów</h2>
                     <br>
-                <form>
-                    <div class="button">
-                    {% if role == caregiver %}
-                        <a class="btn btn-info" href="/add_task">dodaj zadanie</a>
-                </div>
-                </form>
+                    <form>
+                        <div class="button">
+                            {% if role == caregiver %}
+                            <a class="btn btn-info" href="/add_task">dodaj zadanie</a>
+                            {% endif %}
+                        </div>
+                    </form>
                     <ul>
                         <table>
                             <tr>
@@ -29,6 +30,11 @@
                                     <td>{{ task.points }}</td>
                                     <td>{{ task.max_day }}</td>
                                     <td>{{ task.max_week }}</td>
+                                    <form action="/api/child/{{ child.id }}/tasks/delete/{{ task.id }}"
+                                          method="post">
+                                        <td><input class="btn btn-info" type="submit" name="Delete_task"
+                                                   value="Usuń"/></td>
+                                    </form>
                                 </tr>
                             {% endfor %}
                         </table>
