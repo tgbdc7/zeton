@@ -31,3 +31,12 @@ def add_new_task(user_id, name, points, max_day, max_week, is_active):
     params = (user_id, name, points, max_day, max_week, is_active)
     get_db().execute(query, params)
     get_db().commit()
+
+
+def update_task(user_id, name, points, max_day, max_week, is_active, task_id):
+    query = "UPDATE 'home_points' " \
+            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, is_active = ?, id = ?" \
+            "WHERE id = ?"
+    params = (user_id, name, points, max_day, max_week, is_active, task_id)
+    get_db().execute(query, params)
+    get_db().commit()
