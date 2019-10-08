@@ -1,7 +1,6 @@
 from flask import request, redirect
 
-from zeton.data_access.tasks import get_tasks, delete_childs_task
-
+from zeton.data_access.tasks import delete_childs_task
 
 from zeton import auth
 from zeton.api import bp
@@ -12,10 +11,8 @@ from zeton.api import bp
 @auth.caregiver_only
 def delete_task(child_id, task_id):
     child_id = int(child_id)
-
     task_id = int(task_id)
 
     delete_childs_task(child_id, task_id)
 
     return redirect(request.referrer)
-
