@@ -14,3 +14,11 @@ def create_task(user_id, name, points, max_day, max_week):
     params = (user_id, name, points, max_day, max_week)
     cur.execute(query, params)
     get_db().commit()
+
+
+def delete_childs_task(child_id, task_id):
+    query = "DELETE FROM home_points WHERE user_id = ? AND id = ?"
+    cur = get_db().cursor()
+    params = (child_id, task_id)
+    cur.execute(query, params)
+    get_db().commit()
