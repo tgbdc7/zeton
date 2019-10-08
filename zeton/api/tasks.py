@@ -1,6 +1,6 @@
 from flask import request, redirect, flash
 
-from zeton.data_access.tasks import delete_childs_task, add_new_task
+from zeton.data_access.tasks import delete_childs_task, add_new_task, update_task
 
 from zeton import auth
 from zeton.api import bp
@@ -32,6 +32,27 @@ def add_task(child_id):
     if not (name == '' or points == '' or max_day == '' or max_week == ''):
         add_new_task(child_id, name, points, max_day, max_week, 1)
         flash('Zadanie zostało dodane')
+    else:
+        flash('Wypełnij wszystkie pola')
+
+    return redirect(request.referrer)
+
+
+@bp.route("/child/<child_id>/tasks/update/<task_id>", methods=['POST'])
+@auth.login_required
+@auth.caregiver_only
+def update_task(child_id, task_id):
+    child_id = int(child_id)
+    task_id = int(task_id)
+
+    name = request.form['name']
+    points = int(request.form['points'])
+    max_day = int(request.form['max_day'])
+    max_week = int(request.form['max_week'])
+
+    if not (name == '' or points == '' or max_day == '' or max_week == ''):
+        update_task(child_id, name, points, max_day, max_week, 1, task_id)
+        flash('Zadanie zostało zmienione')
     else:
         flash('Wypełnij wszystkie pola')
 
