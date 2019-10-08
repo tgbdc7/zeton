@@ -22,3 +22,12 @@ def delete_childs_task(child_id, task_id):
     params = (child_id, task_id)
     cur.execute(query, params)
     get_db().commit()
+
+
+def add_new_task(user_id, name, points, max_day, max_week, is_active):
+    query = "INSERT INTO 'home_points' " \
+            "(user_id, name, points, max_day, max_week, is_active) " \
+            "VALUES (?, ?, ?, ?, ?, ?) "
+    params = (user_id, name, points, max_day, max_week, is_active)
+    get_db().execute(query, params)
+    get_db().commit()
