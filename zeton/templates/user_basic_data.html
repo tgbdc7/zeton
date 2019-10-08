@@ -1,11 +1,12 @@
 <div class="text-center">
     <h4>Twoja nazwa użytkownika: {{ user_data.username }}</h4>
     <h4>Twoje imię: {{ user_data.firstname }}</h4>
-    <h4>Jesteś zarejestrowany jako: </h4>
-    {% if role == 'caregiver' %}
-        <h4>opiekun</h4>
-    {% else %}
-        <h4>dziecko</h4>
-    {% endif %}
+    <h4>Jesteś zarejestrowany jako:
+        {% if role == 'caregiver' %}
+            opiekun
+        {% else %}
+            dziecko
+        {% endif %}
+    </h4>
 </div>
 <br>
