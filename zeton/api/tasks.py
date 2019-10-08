@@ -1,12 +1,10 @@
-from flask import request, redirect, url_for, abort, g, flash
+from flask import request, redirect
 
 from zeton.data_access.tasks import get_tasks, delete_childs_task
-from zeton.data_access import users, tasks
 
 
 from zeton import auth
 from zeton.api import bp
-from zeton.views import details
 
 
 @bp.route("/child/<child_id>/tasks/delete/<task_id>", methods=['POST'])
