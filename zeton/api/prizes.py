@@ -48,7 +48,7 @@ def update_prizes(child_id):
     child_id = int(child_id)
 
 
-    prizes_name = request.form['prizes_name']
+    prizes_name = str(request.form['prizes_name'])
     name = request.form['name']
     points = int(request.form['points'])
     max_day = int(request.form['max_day'])
@@ -59,7 +59,7 @@ def update_prizes(child_id):
 
     if not (prizes_name == '' or name == '' or points == '' or max_day == '' or max_week == ''):
         update_prize(child_id, name, points, max_day, max_week, max_month, prizes_id)
-        flash('Zadanie zostało zmienione')
+        flash('Nagroda została zmieniona')
     else:
         flash('Wypełnij wszystkie pola')
 
