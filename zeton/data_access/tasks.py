@@ -35,7 +35,7 @@ def add_new_task(user_id, name, points, max_day, max_week, is_active):
 
 def update_task(user_id, name, points, max_day, max_week, is_active, task_id):
     query = "UPDATE 'home_points' " \
-            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, is_active = ?, id = ?" \
+            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, is_active = ?" \
             "WHERE id = ?"
     params = (user_id, name, points, max_day, max_week, is_active, task_id)
     get_db().execute(query, params)
