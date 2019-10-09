@@ -9,8 +9,6 @@
             {% if messages %}
                 <div class="alert alert-dark">{{ messages[0] }}</div>
             {% endif %}
-{#            {% for task in  childs_tasks %}#}
-{#            {% endfor %}#}
             <form action="/api/child/{{ child.id }}/tasks/update" method="post">
                  <table>
                     <tr>
@@ -29,7 +27,7 @@
                 <div class="form-group">
                     <label for="inputName">Nazwa</label>
                     <br>
-                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Nazwa zadania">
+                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Nowa nazwa zadania">
                 </div>
                 <div class="form-group">
                     <label for="inputPoints">Wpisz liczbę punktów</label>

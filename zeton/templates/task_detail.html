@@ -28,11 +28,6 @@
                                         <td><input class="btn btn-info" type="submit" name="Delete_task"
                                                    value="Usuń"/></td>
                                     </form>
-                                    <form>
-                                        <div class="button">
-                                            <td><a class="btn btn-info" href="/task_detail/{{ child.id }}/edit_task/{{ task.id }}">Edytuj</a></td>
-                                        </div>
-                                    </form>
                                 </tr>
                             {% endfor %}
                         </table>
@@ -44,6 +39,7 @@
                 <div class="button">
                     {% if role == 'caregiver' %}
                         <a class="btn btn-info" href="/task_detail/{{ child.id }}/add_task">Dodaj zadanie</a>
+                        <a class="btn btn-info" href="/task_detail/{{ child.id }}/edit_task">Edytuj zadanie</a>
                         <br><br>
                         <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
 
