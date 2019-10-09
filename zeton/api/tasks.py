@@ -25,9 +25,9 @@ def add_task(child_id):
     child_id = int(child_id)
 
     name = request.form['name']
-    points = int(request.form['points'])
-    max_day = int(request.form['max_day'])
-    max_week = int(request.form['max_week'])
+    points = request.form['points']
+    max_day = request.form['max_day']
+    max_week = request.form['max_week']
 
     if not (name == '' or points == '' or max_day == '' or max_week == ''):
         add_new_task(child_id, name, points, max_day, max_week, 1)
@@ -46,9 +46,9 @@ def update_task(child_id, task_id):
     task_id = int(task_id)
 
     name = request.form['name']
-    points = int(request.form['points'])
-    max_day = int(request.form['max_day'])
-    max_week = int(request.form['max_week'])
+    points = request.form['points']
+    max_day = request.form['max_day']
+    max_week = request.form['max_week']
 
     if not (name == '' or points == '' or max_day == '' or max_week == ''):
         update_task(child_id, name, points, max_day, max_week, 1, task_id)
