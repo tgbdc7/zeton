@@ -35,7 +35,7 @@ def add_new_prize(user_id, name, points, max_day, max_week, max_month):
 
 def update_prize(user_id, name, points, max_day, max_week, max_month, prize_id):
     query = "UPDATE 'prizes' " \
-            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, max_month = ?, id = ?" \
+            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, max_month = ?" \
             "WHERE id = ?"
     params = (user_id, name, points, max_day, max_week, max_month, prize_id)
     get_db().execute(query, params)
