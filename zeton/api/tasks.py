@@ -38,12 +38,11 @@ def add_task(child_id):
     return redirect(request.referrer)
 
 
-@bp.route("/child/<child_id>/tasks/update/<task_id>", methods=['POST'])
+@bp.route("/child/<child_id>/tasks/update", methods=['POST'])
 @auth.login_required
 @auth.caregiver_only
 def update_task(child_id, task_id):
     child_id = int(child_id)
-    task_id = int(task_id)
 
     name = request.form['name']
     points = request.form['points']
