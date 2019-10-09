@@ -1,6 +1,6 @@
 from zeton.views import bp
 
-from flask import render_template, abort, g
+from flask import render_template, abort, g, get_flashed_messages
 
 from zeton import auth
 from zeton.data_access import users, prizes, tasks, points
@@ -84,3 +84,19 @@ def bans_detail(child_id):
                'child_points': child_points}
 
     return render_template('bans_detail.html', **context)
+
+
+@bp.route('/prizes_detail/<child_id>/add_prize')
+@auth.login_required
+@auth.caregiver_only
+def add_prize(child_id):
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+    child = users.get_child_data(child_id)
+
+    context = {'user_data': user_data,
+               'child': child}
+
+    messages = get_flashed_messages()
+
+    return render_template('add_prize.html', **context, messages=messages)
