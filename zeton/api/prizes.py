@@ -46,16 +46,16 @@ def add_prizes(child_id):
 def update_prizes(child_id):
     child_id = int(child_id)
 
-    prizes_name = str(request.form['prizes_name'])
+    prizes_name = request.form['prizes_name']
     name = request.form['name']
-    points = int(request.form['points'])
-    max_day = int(request.form['max_day'])
-    max_week = int(request.form['max_week'])
-    max_month = int(request.form['max_month'])
+    points = request.form['points']
+    max_day = request.form['max_day']
+    max_week = request.form['max_week']
+    max_month = request.form['max_month']
 
     prizes_id = get_prize_id_by_name(child_id, prizes_name)
 
-    if not (prizes_name == '' or name == '' or points == '' or max_day == '' or max_week == ''):
+    if not (name == '' or points == '' or max_day == '' or max_week == ''):
         update_prize(child_id, name, points, max_day, max_week, max_month, prizes_id)
         flash('Nagroda została zmieniona')
     else:
