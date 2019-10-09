@@ -31,3 +31,18 @@ def add_new_prize(user_id, name, points, max_day, max_week, max_month):
     params = (user_id, name, points, max_day, max_week, max_month)
     get_db().execute(query, params)
     get_db().commit()
+
+
+def update_prize(user_id, name, points, max_day, max_week, max_month, prize_id):
+    query = "UPDATE 'prizes' " \
+            "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, max_month = ?, id = ?" \
+            "WHERE id = ?"
+    params = (user_id, name, points, max_day, max_week, max_month, prize_id)
+    get_db().execute(query, params)
+    get_db().commit()
+
+
+def get_prize_id_by_name(child_id, name):
+    query = "SELECT id FROM prizes WHERE user_id = ? AND name = ?"
+    result = get_db().execute(query, (child_id, name))
+    return result.fetchone()
