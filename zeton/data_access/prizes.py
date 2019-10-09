@@ -22,3 +22,12 @@ def delete_childs_prize(child_id, prizes_id):
     params = (child_id, prizes_id)
     cur.execute(query, params)
     get_db().commit()
+
+
+def add_new_prize(user_id, name, points, max_day, max_week, max_month):
+    query = "INSERT INTO 'prizes' " \
+            "(user_id, name, points, max_day, max_week, max_month) " \
+            "VALUES (?, ?, ?, ?, ?, ?) "
+    params = (user_id, name, points, max_day, max_week, max_month)
+    get_db().execute(query, params)
+    get_db().commit()
