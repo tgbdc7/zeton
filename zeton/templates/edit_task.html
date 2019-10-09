@@ -11,7 +11,21 @@
             {% endif %}
 {#            {% for task in  childs_tasks %}#}
 {#            {% endfor %}#}
-            <form action="/api/child/{{ child.id }}/tasks/update/{{ childs_tasks.id }}" method="post">
+            <form action="/api/child/{{ child.id }}/tasks/update" method="post">
+                 <table>
+                    <tr>
+                        <td>
+                            Wybierz zadanie:
+                        </td>
+                        <td>
+                            <select name="tasks_name">
+                                {% for task in childs_tasks %}
+                                    <option>{{ task.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
                 <div class="form-group">
                     <label for="inputName">Nazwa</label>
                     <br>
