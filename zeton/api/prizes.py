@@ -2,7 +2,6 @@ from flask import request, redirect, flash
 
 from zeton.data_access.prizes import delete_childs_prize, add_new_prize, update_prize, get_prize_id_by_name
 
-
 from zeton import auth
 from zeton.api import bp
 
@@ -46,7 +45,6 @@ def add_prizes(child_id):
 @auth.caregiver_only
 def update_prizes(child_id):
     child_id = int(child_id)
-
 
     prizes_name = str(request.form['prizes_name'])
     name = request.form['name']
