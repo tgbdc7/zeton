@@ -32,6 +32,11 @@
                             <td>{{ prize.max_day }}</td>
                             <td>{{ prize.max_week }}</td>
                             <td>{{ prize.max_month }}</td>
+                            <form action="/api/child/{{ child.id }}/prizes/delete/{{ prize.id }}"
+                                  method="post">
+                                <td><input class="btn btn-info" type="submit" name="Delete_prize"
+                                           value="Usuń"/></td>
+                            </form>
                         </tr>
                     {% endfor %}
                 </table>
