@@ -38,5 +38,5 @@ def update_task(user_id, name, points, max_day, max_week, is_active, task_id):
             "SET user_id = ?, name = ?, points = ?, max_day = ?, max_week = ?, is_active = ?" \
             "WHERE id = ?"
     params = (user_id, name, points, max_day, max_week, is_active, task_id)
-    get_db().execute(query, params)
+    get_db().cursor().execute(query, params)
     get_db().commit()
