@@ -5,7 +5,7 @@ from zeton import auth
 from zeton.api import bp
 
 
-@bp.route("/ban/<child_id>/<ban_type>")
+@bp.route("/ban/<child_id>/<ban_type>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def give_ban(child_id, ban_type):
