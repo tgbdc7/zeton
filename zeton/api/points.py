@@ -13,8 +13,7 @@ def max_day(child_id, exercise_id):
     dt_string = now.strftime("%Y-%m-%d")
     history=zeton.data_access.points.get_points_history_number(child_id, dt_string)
     day_limit=zeton.data_access.points.get_ex_day_limit(child_id,exercise_id)
-    day_value=history.__len__()
-    if(day_value<day_limit):
+    if(history<day_limit):
         return True
     else:
         return False

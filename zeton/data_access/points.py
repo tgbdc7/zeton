@@ -50,5 +50,5 @@ def get_points_history_number(child_id, dt_string):
 
 def get_ex_day_limit(child_id, exercise_id):
     query = f"select max_day from home_points where user_id={child_id} and id={exercise_id}"
-    result = get_db().execute(query).fetchone()
+    result = get_db().execute(query).fetchone()['max_day']
     return result
