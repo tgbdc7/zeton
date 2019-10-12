@@ -41,3 +41,46 @@ def firstname_change():
     messages = get_flashed_messages()
 
     return render_template('firstname_change.html', **context, messages=messages)
+
+@bp.route('/child-settings/<child_id>')
+@auth.login_required
+def child_settings(child_id):
+    child = users.get_child_data(child_id)
+
+    context = {'child': child}
+
+    return render_template('child_settings.html', **context)
+
+
+@bp.route('/child-settings/<child_id>/password')
+@auth.login_required
+@auth.caregiver_only
+def child_password_change(child_id):
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+    child = users.get_child_data(child_id)
+
+    context = {'child': child,
+               'user_data': user_data
+               }
+
+    messages = get_flashed_messages()
+
+    return render_template('child_password_change.html', **context, messages=messages)
+
+
+
+@bp.route('/child-settings/<child_id>/firstname')
+@auth.login_required
+@auth.caregiver_only
+def child_firstname_change(child_id):
+    child = users.get_child_data(child_id)
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+
+    context = {'child': child,
+               'user_data': user_data}
+
+    messages = get_flashed_messages()
+
+    return render_template('child_firstname_change.html', **context, messages=messages)
