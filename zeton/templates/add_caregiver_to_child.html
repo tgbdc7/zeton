@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="col col-sm-6">
+
+        <form action="/api/{{ child.id }}/assign/set_caregiver_to_child" method="post">
+            <h1>{{ firstname }}, przydziel opiekuna do dziecka o imieniu {{ child.firstname }}</h1>
+            <h3>Wpisz login (username) opiekuna</h3>
+            <div class="form-group">
+                <input type="text" class="form-control" name="caregiver_username_to_child" id="inputUsername"
+                       placeholder="Login (username) opiekuna">
+            </div>
+            <div class="form-group button">
+                <button type="submit" class="btn btn-info">Prześlij</button>
+            </div>
+        {% if messages %}
+        <div class="alert alert-dark">{{ messages[0] }}</div>
+        {% endif %}
+        </form>
+        <div>
+            <center>
+                <form>
+                    <div class="form-group button">
+
+                        <a class="btn btn-info" href="/">Strona główna</a>
+
+                        <a class="btn btn-info" href="/logout">Wyloguj</a>
+
+                        <input class="btn btn-info" value="Wróć" size="5" onclick="history.go(-1);"/>
+                    </div>
+                </form>
+            </center>
+        </div>
+    </div>
+{% endblock %}
