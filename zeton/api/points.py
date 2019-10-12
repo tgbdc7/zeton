@@ -1,4 +1,5 @@
 from flask import request, redirect, url_for, abort, g, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import zeton.data_access.bans
 import zeton.data_access.points
@@ -31,13 +32,11 @@ def add_points(child_id):
 @auth.logged_child_or_caregiver_only
 def use_points(child_id):
     logged_user_id = g.user_data['id']
-
     child_id = int(child_id)
 
     return_url = request.args.get('return_url', '/')
 
-    current_points = zeton.data_access.points.get_points(child_id)
-
+    current_points = zeton.data_access.points.get_only_points(child_id)
     try:
         used_points = int(request.form['points'])
     except ValueError as ex:
@@ -56,3 +55,4 @@ def use_points(child_id):
             flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
 
     return redirect(return_url)
+
