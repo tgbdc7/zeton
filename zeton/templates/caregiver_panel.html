@@ -12,20 +12,18 @@
 {% endblock add_points %}
 
 {% block bans %}
-<form>
     <div class="form-group button">
-        <a class="btn btn-info" href="/api/ban/{{ child.id }}/warn#bany_warny">DAJ WARNA</a>
-
-        <a class="btn btn-info"
-           {% if child.bans.3.active %}
-             disabled="disabled"
-           {%endif%}
-           href="/api/ban/{{ child.id }}/kick#bany_warny">DAJ KICKA</a>
-
-        <a class="btn btn-info" href="/api/ban/{{ child.id }}/ban#bany_warny">DAJ BANA</a>
+        <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
+            <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+        </form>
+        <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
+            <input class="btn btn-info"  name="kick"  type="submit" value="DAJ KICKA">
+        </form>
+        <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
+            <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
+        </form>
 
     </div>
-</form>
 {% endblock bans %}
 
 {% block home_button %}
