@@ -102,20 +102,19 @@ def add_task(child_id):
     return render_template('add_task.html', **context, messages=messages)
 
 
-@bp.route('/task_detail/<child_id>/edit_task')
+@bp.route('/task_detail/<child_id>/edit_task/<task_id>')
 @auth.login_required
 @auth.caregiver_only
-def edit_task(child_id):
+def edit_task(child_id, task_id):
     logged_user_id = g.user_data['id']
+    child_id = int(child_id)
     user_data = users.get_user_data(logged_user_id)
     child = users.get_child_data(child_id)
-    child_id = int(child_id)
-    childs_tasks = tasks.get_tasks(child_id)
-
+    task = tasks.get_task_by_tasks_id(child_id, task_id)
 
     context = {'user_data': user_data,
                'child': child,
-               'childs_tasks': childs_tasks}
+               'task': task}
 
     messages = get_flashed_messages()
 

@@ -4,70 +4,53 @@
     <div class="col col-sm-6">
 
         <div class="text-center">
-            <h2>{{ user_data.firstname }}, aby edytować zadanie uzupełnij poniższe pola</h2>
+            <h2>{{ user_data.firstname }}, aby edytować zadanie "{{ task.name }}"uzupełnij poniższe pola</h2>
 
             {% if messages %}
                 <div class="alert alert-dark">{{ messages[0] }}</div>
             {% endif %}
-            <form action="/api/child/{{ child.id }}/tasks/update" method="post">
-                 <table>
-                    <tr>
-                        <td>
-                            Wybierz zadanie:
-                        </td>
-                        <td>
-                            <select name="tasks_name">
-                                {% for task in childs_tasks %}
-                                    <option>{{ task.name }}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                    </tr>
-                </table>
+            <form action="/api/child/{{ child.id }}/tasks/{{ task.id }}/update" method="post">
                 <div class="form-group">
                     <label for="inputName">Nowa nazwa</label>
                     <br>
-                    <input type="text" class="form-control" name="name" id="inputName" placeholder="Nowa nazwa zadania">
+                    <input type="text" class="form-control" name="name" id="inputName" value="{{ task.name }}">
                 </div>
                 <div class="form-group">
                     <label for="inputPoints">Wpisz liczbę punktów</label>
                     <br>
-                    <input type="number" class="form-control" name="points" id="inputPoints"
-                           placeholder="Punkty">
+                    <input type="number" class="form-control" name="points" id="inputPoints" value="{{ task.points }}">
                 </div>
                 <div class="form-group">
                     <label for="inputMax_day">Ile razy dziennie dziecko może wykonać to zadanie</label>
                     <br>
-                    <input type="number" class="form-control" name="max_day" id="inputMax_day"
-                           placeholder="Maksymalnie dziennie">
+                    <input type="number" class="form-control" name="max_day" id="inputMax_day" value="{{ task.max_day }}">
                 </div>
                 <br>
                 <div class="form-group">
                     <label for="inputMax_week">Ile razy tygodniowo dziecko może wykonać to zadanie</label>
                     <br>
-                    <input type="number" class="form-control" name="max_week" id="inputMax_week"
-                           placeholder="Maksymalnie tygodniowo">
+                    <input type="number" class="form-control" name="max_week" id="inputMax_week" value="{{ task.max_week }}">
                 </div>
                 <br>
                 <div class="form-group button">
                     <button type="submit" class="btn btn-info">Prześlij</button>
                 </div>
-                <div>
-                    <center>
+            <div>
+                <center>
 
-                        <form>
-                            <div class="form-group button">
+                    <form>
+                        <div class="form-group button">
 
-                                <a class="btn btn-info" href="/">Strona główna</a>
+                            <a class="btn btn-info" href="/">Strona główna</a>
 
-                                <a class="btn btn-info" href="/logout">Wyloguj</a>
+                            <a class="btn btn-info" href="/logout">Wyloguj</a>
 
-                                <a class="btn btn-info" href="/task_detail/{{ child.id }}">Wróć</a>
+                            <a class="btn btn-info" href="/task_detail/{{ child.id }}">Wróć</a>
 
-                            </div>
-                        </form>
-                    </center>
-                </div>
+                        </div>
+                    </form>
+                </center>
+            </div>
             </form>
         </div>
     </div>

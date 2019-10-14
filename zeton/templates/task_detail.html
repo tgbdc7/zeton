@@ -28,6 +28,11 @@
                                         <td><input class="btn btn-info" type="submit" name="Delete_task"
                                                    value="Usuń"/></td>
                                     </form>
+                                    <form action="/task_detail/{{ child.id }}/edit_task/{{ task.id }}"
+                                          method="post">
+                                        <td><input class="btn btn-info" type="submit" name="Update_task"
+                                                   value="Edytuj"/></td>
+                                    </form>
                                 </tr>
                             {% endfor %}
                         </table>

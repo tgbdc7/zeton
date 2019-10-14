@@ -42,10 +42,9 @@ def update_task(user_id, name, points, max_day, max_week, is_active, task_id):
     get_db().commit()
 
 
-def get_task_id_by_name(child_id, task_name):
-    query = "SELECT id FROM home_points WHERE user_id = ? AND name = ?"
-    result = get_db().execute(query, (child_id, task_name))
-    row = result.fetchone()
-    if row:
-        return row['id']
-    return None
+def get_task_by_tasks_id(child_id, task_id):
+    query = "SELECT * FROM 'home_points' " \
+            "WHERE user_id = ? AND id = ?"
+    params = (child_id, task_id)
+    result = get_db().execute(query, params)
+    return result.fetchone()
