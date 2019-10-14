@@ -10,12 +10,12 @@
                     <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
                 {% endfor %}
             </ol>
-                <div class="form-group button">
+                <div class="form-inline">
                     <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
-                        <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+                        <input class="btn btn-info"  name="warn" type="submit" value="DAJ WARNA">
                     </form>
                     <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
-                        <input class="btn btn-info"  name="kick"  type="submit" value="DAJ KICKA">
+                        <input class="btn btn-info" name="kick"  type="submit" value="DAJ KICKA">
                     </form>
                     <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
                         <input class="btn btn-info" name="ban" type="submit" value="DAJ BANA">

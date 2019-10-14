@@ -12,7 +12,7 @@
 {% endblock add_points %}
 
 {% block bans %}
-    <div class="form-group button">
+    <div class="form-inline">
         <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
             <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
         </form>
