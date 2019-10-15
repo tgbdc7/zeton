@@ -42,10 +42,9 @@ def update_prize(user_id, name, points, max_day, max_week, max_month, prize_id):
     get_db().commit()
 
 
-def get_prize_id_by_name(child_id, prizes_name):
-    query = "SELECT id FROM prizes WHERE user_id = ? AND name = ?"
-    result = get_db().execute(query, (child_id, prizes_name))
-    row = result.fetchone()
-    if row:
-        return row['id']
-    return None
+def get_prize(child_id, prize_id):
+    query = "SELECT * FROM 'prizes'" \
+            "WHERE user_id = ? AND id = ?"
+    params = (child_id, prize_id)
+    result = get_db().execute(query, params)
+    return result.fetchone()

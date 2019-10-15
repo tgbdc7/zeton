@@ -32,11 +32,20 @@
                             <td>{{ prize.max_day }}</td>
                             <td>{{ prize.max_week }}</td>
                             <td>{{ prize.max_month }}</td>
-                            <form action="/api/child/{{ child.id }}/prizes/delete/{{ prize.id }}"
-                                  method="post">
-                                <td><input class="btn btn-info" type="submit" name="Delete_prize"
-                                           value="Usuń"/></td>
-                            </form>
+                            {% if role == 'caregiver' %}
+                                <form action="/api/child/{{ child.id }}/prizes/delete/{{ prize.id }}"
+                                      method="post">
+                                    <td><input class="btn btn-info" type="submit" name="Delete_prize"
+                                               value="Usuń"/></td>
+                                </form>
+                                <form>
+                                    <div class="button">
+                                        <td><a class="btn btn-info"
+                                               href="/prizes_detail/{{ child.id }}/edit_prize/{{ prize.id }}">Edytuj</a>
+                                        </td>
+                                    </div>
+                                </form>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
@@ -48,7 +57,6 @@
             <div class="button">
                 {% if role == 'caregiver' %}
                     <a class="btn btn-info" href="/prizes_detail/{{ child.id }}/add_prize">Dodaj nagrode</a>
-                    <a class="btn btn-info" href="/prizes_detail/{{ child.id }}/edit_prize/">Edytuj nagrode</a>
                     <br><br>
                     <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
                 {% endif %}

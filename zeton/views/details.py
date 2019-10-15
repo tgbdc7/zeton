@@ -102,19 +102,20 @@ def add_prize(child_id):
     return render_template('add_prize.html', **context, messages=messages)
 
 
-@bp.route('/prizes_detail/<child_id>/edit_prize/')
+@bp.route('/prizes_detail/<child_id>/edit_prize/<prize_id>')
 @auth.login_required
 @auth.caregiver_only
-def edit_task(child_id):
+def edit_prize(child_id, prize_id):
     logged_user_id = g.user_data['id']
     user_data = users.get_user_data(logged_user_id)
     child = users.get_child_data(child_id)
     child_id = int(child_id)
-    childs_prizes = prizes.get_prizes(child_id)
+    prize_id = int(prize_id)
+    prize = prizes.get_prize(child_id, prize_id)
 
     context = {'user_data': user_data,
                'child': child,
-               'childs_prizes': childs_prizes}
+               'prize': prize}
 
     messages = get_flashed_messages()
 

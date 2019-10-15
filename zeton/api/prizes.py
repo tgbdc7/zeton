@@ -1,6 +1,6 @@
 from flask import request, redirect, flash
 
-from zeton.data_access.prizes import delete_childs_prize, add_new_prize, update_prize, get_prize_id_by_name
+from zeton.data_access.prizes import delete_childs_prize, add_new_prize, update_prize
 
 from zeton import auth
 from zeton.api import bp
@@ -40,23 +40,21 @@ def add_prizes(child_id):
     return redirect(request.referrer)
 
 
-@bp.route("/child/<child_id>/prizes/update", methods=['POST'])
+@bp.route("/child/<child_id>/prizes/<prize_id>/update", methods=['POST'])
 @auth.login_required
 @auth.caregiver_only
-def update_prizes(child_id):
+def update_prizes(child_id, prize_id):
     child_id = int(child_id)
+    prize_id = int(prize_id)
 
-    prizes_name = request.form['prizes_name']
     name = request.form['name']
     points = request.form['points']
     max_day = request.form['max_day']
     max_week = request.form['max_week']
     max_month = request.form['max_month']
 
-    prizes_id = get_prize_id_by_name(child_id, prizes_name)
-
     if not (name == '' or points == '' or max_day == '' or max_week == ''):
-        update_prize(child_id, name, points, max_day, max_week, max_month, prizes_id)
+        update_prize(child_id, name, points, max_day, max_week, max_month, prize_id)
         flash('Nagroda została zmieniona')
     else:
         flash('Wypełnij wszystkie pola')
