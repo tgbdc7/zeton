@@ -1,30 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="col col-sm-12">
+    {% include "childs_basic_data.html" %}
     <div class="col col-sm-12">
-        {% include "childs_basic_data.html" %}
-        <div id="odejmowanie" class="col-xl-12 square">
-            <h2 class="text-center">Wykorzystaj punkty</h2>
+        <div class="row">
+            <div id="odejmowanie" class="col-xl-6 square text-align-right">
+                <h2 class="text-center">Wykorzystaj punkty</h2>
 
-            <form action="/api/child/{{ child.id }}/points/use?return_url=/prizes_detail/{{ child.id }}" method="post">
-                <div class="form-group button">
-                    Liczba punktów: <input class="form-control" type="number" name="points" required>
+                <form action="/api/child/{{ child.id }}/points/use?return_url=/prizes_detail/{{ child.id }}"
+                      method="post">
+                    <div class="form-group button">
+                        Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-                </div>
-                <h4 class="text-center">NAGRODY</h4>
-            </form>
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty"
+                               value="Wykorzystaj punkty"/>
+                    </div>
+                    <h4 class="text-center">NAGRODY</h4>
+                </form>
 
-            <ul style="text-align:left;">
-                <table>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nazwa</th>
-                        <th>Punkty</th>
-                        <th>Max. dziennie</th>
-                        <th>Max. tygodniowo</th>
-                        <th>Max. miesięcznie</th>
-                    </tr>
-                    {% for prize in childs_prizes %}
+                <ul style="text-align:left;">
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nazwa</th>
+                            <th>Punkty</th>
+                            <th>Max. dziennie</th>
+                            <th>Max. tygodniowo</th>
+                            <th>Max. miesięcznie</th>
+                        </tr>
+                        {% for prize in childs_prizes %}
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>{{ prize.name }}</td>
@@ -33,19 +37,44 @@
                             <td>{{ prize.max_week }}</td>
                             <td>{{ prize.max_month }}</td>
                         </tr>
-                    {% endfor %}
-                </table>
-            </ul>
+                        {% endfor %}
+                    </table>
+                </ul>
 
+            </div>
+            <div id="historia" class="col-xl-6 square text-align-right">
+                <h4 class="text-center">Historia ostatnich 10 zdarzeń na punktach</h4>
+                <br>
+                <ul>
+                    <table>
+                        <tr>
+                            <th>Id</th>
+                            <th>Liczba punktów</th>
+                            <th>Zmienił(a)</th>
+                            <th>Data</th>
+                        </tr>
+                        {% for mod in childs_points_history %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ mod.points_change }}</td>
+                            <td>{{ mod.firstname }}</td>
+                            <td>{{ mod.change_timestamp }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </ul>
+            </div>
         </div>
 
         <form>
             <div class="button">
                 {% if role == 'caregiver' %}
-                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
                 {% endif %}
                 <a class="btn btn-info" href="/">Strona główna</a>
                 <a class="btn btn-info" href="/logout">Wyloguj</a>
             </div>
         </form>
+    </div>
+</div>
 {% endblock %}
