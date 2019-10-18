@@ -1,7 +1,7 @@
 /* Colors */
 $zet-bg-color: #f4f5f9;
 $zet-white-color: #ffffff;
-$zet-blue-color: #0141c5;
+$zet-blue-color: #4700c9;
 $zet-blueLigher-color: #0084ff;
 $zet-black-color: #000000;
 $zet-gray-color: #a2a4aa;
@@ -26,15 +26,14 @@ $zet-screen-xl-min: 1200px;
 /* Margins */
 $zet-box-radius: 4px;
 
-
 /* Font size */
 %section-title {
-    font-size: calc(24px + 1vw);
-    //font-weight: bold;
+    font-size: 30px;
     line-height: 180%;
 }
 
 %article-title {
-    font-size: calc(18px + 1vw);
+    font-size: 26px;
     line-height: 180%;
+    font-weight: 300;
 }
