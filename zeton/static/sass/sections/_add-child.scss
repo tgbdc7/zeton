@@ -1,0 +1,21 @@
+.add-child {
+    background-color: $zet-white-color;
+
+    .col {
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, .1);
+
+        .article__container {
+            justify-content: center;
+            align-items: center;
+            padding: 15px 0;
+
+            .article__box {
+                margin: 10px;
+
+                .button-add {
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+}
