@@ -8,6 +8,7 @@
     border: solid 1px $zet-blue-color;
     background-color: $zet-blue-color;
     color: $zet-white-color;
+    font-size: 14px;
 
     &:hover {
         border: solid 1px $zet-gray-color;
@@ -26,6 +27,7 @@
     background-color: $zet-white-color;
     color: $zet-blue-color;
     text-align: center;
+    font-size: 14px;
 
     &:hover {
         //border: solid 1px $zet-blue-color;
@@ -54,3 +56,12 @@
         color: $zet-white-color;
     }
 }
+
+.button__choose {
+    background-color: $zet-white-color;
+    border: solid 3px rgba(0, 0, 0, .1);
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    color: $zet-blue-color;
+  }
