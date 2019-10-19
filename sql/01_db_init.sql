@@ -45,6 +45,7 @@ create table caregiver_to_child
 create table bans
 (
   id              INTEGER UNIQUE primary key autoincrement,
+
   child_id         INTEGER not null,
   ban_id            INTEGER not null,
   start_timestamp text,
