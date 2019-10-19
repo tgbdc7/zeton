@@ -37,7 +37,7 @@ create table caregiver_to_child
 (
   id           INTEGER UNIQUE primary key autoincrement,
   caregiver_id INTEGER,
-  child_idhuierg     INTEGER,
+  child_id     INTEGER,
   FOREIGN KEY (caregiver_id) REFERENCES users (id),
   FOREIGN KEY (child_id) REFERENCES users (id)
 );
