@@ -1,37 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div class="col col-sm-6">
+<div class="col col-sm-6">
+    <form>
+        <h2>Ustawienia dziecka {{ child.firstname }}:</h2>
+
         <form>
-            <h2>Ustawienia dziecka {{ child.firstname }}:</h2>
+            <div class="form-group button">
 
-            <form>
-                <div class="form-group button">
+                <a class="btn btn-info" href="/child-settings/{{ child.id }}/password">Zmiana hasła dziecka</a>
+                <a class="btn btn-info" href="/child-settings/{{ child.id }}/firstname">Zmiana imienia dziecka</a>
 
-                    <a class="btn btn-info" href="/child-settings/{{ child.id }}/password">Zmiana hasła dziecka</a>
-                    <a class="btn btn-info" href="/child-settings/{{ child.id }}/firstname">Zmiana imienia dziecka</a>
-
-                </div>
-            </form>
-
-            <br/>
-            <br/>
-
-
-            <form>
-                <div class="form-group button">
-
-                    <a class="btn btn-info" href="/">Strona główna</a>
-
-                    <a class="btn btn-info" href="/logout">Wyloguj</a>
-
-                    <input class="btn btn-info" value="Wróć" size="5" onclick="history.go(-1);"/>
-
-                </div>
-            </form>
-
+            </div>
         </form>
-    </div>
+
+        <br/>
+        <br/>
+
+
+        <form>
+            <div class="form-group button">
+
+                <a class="btn btn-info" href="/">Strona główna</a>
+
+                <a class="btn btn-info" href="/logout">Wyloguj</a>
+
+                <input class="btn btn-info" value="Wróć" size="5" onclick="history.go(-1);"/>
+
+            </div>
+        </form>
+
+    </form>
+</div>
 
 
 {% endblock %}
