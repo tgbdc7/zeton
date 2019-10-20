@@ -5,25 +5,25 @@
     <form action="/api/child/{{ child.id }}/points/add" method="post">
         <div class="form-group button">
             Liczba punktów: <input class="form-control" type="number" name="liczba_punktow" required>
-            <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty" />
+            <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
         </div>
     </form>
 </div>
 {% endblock add_points %}
 
 {% block bans %}
-    <div class="form-inline">
-        <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
-            <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
-        </form>
-        <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
-            <input class="btn btn-info"  name="kick"  type="submit" value="DAJ KICKA">
-        </form>
-        <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
-            <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
-        </form>
+<div class="form-inline">
+    <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
+        <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+    </form>
+    <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
+        <input class="btn btn-info" name="kick" type="submit" value="DAJ KICKA">
+    </form>
+    <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
+        <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
+    </form>
 
-    </div>
+</div>
 {% endblock bans %}
 
 {% block home_button %}
