@@ -20,16 +20,15 @@
         {% if role == 'caregiver' %}
         <form>
             <div class="button">
-                <a class="btn btn-info" href="/assign/{{ child.id }}/add_caregiver_to_child">Przydziel do opiekuna</a>
+                <a class="btn btn-info" href="/child-settings/{{ child.id }}">Ustawienia dziecka</a>
             </div>
         </form>
         {% endif %}
-
     </div>
     <br>
     <div class="row">
 
-        <div id="dodawanie" class="col-xl-6 square text-align-right">
+        <div id="tasks" class="col-xl-6 square text-align-right">
             {% block add_points %}{% endblock add_points %}
             <div class="text-center">
                 <h2>Dodawaj punkty</h2>
@@ -67,7 +66,7 @@
             <h5 class="text-center">SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
         </div>
 
-        <div id="odejmowanie" class="col-xl-6 square">
+        <div id="prizes" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/prizes_detail/{{ child.id }}">Szczegóły</a>
@@ -96,18 +95,18 @@
                             <th>Punkty</th>
                         </tr>
                         {% for prize in childs_prizes %}
-                        <tr>
-                            <td>{{ loop.index }}</td>
-                            <td>{{ prize.name }}</td>
-                            <td>{{ prize.points }}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ prize.name }}</td>
+                                <td>{{ prize.points }}</td>
+                            </tr>
                         {% endfor %}
                     </table>
                 </ul>
-            </form>
-        </div>
+                </form>
+            </div>
 
-        <div id="bany_warny" class="col-xl-6 square">
+        <div id="bans" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/bans_detail/{{ child.id }}">Szczegóły</a>
@@ -117,7 +116,7 @@
             <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
             <ol>
                 {% for ban in child.bans.values() %}
-                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}</li>
+                <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
                 {% endfor %}
             </ol>
 
@@ -138,7 +137,7 @@
 
         </div>
 
-        <div id="punkty_szkola" class="col-xl-6 square">
+        <div id="points_school" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/school_points_detail/{{ child.id }}">Szczegóły</a>
