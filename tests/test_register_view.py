@@ -12,14 +12,24 @@ def test_api_registration(client):
     # register with valid data
     response = client.post('/api/user', data={
         'username': 'testowy_1',
-        'password': 'testowy_1'
+        'password': 'testowy_1',
+        'email': 'testowy_1@example.com'
     })
     assert response.status_code == 302
 
     # register with username taken
     response = client.post('/api/user', data={
         'username': 'testowy_1',
-        'password': 'testowy_1'
+        'password': 'testowy_1',
+        'email': 'testowy_0@example.com'
+    })
+    assert response.status_code == 400
+
+    # register with email taken
+    response = client.post('/api/user', data={
+        'username': 'testowy_1x',
+        'password': 'testowy_1',
+        'email': 'testowy_1@example.com'
     })
     assert response.status_code == 400
 
