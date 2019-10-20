@@ -38,8 +38,8 @@ def test_api_registration(client):
 
     # log in with the new account
     response = client.post('/login', data={
-        'login': 'test_reg',
-        'password': 'test_reg_pass'
+        'login': DATASET_REGISTER['username'],
+        'password': DATASET_REGISTER['password']
     }, follow_redirects=True)
     assert response.status_code == 200
     assert re.search('Witaj test_reg', response.get_data(as_text=True))
