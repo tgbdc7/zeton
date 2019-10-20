@@ -1,32 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col col-sm-6">
+<section class="children">
 
-    <form>
-        <h2>Witaj {{ firstname }}</h2>
+  <div class="col col-12">
+    <article class="article__container">
+      <h3 class="article__title">Podopieczni</h3>
+    </article>
+    {% for child in children %}
+    <article class="article__container">
 
-        <h3 class="text-center">Twoi podopieczni to: </h3>
-
-        <div class="list-group">
-            {% for child in children %}
-            <a href="/child/{{ child.id }}"
-               class="list-group-item list-group-item-action list-group-item-light">{{ child.firstname }}
-                : ma {{ child.child_points.points }} punktów.
-                {% if child.bans.6.active %}
-                <br>
-                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do
-                {{ child.bans.6.stop|ban_time }}
-                {% endif %}
-            </a>
-            <br>
-            {% endfor %}
+      <div class="article__box">
+        <div class="image__container">
+          <img class="portrait__image" src="../static/images/user_circle_blue.svg">
+          <!--#DID IT add avatar different for each child or default avatar -->
         </div>
+      </div>
+      <div class="article__box">
+        <h3 class="article__title">{{ child.firstname }}</h3>
+      </div>
+      <div class="article__box">
+        <p class="article__text">(<span>{{  child.child_points.points}}</span> pkt)</p>
 
-        <div class="form-group button">
-            <a class="btn btn-info" href="/logout">Wyloguj</a>
-            <a class="btn btn-info" href="/settings">Ustawienia</a>
-            <a href="{{ url_for('auth.add_person') }}" class="btn btn-info" role="button">Dodaj Osobę</a>
+      </div>
+      <!--            #TODO add information aboute active bans nr 6  -->
+      <!--              {% if child.bans.6.active %}-->
+      <!--                <br>-->
+      <!--                <b class="text-danger">MA BANA! </b> od {{ child.bans.6.start|ban_time }} do-->
+      <!--                {{ child.bans.6.stop|ban_time }}-->
+      <!--                {% endif %}-->
+      <!--            -->
+      <div class="article__box">
+        <div class="button__container">
+          <a href="/child/{{ child.id }}">
+            <button class="button__choose"></button>
+          </a>
         </div>
-    </form>
-</div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!--#DID IT refactor and style this button group-->
+<section class="add-child">
+  <div class="col col-12">
+    <article class="article__container">
+      <div class="article__box">
+        <!--#DID IT delete buttons "wyloguj" and "ustawienia" - the same are in navbar-->
+        <a href="{{ url_for('auth.add_person') }}" class="button-add" role="button">Dodaj osobę</a>
+      </div>
+    </article>
+  </div>
+</section>
 {% endblock %}
