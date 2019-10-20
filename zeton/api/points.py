@@ -1,4 +1,5 @@
 from flask import request, redirect, url_for, abort, g, flash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import zeton.data_access.bans
 import zeton.data_access.points
@@ -65,3 +66,4 @@ def use_points(child_id):
             flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
 
     return redirect(return_url)
+
