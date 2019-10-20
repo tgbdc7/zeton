@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="col col-sm-12">
-        <div name="user_summary" class="text-center">
-            <h2 name="username">{{ child.firstname }}</h2>
-            <h2 name="points_number"> Ilość punktów {{ child_points.points }} punktów</h2>
+        <div class="text-center">
+            <h2>{{ child.firstname }}</h2>
+            <h2 > Ilość punktów {{ child_points.points }} punktów</h2>
             <h2> Punkty doświadczenia {{ child_points.exp }} punktów</h2>
-            <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
+            <h3 >Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
 
             {% if messages %}
                 <div class="alert alert-dark">{{ messages[0] }}</div>
