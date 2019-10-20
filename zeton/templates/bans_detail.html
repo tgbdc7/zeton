@@ -1,31 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="col col-sm-12">
-        {% include "childs_basic_data.html" %}
-        <div id="bany_warny" class="col-xl-12 square">
-            <h2 style="text-align: center;"> *****Warny i bany****** </h2>
-            <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany " -->
-            <ol>
-                {% for ban in child.bans.values() %}
-                    <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
-                {% endfor %}
-            </ol>
-                <div class="form-inline">
-                    <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
-                        <input class="btn btn-info"  name="warn" type="submit" value="DAJ WARNA">
-                    </form>
-                    <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
-                        <input class="btn btn-info" name="kick"  type="submit" value="DAJ KICKA">
-                    </form>
-                    <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
-                        <input class="btn btn-info" name="ban" type="submit" value="DAJ BANA">
-                    </form>
+<div class="col col-sm-12">
+    {% include "childs_basic_data.html" %}
+    <div id="bany_warny" class="col-xl-12 square">
+        <h2 style="text-align: center;"> *****Warny i bany****** </h2>
+        <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany " -->
+        <ol>
+            {% for ban in child.bans.values() %}
+            <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
+            {% endfor %}
+        </ol>
+        <div class="form-inline">
+            <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
+                <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+            </form>
+            <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
+                <input class="btn btn-info" name="kick" type="submit" value="DAJ KICKA">
+            </form>
+            <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
+                <input class="btn btn-info" name="ban" type="submit" value="DAJ BANA">
+            </form>
 
-                </div>
+        </div>
         <form>
             <div class="button">
                 {% if role == 'caregiver' %}
-                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
                 {% endif %}
                 <a class="btn btn-info" href="/">Strona główna</a>
                 <a class="btn btn-info" href="/logout">Wyloguj</a>
@@ -34,4 +34,4 @@
     </div>
     </div>
 
-{% endblock %}
+    {% endblock %}
