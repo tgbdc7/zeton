@@ -95,16 +95,16 @@
                             <th>Punkty</th>
                         </tr>
                         {% for prize in childs_prizes %}
-                            <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ prize.name }}</td>
-                                <td>{{ prize.points }}</td>
-                            </tr>
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ prize.name }}</td>
+                            <td>{{ prize.points }}</td>
+                        </tr>
                         {% endfor %}
                     </table>
                 </ul>
-                </form>
-            </div>
+            </form>
+        </div>
 
         <div id="bans" class="col-xl-6 square">
             <form>
@@ -120,20 +120,20 @@
                 {% endfor %}
             </ol>
 
- {% block bans %}
-    <div class="form-inline">
-        <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
-            <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
-        </form>
-        <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
-            <input class="btn btn-info"  name="kick"  type="submit" value="DAJ KICKA">
-        </form>
-        <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
-            <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
-        </form>
+            {% block bans %}
+            <div class="form-inline">
+                <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
+                    <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+                </form>
+                <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
+                    <input class="btn btn-info" name="kick" type="submit" value="DAJ KICKA">
+                </form>
+                <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
+                    <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
+                </form>
 
-    </div>
-{% endblock bans %}
+            </div>
+            {% endblock bans %}
 
         </div>
 
