@@ -19,15 +19,15 @@ from zeton.data_access import users
 #     else:
 #         return False
 
-@bp.route("/child/<child_id>/points/add", methods=['POST'])
+@bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def add_points(child_id):
+def add_points(child_id,points,ex_id):
     logged_user_id = g.user_data['id']
     return_url = request.args.get('return_url', '/')
 
     try:
-        added_points = int(request.form['liczba_punktow'])
+        added_points = int(points)
     except ValueError as ex:
         print(ex)
         return {'message': 'Bad request'}, 400
