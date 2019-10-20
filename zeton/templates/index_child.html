@@ -30,7 +30,11 @@
 
         <div id="tasks" class="col-xl-6 square text-align-right">
             {% block add_points %}{% endblock add_points %}
-            <div class="text-center">
+            <form>
+                <div class="form-group button">
+                    <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
+                </div>
+            </form>   <div class="text-center">
                 <h2>Dodawaj punkty</h2>
                 <form action="/api/child/{{ child.id }}/points/add" method="post">
                     <div class="form-group button">
@@ -39,11 +43,7 @@
                     </div>
                 </form>
             </div>
-            <form>
-                <div class="form-group button">
-                    <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
-                </div>
-            </form>
+
             <h2 class="text-center">Sposób na zdobycie punktów</h2>
             <br>
             <ul>
