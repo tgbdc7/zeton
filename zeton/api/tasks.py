@@ -29,12 +29,16 @@ def add_task(child_id):
     max_day = request.form['max_day']
     max_week = request.form['max_week']
 
-    if not (name == '' or points == '' or max_day == '' or max_week == ''):
-        add_new_task(child_id, name, points, max_day, max_week, 1)
-        flash('Zadanie zostało dodane')
-    else:
-        flash('Wypełnij wszystkie pola')
+    points=int(points)
 
+    if points > 0:
+        if not (name == '' or points == '' or max_day == '' or max_week == ''):
+            add_new_task(child_id, name, points, max_day, max_week, 1)
+            flash('Zadanie zostało dodane')
+        else:
+            flash('Wypełnij wszystkie pola')
+    else:
+        flash('Liczba puntów musi być dodatnia')
     return redirect(request.referrer)
 
 
@@ -50,10 +54,15 @@ def update_tasks(child_id, task_id):
     max_day = request.form['max_day']
     max_week = request.form['max_week']
 
-    if not (name == '' or points == '' or max_day == '' or max_week == ''):
-        update_task(child_id, name, points, max_day, max_week, 1, task_id)
-        flash('Zadanie zostało zmienione')
+    points=int(points)
+
+    if points > 0:
+        if not (name == '' or points == '' or max_day == '' or max_week == ''):
+            update_task(child_id, name, points, max_day, max_week, 1, task_id)
+            flash('Zadanie zostało zmienione')
+        else:
+            flash('Wypełnij wszystkie pola')
     else:
-        flash('Wypełnij wszystkie pola')
+        flash('Liczba puntków musi być dodatnia')
 
     return redirect(request.referrer)
