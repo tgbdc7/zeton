@@ -38,7 +38,7 @@ def add_task(child_id):
         else:
             flash('Wypełnij wszystkie pola')
     else:
-        flash('Liczba puntów musi być dodatnia')
+        flash('Liczba punktów musi być dodatnia')
     return redirect(request.referrer)
 
 
