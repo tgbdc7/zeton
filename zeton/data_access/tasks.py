@@ -16,8 +16,10 @@ def create_task(user_id, name, points, max_day, max_week):
     get_db().commit()
 
 
-def delete_childs_task(child_id, task_id):
-    query = "DELETE FROM home_points WHERE user_id = ? AND id = ?"
+def deactivate_task(child_id, task_id):
+    query = "UPDATE 'home_points' " \
+            "SET is_active = 0 " \
+            "WHERE user_id = ? AND id = ? "
     cur = get_db().cursor()
     params = (child_id, task_id)
     cur.execute(query, params)

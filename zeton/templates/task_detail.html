@@ -24,10 +24,10 @@
                                     <td>{{ task.max_day }}</td>
                                     <td>{{ task.max_week }}</td>
                                     {% if role == 'caregiver' %}
-                                        <form action="/api/child/{{ child.id }}/tasks/delete/{{ task.id }}"
+                                        <form action="/api/child/{{ child.id }}/tasks/deactivate/{{ task.id }}"
                                               method="post">
-                                            <td><input class="btn btn-info" type="submit" name="Delete_task"
-                                                       value="Usuń"/></td>
+                                            <td><input class="btn btn-info" type="submit" name="Deactivate_task"
+                                                       value="Dezaktywuj"/></td>
                                         </form>
                                         <form>
                                             <div class="button">
