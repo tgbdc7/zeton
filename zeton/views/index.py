@@ -58,7 +58,7 @@ def child(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('caregiver_panel.html', **context, messages=messages)
+    return render_template('index_child.html', **context, messages=messages)
 
 
 @bp.route('/assign/<child_id>/add_caregiver_to_child')
