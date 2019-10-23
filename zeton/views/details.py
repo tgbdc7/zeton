@@ -39,11 +39,15 @@ def prizes_detail(child_id):
 
     childs_prizes = prizes.get_prizes(child_id)
     child_points = points.get_child_points(child['id'])
+    childs_points_history = points.get_points_history(child_id)
+
 
     context = {'child': child,
                'childs_prizes': childs_prizes,
                'role': role,
-               'child_points': child_points}
+               'child_points': child_points,
+               'childs_points_history': childs_points_history
+               }
 
     return render_template('prizes_detail.html', **context)
 

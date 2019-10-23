@@ -1,0 +1,22 @@
+.welcome {
+  
+  background-color: $zet-blue-color;
+
+  .col {
+    
+    .article__container {
+      background-color: transparent;     
+      height: 80px;
+
+      @media only screen and (max-width: $zet-screen-sm-max) {
+        justify-content: flex-end;
+        align-items: center;
+    }
+      
+      .article__title {
+        line-height: 50px;
+        color: $zet-white-color;
+      }
+    }
+  }
+}

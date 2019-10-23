@@ -5,9 +5,9 @@
     <h3>Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
 
     {% if child.bans.6.active %}
-        <h2 style="color: red;"> Masz BANA !</h2>
-        <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
+    <h2 style="color: red;"> Masz BANA !</h2>
+    <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
     {% else %}
-        <h2 style="color: green;">Możesz korzystać z komputera</h2>
+    <h2 style="color: green;">Możesz korzystać z komputera</h2>
     {% endif %}
 </div>
