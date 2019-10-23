@@ -4,10 +4,10 @@
     {% include "childs_basic_data.html" %}
     <div class="col col-sm-12">
         <div class="row">
-            <div id="tasks" class="col-xl-7 square text-align-right">
+            <div id="tasks" class="col-xl-6 square text-align-right">
                 <h2 class="text-center">Sposoby na zdobycie punktów</h2>
                 <br>
-                <ul>
+                <ul style="text-align:left;">
                     <table>
                         <tr>
                             <th>Id</th>
@@ -60,6 +60,8 @@
                             <td>{{ mod.change_timestamp }}</td>
                         </tr>
                         {% endfor %}
+                    </table>
+                </ul>
             </div>
             <form>
                 <div class="button">
@@ -74,4 +76,5 @@
             </form>
         </div>
     </div>
-    {% endblock %}
+</div>
+{% endblock %}
