@@ -1,15 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-
 <div class="col col-sm-6">
-
     <div class="text-center">
         <h2>{{ user_data.firstname }}, aby stworzyć nowe zadanie uzupełnij poniższe pola</h2>
-
         {% if messages %}
         <div class="alert alert-dark">{{ messages[0] }}</div>
         {% endif %}
-
         <form action="/api/child/{{ child.id }}/tasks/add" method="post">
             <div class="form-group">
                 <label for="inputName">Nazwa</label>
@@ -39,24 +35,21 @@
             <div class="form-group button">
                 <button type="submit" class="btn btn-info">Prześlij</button>
             </div>
-            <div>
-                <center>
+            <div align=“center”>
 
-                    <form>
-                        <div class="form-group button">
+                <form>
+                    <div class="form-group button">
 
-                            <a class="btn btn-info" href="/">Strona główna</a>
+                        <a class="btn btn-info" href="/">Strona główna</a>
 
-                            <a class="btn btn-info" href="/logout">Wyloguj</a>
+                        <a class="btn btn-info" href="/logout">Wyloguj</a>
 
-                            <a class="btn btn-info" href="/task_detail/{{ child.id }}">Wróć</a>
+                        <a class="btn btn-info" href="/task_detail/{{ child.id }}">Wróć</a>
 
-                        </div>
-                    </form>
-                </center>
+                    </div>
+                </form>
             </div>
         </form>
     </div>
 </div>
-
 {% endblock %}
