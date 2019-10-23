@@ -18,19 +18,19 @@
             <div class="form-group">
                 <label for="inputPoints">Wpisz liczbę punktów</label>
                 <br>
-                <input type="number" class="form-control" name="points" id="inputPoints" value="{{ task.points }}">
+                <input type="number" min=1 class="form-control" name="points" id="inputPoints" value="{{ task.points }}">
             </div>
             <div class="form-group">
                 <label for="inputMax_day">Ile razy dziennie dziecko może wykonać to zadanie</label>
                 <br>
-                <input type="number" class="form-control" name="max_day" id="inputMax_day"
+                <input type="number" min=1 class="form-control" name="max_day" id="inputMax_day"
                        value="{{ task.max_day }}">
             </div>
             <br>
             <div class="form-group">
                 <label for="inputMax_week">Ile razy tygodniowo dziecko może wykonać to zadanie</label>
                 <br>
-                <input type="number" class="form-control" name="max_week" id="inputMax_week"
+                <input type="number" min=1 class="form-control" name="max_week" id="inputMax_week"
                        value="{{ task.max_week }}">
             </div>
             <br>
