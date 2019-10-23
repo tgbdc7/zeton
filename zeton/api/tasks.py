@@ -29,7 +29,7 @@ def add_task(child_id):
     max_day = request.form['max_day']
     max_week = request.form['max_week']
 
-    points=int(points)
+    points = int(points)
 
     if points > 0:
         if not (name == '' or points == '' or max_day == '' or max_week == ''):
