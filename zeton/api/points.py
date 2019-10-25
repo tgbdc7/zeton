@@ -21,9 +21,10 @@ from zeton.data_access import users
 
 @bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
-@auth.caregiver_only
+@auth.logged_child_or_caregiver_only
 def add_points(child_id,points,ex_id):
     logged_user_id = g.user_data['id']
+    return_url = request.args.get('return_url', '/')
 
     try:
         added_points = int(points)
@@ -35,7 +36,11 @@ def add_points(child_id,points,ex_id):
         zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
         zeton.data_access.points.add_exp(added_points, child_id)
 
-    return redirect(url_for('views.child', child_id=child_id))
+    role = g.user_data['role']
+    if role == 'child':
+        return redirect(return_url)
+    else:
+        return redirect(url_for('views.child', child_id=child_id))
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
