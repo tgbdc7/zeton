@@ -16,15 +16,17 @@ class TestBans(TestCase):
 
         db_mock = Mock()
         mock_get_db.return_value = db_mock
-        bans.insert_default_ban(1, 2, 3)
-        db_mock.execute.assert_called_with(expected_query, (1, 2, 3))
+        bans.insert_default_ban(target_id=1, ban_id=2, ban_name='test-name')
+
+        db_mock.execute.assert_called_with(expected_query, (1, 2, 'test-name'))
         db_mock.commit.assert_called_once()
 
     @patch('zeton.data_access.bans.get_db')
     def test_count_all_default_bans(self, mock_get_db):
         db_mock = Mock()
         mock_get_db.return_value = db_mock
-        bans.insert_all_default_bans(1)
+        bans.insert_all_default_bans(target_id=1)
+
         self.assertEqual(db_mock.commit.call_count, 6)
 
     @patch('zeton.data_access.bans.get_db')
@@ -33,7 +35,8 @@ class TestBans(TestCase):
 
         db_mock = Mock()
         mock_get_db.return_value = db_mock
-        bans.update_warn_per_ban_id(1, 2)
+        bans.update_warn_per_ban_id(target_id=1, ban_id=2)
+
         db_mock.execute.assert_called_with(expected_query, (ANY, ANY, 1, 2))
 
     @patch('zeton.data_access.bans.get_db')
@@ -42,8 +45,11 @@ class TestBans(TestCase):
 
         db_mock = Mock()
         mock_get_db.return_value = db_mock
-        bans.add_warn_per_ban_id(1, 2)
-        db_mock.execute.assert_called_with(expected_query, (1, 2, ANY, ANY))
+        bans.add_warn_per_ban_id(target_id=1, ban_id=2)
+
+        start_timestamp = ANY
+        end_timestamp = ANY
+        db_mock.execute.assert_called_with(expected_query, (1, 2, start_timestamp, end_timestamp))
 
     def test_set_to_midnight(self):
         self.assertEqual(bans.set_to_midnight(self.test_date), datetime.datetime(2019, 10, 25, 0, 0))
