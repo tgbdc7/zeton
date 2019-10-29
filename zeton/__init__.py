@@ -3,12 +3,16 @@ Aplikacja: system żetonowy ucznia/dziecka
 
 """
 
-from flask import Flask
+from flask import Flask, render_template
 import os
 
 from zeton import api, auth, views, db
 from zeton.core.custom_jinja2_filters import jinja2_ban_datetime_filter
 from zeton.data_access import users
+
+
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 def create_app(test_config=None):
@@ -32,7 +36,7 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
     app.register_blueprint(views.bp)
     app.register_blueprint(api.bp)
-
+    app.register_error_handler(404, page_not_found)
     app.before_request(users.load_logged_in_user_data)
 
     return app
