@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="pl">
 
-{% block head %}
+
 <head>
+    {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,31 +14,31 @@
           rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     {% block password %}
-    {% endblock %}
+    {% endblock password %}
     <title>
         {% block title %}
         Żeton
-        {% endblock %}
+        {% endblock title %}
     </title>
+    {% endblock head %}
 </head>
-{% endblock %}
 
 
 <body>
 <div class="wrapper_withNavbar">
     {% block navbar %}
-    {% include "menu.html" %}
-    {% endblock %}
+    {% include "base/menu.html" %}
+    {% endblock navbar %}
 
 
     <main>
         {% block top %}
-        {% include "top.html" %}
-        {% endblock %}
+        {% include "base/top.html" %}
+        {% endblock top %}
 
-        {% block content%}
+        {% block content %}
         <!--we fill this block with content from other templates -->
-        {% endblock %}
+        {% endblock content %}
     </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

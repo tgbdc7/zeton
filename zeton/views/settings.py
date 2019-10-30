@@ -16,7 +16,7 @@ def user_settings():
     context = {'user_data': user_data,
                'role': role}
 
-    return render_template('user_settings.html', **context)
+    return render_template('user/user_settings.html', **context)
 
 
 @bp.route('/settings/password')
@@ -28,7 +28,7 @@ def password_change():
     context = {'user_data': user_data}
     messages = get_flashed_messages()
 
-    return render_template('password_change.html', **context, messages=messages)
+    return render_template('user/password_change.html', **context, messages=messages)
 
 
 @bp.route('/settings/firstname')
@@ -40,7 +40,7 @@ def firstname_change():
     context = {'user_data': user_data}
     messages = get_flashed_messages()
 
-    return render_template('firstname_change.html', **context, messages=messages)
+    return render_template('user/firstname_change.html', **context, messages=messages)
 
 @bp.route('/child-settings/<child_id>')
 @auth.login_required
@@ -49,7 +49,7 @@ def child_settings(child_id):
 
     context = {'child': child}
 
-    return render_template('child_settings.html', **context)
+    return render_template('user/child_settings.html', **context)
 
 
 @bp.route('/child-settings/<child_id>/password')
@@ -66,7 +66,7 @@ def child_password_change(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('child_password_change.html', **context, messages=messages)
+    return render_template('user/child_password_change.html', **context, messages=messages)
 
 
 
@@ -83,4 +83,4 @@ def child_firstname_change(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('child_firstname_change.html', **context, messages=messages)
+    return render_template('user/child_firstname_change.html', **context, messages=messages)

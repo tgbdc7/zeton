@@ -23,7 +23,7 @@ def task_detail(child_id):
                'child_points': child_points
                }
 
-    return render_template('task_detail.html', **context)
+    return render_template('task/task_detail.html', **context)
 
 
 @bp.route('/prizes_detail/<child_id>')
@@ -49,7 +49,7 @@ def prizes_detail(child_id):
                'childs_points_history': childs_points_history
                }
 
-    return render_template('prizes_detail.html', **context)
+    return render_template('prizes/prizes_detail.html', **context)
 
 
 @bp.route('/school_points_detail/<child_id>')
@@ -68,7 +68,7 @@ def school_points_detail(child_id):
                'role': role,
                'child_points': child_points}
 
-    return render_template('school_points_detail.html', **context)
+    return render_template('school_points/school_points_detail.html', **context)
 
 
 @bp.route('/bans_detail/<child_id>')
@@ -87,4 +87,4 @@ def bans_detail(child_id):
                'role': role,
                'child_points': child_points}
 
-    return render_template('bans_detail.html', **context)
+    return render_template('bans/bans_detail.html', **context)
