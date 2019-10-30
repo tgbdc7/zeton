@@ -3,6 +3,8 @@ import tempfile
 
 import pytest
 
+# set up app will be used as fixture named app
+from zeton import app as application
 from zeton.db import get_db
 
 # read in SQL for populating test data
@@ -22,18 +24,14 @@ def app():
     db_fd, db_path = tempfile.mkstemp()
     # create the app with common test config
 
-    # temporally overwrite the function name to flask app,
-    # so app fixture won't have to change the name,
-    # flask app stays app in tests
-    from zeton import app
-    app.config.from_mapping({"TESTING": True, "DATABASE": db_path})
+    application.config.from_mapping({"TESTING": True, "DATABASE": db_path})
 
     # create the database and load test data
-    with app.app_context():
+    with application.app_context():
         get_db().executescript(_init_data_sql)
         get_db().executescript(_data_sql)
 
-    yield app
+    yield application
 
     # close and remove the temporary database
     os.close(db_fd)
