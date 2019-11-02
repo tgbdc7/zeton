@@ -27,6 +27,8 @@ create table main_points
   child_id                INTEGER,
   points                  integer default 0,
   last_insert_id          integer default 0,
+  last_exercise_id          integer default 0,
+  last_score          integer default 0,
   school_weekly_highscore integer default 0,
   exp                     integer default 0,
   FOREIGN KEY (child_id) REFERENCES users (id)
@@ -98,10 +100,10 @@ create table points_history
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );
 
-CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.points <> old.points
+CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.points = old.points
     begin
-        INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp)
-        VALUES ( new.child_id, new.points - old.points, new.last_insert_id, CURRENT_TIMESTAMP);
+        INSERT INTO points_history (child_id,points_change,id_changing_user,points_name,change_timestamp)
+        VALUES  (new.child_id, new.last_score, new.last_insert_id, new.last_exercise_id, CURRENT_TIMESTAMP);
     END;
 
 

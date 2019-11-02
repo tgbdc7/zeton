@@ -10,10 +10,10 @@ INSERT INTO users VALUES(7,'dyrektor','pbkdf2:sha256:50000$uqVtNvPR$345a77790d43
 INSERT INTO users VALUES(8, 'opiekun_biz','hash_password','caregiver','Marcin',NULL);
 INSERT INTO users VALUES(9, 'dziecko_biz', 'hash_password','child','Marcinek',NULL);
 
-INSERT INTO main_points VALUES(1, 2, 0, 0, 0, 0);
-INSERT INTO main_points VALUES(2, 3, 0, 0, 0, 0);
-INSERT INTO main_points VALUES(3, 5, 0, 0, 0, 0);
-INSERT INTO main_points VALUES(4, 6, 0, 0, 0, 0);
+INSERT INTO main_points VALUES(1, 2, 0, 0, 0, 0, 0, 0);
+INSERT INTO main_points VALUES(2, 3, 0, 0, 0, 0, 0, 0);
+INSERT INTO main_points VALUES(3, 5, 0, 0, 0, 0, 0, 0);
+INSERT INTO main_points VALUES(4, 6, 0, 0, 0, 0, 0, 0);
 
 INSERT INTO caregiver_to_child VALUES(1,1,2);
 INSERT INTO caregiver_to_child VALUES(2,1,3);
