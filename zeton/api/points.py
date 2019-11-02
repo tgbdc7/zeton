@@ -6,12 +6,12 @@ import zeton.data_access.points
 import datetime
 from zeton import auth
 from zeton.api import bp
-from datetime import date
+import datetime
 from zeton.data_access import users
 
 
 def max_day_permision(child_id, exercise_id):
-    now = date.today()
+    now = datetime.datetime.now() - datetime.timedelta(days=1)
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
     act_count = history.__len__()
@@ -49,7 +49,8 @@ def add_points(child_id, points, ex_id):
         else:
             return redirect(url_for('views.child', child_id=child_id))
     else:
-        return {'message': 'flash message'}, 400 # fix me, add flash message
+        flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
+        return redirect(url_for('views.child', child_id=child_id))
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
