@@ -59,6 +59,10 @@ def logout():
 
 @bp.route('/register', methods=['GET'])
 def register():
+    # redirects already logged in user to the index view
+    users.load_logged_in_user_data()
+    if g.user_data:
+        return redirect(url_for('views.index'))
     prev_url = request.referrer
     return render_template('register_form.html', prev_url=prev_url)
 

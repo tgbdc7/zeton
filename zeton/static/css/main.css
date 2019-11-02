@@ -33,20 +33,20 @@ body {
 }
 
 
-#dodawanie {
+#tasks{
     background-color: #1c8041;
 }
 
-#odejmowanie {
+#prizes {
     background-color: #FF1CAE;
 }
 
-#bany_warny {
+#bans {
     background-color: #00cccc;
 
 }
 
-#punkty_szkola {
+#points_school{
     background-color: #66ff99;
 }
 

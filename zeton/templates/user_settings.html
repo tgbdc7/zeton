@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="col col-sm-6">
+    {% include "user_basic_data.html" %}
     <form>
         <h2>Ustawienia:</h2>
 
@@ -24,8 +25,6 @@
                 <a class="btn btn-info" href="/">Strona główna</a>
 
                 <a class="btn btn-info" href="/logout">Wyloguj</a>
-
-                <input class="btn btn-info" value="Wróć" size="5" onclick="history.go(-1);"/>
 
             </div>
         </form>

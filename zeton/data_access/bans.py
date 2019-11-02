@@ -12,21 +12,21 @@ DEFAULT_BANS = [
 ]
 
 
-def insert_default_ban(child_id, ban_id, ban_name):
+def insert_default_ban(target_id, ban_id, ban_name):
     query = """
     INSERT INTO  'bans_name'
     VALUES (NULL, ?, ?, ?)
     """
-    params = (child_id, ban_id, ban_name)
+    params = (target_id, ban_id, ban_name)
 
     get_db().execute(query, params)
     get_db().commit()
 
 
-def insert_all_default_bans(child_id):
+def insert_all_default_bans(target_id):
     for values in DEFAULT_BANS:
         ban_id, ban_name = values
-        insert_default_ban(child_id, ban_id, ban_name)
+        insert_default_ban(target_id, ban_id, ban_name)
 
 
 def get_bans_name(child_id):
@@ -84,50 +84,53 @@ def calculate_end_time_warn(start, ban_id):
     return end.isoformat()
 
 
-def update_warn_per_ban_id(child_id, ban_id):
+def update_warn_per_ban_id(target_id, ban_id):
     start = datetime.now()
     start_timestamp = start.isoformat()
 
     end_timestamp = calculate_end_time_warn(start, ban_id)
     query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
-    params = (start_timestamp, end_timestamp, child_id, ban_id)
+    params = (start_timestamp, end_timestamp, target_id, ban_id)
     get_db().execute(query, params)
     get_db().commit()
 
 
-def add_warn_per_ban_id(child_id, ban_id):
+def add_warn_per_ban_id(target_id, ban_id):
     start = datetime.now()
     start_timestamp = start.isoformat()
     end_timestamp = calculate_end_time_warn(start, ban_id)
     query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
-    params = (child_id, ban_id, start_timestamp, end_timestamp)
+    params = (target_id, ban_id, start_timestamp, end_timestamp)
     get_db().execute(query, params)
     get_db().commit()
 
 
-def give_warn(child_id):
-    bans_status = check_bans_status(child_id)
+def give_warn(target_id, logged_user_id):
+    # TODO add information to db about who give warn `logged_user_id` 
+    bans_status = check_bans_status(target_id)
     for ban_id, ban in bans_status.items():
         if not ban['start']:
-            return add_warn_per_ban_id(child_id, ban_id)
+            return add_warn_per_ban_id(target_id, ban_id)
         elif not ban['active']:
-            return update_warn_per_ban_id(child_id, ban_id)
+            return update_warn_per_ban_id(target_id, ban_id)
 
 
-def give_kick(child_id):
-    bans_status = check_bans_status(child_id)
+def give_kick(target_id, logged_user_id):
+    # TODO add information to db about who give kick `logged_user_id` 
+    bans_status = check_bans_status(target_id)
     # TODO - ustawić warny 1-2 na aktywne
     if not bans_status[3]['start']:
-        return add_warn_per_ban_id(child_id, 3)
+        return add_warn_per_ban_id(target_id, 3)
     elif not bans_status[3]['active']:
-        return update_warn_per_ban_id(child_id, 3)
+        return update_warn_per_ban_id(target_id, 3)
     else:
         # TODO dać komunikat do użytkownika
         pass
 
 
-def give_ban(child_id, duration_minutes):
-    bans_status = check_bans_status(child_id)
+def give_ban(target_id, duration_minutes, logged_user_id):
+    # TODO add information to db about who give ban `logged_user_id` 
+    bans_status = check_bans_status(target_id)
     start = datetime.now()
     start_timestamp = start.isoformat()
     try:
@@ -140,21 +143,21 @@ def give_ban(child_id, duration_minutes):
                 end = bans_status[6]['stop'] + timedelta(minutes=duration_minutes)
                 end_timestamp = end.isoformat()
                 query = 'UPDATE bans SET   end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
-                params = (end_timestamp, child_id, 6)
+                params = (end_timestamp, target_id, 6)
 
             else:
                 # jeśli jest ban ale nieaktywny to ustawimy czasy od początku,
                 end = start + timedelta(minutes=duration_minutes)
                 end_timestamp = end.isoformat()
                 query = 'UPDATE bans SET  start_timestamp =  ?, end_timestamp = ? WHERE child_id = ? AND ban_id = ?'
-                params = (start_timestamp, end_timestamp, child_id, 6)
+                params = (start_timestamp, end_timestamp, target_id, 6)
 
         else:
             # jeśli nie ma wpisu w bazie to robimy nowy wpis
             end = start + timedelta(minutes=duration_minutes)
             end_timestamp = end.isoformat()
             query = 'INSERT INTO bans VALUES (NULL, ?, ?, ?, ?)'
-            params = (child_id, 6, start_timestamp, end_timestamp)
+            params = (target_id, 6, start_timestamp, end_timestamp)
 
         get_db().execute(query, params)
         get_db().commit()

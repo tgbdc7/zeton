@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="col col-sm-12">
-    <div name="user_summary"class="text-center">
+    <div name="user_summary" class="text-center">
         <h2 name="username">{{ child.firstname }}</h2>
         <h2 name="points_number"> Ilość punktów {{ child_points.points }} punktów</h2>
         <h2> Punkty doświadczenia {{ child_points.exp }} punktów</h2>
         <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
 
-            {% if messages %}
-            <div class="alert alert-dark">{{ messages[0] }}</div>
-            {% endif %}
+        {% if messages %}
+        <div class="alert alert-dark">{{ messages[0] }}</div>
+        {% endif %}
 
         {% if child.bans.6.active %}
         <h2 style="color: red;"> Masz BANA !</h2>
@@ -17,25 +17,36 @@
         {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
-    {% if role == 'caregiver' %}
-    <form>
-        <div class="button">
-            <a class="btn btn-info" href="/assign/{{ child.id }}/add_caregiver_to_child">Przydziel do opiekuna</a>
-        </div>
-    </form>
-    {% endif %}
-
+        {% if role == 'caregiver' %}
+        <form>
+            <div class="button">
+                <a class="btn btn-info" href="/child-settings/{{ child.id }}">Ustawienia dziecka</a>
+            </div>
+        </form>
+        {% endif %}
     </div>
     <br>
     <div class="row">
 
-        <div id="dodawanie" class="col-xl-6 square text-align-right">
-<!--            {% block add_points %}{% endblock add_points %}-->
+        <div id="tasks" class="col-xl-6 square text-align-right">
+            {% block add_points %}{% endblock add_points %}
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/task_detail/{{ child.id }}">Szczegóły</a>
                 </div>
             </form>
+            <div class="text-center">
+
+                <h2>Dodawaj punkty</h2>
+                <form action="/api/child/{{ child.id }}/points/add/0/0" method="post">
+                    <div class="form-group button">
+                        Liczba punktów: <input class="form-control" type="number" name="points" required>
+                        <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
+                    </div>
+                </form>
+
+            </div>
+
             <h2 class="text-center">Sposób na zdobycie punktów</h2>
             <br>
             <ul>
@@ -45,16 +56,17 @@
                         <th>Nazwa</th>
                         <th>Punkty</th>
                     </tr>
-                    {% for task in  childs_tasks %}
-                            <tr>
-                                <td>{{ loop.index }}</td>
-                                <td>{{ task.name }}</td>
-                                <td>{{ task.points }}</td>
-                                <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}" method="post">
-                                    <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
-                                </form>
+                    {% for task in childs_tasks %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ task.name }}</td>
+                        <td>{{ task.points }}</td>
+                        <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}"
+                              method="post">
+                            <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
+                        </form>
 
-                            </tr>
+                    </tr>
                     {% endfor %}
                 </table>
             </ul>
@@ -62,7 +74,7 @@
             <h5 class="text-center">SZKOLNY REKORD TYGODNIA--> chipsy & extra 100 pkt</h5>
         </div>
 
-        <div id="odejmowanie" class="col-xl-6 square">
+        <div id="prizes" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/prizes_detail/{{ child.id }}">Szczegóły</a>
@@ -78,10 +90,10 @@
                     <div class="form-group button">
                         Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                    <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
-                </div>
-                <h4 class="text-center">NAGRODY</h4>
-            </form>
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
+                    </div>
+                    <h4 class="text-center">NAGRODY</h4>
+                </form>
 
                 <ul style="text-align:left;">
                     <table>
@@ -102,7 +114,7 @@
             </form>
         </div>
 
-        <div id="bany_warny" class="col-xl-6 square">
+        <div id="bans" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/bans_detail/{{ child.id }}">Szczegóły</a>
@@ -112,15 +124,28 @@
             <!--#TODO wymyślić i zmienić nazwę nagłówka "Warny i bany" -->
             <ol>
                 {% for ban in child.bans.values() %}
-                <li {%if ban.active %} style="color:red;" {% endif%}>WARN--> {{ban.name}}</li>
+                <li {% if ban.active %} style="color:red;" {% endif %}>WARN--> {{ ban.name }}</li>
                 {% endfor %}
             </ol>
 
-            {% block bans %}{% endblock bans %}
+            {% block bans %}
+            <div class="form-inline">
+                <form action="/api/ban/{{child.id}}/warn#bany_warny" method="post">
+                    <input class="btn btn-info" name="warn" type="submit" value="DAJ WARNA">
+                </form>
+                <form action="/api/ban/{{child.id}}/kick#bany_warny" method="post">
+                    <input class="btn btn-info" name="kick" type="submit" value="DAJ KICKA">
+                </form>
+                <form action="/api/ban/{{child.id}}/ban#bany_warny" method="post">
+                    <input class="btn btn-info" name="ban" type="submit" value=" DAJ BANA">
+                </form>
+
+            </div>
+            {% endblock bans %}
 
         </div>
 
-        <div id="punkty_szkola" class="col-xl-6 square">
+        <div id="points_school" class="col-xl-6 square">
             <form>
                 <div class="form-group button">
                     <a class="btn btn-info" href="/school_points_detail/{{ child.id }}">Szczegóły</a>
@@ -142,6 +167,9 @@
             {% block home_button %}{% endblock home_button %}
             <a class="btn btn-info" href="/logout">Wyloguj</a>
             <a class="btn btn-info" href="/settings">Ustawienia</a>
+            {% if role=='caregiver' %}
+            <a class="btn btn-info" href="/">Strona główna</a>
+            {% endif%}
         </div>
     </form>
 </div>
