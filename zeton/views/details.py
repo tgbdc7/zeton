@@ -23,7 +23,7 @@ def task_detail(child_id):
                'child_points': child_points
                }
 
-    return render_template('task/task_detail.html', **context)
+    return render_template('tasks/task_detail.html', **context)
 
 
 @bp.route('/prizes_detail/<child_id>')
