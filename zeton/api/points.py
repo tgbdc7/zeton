@@ -10,22 +10,24 @@ from datetime import date
 from zeton.data_access import users
 
 
-def max_day(child_id, exercise_id):
+def max_day_permision(child_id, exercise_id):
     now = date.today()
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
     act_count = history.__len__()
-    if act_count>0:
-        day_limit= history[0]['max_day']
-        if act_count > day_limit:
+
+    if act_count > 0:
+        day_limit = history[0]['max_day']
+        if act_count >= day_limit:
             return False
+
     return True
 
 @bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def add_points(child_id, points, ex_id):
-    if max_day(child_id, ex_id):
+    if max_day_permision(child_id, ex_id):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
 
@@ -47,7 +49,7 @@ def add_points(child_id, points, ex_id):
         else:
             return redirect(url_for('views.child', child_id=child_id))
     else:
-        return redirect(url_for('views.child', child_id=child_id))
+        return {'message': 'flash message'}, 400 # fix me, add flash message
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
