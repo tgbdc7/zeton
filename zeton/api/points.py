@@ -9,6 +9,7 @@ from zeton.api import bp
 from datetime import datetime
 from zeton.data_access import users
 
+
 # def max_day(child_id, exercise_id):
 #     now = datetime.now()
 #     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -22,10 +23,12 @@ from zeton.data_access import users
 @bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def add_points_buttons(child_id,points,ex_id):
+def add_points(child_id, points, ex_id):
     logged_user_id = g.user_data['id']
     return_url = request.args.get('return_url', '/')
 
+    if ex_id == '0':
+        points = request.form['points']
     try:
         added_points = int(points)
     except ValueError as ex:
@@ -41,31 +44,6 @@ def add_points_buttons(child_id,points,ex_id):
         return redirect(return_url)
     else:
         return redirect(url_for('views.child', child_id=child_id))
-
-@bp.route("/child/<child_id>/points/add", methods=['POST'])
-@auth.login_required
-@auth.logged_child_or_caregiver_only
-def add_points(child_id):
-    logged_user_id = g.user_data['id']
-    return_url = request.args.get('return_url', '/')
-
-    try:
-        added_points = int(request.form['liczba_punktow'])
-    except ValueError as ex:
-        print(ex)
-        return {'message': 'Bad request'}, 400
-
-    if added_points > 0:
-        zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
-        zeton.data_access.points.add_exp(added_points, child_id)
-
-    role = g.user_data['role']
-    if role == 'child':
-        return redirect(return_url)
-    else:
-        return redirect(url_for('views.child', child_id=child_id))
-
-
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
@@ -96,4 +74,3 @@ def use_points(child_id):
             flash(f'Do tej nagrody brakuje Ci:  {missing_points} {points_word}')
 
     return redirect(return_url)
-
