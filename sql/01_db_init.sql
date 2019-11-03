@@ -85,6 +85,7 @@ create table prizes
   max_day         INTEGER NOT NULL,
   max_week        INTEGER NOT NULL,
   max_month       INTEGER NOT NULL,
+  is_active       BIT NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

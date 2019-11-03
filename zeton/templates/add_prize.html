@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col col-sm-6">
+    <div class="text-center">
+        <h2>{{ user_data.firstname }}, aby stworzyć nową nagrodę uzupełnij poniższe pola</h2>
+        {% if messages %}
+        <div class="alert alert-dark">{{ messages[0] }}</div>
+        {% endif %}
+        <form action="/api/child/{{ child.id }}/prizes/add" method="post">
+            <div class="form-group">
+                <label for="inputName">Nazwa</label>
+                <br>
+                <input type="text" class="form-control" name="name" id="inputName" placeholder="Nazwa nagrody">
+            </div>
+            <div class="form-group">
+                <label for="inputPoints">Wpisz liczbę punktów</label>
+                <br>
+                <input type="number" min=1 class="form-control" name="points" id="inputPoints"
+                       placeholder="Punkty">
+            </div>
+            <div class="form-group">
+                <label for="inputMax_day">Ile razy dziennie dziecko może wykorzystać tą nagrodę</label>
+                <br>
+                <input type="number" min=1 class="form-control" name="max_day" id="inputMax_day"
+                       placeholder="Maksymalnie dziennie">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="inputMax_week">Ile razy tygodniowo dziecko może wykorzystać tą nagrodę</label>
+                <br>
+                <input type="number" min=1 class="form-control" name="max_week" id="inputMax_week"
+                       placeholder="Maksymalnie tygodniowo">
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="inputMax_month">Ile razy miesięcznie dziecko może wykorzystać tą nagrodę</label>
+                <br>
+                <input type="number" min=1 class="form-control" name="max_month" id="inputMax_month"
+                       placeholder="Maksymalnie miesięcznie">
+            </div>
+            <br>
+            <div class="form-group button">
+                <button type="submit" class="btn btn-info">Prześlij</button>
+            </div>
+            <div align=“center”>
+                <form>
+                    <div class="form-group button">
+
+                        <a class="btn btn-info" href="/">Strona główna</a>
+
+                        <a class="btn btn-info" href="/logout">Wyloguj</a>
+
+                        <a class="btn btn-info" href="/prizes_detail/{{ child.id }}">Wróć</a>
+
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
