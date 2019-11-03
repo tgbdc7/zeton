@@ -19,7 +19,7 @@ oraz wymienianie ich na nagrody.
 ## Uruchomienie:
 - `pip install -r requirements.txt` - instalacja zależności
 - `python recreate_db.py` - stworzenie tabeli w bazie
-- `python run.py` - uruchomienie serwera
+- `export FLASK_APP="zeton"; flask run` - uruchomienie serwera
 
 ### Testowi użytkownicy:
 - na ten moment użytkownicy i ich hasła zapisane są w wykomentowanym kodzie w `recreate_db.py`

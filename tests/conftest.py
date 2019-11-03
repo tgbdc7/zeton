@@ -3,7 +3,8 @@ import tempfile
 
 import pytest
 
-from zeton import create_app
+# set up app will be used as fixture named app
+from zeton import app as application
 from zeton.db import get_db
 
 # read in SQL for populating test data
@@ -22,14 +23,15 @@ def app():
     # create a temporary file to isolate the database for each test
     db_fd, db_path = tempfile.mkstemp()
     # create the app with common test config
-    app = create_app({"TESTING": True, "DATABASE": db_path})
+
+    application.config.from_mapping({"TESTING": True, "DATABASE": db_path})
 
     # create the database and load test data
-    with app.app_context():
+    with application.app_context():
         get_db().executescript(_init_data_sql)
         get_db().executescript(_data_sql)
 
-    yield app
+    yield application
 
     # close and remove the temporary database
     os.close(db_fd)
