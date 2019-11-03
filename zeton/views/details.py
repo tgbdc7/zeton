@@ -23,7 +23,7 @@ def task_detail(child_id):
                'child_points': child_points
                }
 
-    return render_template('task_detail.html', **context)
+    return render_template('tasks/task_detail.html', **context)
 
 
 @bp.route('/prizes_detail/<child_id>')
@@ -41,7 +41,6 @@ def prizes_detail(child_id):
     child_points = points.get_child_points(child['id'])
     childs_points_history = points.get_points_history(child_id)
 
-
     context = {'child': child,
                'childs_prizes': childs_prizes,
                'role': role,
@@ -49,7 +48,7 @@ def prizes_detail(child_id):
                'childs_points_history': childs_points_history
                }
 
-    return render_template('prizes_detail.html', **context)
+    return render_template('prizes/prizes_detail.html', **context)
 
 
 @bp.route('/school_points_detail/<child_id>')
@@ -68,7 +67,7 @@ def school_points_detail(child_id):
                'role': role,
                'child_points': child_points}
 
-    return render_template('school_points_detail.html', **context)
+    return render_template('school_points/school_points_detail.html', **context)
 
 
 @bp.route('/bans_detail/<child_id>')
@@ -87,7 +86,7 @@ def bans_detail(child_id):
                'role': role,
                'child_points': child_points}
 
-    return render_template('bans_detail.html', **context)
+    return render_template('bans/bans_detail.html', **context)
 
 
 @bp.route('/prizes_detail/<child_id>/add_prize')
@@ -103,7 +102,7 @@ def add_prize(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('add_prize.html', **context, messages=messages)
+    return render_template('prizes/add_prize.html', **context, messages=messages)
 
 
 @bp.route('/prizes_detail/<child_id>/edit_prize/<prize_id>')
@@ -123,4 +122,4 @@ def edit_prize(child_id, prize_id):
 
     messages = get_flashed_messages()
 
-    return render_template('edit_prize.html', **context, messages=messages)
+    return render_template('prizes/edit_prize.html', **context, messages=messages)
