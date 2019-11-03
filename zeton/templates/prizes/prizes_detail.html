@@ -12,12 +12,10 @@
                     <div class="form-group button">
                         Liczba punktów: <input class="form-control" type="number" name="points" required>
 
-                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty"
-                               value="Wykorzystaj punkty"/>
+                        <input class="btn btn-info" type="submit" name="wykorzystaj punkty" value="Wykorzystaj punkty"/>
                     </div>
                     <h4 class="text-center">NAGRODY</h4>
                 </form>
-
                 <ul style="text-align:left;">
                     <table>
                         <tr>
@@ -36,11 +34,24 @@
                             <td>{{ prize.max_day }}</td>
                             <td>{{ prize.max_week }}</td>
                             <td>{{ prize.max_month }}</td>
+                            {% if role == 'caregiver' %}
+                            <form action="/api/child/{{ child.id }}/prizes/deactivate/{{ prize.id }}"
+                                  method="post">
+                                <td><input class="btn btn-info" type="submit" name="Deactivate_prize"
+                                           value="Dezaktywuj"/></td>
+                            </form>
+                            <form>
+                                <div class="button">
+                                    <td><a class="btn btn-info"
+                                           href="/prizes_detail/{{ child.id }}/edit_prize/{{ prize.id }}">Edytuj</a>
+                                    </td>
+                                </div>
+                            </form>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>
                 </ul>
-
             </div>
             <div id="history_points" class="col-xl-6 square text-align-right">
                 <h4 class="text-center">Historia ostatnich 10 zdarzeń na punktach</h4>
@@ -64,17 +75,18 @@
                     </table>
                 </ul>
             </div>
+            <form>
+                <div class="button">
+                    {% if role == 'caregiver' %}
+                    <a class="btn btn-info" href="/prizes_detail/{{ child.id }}/add_prize">Dodaj nagrodę</a>
+                    <br><br>
+                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                    {% endif %}
+                    <a class="btn btn-info" href="/">Strona główna</a>
+                    <a class="btn btn-info" href="/logout">Wyloguj</a>
+                </div>
+            </form>
         </div>
-
-        <form>
-            <div class="button">
-                {% if role == 'caregiver' %}
-                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-                {% endif %}
-                <a class="btn btn-info" href="/">Strona główna</a>
-                <a class="btn btn-info" href="/logout">Wyloguj</a>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock %}
