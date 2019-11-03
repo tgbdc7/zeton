@@ -10,24 +10,24 @@ import datetime
 from zeton.data_access import users
 
 
-def max_day_permision(child_id, exercise_id):
-    now = datetime.datetime.now() - datetime.timedelta(days=1)
+def max_permission(child_id, exercise_id, days, max_column):
+    now = datetime.datetime.now() - datetime.timedelta(days= days)
     dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
     act_count = history.__len__()
 
     if act_count > 0:
-        day_limit = history[0]['max_day']
-        if act_count >= day_limit:
+        limit = history[0][max_column]
+        if act_count >= limit:
             return False
-
     return True
+
 
 @bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def add_points(child_id, points, ex_id):
-    if max_day_permision(child_id, ex_id):
+    if max_permission(child_id, ex_id, 1, 'max_day') and max_permission(child_id, ex_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
 
