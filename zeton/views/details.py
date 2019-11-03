@@ -41,7 +41,6 @@ def prizes_detail(child_id):
     child_points = points.get_child_points(child['id'])
     childs_points_history = points.get_points_history(child_id)
 
-
     context = {'child': child,
                'childs_prizes': childs_prizes,
                'role': role,
@@ -103,7 +102,7 @@ def add_prize(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('add_prize.html', **context, messages=messages)
+    return render_template('prizes/add_prize.html', **context, messages=messages)
 
 
 @bp.route('/prizes_detail/<child_id>/edit_prize/<prize_id>')
@@ -123,4 +122,4 @@ def edit_prize(child_id, prize_id):
 
     messages = get_flashed_messages()
 
-    return render_template('edit_prize.html', **context, messages=messages)
+    return render_template('prizes/edit_prize.html', **context, messages=messages)
