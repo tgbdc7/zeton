@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
 
 
+
 create table users
 (
   id                      integer UNIQUE primary key autoincrement,

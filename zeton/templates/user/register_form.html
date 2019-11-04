@@ -1,8 +1,10 @@
-{% extends "base.html" %}
-
+{% extends "base/base.html" %}
+{% block head %}
+{{ super() }}
 {% block password %}
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 {% endblock password %}
+{% endblock head %}
 
 {% block content %}
 <div class="col col-sm-4">
