@@ -138,7 +138,7 @@ def add_task(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('add_task.html', **context, messages=messages)
+    return render_template('tasks/add_task.html', **context, messages=messages)
 
 
 @bp.route('/task_detail/<child_id>/edit_task/<task_id>')
@@ -157,4 +157,4 @@ def edit_task(child_id, task_id):
 
     messages = get_flashed_messages()
 
-    return render_template('edit_task.html', **context, messages=messages)
+    return render_template('tasks/edit_task.html', **context, messages=messages)
