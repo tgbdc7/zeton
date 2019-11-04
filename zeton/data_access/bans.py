@@ -13,10 +13,7 @@ DEFAULT_BANS = [
 
 
 def insert_default_ban(target_id, ban_id, ban_name):
-    query = """
-    INSERT INTO  'bans_name'
-    VALUES (NULL, ?, ?, ?)
-    """
+    query = "INSERT INTO  'bans_name' VALUES (NULL, ?, ?, ?)"
     params = (target_id, ban_id, ban_name)
 
     get_db().execute(query, params)

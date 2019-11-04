@@ -17,7 +17,7 @@ def index():
 
     if role == 'caregiver':
         children = users.get_caregivers_children(logged_user_id)
-        template = 'index_caregiver.html'
+        template = 'base/index_caregiver.html'
 
         context.update({"firstname": g.user_data['firstname'],
                         "role": role,
@@ -25,7 +25,7 @@ def index():
 
     elif role == 'child':
 
-        template = 'index_child.html'
+        template = 'base/index_child.html'
         child = users.get_child_data(logged_user_id)
         child_points = points.get_child_points(child['id'])
         childs_tasks = tasks.get_tasks(logged_user_id)
@@ -58,7 +58,7 @@ def child(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('index_child.html', **context, messages=messages)
+    return render_template('base/index_child.html', **context, messages=messages)
 
 
 @bp.route('/assign/<child_id>/add_caregiver_to_child')
@@ -78,4 +78,4 @@ def add_caregiver_to_child(child_id):
 
     messages = get_flashed_messages()
 
-    return render_template('add_caregiver_to_child.html', **context, messages=messages)
+    return render_template('user/add_caregiver_to_child.html', **context, messages=messages)

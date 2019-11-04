@@ -58,15 +58,15 @@ INSERT INTO home_points
 VALUES (8, 2, 'pomoc ślepej sąsiadce', 20, 1, 7, 0);
 
 INSERT INTO prizes
-VALUES (1, 2, '1 min komputer', 1, 30, 180, 720);
+VALUES (1, 2, '1 min komputer', 1, 30, 180, 720, 1);
 INSERT INTO prizes
-VALUES (2, 2, 'cola (200ml)', 20, 1, 1, 4);
+VALUES (2, 2, 'cola (200ml)', 20, 1, 1, 4, 1);
 INSERT INTO prizes
-VALUES (3, 2, 'zakupy w żabce (bez chipsów i Coca Coli)', 60, 1, 1, 4);
+VALUES (3, 2, 'zakupy w żabce (bez chipsów i Coca Coli)', 60, 1, 1, 4, 1);
 INSERT INTO prizes
-VALUES (4, 2, 'kino domowe', 100, 1, 2, 8);
+VALUES (4, 2, 'kino domowe', 100, 1, 2, 8, 1);
 INSERT INTO prizes
-VALUES (5, 2, 'piżama party', 100, 1, 2, 8);
+VALUES (5, 2, 'piżama party', 100, 1, 2, 8, 1);
 
 CREATE TRIGGER add_new_child_main_points  AFTER INSERT ON users for each row when new.role = 'child'
     begin

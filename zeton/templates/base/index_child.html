@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block content %}
 <div class="col col-sm-12">
     <div name="user_summary" class="text-center">
@@ -36,13 +36,15 @@
                 </div>
             </form>
             <div class="text-center">
+
                 <h2>Dodawaj punkty</h2>
-                <form action="/api/child/{{ child.id }}/points/add" method="post">
+                <form action="/api/child/{{ child.id }}/points/add/0/0" method="post">
                     <div class="form-group button">
-                        Liczba punktów: <input class="form-control" type="number" name="liczba_punktow" required>
+                        Liczba punktów: <input class="form-control" type="number" name="points" required>
                         <input class="btn btn-info" type="submit" name="dodaj punkty" value="Dodaj punkty"/>
                     </div>
                 </form>
+
             </div>
 
             <h2 class="text-center">Sposób na zdobycie punktów</h2>

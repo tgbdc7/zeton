@@ -1,13 +1,13 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block content %}
 <div class="col col-sm-12">
-    {% include "childs_basic_data.html" %}
+    {% include "base/childs_basic_data.html" %}
     <div class="col col-sm-12">
         <div class="row">
             <div id="tasks" class="col-xl-6 square text-align-right">
                 <h2 class="text-center">Sposoby na zdobycie punktów</h2>
                 <br>
-                <ul>
+                <ul style="text-align:left;">
                     <table>
                         <tr>
                             <th>Id</th>
@@ -23,6 +23,19 @@
                             <td>{{ task.points }}</td>
                             <td>{{ task.max_day }}</td>
                             <td>{{ task.max_week }}</td>
+                            {% if role == 'caregiver' %}
+                            <form action="/api/child/{{ child.id }}/tasks/deactivate/{{ task.id }}"
+                                  method="post">
+                                <td><input class="btn btn-info" type="submit" name="Deactivate_task"
+                                           value="Dezaktywuj"/></td>
+                            </form>
+                            <form>
+                                <div class="button">
+                                    <td><a class="btn btn-info"
+                                           href="/task_detail/{{ child.id }}/edit_task/{{ task.id }}">Edytuj</a></td>
+                                </div>
+                            </form>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>
@@ -50,16 +63,18 @@
                     </table>
                 </ul>
             </div>
+            <form>
+                <div class="button">
+                    {% if role == 'caregiver' %}
+                    <a class="btn btn-info" href="/task_detail/{{ child.id }}/add_task">Dodaj zadanie</a>
+                    <br><br>
+                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                    {% endif %}
+                    <a class="btn btn-info" href="/">Strona główna</a>
+                    <a class="btn btn-info" href="/logout">Wyloguj</a>
+                </div>
+            </form>
         </div>
-        <form>
-            <div class="button">
-                {% if role == 'caregiver' %}
-                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-                {% endif %}
-                <a class="btn btn-info" href="/">Strona główna</a>
-                <a class="btn btn-info" href="/logout">Wyloguj</a>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock %}
