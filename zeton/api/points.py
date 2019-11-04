@@ -23,10 +23,11 @@ def max_permission(child_id, exercise_id, days, max_column):
     return True
 
 
+@bp.route("/child/<child_id>/points/add/<points>/<ex_id>/<details>", methods=['POST'])
 @bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def add_points(child_id, points, ex_id):
+def add_points(child_id, points, ex_id, details=0):
     if max_permission(child_id, ex_id, 1, 'max_day') and max_permission(child_id, ex_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
@@ -43,11 +44,16 @@ def add_points(child_id, points, ex_id):
             zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
             zeton.data_access.points.add_exp(added_points, child_id, ex_id)
 
+        if(details!=0):
+            return_url=f'views.task_detail'
+        else:
+            return_url='views.child'
+
         role = g.user_data['role']
         if role == 'child':
             return redirect(return_url)
         else:
-            return redirect(url_for('views.child', child_id=child_id))
+            return redirect(url_for(return_url, child_id=child_id))
     else:
         flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
         return redirect(url_for('views.child', child_id=child_id))

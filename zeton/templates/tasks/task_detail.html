@@ -23,6 +23,10 @@
                             <td>{{ task.points }}</td>
                             <td>{{ task.max_day }}</td>
                             <td>{{ task.max_week }}</td>
+                            <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}/1"
+                              method="post">
+                                <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
+                            </form>
                         </tr>
                         {% endfor %}
                     </table>
