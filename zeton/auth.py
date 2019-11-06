@@ -33,7 +33,7 @@ def password_validation(password):
 def login():
     error = None
     if request.method == 'POST':
-        login = request.form['login']
+        login = request.form['login'].lower()
         password = request.form['password']
 
         user_data = get_user_data(login)

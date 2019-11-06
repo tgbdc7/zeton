@@ -40,7 +40,7 @@ def set_password():
 @bp.route("/user", methods=['POST'])
 def register():
     users.load_logged_in_user_data()
-    username = request.form['username']
+    username = request.form['username'].lower()
     password = request.form['password']
     password_hash = generate_password_hash(password)
     role = request.form.get('role') or 'caregiver'
