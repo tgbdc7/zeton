@@ -54,22 +54,20 @@ def login():
 def pass_rec():
     error = None
     if request.method == 'POST':
-        login = request.form['login']
+        username = request.form['username']
         emial = request.form['email']
 
-        user_data = get_user_data(login)
+        user_data = get_user_data(username)
 
-        # if user_data:
-
-            # hashed_password = user_data['password']
-            #
-            # if check_password_hash(hashed_password, password):
-            #     session['user_id'] = user_data['id']
-            #     session['role'] = user_data['role']
-            #     return redirect(url_for('views.index'))
+        if user_data:
+            user_data_username = user_data['username']
+            user_data_email = user_data['email']
+            if user_data_username == username and user_data_email == emial:
+                error = "Sprawdz skrzynkę pocztową w celu odzyskania hasła"
+                return render_template('user/pass_rec_form.html', error=error)
 
         error = 'Invalid login or email'
-    return render_template('user/pass_rec_form.html', error=error)
+    return render_template('base/login.html', error=error)
 
 
 @bp.route('/logout')
