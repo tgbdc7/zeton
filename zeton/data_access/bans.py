@@ -44,7 +44,7 @@ def get_all_bans(child_id):
 
 
 def get_most_important_warn_ban(child_id):
-    now = datetime.now().__format__('yyyy-MM-ddTHH:mm:00')
+    now = datetime.now().strftime("%Y-%m-%dT%H:%M:%S")
     query = 'select bans_name.ban_id, bans_name.ban_name, bans.start_timestamp, bans.end_timestamp from bans ' \
             f'inner JOIN bans_name ON bans.id=bans_name.ban_id where bans_name.child_id={child_id} ' \
             f'and bans.child_id={child_id} and bans.end_timestamp>\'{now}\' order by bans_name.ban_id desc'
@@ -52,9 +52,14 @@ def get_most_important_warn_ban(child_id):
 
     try:
         result = bans.fetchone()
-        info_str = f'{result["ban_name"]} Od: {result["start_timestamp"]} Do: {result["end_timestamp"]}'
+        raw_start = result["start_timestamp"].replace('T', ' ').split(':')
+        raw_end = result["end_timestamp"].replace('T', ' ').split(':')
+        start = f'{raw_start[0]}:{raw_start[1]}'
+        end = f'{raw_end[0]}:{raw_end[1]}'
+
+        info_str = f'{result["ban_name"]} Od: {start} Do: {end};red'
     except:
-        info_str = 'brak aktywnych warnów/banów'
+        info_str = 'brak aktywnych warnów/banów;green'
 
     return info_str
 

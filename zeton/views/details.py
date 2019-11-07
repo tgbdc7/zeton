@@ -3,7 +3,7 @@ from zeton.views import bp
 from flask import render_template, abort, g, get_flashed_messages
 
 from zeton import auth
-from zeton.data_access import users, prizes, tasks, points
+from zeton.data_access import users, prizes, tasks, points, bans
 
 
 @bp.route('/task_detail/<child_id>')
@@ -81,10 +81,15 @@ def bans_detail(child_id):
     except TypeError:
         return abort(403)
     child_points = points.get_child_points(child['id'])
+    info = bans.get_most_important_warn_ban(child_id).split(';')
+    info_str = info[0]
+    info_bck = info[1]
 
     context = {'child': child,
                'role': role,
-               'child_points': child_points}
+               'child_points': child_points,
+               'info_str': info_str,
+               'info_bck': info_bck}
 
     return render_template('bans/bans_detail.html', **context)
 
