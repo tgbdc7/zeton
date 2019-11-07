@@ -1,0 +1,30 @@
+{% extends "base/base.html" %}
+{% block head %}
+{{ super() }}
+{% block password %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endblock password %}
+{% endblock head %}
+
+{% block content %}
+<div class="col col-sm-4">
+    <form action="/api/user" method="POST">
+
+        <h2>Odzyskiwanie hasła użytkownika</h2>
+
+        {% block add_person %}{% endblock add_person %}
+        <div class="form-group">
+            <label>Nazwa użytkownika:</label>
+            <input class="form-control" type="text" name="username" placeholder="Nazwa użytkownika" required>
+        </div>
+        <div class="form-group">
+            <label>Adres email:</label>
+            <input class="form-control" type="email" name="email" placeholder="Adres email" required>
+        </div>
+        <div class="form-group button">
+            <a href="{{ prev_url }}" class="btn btn-info">Powrót</a>
+            <button type="submit" class="btn btn-info">Zarejestruj</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
