@@ -47,7 +47,7 @@ def login():
                 session['role'] = user_data['role']
                 return redirect(url_for('views.index'))
 
-        error = 'Invalid login or username'
+        error = 'Błędny login lub hasło'
     return render_template('base/login.html', error=error)
 
 @bp.route('/pass_rec', methods=['GET', 'POST'])
@@ -64,10 +64,10 @@ def pass_rec():
             user_data_email = user_data['email']
             if user_data_username == username and user_data_email == emial:
                 error = "Sprawdz skrzynkę pocztową w celu odzyskania hasła"
-                return render_template('user/pass_rec_form.html', error=error)
+                return render_template('base/login.html', error=error)
 
         error = 'Invalid login or email'
-    return render_template('base/login.html', error=error)
+    return render_template('user/pass_rec_form.html', error=error)
 
 
 @bp.route('/logout')
