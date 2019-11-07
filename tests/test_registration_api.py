@@ -9,6 +9,7 @@ CAREGIVER_EMAIL = "caregiver@email.com"
 DATASET_REGISTER = {
     'username': 'test_reg',
     'password': 'test_reg_pass',
+    'email': 'caregiver@email.com'
     }
 
 DATASET_ADD_CHILD = {
