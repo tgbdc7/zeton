@@ -50,6 +50,27 @@ def login():
         error = 'Invalid login or username'
     return render_template('base/login.html', error=error)
 
+@bp.route('/pass_rec', methods=['GET', 'POST'])
+def pass_rec():
+    error = None
+    if request.method == 'POST':
+        login = request.form['login']
+        emial = request.form['email']
+
+        user_data = get_user_data(login)
+
+        # if user_data:
+
+            # hashed_password = user_data['password']
+            #
+            # if check_password_hash(hashed_password, password):
+            #     session['user_id'] = user_data['id']
+            #     session['role'] = user_data['role']
+            #     return redirect(url_for('views.index'))
+
+        error = 'Invalid login or email'
+    return render_template('user/pass_rec_form.html', error=error)
+
 
 @bp.route('/logout')
 def logout():
