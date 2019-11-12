@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
-
+DROP TABLE IF EXISTS pass_rec;
 
 
 create table users

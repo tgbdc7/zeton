@@ -36,6 +36,31 @@ def set_password():
 
     return redirect(url_for('views.password_change'))
 
+@bp.route('/set_new_password', methods=['POST'])
+@auth.login_required
+def set_new_password():
+    logged_user_id = g.user_data['id']
+    logged_user_password = g.user_data['password']
+
+    new_password = request.form['new_password']
+    repeat_new_password = request.form['repeat_new_password']
+
+    hashed_new_password = generate_password_hash(new_password)
+
+    if not logged_user_id:
+        return abort(403)
+
+    if not (new_password == '' or repeat_new_password == ''):
+        if new_password == repeat_new_password:
+            if auth.password_validation(new_password):
+                users.update_password(logged_user_id, hashed_new_password)
+                flash('Nowe hasło wprowadzone poprawnie')
+            flash('Hasło musi zawierać 1 dużą literę, 1 małą literę, 1 cyfrę i musi mieć długość 8 znaków')
+        flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
+    else:
+        flash('Wypełnij wszystkie pola')
+
+    return redirect(url_for('views.password_recovery'))
 
 @bp.route("/user", methods=['POST'])
 def register():

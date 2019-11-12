@@ -62,13 +62,12 @@ def pass_rec():
             user_data_username = user_data['username']
             user_data_email = user_data['email']
             if user_data_username == username and user_data_email == emial:
-                error = "Sprawdz skrzynkę pocztową w celu odzyskania hasła"
                 # fix me
                 # send mail
                 sha = generate_password_hash("password_recovery", "sha256")
                 expire = datetime.datetime.now()
-                users.add_pas_rec(username, emial, sha, expire)
-                return render_template('base/login.html', error=error)
+                message = users.pass_rec(username, emial, sha, expire)
+                return render_template('base/login.html', error=message)
 
         error = 'Invalid login or email'
     return render_template('user/pass_rec_form.html', error=error)
@@ -89,6 +88,14 @@ def register():
     prev_url = request.referrer
     return render_template('user/register_form.html', prev_url=prev_url)
 
+@bp.route('/pass_rec/<sha>', methods=['GET'])
+def new_pass(sha):
+    logged_user_id = 1
+    user_data = users.get_user_data(logged_user_id)
+
+    context = {'user_data': user_data}
+
+    return render_template('user/password_recovery.html', **context)
 
 @bp.route('/add-person', methods=['GET'])
 def add_person():
