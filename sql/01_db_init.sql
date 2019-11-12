@@ -101,6 +101,15 @@ create table points_history
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
 );
 
+create table pass_rec
+(
+  id                      integer UNIQUE primary key autoincrement,
+  username                text not null,
+  email                   text not null,
+  sha                     text not null,
+  expire                  text not null
+);
+
 CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.points <> old.points
     begin
         INSERT INTO points_history  (child_id,points_change, id_changing_user, change_timestamp)

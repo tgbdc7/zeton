@@ -103,6 +103,13 @@ def get_user_id(username):
         return row['id']
     return False
 
+def add_pas_rec(username, emial, sha, expire):
+    query = "INSERT INTO 'users' " \
+            "(username, password, role, firstname, email) " \
+            "VALUES (?, ?, ?, ?, ?) "
+
+    get_db().execute(query)
+    get_db().commit()
 
 def get_email_address(email):
     query = """

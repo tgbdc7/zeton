@@ -1,8 +1,7 @@
 import functools
-
+import datetime
 from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort
-from werkzeug.security import check_password_hash
-
+from werkzeug.security import check_password_hash, generate_password_hash
 from zeton.data_access import users
 from . import db
 
@@ -64,6 +63,11 @@ def pass_rec():
             user_data_email = user_data['email']
             if user_data_username == username and user_data_email == emial:
                 error = "Sprawdz skrzynkę pocztową w celu odzyskania hasła"
+                # fix me
+                # send mail
+                sha = generate_password_hash("password_recovery", "sha256")
+                expire = datetime.datetime.now()
+                users.add_pas_rec(username, emial, sha, expire)
                 return render_template('base/login.html', error=error)
 
         error = 'Invalid login or email'
