@@ -1,6 +1,6 @@
 import functools
 import datetime
-from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort
+from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort, get_flashed_messages
 from werkzeug.security import check_password_hash, generate_password_hash
 from zeton.data_access import users
 from . import db
@@ -96,9 +96,9 @@ def new_pass(sha, messages=None):
         user_id = users.get_user_id(user_name)
         user_data = users.get_user_data(user_id)
 
-        context = {'user_data': user_data, 'messages': messages}
-
-        return render_template('user/password_recovery.html', **context)
+        context = {'user_data': user_data}
+        messages = get_flashed_messages()
+        return render_template('user/password_recovery.html', **context, sha=sha, messages=messages)
     else:
         message = "Link do odzyskania hasłą jest błędny lub przeterminowany"
         return render_template('base/login.html', error=message)

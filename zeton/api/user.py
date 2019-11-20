@@ -52,13 +52,10 @@ def set_new_password(user_id, sha):
                 flash('Nowe hasło wprowadzone poprawnie')
                 return redirect(url_for('views.index'))
             flash('Hasło musi zawierać 1 dużą literę, 1 małą literę, 1 cyfrę i musi mieć długość 8 znaków')
-            messages = 'dupa'
-            return redirect(url_for('auth.new_pass', sha=sha, messages=messages))
         flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
-        return redirect(url_for('auth.new_pass', sha=sha))
     else:
         flash('Wypełnij wszystkie pola')
-        return redirect(url_for('auth.new_pass', sha=sha))
+
 
     return redirect(url_for('auth.new_pass', sha=sha))
 
