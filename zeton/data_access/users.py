@@ -106,8 +106,10 @@ def get_user_name_pass_recovery_sha(sha):
     query = f"select * from pass_rec where expire > '{datetime.datetime.now()}' and sha='{sha}'"
     result = get_db().execute(query)
     row = result.fetchone()
-    return row['username']
-
+    if row!=None:
+        return row['username']
+    else:
+        return None
 
 def pass_rec(username, email, sha, expire):
     query = f"select * from pass_rec where expire > '{datetime.datetime.now()}' and username='{username}'"

@@ -64,7 +64,7 @@ def pass_rec():
             if user_data_username == username and user_data_email == emial:
                 # fix me
                 # send mail
-                sha = generate_password_hash("password_recovery", "sha256")
+                sha = generate_password_hash(str(datetime.datetime.now()), "sha256")
                 sha = sha.replace('sha256$', '')
                 expire = datetime.datetime.now()
                 message = users.pass_rec(username, emial, sha, expire)
@@ -90,14 +90,18 @@ def register():
     return render_template('user/register_form.html', prev_url=prev_url)
 
 @bp.route('/pass_rec/<sha>', methods=['GET'])
-def new_pass(sha):
+def new_pass(sha, messages=None):
     user_name = users.get_user_name_pass_recovery_sha(sha)
-    user_id = users.get_user_id(user_name)
-    user_data = users.get_user_data(user_id)
+    if user_name!=None:
+        user_id = users.get_user_id(user_name)
+        user_data = users.get_user_data(user_id)
 
-    context = {'user_data': user_data}
+        context = {'user_data': user_data, 'messages': messages}
 
-    return render_template('user/password_recovery.html', **context)
+        return render_template('user/password_recovery.html', **context)
+    else:
+        message = "Link do odzyskania hasłą jest błędny lub przeterminowany"
+        return render_template('base/login.html', error=message)
 
 @bp.route('/add-person', methods=['GET'])
 def add_person():

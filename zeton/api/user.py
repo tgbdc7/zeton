@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, g, flash, abort
+from flask import request, redirect, url_for, g, flash, abort, render_template
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from zeton import auth
@@ -36,31 +36,31 @@ def set_password():
 
     return redirect(url_for('views.password_change'))
 
-@bp.route('/set_new_password', methods=['POST'])
-@auth.login_required
-def set_new_password():
-    logged_user_id = g.user_data['id']
-    logged_user_password = g.user_data['password']
-
+@bp.route('/settings/set_new_password/<user_id>/<sha>', methods=['POST'])
+def set_new_password(user_id, sha):
     new_password = request.form['new_password']
     repeat_new_password = request.form['repeat_new_password']
-
     hashed_new_password = generate_password_hash(new_password)
 
-    if not logged_user_id:
+    if not user_id:
         return abort(403)
 
     if not (new_password == '' or repeat_new_password == ''):
         if new_password == repeat_new_password:
             if auth.password_validation(new_password):
-                users.update_password(logged_user_id, hashed_new_password)
+                users.update_password(user_id, hashed_new_password)
                 flash('Nowe hasło wprowadzone poprawnie')
+                return redirect(url_for('views.index'))
             flash('Hasło musi zawierać 1 dużą literę, 1 małą literę, 1 cyfrę i musi mieć długość 8 znaków')
+            messages = 'dupa'
+            return redirect(url_for('auth.new_pass', sha=sha, messages=messages))
         flash('Nowe hasło i powtórzone nowe hasło muszą się zgadzać. Spróbuj ponownie')
+        return redirect(url_for('auth.new_pass', sha=sha))
     else:
         flash('Wypełnij wszystkie pola')
+        return redirect(url_for('auth.new_pass', sha=sha))
 
-    return redirect(url_for('views.password_recovery'))
+    return redirect(url_for('auth.new_pass', sha=sha))
 
 @bp.route("/user", methods=['POST'])
 def register():
