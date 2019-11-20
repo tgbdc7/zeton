@@ -66,8 +66,12 @@ def pass_rec():
                 # send mail
                 sha = generate_password_hash(str(datetime.datetime.now()), "sha256")
                 sha = sha.replace('sha256$', '')
-                expire = datetime.datetime.now()
+                expire = datetime.datetime.now() + datetime.timedelta(hours=1)
                 message = users.pass_rec(username, emial, sha, expire)
+
+                # file
+                f = open("email_test.txt", "a")
+                f.write(f"http://127.0.0.1:5000/pass_rec/{sha}\n")
                 return render_template('base/login.html', error=message)
 
         error = 'Invalid login or email'

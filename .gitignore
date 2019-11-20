@@ -9,3 +9,4 @@ db.sqlite
 node_modules/
 .coverage
 tests/TODO.txt
+email_test.txt
