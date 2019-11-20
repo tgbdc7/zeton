@@ -123,3 +123,38 @@ def edit_prize(child_id, prize_id):
     messages = get_flashed_messages()
 
     return render_template('prizes/edit_prize.html', **context, messages=messages)
+
+
+@bp.route('/task_detail/<child_id>/add_task')
+@auth.login_required
+@auth.caregiver_only
+def add_task(child_id):
+    logged_user_id = g.user_data['id']
+    user_data = users.get_user_data(logged_user_id)
+    child = users.get_child_data(child_id)
+
+    context = {'user_data': user_data,
+               'child': child}
+
+    messages = get_flashed_messages()
+
+    return render_template('tasks/add_task.html', **context, messages=messages)
+
+
+@bp.route('/task_detail/<child_id>/edit_task/<task_id>')
+@auth.login_required
+@auth.caregiver_only
+def edit_task(child_id, task_id):
+    logged_user_id = g.user_data['id']
+    child_id = int(child_id)
+    user_data = users.get_user_data(logged_user_id)
+    child = users.get_child_data(child_id)
+    task = tasks.get_task_by_tasks_id(child_id, task_id)
+
+    context = {'user_data': user_data,
+               'child': child,
+               'task': task}
+
+    messages = get_flashed_messages()
+
+    return render_template('tasks/edit_task.html', **context, messages=messages)
