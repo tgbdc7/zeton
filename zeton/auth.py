@@ -65,6 +65,7 @@ def pass_rec():
                 # fix me
                 # send mail
                 sha = generate_password_hash("password_recovery", "sha256")
+                sha = sha.replace('sha256$', '')
                 expire = datetime.datetime.now()
                 message = users.pass_rec(username, emial, sha, expire)
                 return render_template('base/login.html', error=message)
@@ -90,8 +91,8 @@ def register():
 
 @bp.route('/pass_rec/<sha>', methods=['GET'])
 def new_pass(sha):
-    logged_user_id = 1
-    user_data = users.get_user_data(logged_user_id)
+    user_id = users.get_user_id('opiekun_biz')
+    user_data = users.get_user_data(user_id)
 
     context = {'user_data': user_data}
 
