@@ -12,7 +12,7 @@ from zeton.data_access import users
 
 def is_daily_limit_reached(child_id, exercise_id):
     now = datetime.datetime.now() - datetime.timedelta(days=1)
-    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+    dt_string = datetime.datetime.fromisoformat(str(now))
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
     points_events_count = history.__len__()
 
