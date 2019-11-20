@@ -20,7 +20,6 @@ def is_daily_limit_reached(child_id, exercise_id):
         day_limit = history[0]['max_day']
         if points_events_count >= day_limit:
             return False
-
     return True
 
 @bp.route("/child/<child_id>/points/add/<points>/<exercise_id>", methods=['POST'])
