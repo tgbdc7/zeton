@@ -91,7 +91,8 @@ def register():
 
 @bp.route('/pass_rec/<sha>', methods=['GET'])
 def new_pass(sha):
-    user_id = users.get_user_id('opiekun_biz')
+    user_name = users.get_user_name_pass_recovery_sha(sha)
+    user_id = users.get_user_id(user_name)
     user_data = users.get_user_data(user_id)
 
     context = {'user_data': user_data}
