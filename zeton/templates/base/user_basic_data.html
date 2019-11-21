@@ -1,6 +1,7 @@
 <div class="text-center">
     <h4>Twoja nazwa użytkownika: {{ user_data.username }}</h4>
     <h4>Twoje imię: {{ user_data.firstname }}</h4>
+    <h4>Twój adres e-mail: {{ user_data.email }}</h4>
     <h4>Jesteś zarejestrowany jako:
         {% if role == 'caregiver' %}
         opiekun

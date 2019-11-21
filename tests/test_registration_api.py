@@ -4,24 +4,28 @@ from zeton.data_access import users
 
 CAREGIVER_LOGIN = 'caregiver_login'
 CAREGIVER_PASSWORD = 'caregiver_password'
+CAREGIVER_EMAIL = "caregiver@email.com"
 
 DATASET_REGISTER = {
     'username': 'test_reg',
     'password': 'test_reg_pass',
+    'email': 'caregiver@email.com'
     }
 
 DATASET_ADD_CHILD = {
     'username': 'test_child',
     'password': 'test_child_pass',
     'role': 'child',
-    'firstname': 'test_child_name'
+    'firstname': 'test_child_name',
+    'email': 'testowy_1@example.com'
     }
 
 DATASET_ADD_CAREGIVER = {
     'username': 'test_caregiver',
     'password': 'test_pass',
     'role': 'caregiver',
-    'firstname': 'test_caregiver_name'
+    'firstname': 'test_caregiver_name',
+    'email': 'testowy_0@example.com'
     }
 
 
@@ -49,14 +53,16 @@ def test_register_with_missing_data(client):
     # register with username missing
     response = client.post('api/user', data={
         'username': None,
-        'password': 'testowy_2'
+        'password': 'testowy_2',
+        'email': 'blank_username@test.com'
     })
     assert response.status_code == 400
 
     # register with password missing
     response = client.post('/api/user', data={
         'username': 'testowy_3',
-        'password': None
+        'password': None,
+        'email': 'blank_pass@test.com'
     })
     assert response.status_code == 400
 
