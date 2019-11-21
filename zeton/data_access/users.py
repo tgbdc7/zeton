@@ -85,8 +85,8 @@ def update_password(user_id, hashed_new_password):
 
 def add_new_user(user_data):
     query = "INSERT INTO 'users' " \
-            "(username, password, role, firstname) " \
-            "VALUES (?, ?, ?, ?) "
+            "(username, password, role, firstname, email) " \
+            "VALUES (?, ?, ?, ?, ?) "
 
     get_db().execute(query, user_data)
     get_db().commit()
@@ -103,6 +103,17 @@ def get_user_id(username):
         return row['id']
     return False
 
+
+def get_email_address(email):
+    query = """
+    SELECT email FROM users
+    WHERE email = ?
+    """
+    result = get_db().execute(query, (email,))
+    row = result.fetchone()
+    if row:
+        return row['email']
+    return False
 
 def associate_child_with_caregiver(caregiver_id, child_id):
     query = "INSERT INTO 'caregiver_to_child' " \
