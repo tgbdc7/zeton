@@ -153,6 +153,17 @@ def get_email_address(email):
         return row['email']
     return False
 
+def get_email_address(email):
+    query = """
+    SELECT email FROM users
+    WHERE email = ?
+    """
+    result = get_db().execute(query, (email,))
+    row = result.fetchone()
+    if row:
+        return row['email']
+    return False
+
 def associate_child_with_caregiver(caregiver_id, child_id):
     query = "INSERT INTO 'caregiver_to_child' " \
             "(caregiver_id, child_id)" \
