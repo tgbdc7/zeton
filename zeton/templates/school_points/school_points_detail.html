@@ -18,9 +18,12 @@
             {% if role == 'caregiver' %}
             <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
             {% endif %}
+            {% if role=='caregiver' %}
             <a class="btn btn-info" href="/">Strona główna</a>
-            <a class="btn btn-info" href="/logout">Wyloguj</a>
-        </div>
+            {% else %}
+            <a class="btn btn-info" href="/">Wróć</a>
+            {% endif %}
+
     </form>
 </div>
 {% endblock %}
