@@ -4,6 +4,7 @@ from flask import Blueprint, redirect, render_template, request, url_for, sessio
 from werkzeug.security import check_password_hash, generate_password_hash
 from zeton.data_access import users
 from . import db
+from zeton.api.send_email import is_pass_rec_email
 
 bp = Blueprint('auth', __name__)
 
@@ -68,6 +69,8 @@ def pass_rec():
                 sha = sha.replace('sha256$', '')
                 expire = datetime.datetime.now() + datetime.timedelta(hours=1)
                 message = users.pass_rec(username, emial, sha, expire)
+                if not is_pass_rec_email(emial,sha):
+                    message = "Blad wysylania email, skontaktuj sie z administratorem"
 
                 # file
                 f = open("email_test.txt", "a")
