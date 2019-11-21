@@ -70,8 +70,12 @@
                     <br><br>
                     <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
                     {% endif %}
+                    {% if role='caregiver' %}
                     <a class="btn btn-info" href="/">Strona główna</a>
-                    <a class="btn btn-info" href="/logout">Wyloguj</a>
+                    {% else %}
+                    <a class="btn btn-info" href="/">Wróć</a>
+                    {% endif %}
+
                 </div>
             </form>
         </div>
