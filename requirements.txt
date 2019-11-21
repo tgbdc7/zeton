@@ -2,3 +2,4 @@ werkzeug
 Flask
 pytest
 lxml
+sendgrid
