@@ -10,16 +10,16 @@ def get_only_points(child_id):
     return None
 
 
-def change_points_by(target_id, points, user_id):
+def change_points_by(target_id, points, user_id, exercise_id):
     """ used both to add and subtract points from the current amount """
-    query = 'UPDATE main_points SET points = points + ?, last_insert_id = ?   WHERE child_id = ?;'
-    get_db().execute(query, [points, user_id, target_id])
+    query = 'UPDATE main_points SET points = points + ?, last_insert_id = ?, last_exercise_id= ?   WHERE child_id = ?;'
+    get_db().execute(query, [points, user_id, exercise_id, target_id])
     get_db().commit()
 
 
-def add_exp(exp, child_id, ex_id):
-    query = 'UPDATE main_points SET exp = exp + ?, last_exercise_id= ?, last_score= ?  WHERE child_id = ?;'
-    get_db().execute(query, [exp, ex_id, exp, child_id])
+def add_exp(exp, child_id):
+    query = 'UPDATE main_points SET exp = exp + ? WHERE child_id = ?;'
+    get_db().execute(query, [exp, child_id])
     get_db().commit()
 
 

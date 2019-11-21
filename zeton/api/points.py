@@ -39,8 +39,8 @@ def add_points(child_id, points, exercise_id):
             return {'message': 'Bad request'}, 400
 
         if added_points > 0:
-            zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
-            zeton.data_access.points.add_exp(added_points, child_id, exercise_id)
+            zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id, exercise_id)
+            zeton.data_access.points.add_exp(added_points, child_id)
 
         role = g.user_data['role']
         if role == 'child':
