@@ -23,7 +23,6 @@ VALUES(1,
        0,
        0,
        0,
-       0,
        0);
 
 INSERT INTO caregiver_to_child
