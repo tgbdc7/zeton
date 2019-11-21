@@ -40,17 +40,18 @@ def set_password():
 @bp.route("/user", methods=['POST'])
 def register():
     users.load_logged_in_user_data()
-    username = request.form['username']
+    username = request.form['username'].lower()
     password = request.form['password']
+    email = request.form['email']
     password_hash = generate_password_hash(password)
     role = request.form.get('role') or 'caregiver'
     firstname = request.form.get('name') or username
 
-    data = (username, password_hash, role, firstname)
+    data = (username, password_hash, role, firstname, email)
 
     if username is None or password is None:
         abort(400)
-    if users.get_user_id(username):
+    if users.get_user_id(username) or users.get_email_address(email) :
         abort(400)  # user already exists
 
     users.add_new_user(data)

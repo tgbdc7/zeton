@@ -10,28 +10,27 @@ import datetime
 from zeton.data_access import users
 
 
-def max_permission(child_id, exercise_id, days, max_column):
+def is_limit_reached(child_id, exercise_id, days, max_column):
     now = datetime.datetime.now() - datetime.timedelta(days= days)
-    dt_string = now.strftime("%Y-%m-%d %H:%M:%S")
+    dt_string = datetime.datetime.fromisoformat(str(now))
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
-    act_count = history.__len__()
+    points_events_count = history.__len__()
 
-    if act_count > 0:
+    if points_events_count > 0:
         limit = history[0][max_column]
-        if act_count >= limit:
+        if points_events_count >= limit:
             return False
     return True
 
-
-@bp.route("/child/<child_id>/points/add/<points>/<ex_id>", methods=['POST'])
+@bp.route("/child/<child_id>/points/add/<points>/<exercise_id>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
-def add_points(child_id, points, ex_id):
-    if max_permission(child_id, ex_id, 1, 'max_day') and max_permission(child_id, ex_id, 7, 'max_week'):
+def add_points(child_id, points, exercise_id):
+    if is_limit_reached(child_id, exercise_id, 1, 'max_day') and is_limit_reached(child_id, exercise_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
 
-        if ex_id == '0':
+        if exercise_id == '0':
             points = request.form['points']
         try:
             added_points = int(points)
@@ -40,8 +39,8 @@ def add_points(child_id, points, ex_id):
             return {'message': 'Bad request'}, 400
 
         if added_points > 0:
-            zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id)
-            zeton.data_access.points.add_exp(added_points, child_id, ex_id)
+            zeton.data_access.points.change_points_by(child_id, added_points, logged_user_id, exercise_id)
+            zeton.data_access.points.add_exp(added_points, child_id)
 
         role = g.user_data['role']
         if role == 'child':
