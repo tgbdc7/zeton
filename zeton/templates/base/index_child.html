@@ -1,6 +1,8 @@
 {% extends "base/base.html" %}
 {% block content %}
+{% if role=='caregiver' %}
 <a class="btn btn-info" style="margin-left:550px;" href="/">Strona główna</a>
+{% endif%}
 <div class="col col-sm-12">
     <div name="user_summary" class="text-center">
         <h2 name="username">{{ child.firstname }}</h2>
