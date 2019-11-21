@@ -70,7 +70,7 @@ def use_points(child_id):
 
     if used_points > 0:
         if used_points <= current_points:
-            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id)
+            zeton.data_access.points.change_points_by(child_id, -used_points, logged_user_id, 0)
         else:
             missing_points = abs(current_points - used_points)
             if missing_points == 1:
