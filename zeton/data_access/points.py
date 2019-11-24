@@ -44,7 +44,7 @@ def get_points_history(child_id):
     return result.fetchall()
 
 def get_points_history_limits(child_id,dt_string, exercise_id):
-    query = 'select points_history.child_id, points_history.change_timestamp, home_points.max_day, home_points.id ' \
+    query = 'select points_history.child_id, points_history.change_timestamp, home_points.max_day, home_points.max_week, home_points.id ' \
             'from points_history INNER JOIN home_points on home_points.id=points_history.points_name ' \
             f'where points_history.child_id= {child_id} and points_history.change_timestamp>\'{dt_string}\' and  home_points.id = {exercise_id} '
     result = get_db().execute(query)
