@@ -48,7 +48,12 @@ def add_points(child_id, points, exercise_id):
         else:
             return redirect(url_for('views.child', child_id=child_id))
     else:
-        flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
+        if not is_limit_reached(child_id, exercise_id, 1, 'max_day'):
+            flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
+
+        if not is_limit_reached(child_id, exercise_id, 7, 'max_week'):
+            flash(f'W ciągu ostatnich 7 dni został przekroczony limit punktów')
+            
         return redirect(url_for('views.child', child_id=child_id))
 
 
