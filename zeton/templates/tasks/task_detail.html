@@ -23,10 +23,19 @@
                             <td>{{ task.points }}</td>
                             <td>{{ task.max_day }}</td>
                             <td>{{ task.max_week }}</td>
-                            <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}/1"
-                              method="post">
-                                <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
+                            {% if role == 'caregiver' %}
+                            <form action="/api/child/{{ child.id }}/tasks/deactivate/{{ task.id }}"
+                                  method="post">
+                                <td><input class="btn btn-info" type="submit" name="Deactivate_task"
+                                           value="Dezaktywuj"/></td>
                             </form>
+                            <form>
+                                <div class="button">
+                                    <td><a class="btn btn-info"
+                                           href="/task_detail/{{ child.id }}/edit_task/{{ task.id }}">Edytuj</a></td>
+                                </div>
+                            </form>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </table>
@@ -54,16 +63,18 @@
                     </table>
                 </ul>
             </div>
+            <form>
+                <div class="button">
+                    {% if role == 'caregiver' %}
+                    <a class="btn btn-info" href="/task_detail/{{ child.id }}/add_task">Dodaj zadanie</a>
+                    <br><br>
+                    <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
+                    {% endif %}
+                    <a class="btn btn-info" href="/">Strona główna</a>
+                    <a class="btn btn-info" href="/logout">Wyloguj</a>
+                </div>
+            </form>
         </div>
-        <form>
-            <div class="button">
-                {% if role == 'caregiver' %}
-                <a class="btn btn-info" href="/child/{{ child.id }}">Wróć</a>
-                {% endif %}
-                <a class="btn btn-info" href="/">Strona główna</a>
-                <a class="btn btn-info" href="/logout">Wyloguj</a>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock %}
