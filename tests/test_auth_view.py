@@ -4,6 +4,7 @@ from pytest import mark
 
 CHILD_LOGIN = 'child_login'
 CHILD_PASSWORD = 'child_password'
+
 CHILD_FIRSTNAME = 'Bonifacy'
 
 
