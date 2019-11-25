@@ -10,15 +10,15 @@ import datetime
 from zeton.data_access import users
 
 
-def is_daily_limit_reached(child_id, exercise_id):
-    now = datetime.datetime.now() - datetime.timedelta(days=1)
+def is_limit_reached(child_id, exercise_id, days, max_column):
+    now = datetime.datetime.now() - datetime.timedelta(days= days)
     dt_string = datetime.datetime.fromisoformat(str(now))
     history = zeton.data_access.points.get_points_history_limits(child_id, dt_string, exercise_id)
     points_events_count = history.__len__()
 
     if points_events_count > 0:
-        day_limit = history[0]['max_day']
-        if points_events_count >= day_limit:
+        limit = history[0][max_column]
+        if points_events_count >= limit:
             return False
     return True
 
@@ -26,7 +26,7 @@ def is_daily_limit_reached(child_id, exercise_id):
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def add_points(child_id, points, exercise_id):
-    if is_daily_limit_reached(child_id, exercise_id):
+    if is_limit_reached(child_id, exercise_id, 1, 'max_day') and is_limit_reached(child_id, exercise_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
 
@@ -48,7 +48,12 @@ def add_points(child_id, points, exercise_id):
         else:
             return redirect(url_for('views.child', child_id=child_id))
     else:
-        flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
+        if not is_limit_reached(child_id, exercise_id, 1, 'max_day'):
+            flash(f'W ciągu ostatniej doby został przekroczony limit punktów')
+
+        if not is_limit_reached(child_id, exercise_id, 7, 'max_week'):
+            flash(f'W ciągu ostatnich 7 dni został przekroczony limit punktów')
+            
         return redirect(url_for('views.child', child_id=child_id))
 
 
