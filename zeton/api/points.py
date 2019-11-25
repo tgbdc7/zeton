@@ -25,6 +25,7 @@ def is_limit_reached(child_id, exercise_id, days, max_column):
 @bp.route("/child/<child_id>/points/add/<points>/<exercise_id>/<is_detail>", methods=['POST'])
 @auth.login_required
 @auth.logged_child_or_caregiver_only
+
 def add_points(child_id, points, exercise_id,is_detail):
     if is_limit_reached(child_id, exercise_id, 1, 'max_day') and is_limit_reached(child_id, exercise_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
@@ -57,10 +58,12 @@ def add_points(child_id, points, exercise_id,is_detail):
         if not is_limit_reached(child_id, exercise_id, 7, 'max_week'):
             flash(f'W ciągu ostatnich 7 dni został przekroczony limit punktów')
 
+
         if is_detail == "0":
             return redirect(url_for('views.child', child_id=child_id))
         else:
             return redirect(url_for('views.task_detail', child_id=child_id))
+
 
 
 @bp.route("/child/<child_id>/points/use", methods=['POST'])
