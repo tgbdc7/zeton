@@ -24,6 +24,7 @@ VALUES(1,
        0,
        0,
        0,
+       0,
        0);
 
 INSERT INTO caregiver_to_child
@@ -41,6 +42,7 @@ INSERT INTO bans_name
 VALUES (5, 2, 5, 'BAN 1 stopnia na 24h - brak telefonu');
 INSERT INTO bans_name
 VALUES (6, 2, 6, 'BAN 2 stopnia na 24h - brak komputera i telefonu');
+
 
 INSERT INTO home_points
 VALUES (1, 2, 'sprzątanie pokoju', 20, 1, 7, 1);
