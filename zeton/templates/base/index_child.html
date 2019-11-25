@@ -62,7 +62,7 @@
                         <td>{{ loop.index }}</td>
                         <td>{{ task.name }}</td>
                         <td>{{ task.points }}</td>
-                        <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}"
+                        <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}/0"
                               method="post">
                             <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
                         </form>

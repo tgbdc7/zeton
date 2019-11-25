@@ -23,7 +23,9 @@ def task_detail(child_id):
                'child_points': child_points
                }
 
-    return render_template('tasks/task_detail.html', **context)
+    messages = get_flashed_messages()
+
+    return render_template('tasks/task_detail.html', **context, messages=messages)
 
 
 @bp.route('/prizes_detail/<child_id>')
