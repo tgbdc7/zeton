@@ -62,7 +62,7 @@ jobs:
             ACRONYM=$(echo $CIRCLE_BRANCH | awk -F_ '{print $NF}')
             API_KEY_VAR_NAME=$(echo HEROKU_API_KEY_$ACRONYM | awk '{ print toupper($0) }')
             HEROKU_APP_SUFFIX=$(echo $ACRONYM | awk '{ print tolower($0) }')
-            HEROKU_API_KEY=${!API_KEY_VAR_NAME}
+            export HEROKU_API_KEY=${!API_KEY_VAR_NAME}
             heroku container:login
             heroku container:push web -a zeton-$HEROKU_APP_SUFFIX
             heroku container:release web -a zeton-$HEROKU_APP_SUFFIX
