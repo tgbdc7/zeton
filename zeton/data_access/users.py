@@ -141,7 +141,7 @@ def get_username_id_and_role_by_username(username):
 
 
 def get_role_permissions(role):
-    query = 'SELECT permissions from Roles where role = ?'
+    query = 'SELECT permissions from Roles where role_name = ?'
     result = get_db().execute(query, (role,))
     row = result.fetchone()
     if row:
