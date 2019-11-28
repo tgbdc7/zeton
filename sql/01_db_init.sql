@@ -9,8 +9,15 @@ DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 
 
+create table roles
+(
+    id                    integer UNIQUE primary key autoincrement ,
+    role_name             text UNIQUE not null ,
+    permissions           integer UNIQUE not null
+);
 
 create table users
 (

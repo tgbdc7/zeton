@@ -93,6 +93,10 @@ INSERT INTO prizes VALUES(12,6, "nowe części do motocykla", 600, 1, 1, 1, 1);
 INSERT INTO prizes VALUES(13,6, "nowa książka", 100, 1, 1, 4, 1);
 INSERT INTO prizes VALUES(14,6, "nowa rybka", 20, 1, 1, 1, 1);
 
+
+INSERT INTO roles VALUES(1, 'caregiver', 63);
+INSERT INTO roles VALUES(2, 'child', 13);
+
 DELETE FROM sqlite_sequence;
 INSERT INTO sqlite_sequence VALUES('users',9);
 INSERT INTO sqlite_sequence VALUES('main_points',4);
