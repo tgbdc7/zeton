@@ -136,3 +136,18 @@ def logged_child_or_caregiver_only(view):
         return view(*args, **kwargs)
 
     return wrapped_view
+
+
+class Permissions:
+
+    ADD_POINTS = 1
+    USE_POINTS = 2
+    EDIT_TASKS = 4
+    EDIT_PRIZES = 8
+    ADD_BAN = 16
+    EDIT_BAN = 32
+    ADD_SCHOOL_POINTS = 64
+    EDIT_SCHOOL_POINTS = 128
+    EDIT_KIDS_SETTINGS = 256
+    EDIT_CAREGIVER_LIST = 512
+
