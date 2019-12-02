@@ -20,7 +20,8 @@ def task_detail(child_id):
                'childs_tasks': childs_tasks,
                'childs_points_history': childs_points_history,
                'role': role,
-               'child_points': child_points
+               'child_points': child_points,
+               "firstname": g.user_data['firstname']
                }
 
     return render_template('tasks/task_detail.html', **context)
@@ -45,7 +46,8 @@ def prizes_detail(child_id):
                'childs_prizes': childs_prizes,
                'role': role,
                'child_points': child_points,
-               'childs_points_history': childs_points_history
+               'childs_points_history': childs_points_history,
+               "firstname": g.user_data['firstname']
                }
 
     return render_template('prizes/prizes_detail.html', **context)
@@ -65,7 +67,8 @@ def school_points_detail(child_id):
 
     context = {'child': child,
                'role': role,
-               'child_points': child_points}
+               'child_points': child_points,
+               "firstname": g.user_data['firstname']}
 
     return render_template('school_points/school_points_detail.html', **context)
 
@@ -84,7 +87,8 @@ def bans_detail(child_id):
 
     context = {'child': child,
                'role': role,
-               'child_points': child_points}
+               'child_points': child_points,
+               "firstname": g.user_data['firstname']}
 
     return render_template('bans/bans_detail.html', **context)
 
