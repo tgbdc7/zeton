@@ -148,3 +148,12 @@ def get_role_permissions(role):
         return row['permissions']
     return None
 
+
+def get_individual_permissions(user_id):
+    query = 'SELECT individual_permissions FROM users WHERE id = ?'
+    result = get_db().execute(query, (user_id,))
+    row = result.fetchone()
+    if row:
+        return row['individual_permissions']
+    return None
+

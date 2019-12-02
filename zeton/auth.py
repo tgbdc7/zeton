@@ -152,13 +152,12 @@ class Permissions:
     EDIT_CAREGIVER_LIST = 512
 
 
-def can(permission):
-    users.load_logged_in_user_data()
-    role = g.user_data['role']
-    user_permissions = users.get_role_permissions(role)
-    return user_permissions & permission == permission
+def check_permission(permission):
+    if not has_permission(permission):
+        abort(403, 'no authorization')
 
 
 def has_permission(permission):
-    if not can(permission):
-        abort(403, 'no authorization')
+    user_permissions = users.get_individual_permissions(g.user_data['id']) or \
+                       users.get_role_permissions(g.user_data['role'])
+    return user_permissions & permission == permission
