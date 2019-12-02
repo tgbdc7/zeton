@@ -27,7 +27,8 @@ create table users
   role                    text not NULL check ( role in ('caregiver', 'child') ),
   firstname               text,
   lastname                text,
-  email                   text UNIQUE not null
+  email                   text UNIQUE not null,
+  individual_permissions  integer default 0
 );
 
 create table main_points
