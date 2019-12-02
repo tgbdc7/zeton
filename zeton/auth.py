@@ -161,3 +161,17 @@ def has_permission(permission):
     user_permissions = users.get_individual_permissions(g.user_data['id']) or \
                        users.get_role_permissions(g.user_data['role'])
     return user_permissions & permission == permission
+
+
+def grant_permission(permission):
+    if has_permission(permission):
+        print('permission already granted') # TODO: implement better handling
+        abort(403)
+    users.add_permission(g.user_data['id'], permission)
+
+
+def take_permission(permission):
+    if not has_permission(permission):
+        print('user does not have requested permission') # TODO: implement better handling
+        abort(403)
+    users.remove_permission(g.user_data['id'], permission)

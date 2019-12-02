@@ -157,3 +157,15 @@ def get_individual_permissions(user_id):
         return row['individual_permissions']
     return None
 
+
+def add_permission(user_id, permission):
+    query = 'UPDATE users SET individual_permissions = individual_permissions + ? WHERE id = ?'
+    get_db().execute(query, (permission, user_id))
+    get_db().commit()
+
+
+def remove_permission(user_id, permission):
+    query = 'UPDATE users SET individual_permissions = individual_permissions - ? WHERE id = ?'
+    get_db().execute(query, (permission, user_id))
+    get_db().commit()
+
