@@ -1,8 +1,7 @@
+import datetime
 from flask import session, g
-
 from zeton.data_access.bans import check_bans_status
 from zeton.data_access.points import get_child_points
-
 from zeton.db import get_db
 
 
@@ -103,6 +102,56 @@ def get_user_id(username):
         return row['id']
     return False
 
+def get_user_name_pass_recovery_sha(sha):
+    query = f"select * from pass_rec where expire > '{datetime.datetime.now()}' and sha='{sha}'"
+    result = get_db().execute(query)
+    row = result.fetchone()
+    if row!=None:
+        return row['username']
+    else:
+        return None
+
+def pass_rec(username, email, sha, expire):
+    query = f"select * from pass_rec where expire > '{datetime.datetime.now()}' and username='{username}'"
+    result = get_db().execute(query)
+    rows = result.fetchall()
+    rows_count = rows.__len__()
+    if rows_count > 0:
+        check_old = False
+    else:
+        check_old = True
+    if check_old:
+        query = "INSERT INTO 'pass_rec' " \
+                "(username, email, sha, expire) " \
+                f"VALUES ('{username}', '{email}', '{sha}', '{expire}') "
+
+        get_db().execute(query)
+        get_db().commit()
+        return "Sprawdz skrzynkę pocztową w celu odzyskania hasła"
+    else:
+        return "Poprzedni link jeszcze nie wygasł, sprawdź stare maile i spam"
+
+def check_pass_rec(username, sha):
+    query = f"select * from pass_rec where expire > '{datetime.datetime.now()}' and username='{username}'"
+    result = get_db().execute(query)
+    rows = result.fetchone()
+    rows_count = rows.__len__()
+    if rows_count == 1:
+        check = True
+    else:
+        check = False
+    return check
+
+def get_email_address(email):
+    query = """
+    SELECT email FROM users
+    WHERE email = ?
+    """
+    result = get_db().execute(query, (email,))
+    row = result.fetchone()
+    if row:
+        return row['email']
+    return False
 
 def get_email_address(email):
     query = """

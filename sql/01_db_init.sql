@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS main_points;
 DROP TABLE IF EXISTS users;
-
+DROP TABLE IF EXISTS pass_rec;
 
 
 create table users
@@ -100,6 +100,15 @@ create table points_history
   change_timestamp          TEXT NOT NULL,
   FOREIGN KEY (child_id) REFERENCES users (id),
   FOREIGN KEY (id_changing_user) REFERENCES users (id)
+);
+
+create table pass_rec
+(
+  id                      integer UNIQUE primary key autoincrement,
+  username                text not null,
+  email                   text not null,
+  sha                     text not null,
+  expire                  text not null
 );
 
 CREATE TRIGGER points_log  AFTER UPDATE ON main_points for each row when new.points <> old.points

@@ -30,7 +30,6 @@ def password_change():
 
     return render_template('user/password_change.html', **context, messages=messages)
 
-
 @bp.route('/settings/firstname')
 @auth.login_required
 def firstname_change():

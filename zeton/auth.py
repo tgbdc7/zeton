@@ -1,10 +1,10 @@
 import functools
-
-from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort
-from werkzeug.security import check_password_hash
-
+import datetime
+from flask import Blueprint, redirect, render_template, request, url_for, session, g, abort, get_flashed_messages
+from werkzeug.security import check_password_hash, generate_password_hash
 from zeton.data_access import users
 from . import db
+from zeton.api.send_email import is_pass_rec_email
 
 bp = Blueprint('auth', __name__)
 
@@ -47,8 +47,38 @@ def login():
                 session['role'] = user_data['role']
                 return redirect(url_for('views.index'))
 
-        error = 'Invalid login or username'
+        error = 'Błędny login lub hasło'
     return render_template('base/login.html', error=error)
+
+@bp.route('/pass_rec', methods=['GET', 'POST'])
+def pass_rec():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        emial = request.form['email']
+
+        user_data = get_user_data(username)
+
+        if user_data:
+            user_data_username = user_data['username']
+            user_data_email = user_data['email']
+            if user_data_username == username and user_data_email == emial:
+                # fix me
+                # send mail
+                sha = generate_password_hash(str(datetime.datetime.now()), "sha256")
+                sha = sha.replace('sha256$', '')
+                expire = datetime.datetime.now() + datetime.timedelta(hours=1)
+                message = users.pass_rec(username, emial, sha, expire)
+                if not is_pass_rec_email(emial,sha):
+                    message = "Blad wysylania email, skontaktuj sie z administratorem"
+
+                # file
+                f = open("email_test.txt", "a")
+                f.write(f"http://127.0.0.1:5000/pass_rec/{sha}\n")
+                return render_template('base/login.html', error=message)
+
+        error = 'Invalid login or email'
+    return render_template('user/pass_rec_form.html', error=error)
 
 
 @bp.route('/logout')
@@ -66,6 +96,19 @@ def register():
     prev_url = request.referrer
     return render_template('user/register_form.html', prev_url=prev_url)
 
+@bp.route('/pass_rec/<sha>', methods=['GET'])
+def new_pass(sha, messages=None):
+    user_name = users.get_user_name_pass_recovery_sha(sha)
+    if user_name!=None:
+        user_id = users.get_user_id(user_name)
+        user_data = users.get_user_data(user_id)
+
+        context = {'user_data': user_data}
+        messages = get_flashed_messages()
+        return render_template('user/password_recovery.html', **context, sha=sha, messages=messages)
+    else:
+        message = "Link do odzyskania hasłą jest błędny lub przeterminowany"
+        return render_template('base/login.html', error=message)
 
 @bp.route('/add-person', methods=['GET'])
 def add_person():

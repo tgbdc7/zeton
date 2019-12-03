@@ -36,8 +36,12 @@
                 <!--#TODO add and styling button `Zarejestruj się`   -->
                 <a href="{{ url_for('auth.register') }}" class="button-add" role="button">Zarejestruj się</a>
             </div>
+            <center>
+                <a href="/pass_rec">Odzyskaj hasło</a>
+            </center>
+
             {% if error %}
-            <h3 style="text-align: center; color: red;">Błędny login lub hasło</h3>
+            <h3 style="text-align: center; color: red;">{{ error }}</h3>
             {% endif %}
         </form>
 
