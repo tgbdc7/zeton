@@ -7,23 +7,23 @@
 {% endblock head %}
 
 {% block content %}
-<section class="registration">
+<section class="registration login">
     <div class="col col-sm-12 col-md-6">
-        <form action="/api/user" method="POST">
+        <form class="form" action="/api/user" method="POST">
 
             <h2 class="section__title">Rejestracja</h2>
 
             {% block add_person %}{% endblock add_person %}
             <div class="form-group">
-                <label>Nazwa użytkownika:</label>
+                <label class="form__label">Nazwa użytkownika:</label>
                 <input class="form-control" type="text" name="username" placeholder="Nazwa użytkownika" required>
             </div>
             <div class="form-group">
-                <label>Adres email:</label>
+                <label class="form__label">Adres email:</label>
                 <input class="form-control" type="email" name="email" placeholder="Adres email" required>
             </div>
             <div class="form-group">
-                <label>Hasło:</label>
+                <label class="form__label">Hasło:</label>
                 <div class="input-group">
                     <input class="form-control pwd" type="password" name="password" placeholder="Hasło" required>
                     <div class="input-group-append">
