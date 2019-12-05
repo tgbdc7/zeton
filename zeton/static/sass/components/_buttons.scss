@@ -21,11 +21,12 @@
 
 
 a.button-return {
-    text-align: right;
+    text-align: center;
     width: auto;
     color: $zet-blue-color;
     margin: 10px auto;
     transition: .2s;
+    line-height: 30px;
     background-color: $zet-white-color;
 }
 

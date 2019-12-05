@@ -220,6 +220,17 @@ body {
   color: #ffffff;
 }
 
+a.button-return {
+  text-align: center;
+  width: auto;
+  color: #4700c9;
+  margin: 10px auto;
+  -webkit-transition: .2s;
+  transition: .2s;
+  line-height: 30px;
+  background-color: #ffffff;
+}
+
 .button-add {
   margin: 10px 2px;
   -webkit-box-shadow: none;
@@ -685,6 +696,15 @@ body {
 
 .login-header .login-logo {
   height: 100px;
+}
+
+.registration .col .button__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .welcome {
