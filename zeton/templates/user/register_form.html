@@ -5,7 +5,10 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 {% endblock password %}
 {% endblock head %}
-
+<!--remove/overwrite block navbar from base.html-->
+{% block navbar %}{% endblock navbar %}
+<!--remove/overwrite block top from base.html-->
+{% block top %}{% endblock top %}
 {% block content %}
 <section class="login-header">
     <img src="../../static/images/zeton1c.png" alt="logo" class="login-logo">
