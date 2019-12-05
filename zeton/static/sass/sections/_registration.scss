@@ -1,4 +1,25 @@
 .registration {
 
-  
+  .col {
+    .form {
+
+      .article__item {
+
+        .button-switch {}
+
+        .button-return {
+          margin: 0 5px;
+        }
+
+        @media only screen and (max-width: $zet-screen-sm-max) {
+
+          flex-direction: column;
+
+          .button-switch {}
+
+          .button-return {}
+        }
+      }
+    }
+  }
 }

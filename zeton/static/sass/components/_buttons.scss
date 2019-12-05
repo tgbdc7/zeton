@@ -19,6 +19,16 @@
     }
 }
 
+
+a.button-return {
+    text-align: right;
+    width: auto;
+    color: $zet-blue-color;
+    margin: 10px auto;
+    transition: .2s;
+    background-color: $zet-white-color;
+}
+
 .button-add {
     @extend .button-switch;
     margin: 10px 2px;
