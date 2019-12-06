@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS main_points;
+DROP TABLE IF EXISTS family;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS roles;
 
@@ -28,7 +29,15 @@ create table users
   firstname               text,
   lastname                text,
   email                   text UNIQUE not null,
-  individual_permissions  integer default 0
+  individual_permissions  integer default 0,
+  family_id               integer
+);
+
+create table family
+(
+    id            integer unique primary key autoincrement,
+    family_admin_id integer,
+    FOREIGN KEY (family_admin_id) REFERENCES users (id)
 );
 
 create table main_points
