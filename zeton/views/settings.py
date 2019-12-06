@@ -84,3 +84,13 @@ def child_firstname_change(child_id):
     messages = get_flashed_messages()
 
     return render_template('user/child_firstname_change.html', **context, messages=messages)
+
+
+@bp.route('/settings/admin/permissions')
+# @auth.login_required
+@auth.caregiver_only
+def manage_permissions():
+    group_members = [1,2,4]
+    context = {'group_members':group_members}
+    messages = None
+    return render_template('permissions.html', **context, messages=messages)
