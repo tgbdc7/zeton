@@ -152,26 +152,27 @@ class Permissions:
     EDIT_CAREGIVER_LIST = 512
 
 
-def check_permission(permission):
-    if not has_permission(permission):
+def check_permission(user_id, permission):
+    if not has_permission(user_id, permission):
         abort(403, 'no authorization')
 
 
-def has_permission(permission):
-    user_permissions = users.get_individual_permissions(g.user_data['id']) or \
-                       users.get_role_permissions(g.user_data['role'])
+def has_permission(user_id, permission):
+    user_permissions = users.get_individual_permissions(user_id) or \
+                       users.get_role_permissions(user_id)
     return user_permissions & permission == permission
 
 
-def grant_permission(permission):
-    if has_permission(permission):
+def grant_permission(user_id, permission):
+    if has_permission(user_id, permission):
         print('permission already granted') # TODO: implement better handling
         abort(403)
-    users.add_permission(g.user_data['id'], permission)
+    users.add_permission(user_id, permission)
 
 
-def take_permission(permission):
-    if not has_permission(permission):
+def take_permission(user_id, permission):
+    if not has_permission(user_id, permission):
         print('user does not have requested permission') # TODO: implement better handling
         abort(403)
-    users.remove_permission(g.user_data['id'], permission)
+    users.remove_permission(user_id, permission)
+
