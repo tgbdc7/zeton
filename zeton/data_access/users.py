@@ -169,3 +169,8 @@ def remove_permission(user_id, permission):
     get_db().execute(query, (permission, user_id))
     get_db().commit()
 
+
+def reset_permissions(user_id):
+    query = 'UPDATE users SET individual_permissions = 0 WHERE id = ?'
+    get_db().execute(query, (user_id,))
+    get_db().commit()
