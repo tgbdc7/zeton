@@ -7,7 +7,9 @@ VALUES (1,
         'caregiver',
         'Pafnucy',
         NULL,
-        'caregiver@example.com');
+        'caregiver@example.com',
+        0,
+        1);
 INSERT INTO users
 VALUES (2,
         'child_login',
@@ -15,7 +17,9 @@ VALUES (2,
         'child',
         'Bonifacy',
         NULL,
-        'child@example.com');
+        'child@example.com',
+        0,
+        1);
 
 
 INSERT INTO main_points
