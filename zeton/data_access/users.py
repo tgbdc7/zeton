@@ -98,11 +98,13 @@ def add_new_family(user_id):
     get_db().commit()
 
 
-def get_family_id(admin_id):
+def get_family_id(family_admin_id):
     query = 'SELECT id FROM family WHERE family_admin_id = ?'
-    result = get_db().execute(query, (admin_id,))
-    return result.fetchone()
-
+    result = get_db().execute(query, (family_admin_id,))
+    row = result.fetchone()
+    if row:
+        return row['id']
+    return None
 
 
 def get_user_id(username):
