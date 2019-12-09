@@ -39,7 +39,7 @@ def set_password():
 
 @bp.route("/user", methods=['POST'])
 def register():
-    users.load_logged_in_user_data()
+    # users.load_logged_in_user_data()
     username = request.form['username'].lower()
     password = request.form['password']
     email = request.form['email']
@@ -57,13 +57,26 @@ def register():
     users.add_new_user(data)
     users.add_new_family(users.get_user_id(username))
 
+    return redirect(url_for('views.index'))
+
+
+@bp.route('/add-person', methods=['POST'])
+def add_person():
+    username = request.form['username'].lower()
+    password = request.form['password']
+    email = request.form['email']
+    role = request.form.get('role')
+    firstname = request.form.get('name') or username
+    family_id = users.get_family_id(g.user_data['id'])
+    password_hash = generate_password_hash(password)
+    data = (username, password_hash, role, firstname, email, family_id)
+    users.add_new_user(data)
+
     if role == 'child':
         child_id = users.get_user_id(username)
-
         caregiver_id = g.user_data['id']
         users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
-
     return redirect(url_for('views.index'))
 
 
