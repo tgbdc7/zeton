@@ -9,3 +9,5 @@ db.sqlite
 node_modules/
 .coverage
 tests/TODO.txt
+
+style.css.map
