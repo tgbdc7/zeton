@@ -55,6 +55,7 @@ def register():
         abort(400)  # user already exists
 
     users.add_new_user(data)
+    users.add_new_family(users.get_user_id(username))
 
     if role == 'child':
         child_id = users.get_user_id(username)

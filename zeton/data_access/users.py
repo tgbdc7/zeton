@@ -92,6 +92,12 @@ def add_new_user(user_data):
     get_db().commit()
 
 
+def add_new_family(user_id):
+    query = "INSERT INTO family (family_admin_id) VALUES (?)"
+    get_db().execute(query, (user_id,))
+    get_db().commit()
+
+
 def get_user_id(username):
     query = """
     SELECT id FROM users
