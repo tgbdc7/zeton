@@ -85,8 +85,8 @@ def update_password(user_id, hashed_new_password):
 
 def add_new_user(user_data):
     query = "INSERT INTO 'users' " \
-            "(username, password, role, firstname, email, family_id) " \
-            "VALUES (?, ?, ?, ?, ?, ?) "
+            "(username, password, role, firstname, email) " \
+            "VALUES (?, ?, ?, ?, ?)"
 
     get_db().execute(query, user_data)
     get_db().commit()
@@ -95,6 +95,12 @@ def add_new_user(user_data):
 def add_new_family(user_id):
     query = "INSERT INTO family (family_admin_id) VALUES (?)"
     get_db().execute(query, (user_id,))
+    get_db().commit()
+
+
+def update_family_id(user_id, family_id):
+    query = "UPDATE users SET family_id = ? WHERE id = ?"
+    get_db().execute(query, (family_id, user_id))
     get_db().commit()
 
 

@@ -55,7 +55,10 @@ def register():
         abort(400)  # user already exists
 
     users.add_new_user(data)
-    users.add_new_family(users.get_user_id(username))
+    new_user_id = users.get_user_id(username)
+    users.add_new_family(new_user_id)
+    family_id = users.get_family_id(new_user_id)
+    users.update_family_id(new_user_id, family_id)
 
     return redirect(url_for('views.index'))
 
@@ -69,8 +72,10 @@ def add_person():
     firstname = request.form.get('name') or username
     family_id = users.get_family_id(g.user_data['id'])
     password_hash = generate_password_hash(password)
-    data = (username, password_hash, role, firstname, email, family_id)
+    data = (username, password_hash, role, firstname, email)
     users.add_new_user(data)
+    new_user_id = users.get_user_id(username)
+    users.update_family_id(new_user_id, family_id)
 
     if role == 'child':
         child_id = users.get_user_id(username)
