@@ -98,8 +98,8 @@ def add_new_family(user_id):
     get_db().commit()
 
 
-def update_family_id(user_id, family_id):
-    query = "UPDATE users SET family_id = ? WHERE id = ?"
+def add_to_family_members(user_id, family_id):
+    query = "INSERT INTO family_members (family_id, family_member) VALUES (?,?)"
     get_db().execute(query, (family_id, user_id))
     get_db().commit()
 

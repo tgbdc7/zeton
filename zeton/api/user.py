@@ -58,7 +58,7 @@ def register():
     new_user_id = users.get_user_id(username)
     users.add_new_family(new_user_id)
     family_id = users.get_family_id(new_user_id)
-    users.update_family_id(new_user_id, family_id)
+    users.add_to_family_members(new_user_id, family_id)
 
     return redirect(url_for('views.index'))
 
@@ -75,7 +75,7 @@ def add_person():
     data = (username, password_hash, role, firstname, email)
     users.add_new_user(data)
     new_user_id = users.get_user_id(username)
-    users.update_family_id(new_user_id, family_id)
+    users.add_to_family_members(new_user_id, family_id)
 
     if role == 'child':
         child_id = users.get_user_id(username)
