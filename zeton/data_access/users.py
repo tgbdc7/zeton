@@ -32,6 +32,15 @@ def get_user_data(user_id):
     return None
 
 
+def get_username(user_id):
+    query = "SELECT username FROM users WHERE id = ?"
+    result = get_db().execute(query, (user_id,))
+    row = result.fetchone()
+    if row:
+        return row['username']
+    return None
+
+
 def get_caregivers_children(user_id):
     # TODO remove _update_with_bans_and_points_data to data_access/bans.py
     def _update_with_bans_and_points_data(children):
@@ -102,6 +111,15 @@ def add_to_family_members(user_id, family_id):
     query = "INSERT INTO family_members (family_id, family_member) VALUES (?,?)"
     get_db().execute(query, (family_id, user_id))
     get_db().commit()
+
+
+def get_family_members(family_id):
+    query = "SELECT family_member FROM family_members WHERE family_id = ?"
+    result = get_db().execute(query, (family_id,))
+    row = result.fetchall()
+    if row:
+        return row
+    return None
 
 
 def get_family_id(family_admin_id):

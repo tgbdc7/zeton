@@ -50,9 +50,9 @@ def register():
     data = (username, password_hash, role, firstname, email)
 
     if username is None or password is None:
-        abort(400)
+        abort(400, 'data missing')
     if users.get_user_id(username) or users.get_email_address(email) :
-        abort(400)  # user already exists
+        abort(400, 'user already exists')
 
     users.add_new_user(data)
     new_user_id = users.get_user_id(username)
