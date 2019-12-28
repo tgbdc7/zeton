@@ -9,10 +9,12 @@
 </head>
 <body>
 <h1>Lista użytkowników:</h1>
-<ul>
-    {% for member in group_members %}
-        <li>{{member}}</li>
+<table>
+    {% for member in family_members %}
+   <tr>
+       <td>{{ member }}</td>
+   </tr>
     {% endfor %}
-</ul>
+</table>
 </body>
 </html>

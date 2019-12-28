@@ -88,9 +88,13 @@ def child_firstname_change(child_id):
 
 @bp.route('/settings/admin/permissions')
 # @auth.login_required
-@auth.caregiver_only
 def manage_permissions():
-    group_members = [1,2,4]
-    context = {'group_members':group_members}
+    family_id = users.get_family_id(g.user_data['id'])
+    family_members = [row['family_member'] for row
+                      in users.get_family_members(family_id)]
+    family_members_names = [users.get_username(user_id) for user_id
+                            in family_members]
+    available_permissions = None
+    context = {'family_members': family_members_names}
     messages = None
     return render_template('permissions.html', **context, messages=messages)
