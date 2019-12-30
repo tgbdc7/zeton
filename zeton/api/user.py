@@ -176,7 +176,6 @@ def set_caregiver_to_child(child_id):
 @bp.route('/settings/manage-permissions/add-permission/<int:permission>')
 def add_permission(permission):
     user_id = session.get('user_id', None)
-    print('hello')
     auth.grant_permission(user_id, permission)
     return redirect(url_for('views.manage_permissions', user_id=user_id))
 
@@ -184,7 +183,6 @@ def add_permission(permission):
 @bp.route('/settings/manage-permissions/remove-permission/<int:permission>')
 def remove_permission(permission):
     user_id = session.get('user_id', None)
-    print('hello')
     auth.take_permission(user_id, permission)
     return redirect(url_for('views.manage_permissions', user_id=user_id))
 
