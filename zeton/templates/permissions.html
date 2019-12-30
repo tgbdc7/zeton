@@ -10,11 +10,13 @@
 <body>
 <h1>Lista użytkowników:</h1>
 <table>
-    {% for member in family_members %}
+    {% for  member  in family_members_by_name_and_id %}
    <tr>
-       <td>{{ member }}</td>
+       <td>{{ member[0] }}</td>
+       <td><a href="{{ url_for('views.manage_permissions', user_id=member[1]) }}">edytuj</a></td>
    </tr>
     {% endfor %}
+
 </table>
 </body>
 </html>

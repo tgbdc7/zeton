@@ -138,18 +138,31 @@ def logged_child_or_caregiver_only(view):
     return wrapped_view
 
 
-class Permissions:
+class Permission:
 
-    ADD_POINTS = 1
-    USE_POINTS = 2
-    EDIT_TASKS = 4
-    EDIT_PRIZES = 8
-    ADD_BAN = 16
-    EDIT_BAN = 32
-    ADD_SCHOOL_POINTS = 64
-    EDIT_SCHOOL_POINTS = 128
-    EDIT_KIDS_SETTINGS = 256
-    EDIT_CAREGIVER_LIST = 512
+    def __init__(self, value, label):
+        self._value = value
+        self._label = label
+
+    def get_value(self):
+        return self._value
+
+    def get_label(self):
+        return self._label
+
+
+permissions = {
+    'ADD_POINTS': Permission(1, 'dodawanie puntków'),
+    'USE_POINTS': Permission(2, 'używanie punktów'),
+    'EDIT_TASKS': Permission(4, 'edycja zadań'),
+    'EDIT_PRIZES': Permission(8, 'edycja nagród'),
+    'ADD_BAN': Permission(16, 'dodanie bana'),
+    'EDIT_BAN': Permission(32, 'edytowanie bana'),
+    'ADD_SCHOOL_POINTS': Permission(64, 'dodawanie punktów ze szkoły'),
+    'EDIT_SCHOOL_POINTS': Permission(128, 'edytowanie punktów ze szkoły'),
+    'EDIT_KIDS_SETTINGS': Permission(256, 'edytowanie ustawień dziecka'),
+    'EDIT_CAREGIVER_LIST': Permission(512, 'edytowanie listy opiekunów'),
+}
 
 
 def check_permission(user_id, permission):
@@ -159,7 +172,7 @@ def check_permission(user_id, permission):
 
 def has_permission(user_id, permission):
     user_permissions = users.get_individual_permissions(user_id) or \
-                       users.get_role_permissions(user_id)
+                       users.get_role_permissions(g.user_data['role'])
     return user_permissions & permission == permission
 
 
@@ -176,3 +189,14 @@ def take_permission(user_id, permission):
         abort(403)
     users.remove_permission(user_id, permission)
 
+
+def get_used_permissions(user_id, permissions):
+    result = [permission for permission in permissions.values()
+              if has_permission(user_id, permission.get_value())]
+    return result
+
+
+def get_unused_permissions(user_id, permissions):
+    result = [permission for permission in permissions.values()
+              if not has_permission(user_id, permission.get_value())]
+    return result

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1>Lista uprawnień:</h1>
+<h2>Nadane uprawnienia:</h2>
+<table>
+    {% for permission in used_permissions %}
+    <tr>
+        <td>{{ permission.get_label() }}</td>
+        <td><a href="{{ url_for('api.remove_permission', permission=permission.get_value()) }}">usuń</a></td>
+    {% endfor %}
+</table>
+<h2>Dostępne uprawnienia:</h2>
+<table>
+    {% for permission in unused_permissions %}
+    <tr>
+        <td>{{ permission.get_label() }}</td>
+        <td><a href="{{ url_for('api.add_permission', permission=permission.get_value()) }}">dodaj</a></td>
+    </tr>
+    </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

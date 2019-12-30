@@ -1,6 +1,6 @@
 from zeton.views import bp
 
-from flask import render_template, g, get_flashed_messages
+from flask import render_template, g, get_flashed_messages, session
 
 from zeton import auth
 from zeton.data_access import users
@@ -88,13 +88,32 @@ def child_firstname_change(child_id):
 
 @bp.route('/settings/admin/permissions')
 # @auth.login_required
-def manage_permissions():
-    family_id = users.get_family_id(g.user_data['id'])
-    family_members = [row['family_member'] for row
-                      in users.get_family_members(family_id)]
-    family_members_names = [users.get_username(user_id) for user_id
-                            in family_members]
-    available_permissions = None
-    context = {'family_members': family_members_names}
+def list_family_members():
+    user_id = g.user_data['id']
+    # auth.check_permission(
+    #     user_id, auth.permissions['ADD_POINTS'].get_value())
+    family_id = users.get_family_id(user_id)
+    family_members_by_id = [row['family_member'] for row
+                            in users.get_family_members(family_id)]
+    family_members_by_name = [users.get_username(user_id) for user_id
+                              in family_members_by_id]
+    family_members_by_name_and_id = zip(family_members_by_name,
+                                        family_members_by_id)
+    context = {'family_members_by_id': family_members_by_id,
+               'family_members_by_name': family_members_by_name,
+               'family_members_by_name_and_id': family_members_by_name_and_id}
+    return render_template('permissions.html', **context)
+
+
+@bp.route('/settings/manage-permissions/<int:user_id>')
+def manage_permissions(user_id):
+    session['user_id'] = user_id
+    used_permissions = auth.get_used_permissions(
+        user_id, auth.permissions)
+    unused_permissions = auth.get_unused_permissions(user_id, auth.permissions)
+
+    context = {'used_permissions': used_permissions,
+               'unused_permissions': unused_permissions}
     messages = None
-    return render_template('permissions.html', **context, messages=messages)
+
+    return render_template('permissions_list.html', **context)

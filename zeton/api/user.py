@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, g, flash, abort
+from flask import request, redirect, url_for, g, flash, abort, session
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from zeton import auth
@@ -168,3 +168,18 @@ def set_caregiver_to_child(child_id):
 
     return redirect(url_for('views.add_caregiver_to_child', child_id=child_id))
 
+
+@bp.route('/settings/manage-permissions/add-permission/<int:permission>')
+def add_permission(permission):
+    user_id = session.get('user_id', None)
+    print('hello')
+    auth.grant_permission(user_id, permission)
+    return redirect(url_for('views.manage_permissions', user_id=user_id))
+
+
+@bp.route('/settings/manage-permissions/remove-permission/<int:permission>')
+def remove_permission(permission):
+    user_id = session.get('user_id', None)
+    print('hello')
+    auth.take_permission(user_id, permission)
+    return redirect(url_for('views.manage_permissions', user_id=user_id))
