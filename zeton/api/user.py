@@ -82,6 +82,10 @@ def add_person():
         caregiver_id = g.user_data['id']
         users.associate_child_with_caregiver(caregiver_id, child_id)
         insert_all_default_bans(child_id)
+
+    if not users.get_individual_permissions(new_user_id):
+        role_permissions = users.get_role_permissions(role)
+        auth.grant_permission(new_user_id, role_permissions)
     return redirect(url_for('views.index'))
 
 
@@ -182,4 +186,12 @@ def remove_permission(permission):
     user_id = session.get('user_id', None)
     print('hello')
     auth.take_permission(user_id, permission)
+    return redirect(url_for('views.manage_permissions', user_id=user_id))
+
+
+
+@bp.route('/settings/manage-permissions/reset-permissions/')
+def reset_permissions():
+    user_id = session.get('user_id', None)
+    auth.reset_permissions(user_id)
     return redirect(url_for('views.manage_permissions', user_id=user_id))

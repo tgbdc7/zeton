@@ -171,8 +171,7 @@ def check_permission(user_id, permission):
 
 
 def has_permission(user_id, permission):
-    user_permissions = users.get_individual_permissions(user_id) or \
-                       users.get_role_permissions(g.user_data['role'])
+    user_permissions = users.get_individual_permissions(user_id)
     return user_permissions & permission == permission
 
 
@@ -188,6 +187,11 @@ def take_permission(user_id, permission):
         print('user does not have requested permission') # TODO: implement better handling
         abort(403)
     users.remove_permission(user_id, permission)
+
+
+def reset_permissions(user_id):
+    value = users.get_role_permissions(g.user_data['role'])
+    users.set_permissions(user_id, value)
 
 
 def get_used_permissions(user_id, permissions):
