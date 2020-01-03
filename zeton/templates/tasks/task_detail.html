@@ -24,6 +24,10 @@
                             <td>{{ task.max_day }}</td>
                             <td>{{ task.max_week }}</td>
                             {% if role == 'caregiver' %}
+                            <form action="/api/child/{{ child.id }}/points/add/{{ task.points }}/{{ task.id }}/1"
+                              method="post">
+                            <td><input class="btn btn-info" type="submit" name="Dodaj punkty" value="Dodaj"/></td>
+                            </form>
                             <form action="/api/child/{{ child.id }}/tasks/deactivate/{{ task.id }}"
                                   method="post">
                                 <td><input class="btn btn-info" type="submit" name="Deactivate_task"
