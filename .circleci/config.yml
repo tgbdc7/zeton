@@ -85,11 +85,10 @@ jobs:
           name: Deploy if tests pass and branch is Master
           shell: /bin/bash
           command: |
-            export HEROKU_API_KEY=${!HEROKU_API_KEY_MASTER}
+            export HEROKU_API_KEY=${HEROKU_API_KEY_MASTER}
             heroku container:login
             heroku container:push web -a zeton1
             heroku container:release web -a zeton1
-
 
 workflows:
   version: 2
@@ -112,6 +111,3 @@ workflows:
           filters:
             branches:
               only: master
-
-
-
