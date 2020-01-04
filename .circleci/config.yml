@@ -86,6 +86,7 @@ jobs:
           shell: /bin/bash
           command: |
             export HEROKU_API_KEY=${!HEROKU_API_KEY_MASTER}
+            echo $HEROKU_API_KEY
             heroku container:login
             heroku container:push web -a zeton1
             heroku container:release web -a zeton1
@@ -111,7 +112,7 @@ workflows:
             - test
           filters:
             branches:
-              only: master
+              only: test-branch-deploy
 
 
 
