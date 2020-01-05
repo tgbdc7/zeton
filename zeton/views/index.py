@@ -33,7 +33,8 @@ def index():
         context = {'child': child,
                    'child_points': child_points,
                    'childs_tasks': childs_tasks,
-                   'childs_prizes': childs_prizes}
+                   'childs_prizes': childs_prizes,
+                   'firstname': g.user_data['firstname']}
 
     messages = get_flashed_messages()
 
@@ -59,7 +60,8 @@ def child(child_id):
                'role': role,
                'child_points': child_points,
                'info_str': info_str,
-               'info_bck': info_bck}
+               'info_bck': info_bck,
+               "firstname": g.user_data['firstname']}
 
     messages = get_flashed_messages()
 

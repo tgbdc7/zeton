@@ -41,15 +41,73 @@ jobs:
             source venv/bin/activate
             pytest -s
 
+  deploy:
+    working_directory: ~/project
+    docker:
+      - image: docker:19.03
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add curl bash git
+            apk add --update nodejs nodejs-npm
+            npm config set unsafe-perm true
+            npm install -g heroku
+      - run:
+          name: Deploy app to heroku
+          shell: /bin/bash
+          command: |
+            ACRONYM=$(echo $CIRCLE_BRANCH | awk -F_ '{print $NF}')
+            API_KEY_VAR_NAME=$(echo HEROKU_API_KEY_$ACRONYM | awk '{ print toupper($0) }')
+            HEROKU_APP_SUFFIX=$(echo $ACRONYM | awk '{ print tolower($0) }')
+            export HEROKU_API_KEY=${!API_KEY_VAR_NAME}
+            heroku container:login
+            heroku container:push web -a zeton-$HEROKU_APP_SUFFIX
+            heroku container:release web -a zeton-$HEROKU_APP_SUFFIX
+
+  deploy-prod:
+    working_directory: ~/project
+    docker:
+      - image: docker:19.03
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add curl bash git
+            apk add --update nodejs nodejs-npm
+            npm config set unsafe-perm true
+            npm install -g heroku
+      - run:
+          name: Deploy if tests pass and branch is Master
+          shell: /bin/bash
+          command: |
+            export HEROKU_API_KEY=${HEROKU_API_KEY_MASTER}
+            heroku container:login
+            heroku container:push web -a zeton1
+            heroku container:release web -a zeton1
+
 workflows:
   version: 2
-  build_and_test:
+  build_test_and_deploy:
     jobs:
       - build
       - test:
           requires:
             - build
-            
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /.*_[a-z]{4}$/
 
-
-
+      - deploy-prod:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
