@@ -3,7 +3,7 @@ from zeton.views import bp
 from flask import render_template, g, get_flashed_messages, abort
 
 from zeton import auth
-from zeton.data_access import users, prizes, tasks, points
+from zeton.data_access import users, prizes, tasks, points, bans
 
 
 @bp.route('/')
@@ -50,12 +50,17 @@ def child(child_id):
     childs_prizes = prizes.get_prizes(child_id)
     role = g.user_data['role']
     child_points = points.get_child_points(child['id'])
+    info = bans.get_most_important_warn_ban(child_id).split(';')
+    info_str = info[0]
+    info_bck = info[1]
 
     context = {'child': child,
                'childs_tasks': childs_tasks,
                'childs_prizes': childs_prizes,
                'role': role,
                'child_points': child_points,
+               'info_str': info_str,
+               'info_bck': info_bck,
                "firstname": g.user_data['firstname']}
 
     messages = get_flashed_messages()

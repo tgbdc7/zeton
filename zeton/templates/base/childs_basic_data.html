@@ -4,10 +4,14 @@
     <h3>Punkty doświadczenia {{ child_points.exp }} punktów</h3>
     <h3>Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
 
+<!--      TODO: Delete in another issue?&ndash;&gt;-->
     {% if child.bans.6.active %}
     <h2 style="color: red;"> Masz BANA !</h2>
     <h4> Ban konczy sie: {{ child.bans.6.stop|ban_time }}</h4>
     {% else %}
+<!--      TODO: END &ndash;&gt;-->
+
+    <h2 style="color: {{info_bck}};"> {{ info_str }}</h2>
     <h2 style="color: green;">Możesz korzystać z komputera</h2>
     {% endif %}
 </div>
