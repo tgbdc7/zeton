@@ -22,7 +22,7 @@
 
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
         {% endif %}
-        {% if role == 'caregiver' %}
+        {% if role in ('caregiver', 'admin') %}
         <form>
             <div class="button">
                 <a class="btn btn-info" href="/child-settings/{{ child.id }}">Ustawienia dziecka</a>

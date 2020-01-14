@@ -15,7 +15,7 @@ def index():
     template = None
     context = {}
 
-    if role == 'caregiver':
+    if role in ('caregiver', 'teacher', 'admin'):
         children = users.get_caregivers_children(logged_user_id)
         template = 'base/index_caregiver.html'
 
