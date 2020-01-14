@@ -187,23 +187,25 @@ def set_caregiver_to_child(child_id):
     return redirect(url_for('views.add_caregiver_to_child', child_id=child_id))
 
 
-@bp.route('/settings/manage-permissions/add-permission/<int:permission>')
+@bp.route('/settings/admin/manage-permissions/add-permission/<int:permission>')
 def add_permission(permission):
-    user_id = session.get('user_id', None)
+    user_id = session.get('target_user_id', None)
+    child_id = session.get('child_id', None)
     auth.grant_permission(user_id, permission)
-    return redirect(url_for('views.manage_permissions', user_id=user_id))
+    return redirect(url_for('views.manage_permissions', user_id=user_id, child_id=child_id))
 
 
-@bp.route('/settings/manage-permissions/remove-permission/<int:permission>')
+@bp.route('/settings/admin/manage-permissions/remove-permission/<int:permission>')
 def remove_permission(permission):
-    user_id = session.get('user_id', None)
+    user_id = session.get('target_user_id', None)
+    child_id = session.get('child_id', None)
     auth.take_permission(user_id, permission)
-    return redirect(url_for('views.manage_permissions', user_id=user_id))
+    return redirect(url_for('views.manage_permissions', user_id=user_id, child_id=child_id))
 
 
-
-@bp.route('/settings/manage-permissions/reset-permissions/')
+@bp.route('/settings/admin/manage-permissions/reset-permissions/')
 def reset_permissions():
-    user_id = session.get('user_id', None)
+    user_id = session.get('target_user_id', None)
+    child_id = session.get('child_id', None)
     auth.reset_permissions(user_id)
-    return redirect(url_for('views.manage_permissions', user_id=user_id))
+    return redirect(url_for('views.manage_permissions', user_id=user_id,child_id=child_id))
