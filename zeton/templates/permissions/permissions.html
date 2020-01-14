@@ -1,42 +1,46 @@
 {% extends "base/base.html" %}
 {% block content %}
-<h1>Lista użytkowników:</h1>
-<div class="container self-align-center">
+    <h1>Lista użytkowników:</h1>
+    <div class="container self-align-center">
 
-    <table class="table table-borderless table-sm">
-        <thead class="thead-dark">Dzieci:</thead-dak>
-        {% for member in members_data %}
-            {% if members_data[member]['role'] == 'child' %}
-                <tr class="table-info">
-                    <td>{{ member }}</td>
-                    <td><a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a></td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-
-    <table class="table table-borderless table-sm">
-        <thead>Opiekunowie:</thead>
-        {% for member in members_data %}
-            {% if members_data[member]['role'] == 'caregiver' %}
-                <tr class="table-success">
-                    <td>{{ member }}</td>
-                    <td><a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a></td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-
-    <table class="table table-borderless table-sm">
-        <thead>Nauczyciele:</thead>
-        {% for member in members_data %}
-            {% if members_data[member]['role'] == 'teacher' %}
-                <tr class="table-primary">
-                    <td>{{ member }}</td>
-                    <td><a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a></td>
-                </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-</divc>
+        <table class="table table-borderless">
+            <th>Dzieci:</th>
+            {% for member in members_data %}
+                {% if members_data[member]['role'] == 'child' %}
+                    <tr class="table-info text-center">
+                        <td>{{ member }}</td>
+                        <td>
+                            <a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <th>Opiekunowie:</th>
+            </tr>
+            {% for member in members_data %}
+                {% if members_data[member]['role'] == 'caregiver' %}
+                    <tr class="table-success text-center">
+                        <td>{{ member }}</td>
+                        <td>
+                            <a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <th>Nauczyciele:</th>
+            </tr>
+            {% for member in members_data %}
+                {% if members_data[member]['role'] == 'teacher' %}
+                    <tr class="table-primary text-center">
+                        <td>{{ member }}</td>
+                        <td>
+                            <a href="{{ url_for('views.manage_permissions', user_id=members_data[member]['id']) }}">edytuj</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    </div>
 {% endblock content %}
