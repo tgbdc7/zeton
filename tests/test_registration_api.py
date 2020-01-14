@@ -73,24 +73,14 @@ def test_api_add_person(app, auth):
     client = app.test_client()
     client.post("/login", data={"login": CAREGIVER_LOGIN, "password": CAREGIVER_PASSWORD})
 
-    # add new child
-    response = client.post('api/user', data=DATASET_ADD_CHILD)
-    assert response.status_code == 302
-
     # add new caregiver
     response = client.post('api/user', data=DATASET_ADD_CAREGIVER)
     assert response.status_code == 302
 
     with app.app_context():
-        child = users.get_username_id_and_role_by_username('test_child')
-        assert child['role'] == 'child'
-
         caregiver = users.get_username_id_and_role_by_username('test_caregiver')
-        assert caregiver['role'] == 'caregiver'
+        assert caregiver['role'] == 'admin'
 
-        child_id = users.get_user_id('test_child')
-        caregiver_id = users.get_user_id('caregiver_login')
-        assert users.is_child_under_caregiver(child_id, caregiver_id)
 
 
 
