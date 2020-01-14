@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+{% block content %}
+<body>
+<h1>Lista uprawnień:</h1>
+<h2>Nadane uprawnienia:</h2>
+<table>
+    {% for permission in used_permissions %}
+    <tr>
+        <td>{{ permission.get_label() }}</td>
+        <td><a href="{{ url_for('api.remove_permission', permission=permission.get_value()) }}">usuń</a></td>
+    {% endfor %}
+</table>
+<h2>Dostępne uprawnienia:</h2>
+<table>
+    {% for permission in unused_permissions %}
+    <tr>
+        <td>{{ permission.get_label() }}</td>
+        <td><a href="{{ url_for('api.add_permission', permission=permission.get_value()) }}">dodaj</a></td>
+    </tr>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('api.reset_permissions') }}">resetuj uprawnienia</a>
+{% endblock content %}
