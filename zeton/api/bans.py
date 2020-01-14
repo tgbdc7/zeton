@@ -9,6 +9,9 @@ from zeton.api import bp
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def give_ban(child_id, ban_type):
+    permission = auth.permissions['ADD_BAN'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     logged_user_id = g.user_data['id']
     ten_minutes = 10
 

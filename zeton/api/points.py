@@ -26,6 +26,8 @@ def is_limit_reached(child_id, exercise_id, days, max_column):
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def add_points(child_id, points, exercise_id):
+    permission = auth.permissions['ADD_POINTS'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'], assigned_user_id=child_id)
     if is_limit_reached(child_id, exercise_id, 1, 'max_day') and is_limit_reached(child_id, exercise_id, 7, 'max_week'):
         logged_user_id = g.user_data['id']
         return_url = request.args.get('return_url', '/')
@@ -61,6 +63,9 @@ def add_points(child_id, points, exercise_id):
 @auth.login_required
 @auth.logged_child_or_caregiver_only
 def use_points(child_id):
+    permission = auth.permissions['USE_POINTS'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     logged_user_id = g.user_data['id']
     child_id = int(child_id)
 

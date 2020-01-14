@@ -1,4 +1,4 @@
-from flask import request, redirect, flash
+from flask import request, redirect, flash, g
 
 from zeton.data_access.tasks import deactivate_task, add_new_task, update_task
 
@@ -10,6 +10,9 @@ from zeton.api import bp
 @auth.login_required
 @auth.caregiver_only
 def deactivate_tasks(child_id, task_id):
+    permission = auth.permissions['EDIT_TASKS'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
     task_id = int(task_id)
 
@@ -22,6 +25,9 @@ def deactivate_tasks(child_id, task_id):
 @auth.login_required
 @auth.caregiver_only
 def add_task(child_id):
+    permission = auth.permissions['EDIT_TASKS'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
 
     name = request.form['name']
@@ -41,6 +47,9 @@ def add_task(child_id):
 @auth.login_required
 @auth.caregiver_only
 def update_tasks(child_id, task_id):
+    permission = auth.permissions['EDIT_TASKS'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
     task_id = int(task_id)
 

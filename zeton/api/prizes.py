@@ -10,6 +10,9 @@ from zeton.api import bp
 @auth.login_required
 @auth.caregiver_only
 def deactivate_prizes(child_id, prizes_id):
+    permission = auth.permissions['EDIT_PRIZES'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
     prizes_id = int(prizes_id)
 
@@ -22,6 +25,9 @@ def deactivate_prizes(child_id, prizes_id):
 @auth.login_required
 @auth.caregiver_only
 def add_prizes(child_id):
+    permission = auth.permissions['EDIT_PRIZES'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
 
     name = request.form['name']
@@ -43,6 +49,9 @@ def add_prizes(child_id):
 @auth.login_required
 @auth.caregiver_only
 def update_prizes(child_id, prize_id):
+    permission = auth.permissions['EDIT_PRIZES'].get_value()
+    auth.check_permission(permission=permission, user_id=g.user_data['id'],
+                          assigned_user_id=child_id)
     child_id = int(child_id)
     prize_id = int(prize_id)
 

@@ -46,6 +46,9 @@ def firstname_change():
 @bp.route('/child-settings/<child_id>')
 @auth.login_required
 def child_settings(child_id):
+    user_id = g.user_data['id']
+    auth.check_permission(permission=auth.permissions['EDIT_KIDS_SETTINGS'].get_value(),
+                       user_id=user_id, assigned_user_id=child_id)
     child = users.get_child_data(child_id)
 
     context = {'child': child}
