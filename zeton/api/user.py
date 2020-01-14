@@ -44,7 +44,7 @@ def register():
     password = request.form['password']
     email = request.form['email']
     password_hash = generate_password_hash(password)
-    role = request.form.get('role') or 'caregiver'
+    role = 'admin'
     firstname = request.form.get('name') or username
 
     data = (username, password_hash, role, firstname, email)
@@ -57,8 +57,7 @@ def register():
     users.add_new_user(data)
     new_user_id = users.get_user_id(username)
     users.add_new_family(new_user_id)
-    family_id = users.get_family_id(new_user_id)
-    users.add_to_family_members(new_user_id, family_id)
+    auth.set_admin_permissions(user_id=new_user_id, child_id=None)
 
     return redirect(url_for('views.index'))
 
@@ -80,12 +79,24 @@ def add_person():
     if role == 'child':
         child_id = users.get_user_id(username)
         caregiver_id = g.user_data['id']
+        caregiver_role = g.user_data['role']
+        caregiver_permissions = users.get_role_permissions(caregiver_role)
+        child_permissions = users.get_role_permissions('child')
         users.associate_child_with_caregiver(caregiver_id, child_id)
+        users.set_default_permissions(user_id=caregiver_id,
+                                      assigned_user_id=child_id,
+                                      value=caregiver_permissions)
         insert_all_default_bans(child_id)
 
-    if not users.get_individual_permissions(new_user_id):
+        users.set_default_permissions(user_id=child_id,
+                                      assigned_user_id=None,
+                                      value=child_permissions)
+    else:
         role_permissions = users.get_role_permissions(role)
-        auth.grant_permission(new_user_id, role_permissions)
+        users.set_default_permissions(user_id=new_user_id,
+                                      assigned_user_id=None,
+                                      value=role_permissions)
+
     return redirect(url_for('views.index'))
 
 
@@ -159,11 +170,14 @@ def set_caregiver_to_child(child_id):
     child_id = int(child_id)
 
     caregiver_username_to_child = request.form.get('caregiver_username_to_child')
-    caregiver_data = users.get_username_id_and_role_by_username(caregiver_username_to_child)
+    caregiver_data = users.get_username_id_and_role_by_username(
+        caregiver_username_to_child)
+    role_persmissions = users.get_role_permissions(caregiver_data['role'])
 
-    if caregiver_data and caregiver_data['role'] == 'caregiver':
+    if caregiver_data and caregiver_data['role'] in ('caregiver', 'teacher', 'admin'):
         if not users.is_child_under_caregiver(child_id, caregiver_data['id']):
             users.associate_child_with_caregiver(caregiver_data['id'], child_id)
+            users.set_default_permissions(caregiver_data['id'], child_id, role_persmissions )
             flash('Opiekun został przydzielony do dziecka')
         else:
             flash('Podany opiekun już był przydzielony')
