@@ -9,6 +9,11 @@ from . import db
 bp = Blueprint('auth', __name__)
 
 
+SUPERVISING_ROLES = ('admin',
+                     'caregiver',
+                     'teacher')
+
+
 def get_user_data(login):
     result = db.get_db().execute("SELECT * FROM users WHERE username = ?", [login])
     user_data = result.fetchall()
@@ -165,42 +170,64 @@ permissions = {
 }
 
 
-def check_permission(user_id, permission):
-    if not has_permission(user_id, permission):
+def check_permission(permission, **kwargs):
+    if not has_permission(permission=permission, **kwargs):
         abort(403, 'no authorization')
 
 
-def has_permission(user_id, permission):
-    user_permissions = users.get_individual_permissions(user_id)
+def has_permission(permission, user_id=None, assigned_user_id=None):
+    user_permissions = get_permissions(user_id, assigned_user_id)
     return user_permissions & permission == permission
 
 
 def grant_permission(user_id, permission):
-    if has_permission(user_id, permission):
+    if has_permission(permission, user_id):
         print('permission already granted') # TODO: implement better handling
         abort(403)
     users.add_permission(user_id, permission)
 
 
 def take_permission(user_id, permission):
-    if not has_permission(user_id, permission):
-        print('user does not have requested permission') # TODO: implement better handling
+    if not has_permission(permission, user_id):
+        print('user does not have requested permission')
         abort(403)
     users.remove_permission(user_id, permission)
 
 
-def reset_permissions(user_id):
-    value = users.get_role_permissions(g.user_data['role'])
-    users.set_permissions(user_id, value)
+def reset_permissions(target_user_id):
+    role = users.get_user_role(target_user_id)
+    value = users.get_role_permissions(role)
+    users.set_permissions(target_user_id, value)
 
 
-def get_used_permissions(user_id, permissions):
-    result = [permission for permission in permissions.values()
-              if has_permission(user_id, permission.get_value())]
+def get_used_permissions(user_id, permissions_dict, assigned_user_id=None):
+    result = [permission for permission in permissions_dict.values()
+              if has_permission(permission.get_value(),
+                                user_id,
+                                assigned_user_id)]
     return result
 
 
-def get_unused_permissions(user_id, permissions):
-    result = [permission for permission in permissions.values()
-              if not has_permission(user_id, permission.get_value())]
+def get_unused_permissions(user_id, permissions_dict, assigned_user_id=None):
+    result = [permission for permission in permissions_dict.values()
+              if not has_permission(permission.get_value(),
+                                    user_id,
+                                    assigned_user_id)]
     return result
+
+
+def set_admin_permissions(user_id, child_id):
+    admin_permissions = users.get_role_permissions('admin')
+    users.set_default_permissions(user_id=user_id,
+                                  assigned_user_id=child_id,
+                                  value=admin_permissions)
+
+
+def get_permissions(user_id=None, assigned_user_id=None):
+    role = g.user_data['role']
+    if role in SUPERVISING_ROLES and assigned_user_id is None:
+        return users.get_caregiver_permissions(caregiver_id=user_id)
+    if role in SUPERVISING_ROLES:
+        return users.get_caregiver_to_child_permissions(
+            caregiver_id=user_id, child_id=assigned_user_id)
+    return users.get_child_permissions(child_id=user_id)
