@@ -41,6 +41,14 @@ def get_username(user_id):
     return None
 
 
+def get_user_role(target_id):
+    query = 'SELECT role FROM users WHERE id = ?'
+    result = get_db().execute(query, (target_id,))
+    row = result.fetchone()
+    if row:
+        return row['role']
+    return None
+
 def get_caregivers_children(user_id):
     # TODO remove _update_with_bans_and_points_data to data_access/bans.py
     def _update_with_bans_and_points_data(children):
@@ -198,18 +206,52 @@ def get_individual_permissions(user_id):
 
 
 def add_permission(user_id, permission):
-    query = 'UPDATE users SET individual_permissions = individual_permissions + ? WHERE id = ?'
+    query = 'UPDATE permissions SET permissions = permissions + ? WHERE user_id = ?'
     get_db().execute(query, (permission, user_id))
     get_db().commit()
 
 
+def get_child_permissions(child_id):
+    query = 'SELECT permissions FROM permissions WHERE user_id = ? AND assigned_user_id IS NULL'
+    result = get_db().execute(query, (child_id,))
+    row = result.fetchone()
+    if row:
+        return row['permissions']
+    return None
+
+
+def get_caregiver_permissions(caregiver_id):
+    query = 'SELECT permissions FROM permissions WHERE user_id = ? AND assigned_user_id IS NULL'
+    result = get_db().execute(query, (caregiver_id,))
+    row = result.fetchone()
+    if row:
+        return row['permissions']
+    return None
+
+
+def get_caregiver_to_child_permissions(caregiver_id, child_id):
+    query = 'SELECT permissions FROM permissions WHERE assigned_user_id = ? AND user_id = ?'
+    result = get_db().execute(query, (child_id, caregiver_id))
+    row = result.fetchone()
+    if row:
+        return row['permissions']
+    return None
+
+
 def remove_permission(user_id, permission):
-    query = 'UPDATE users SET individual_permissions = individual_permissions - ? WHERE id = ?'
+    query = 'UPDATE permissions SET permissions = permissions - ? WHERE user_id = ?'
     get_db().execute(query, (permission, user_id))
     get_db().commit()
 
 
 def set_permissions(user_id, value):
-    query = 'UPDATE users SET individual_permissions = ? WHERE id = ?'
+    query = 'UPDATE permissions SET permissions = ? WHERE user_id = ?'
     get_db().execute(query, (value, user_id))
+    get_db().commit()
+
+
+def set_default_permissions(user_id, assigned_user_id, value):
+    query = 'INSERT INTO permissions (user_id, assigned_user_id, permissions)' \
+            ' VALUES (?, ?, ?)'
+    get_db().execute(query, (user_id, assigned_user_id, value))
     get_db().commit()
