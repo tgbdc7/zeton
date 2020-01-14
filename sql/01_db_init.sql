@@ -1,6 +1,10 @@
 PRAGMA foreign_keys = ON;
 
 
+DROP TABLE IF EXISTS family_members;
+DROP TABLE IF EXISTS family;
+DROP TABLE IF EXISTS permissions;
+DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS home_points;
 DROP TABLE IF EXISTS prizes;
 DROP TABLE IF EXISTS points_history;
@@ -8,10 +12,7 @@ DROP TABLE IF EXISTS bans_name;
 DROP TABLE IF EXISTS bans;
 DROP TABLE IF EXISTS caregiver_to_child;
 DROP TABLE IF EXISTS main_points;
-DROP TABLE IF EXISTS family;
-DROP TABLE IF EXISTS family_members;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS roles;
 
 
 create table roles
@@ -26,11 +27,10 @@ create table users
     id                     integer UNIQUE primary key autoincrement,
     username               text UNIQUE not null,
     password               text        not null,
-    role                   text        not NULL check ( role in ('caregiver', 'child') ),
+    role                   text        not NULL check ( role in ('caregiver', 'child', 'teacher', 'admin') ),
     firstname              text,
     lastname               text,
-    email                  text UNIQUE not null,
-    individual_permissions integer default 0
+    email                  text UNIQUE not null
 );
 
 create table family
@@ -126,6 +126,14 @@ create table points_history
     change_timestamp TEXT    NOT NULL,
     FOREIGN KEY (child_id) REFERENCES users (id),
     FOREIGN KEY (id_changing_user) REFERENCES users (id)
+);
+
+create table permissions
+(
+    id INTEGER UNIQUE PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    assigned_user_id INTEGER,
+    permissions INTEGER
 );
 
 CREATE TRIGGER points_log
