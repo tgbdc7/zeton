@@ -11,16 +11,23 @@
         <div class="alert alert-dark">{{ messages[0] }}</div>
         {% endif %}
 
-<!--        TODO: Delete in another issue?-->
+        <!--        TODO: Delete in another issue?-->
         {% if child.bans.6.active %}
-        <h2 style="color: red;"> Masz BANA !</h2>
+            {% if role=='caregiver' %}
+            <h2 style="color: red;">{{child.firstname}} Ma BANA !</h2>
+            {% else %}
+            <h2 style="color: red;"> Masz BANA !</h2>
+            {% endif %}
         <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
-<!--        TODO END-->
+        <!--        TODO END-->
 
         <h2 style="color: {{info_bck}};"> {{ info_str }}</h2>
-
+        {% if role == 'caregiver' %}
+        <h2 style="color: green;">{{ child.firstname }} może korzystać z komputera</h2>
+        {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        {% endif %}
         {% endif %}
         {% if role == 'caregiver' %}
         <form>
