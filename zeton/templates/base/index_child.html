@@ -3,24 +3,38 @@
 <div class="col col-sm-12">
     <div name="user_summary" class="text-center">
         <h2 name="username">{{ child.firstname }}</h2>
-        <h2 name="points_number"> Ilość punktów {{ child_points.points }} punktów</h2>
-        <h2> Punkty doświadczenia {{ child_points.exp }} punktów</h2>
-        <h3 name="school_highscore">Szkolny rekord tygodnia : {{ child_points.school_weekly_highscore }}</h3>
+        {% if role=='caregiver' %}
+        <h2 name="points_number"> {{ child.firstname }} ma {{ child_points.points }} punktów</h2>
+        <h2> {{ child.firstname }} ma {{ child_points.exp }} punktów doświadczenia</h2>
+        <h3 name="school_highscore">Szkolny rekord tygodnia użytkownika {{ child.firstname }} wynosi {{ child_points.school_weekly_highscore }}</h3>
+        {% else %}
+        <h2 name="points_number">masz {{ child_points.points }} punktów</h2>
+        <h2> masz {{ child_points.exp }} punktów doświadczenia</h2>
+        <h3 name="school_highscore">Twój szkolny rekord tygodnia to {{ child_points.school_weekly_highscore }}</h3>
+        {% endif %}
+
 
         {% if messages %}
         <div class="alert alert-dark">{{ messages[0] }}</div>
         {% endif %}
 
-<!--        TODO: Delete in another issue?-->
+        <!--        TODO: Delete in another issue?-->
         {% if child.bans.6.active %}
-        <h2 style="color: red;"> Masz BANA !</h2>
+            {% if role=='caregiver' %}
+            <h2 style="color: red;">{{child.firstname}} Ma BANA !</h2>
+            {% else %}
+            <h2 style="color: red;"> Masz BANA !</h2>
+            {% endif %}
         <h4> Ban kończy się: {{ child.bans.6.stop|ban_time }}</h4>
         {% else %}
-<!--        TODO END-->
+        <!--        TODO END-->
 
         <h2 style="color: {{info_bck}};"> {{ info_str }}</h2>
-
+        {% if role == 'caregiver' %}
+        <h2 style="color: green;">{{ child.firstname }} może korzystać z komputera</h2>
+        {% else %}
         <h2 style="color: green;">Możesz korzystać z komputera</h2>
+        {% endif %}
         {% endif %}
         {% if role == 'caregiver' %}
         <form>
