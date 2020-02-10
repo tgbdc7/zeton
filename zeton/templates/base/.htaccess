@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://zeton-smio.herokuapp.com%{REQUEST_URI} [L,NE,R=301]
