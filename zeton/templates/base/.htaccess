@@ -1,3 +1,4 @@
 RewriteEngine On
-RewriteCond %{HTTPS} off
-RewriteRule ^ https://zeton-smio.herokuapp.com%{REQUEST_URI} [L,NE,R=301]
+RewriteCond %{HTTP_HOST} zeton-smio\.herokuapp\.com [NC]
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://zeton-smio.herokuapp.com/$1 [R,L]
