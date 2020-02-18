@@ -20,7 +20,6 @@ html {
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 16px;
   font-family: 'Lato', sans-serif;
@@ -71,7 +70,6 @@ body {
 /* Components */
 .navbar-btn {
   margin: 0;
-  -webkit-transition: .2s;
   transition: .2s;
 }
 
@@ -121,6 +119,7 @@ body {
   padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
+  diplay: -webkit-flex;
   display: flex;
   position: relative;
 }
@@ -157,6 +156,7 @@ body {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
 }
 
@@ -204,9 +204,7 @@ body {
   min-width: 133px;
   padding: 10px 15px;
   border-radius: 25px;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transition: .2s;
   transition: .2s;
   border: solid 1px #4700c9;
   background-color: #4700c9;
@@ -225,7 +223,6 @@ a.button-return {
   width: auto;
   color: #4700c9;
   margin: 10px auto;
-  -webkit-transition: .2s;
   transition: .2s;
   line-height: 30px;
   background-color: #ffffff;
@@ -233,7 +230,6 @@ a.button-return {
 
 .button-add {
   margin: 10px 2px;
-  -webkit-box-shadow: none;
           box-shadow: none;
   border: solid 1.5px #4700c9;
   background-color: #ffffff;
@@ -252,9 +248,7 @@ a.button-return {
   width: auto;
   padding: 10px 15px;
   border-radius: 4px;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  -webkit-transition: .2s;
   transition: .2s;
   border: solid 2px #ffffff;
   background-color: #ffffff;
@@ -288,7 +282,6 @@ a.button-return {
 .navbar {
   background-color: #ffffff;
   position: absolute;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -408,7 +401,6 @@ a.button-return {
 
 @media only screen and (max-width: 575.99px) {
   .navbar {
-    -webkit-transition: .2s;
     transition: .2s;
   }
   .navbar .navbar-brand {
@@ -418,9 +410,7 @@ a.button-return {
     background-color: #ffffff;
     border-radius: 50px;
     padding: 0 17px;
-    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
             box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-    -webkit-transition: .2s;
     transition: .2s;
   }
   .navbar .navbar-brand .logo {
@@ -431,13 +421,11 @@ a.button-return {
     width: calc(60px - 32px);
     height: 60px;
     margin: 0 auto;
-    -webkit-transition: .1s;
     transition: .1s;
   }
   .navbar .navbar-nav,
   .navbar .navbar-nav_settings {
     display: none;
-    -webkit-transition: .3s;
     transition: .3s;
   }
   .navbar .navbar-nav .navbar-btn,
@@ -465,7 +453,6 @@ a.button-return {
     min-height: 550px;
     height: 100%;
     left: 0;
-    -webkit-transition: .2s;
     transition: .2s;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
@@ -484,7 +471,6 @@ a.button-return {
     position: relative;
     background-color: transparent;
     border-radius: 0x;
-    -webkit-box-shadow: none;
             box-shadow: none;
     padding: 0;
     background-image: none;
@@ -524,7 +510,6 @@ a.button-return {
     width: 80px;
     height: 100%;
     left: 0;
-    -webkit-transition: .2s;
     transition: .2s;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
@@ -547,12 +532,10 @@ a.button-return {
     width: calc(80px - 32px);
     height: 80px;
     margin: 0 auto;
-    -webkit-transition: .2s;
     transition: .2s;
   }
   .navbar .navbar-nav,
   .navbar .navbar-nav_settings {
-    -webkit-transition: .3s;
     transition: .3s;
   }
   .navbar .navbar-nav .navbar-btn,
@@ -625,7 +608,6 @@ a.button-return {
   min-width: 296px;
   margin: calc(100px + 5vh) auto;
   background-color: #ffffff;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   padding: 15px 0;
@@ -656,6 +638,7 @@ a.button-return {
 .login .col .form .article__item {
   display: -webkit-box;
   display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -701,6 +684,7 @@ a.button-return {
 .registration .col .button__container {
   display: -webkit-box;
   display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   -webkit-box-pack: end;
       -ms-flex-pack: end;
@@ -816,6 +800,7 @@ a.button-return {
 .index-child .col .article__container .article__box {
   display: -webkit-box;
   display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
 }
 
@@ -826,6 +811,7 @@ a.button-return {
           flex: 1;
   display: -webkit-box;
   display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   text-align: center;
   -webkit-box-align: center;
@@ -861,7 +847,6 @@ a.button-return {
   background-color: #ffffff;
   margin: 0 auto 15px;
   border: solid 5px #ffffff;
-  -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -973,6 +958,7 @@ a.button-return {
     margin: 0 auto;
     display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
@@ -1002,7 +988,6 @@ a.button-return {
 }
 
 .add-child .col {
-  -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
           box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
 }
 

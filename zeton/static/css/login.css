@@ -47,6 +47,7 @@ body header .container .row .col .circle {
   top: 3px;
   left: 38%;
   -webkit-transform: rotate(75deg);
+  -ms-transform: rotate(75deg);
           transform: rotate(75deg);
   -webkit-box-shadow: 1px 0px 7px #313848;
           box-shadow: 1px 0px 7px #313848;
@@ -137,7 +138,6 @@ body main .text .container .row .col {
   padding: 20px;
   background-color: #157EB3;
   border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 5px #157EB3;
           box-shadow: 1px 1px 5px #157EB3;
   color: #ffffff;
   height: 100%;
