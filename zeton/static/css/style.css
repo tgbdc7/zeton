@@ -1009,5 +1009,10 @@ a.button-return {
   margin: 0 auto;
 }
 
+#subtraction
+{
+text-align:center;
+}
+
 /*Test-SASS*/
 /*# sourceMappingURL=style.css.map */
