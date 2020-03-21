@@ -1014,7 +1014,55 @@ a.button-return {
 text-align:center;
 }
 
+.login-logo
+{
+    user-select: none;
+}
 
+h2.section__title
+{
+    user-select: none;
+}
+
+label.form__label
+{
+user-select: none;
+}
+
+input.form-control
+{
+user-select: none;
+}
+
+button.button-switch
+{
+user-select: none;
+}
+
+a.button-add
+{
+user-select: none;
+}
+
+a.navbar-btn
+{
+user-select: none;
+}
+
+h3.article__title
+{
+user-select: none;
+}
+
+.image__container
+{
+user-select: none;
+}
+
+p.article__text
+{
+user-select: none;
+}
 
 /*Test-SASS*/
 /*# sourceMappingURL=style.css.map */
